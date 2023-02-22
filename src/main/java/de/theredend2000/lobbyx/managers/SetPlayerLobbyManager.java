@@ -39,20 +39,27 @@ public class SetPlayerLobbyManager {
 
     public void setItems(Player player) {
         player.getInventory().clear();
-        player.getInventory().setItem(0,new ItemBuilder(Material.CHEST).setDisplayname("§1Gadgets").setLore("§eRight click to open").build());
+        if(plugin.getConfig().getBoolean("Items.Gadgets.enabled"))
+            player.getInventory().setItem(plugin.getConfig().getInt("Items.Gadgets.slot"),new ItemBuilder(plugin.getMaterial("Items.Gadgets.material")).setDisplayname(plugin.getConfig().getString("Items.Gadgets.displayname").replaceAll("&","§")).build());
         ItemStack playerHead = new ItemStack(Material.PLAYER_HEAD);
         SkullMeta skullMeta = (SkullMeta) playerHead.getItemMeta();
         skullMeta.setOwner(player.getName());
-        skullMeta.setDisplayName("§2Your Profile");
+        skullMeta.setDisplayName(plugin.getConfig().getString("Items.Profile.displayname").replaceAll("&","§"));
         skullMeta.setLocalizedName("lobbyx.profile");
         playerHead.setItemMeta(skullMeta);
-        player.getInventory().setItem(1,playerHead);
+        if(plugin.getConfig().getBoolean("Items.Profile.enabled"))
+            player.getInventory().setItem(plugin.getConfig().getInt("Items.Profile.slot"),playerHead);
         if(plugin.yaml.getBoolean("Settings."+player.getUniqueId()+".PlayerHidden")){
-            player.getInventory().setItem(7,new ItemBuilder(Material.GRAY_DYE).setDisplayname("§7Player: §cHidden").setLore("§7Right click to change.").setLocalizedName("lobbyx.player_hider").build());
-        }else
-            player.getInventory().setItem(7,new ItemBuilder(Material.LIME_DYE).setDisplayname("§7Player: §aShown").setLore("§7Right click to change.").setLocalizedName("lobbyx.player_hider").build());
-        player.getInventory().setItem(4,new ItemBuilder(Material.COMPASS).setDisplayname("§5Navigator").setLore("§eRight click to open").build());
-        player.getInventory().setItem(8,new ItemBuilder(Material.FIREWORK_STAR).setDisplayname("§fLobby Selector").setLore("§eRight click to open").build());
+            if(plugin.getConfig().getBoolean("Items.Hider_ON.enabled"))
+                player.getInventory().setItem(plugin.getConfig().getInt("Items.Hider_ON.slot"),new ItemBuilder(plugin.getMaterial("Items.Hider_ON.material")).setDisplayname(plugin.getConfig().getString("Items.Hider_ON.displayname").replaceAll("&","§")).setLocalizedName("lobbyx.player_hider").build());
+        }else {
+            if(plugin.getConfig().getBoolean("Items.Hider_OFF.enabled"))
+                player.getInventory().setItem(plugin.getConfig().getInt("Items.Hider_OFF.slot"),new ItemBuilder(plugin.getMaterial("Items.Hider_OFF.material")).setDisplayname(plugin.getConfig().getString("Items.Hider_OFF.displayname").replaceAll("&","§")).setLocalizedName("lobbyx.player_hider").build());
+        }
+        if(plugin.getConfig().getBoolean("Items.Teleporter.enabled"))
+            player.getInventory().setItem(plugin.getConfig().getInt("Items.Teleporter.slot"),new ItemBuilder(plugin.getMaterial("Items.Teleporter.material")).setDisplayname(plugin.getConfig().getString("Items.Teleporter.displayname").replaceAll("&","§")).build());
+        if(plugin.getConfig().getBoolean("Items.Selector.enabled"))
+            player.getInventory().setItem(plugin.getConfig().getInt("Items.Selector.slot"),new ItemBuilder(plugin.getMaterial("Items.Selector.material")).setDisplayname(plugin.getConfig().getString("Items.Selector.displayname").replaceAll("&","§")).build());
     }
 
 }

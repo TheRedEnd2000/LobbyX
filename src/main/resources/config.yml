@@ -39,3 +39,37 @@ Tablist:
   #Use '~' to create paragraphs!
   Header: '&r ~ &bLobby&4X &8- &6Lobby ~ &aOnline: &6%SERVER_ONLINE%&8/&6%SERVER_MAX_PLAYERS% &8● &dServer: &b%PLAYER_SERVER% ~'
   Footer: '&r~ &bTwitter &8» §f@????? &8&l| &9TeamSpeak &8» &f????? &8&l| &4Youtube: &8» &f?????'
+
+#Items
+#Customize the Lobby-Items
+
+Items:
+  Teleporter:
+    enabled: true
+    slot: 4
+    material: COMPASS
+    displayname: '&5Navigator &8| &7Right-Click'
+  Gadgets:
+    enabled: true
+    slot: 0
+    material: CHEST
+    displayname: '&bGadgets &8| &7Right-Click'
+  Profile:
+    enabled: true
+    slot: 1
+    displayname: '&2Profile &8| &7Right-Click'
+  Hider_ON:
+    enabled: true
+    slot: 7
+    material: LIME_DYE
+    displayname: '&7Player: &aShown'
+  Hider_OFF:
+    enabled: true
+    slot: 7
+    material: GRAY_DYE
+    displayname: '&7Player: &cHidden'
+  Selector:
+    enabled: true
+    slot: 8
+    material: FIREWORK_STAR
+    displayname: '&fLobby Selector'

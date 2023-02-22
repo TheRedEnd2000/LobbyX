@@ -1,4 +1,16 @@
-Messages:
-  NoPermissionMessage: '&cFür diesen Command fehlt dir die &6%PERMISSION% permission&c!'
-  BuildJoined: '&7Du bist nun im §aBau Modus&7.'
+Admin:
+  OnlyPlayerUse: '&cOnly Player can use this command.'
+  NoPermissionMessage: '&cYou do not have the &6%PERMISSION% permission &cto use this command!'
+
+PlayerHider:
+  PlayerHider_Hide: '&7Player visibility has been &6successfully §cdisabled&7.'
+  PlayerHider_Show: '&7Player visibility has been &6successfully §aenabled&7.'
+  PlayerHider_Wait: '&cPlease wait before doing this again!'
+
+BuildCommand:
+  BuildJoined: '&7Du bist nun im &aBau Modus&7.'
   BuildLeave: '&7Du bist nun nicht mehr im &cBau Modus&7.'
+
+JoinQuit:
+  JoinMessage: '&b%PLAYER% &6joined the Server.'
+  QuitMessage: '&b%PLAYER% &6left the Server.'
