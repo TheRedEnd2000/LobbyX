@@ -2,9 +2,7 @@ package de.theredend2000.lobbyx.listeners;
 
 import de.theredend2000.lobbyx.Main;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -23,25 +21,21 @@ public class EntityDamageEventListener implements Listener {
         if(event.getEntity() instanceof Player){
             Player player = (Player) event.getEntity();
             if(plugin.getLobbyWorlds().contains(player.getWorld())){
-                if(plugin.getBuildPlayers().contains(player)){
-                    if(event.getEntity().getType() == EntityType.ITEM_FRAME || event.getEntity().getType() == EntityType.ARMOR_STAND){
-                        return;
-                    }
+                if(!plugin.getBuildPlayers().contains(player)){
+                    event.setCancelled(true);
                 }
-                event.setCancelled(true);
             }
         }
-        if(!plugin.getConfig().getBoolean("Settings.MobDamageInLobbys")){
+        /*if(!plugin.getConfig().getBoolean("Settings.MobDamageInLobbys")){
             Entity entity = event.getEntity();
-            if(plugin.getLobbyWorlds().contains(entity.getWorld())){
-                if(plugin.getBuildPlayers().contains(entity)){
-                    if(event.getEntity().getType() == EntityType.ITEM_FRAME || event.getEntity().getType() == EntityType.ARMOR_STAND){
-                        return;
-                    }
+            if(!(entity instanceof ItemFrame || entity instanceof ArmorStand)) {
+                if (plugin.getLobbyWorlds().contains(entity.getWorld())) {
+                    event.setCancelled(true);
+                    entity.sendMessage(String.valueOf(event.getEntity().getType()));
                 }
-                event.setCancelled(true);
-            }
-        }
+            }else
+                Bukkit.getConsoleSender().sendMessage("ne");
+        }*/
     }
 
 }

@@ -2,6 +2,7 @@ package de.theredend2000.lobbyx;
 
 import de.theredend2000.lobbyx.commands.LobbyXCommand;
 import de.theredend2000.lobbyx.commands.playercommand.BuildCommand;
+import de.theredend2000.lobbyx.commands.playercommand.FriendCommand;
 import de.theredend2000.lobbyx.commands.playercommand.HubCommand;
 import de.theredend2000.lobbyx.commands.playercommand.LobbyCommand;
 import de.theredend2000.lobbyx.listeners.*;
@@ -75,6 +76,7 @@ public final class Main extends JavaPlugin {
         getCommand("lobbyx").setExecutor(new LobbyXCommand(this));
         getCommand("hub").setExecutor(new HubCommand(this));
         getCommand("build").setExecutor(new BuildCommand(this));
+        getCommand("friend").setExecutor(new FriendCommand(this));
     }
 
     private void initListeners(){

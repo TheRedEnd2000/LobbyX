@@ -11,3 +11,4 @@ commands:
   hub:
     description: teleports you to the hub
   build:
+  friend:

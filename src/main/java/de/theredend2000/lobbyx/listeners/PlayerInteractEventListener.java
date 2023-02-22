@@ -38,7 +38,7 @@ public class PlayerInteractEventListener implements Listener {
         Player player = event.getPlayer();
         if (plugin.getLobbyWorlds().contains(player.getWorld())) {
             if (event.getAction() == Action.PHYSICAL) {
-                if (plugin.getBuildPlayers().contains(player)) {
+                if (!plugin.getBuildPlayers().contains(player)) {
                     event.setCancelled(true);
                 }
             }
