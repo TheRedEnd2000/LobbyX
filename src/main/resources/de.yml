@@ -1,0 +1,4 @@
+Messages:
+  NoPermissionMessage: '&cFür diesen Command fehlt dir die &6%PERMISSION% permission&c!'
+  BuildJoined: '&7Du bist nun im §aBau Modus&7.'
+  BuildLeave: '&7Du bist nun nicht mehr im &cBau Modus&7.'

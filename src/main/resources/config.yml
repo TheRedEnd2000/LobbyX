@@ -1,0 +1,32 @@
+#------------LobbyX------------
+#Project by XMC-Plugins
+#Discord: https://discord.gg/7x2fzYKucZ
+#------------LobbyX------------
+
+#Prefix
+Prefix: '&f[&b&lLobby&4&lX&f] &r'
+
+
+#Settings
+#Change the settings as they are perfect for you
+
+Settings:
+
+
+#LobbyWorlds
+
+Lobby_Worlds: #All worlds where the lobby system is to be used
+  - world
+  - lobby
+
+#Permissions
+#Change the permission for commands and other thinks
+Permissions:
+  LobbyXCommandPermission: lobbyx.lobbyx
+  BuildCommandPermission: lobbyx.build
+
+#Inventorys
+#Change the inventory titles
+
+Inventory:
+  MainInventoryTitle: '&bLobby&4X&f - &6Main'

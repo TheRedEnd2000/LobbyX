@@ -1,0 +1,12 @@
+Admin:
+  OnlyPlayerUse: '&cOnly Player can use this command.'
+  NoPermissionMessage: '&cYou do not have the &6%PERMISSION% permission &cto use this command!'
+
+PlayerHider:
+  PlayerHider_Hide: '&7Player visibility has been &6successfully §cdisabled&7.'
+  PlayerHider_Show: '&7Player visibility has been &6successfully §aenabled&7.'
+  PlayerHider_Wait: '&cPlease wait before doing this again!'
+
+BuildCommand:
+  BuildJoined: '&7You are now in the &abuild mode&7.'
+  BuildLeave: '&7You are not longer in the &cbuild mode&7.'

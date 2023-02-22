@@ -1,0 +1,13 @@
+name: LobbyX
+version: '${project.version}'
+main: de.theredend2000.lobbyx.Main
+api-version: 1.19
+commands:
+  lobby:
+    description: teleports you to the lobby
+  lobbyx:
+    aliases:
+      - lx
+  hub:
+    description: teleports you to the hub
+  build:
