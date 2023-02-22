@@ -24,21 +24,15 @@ public class LanguageListeners implements Listener {
     public void onJoin(PlayerJoinEvent event){
         Player player = event.getPlayer();
         UUID uuid = player.getUniqueId();
-        if(plugin.yaml.get(uuid.toString()) == null){
+        if(plugin.yaml.get("Languages."+uuid) == null){
             Util.setLocale(player, new File(plugin.getDataFolder()+"/locales", "en.yml"));
-            plugin.yaml.set(uuid.toString(),"en");
+            plugin.yaml.set("Languages."+uuid,"en");
             plugin.saveData();
             return;
         }
-        String localeFileName = plugin.getConfig().getString(uuid.toString());
+        String localeFileName = plugin.getConfig().getString("Languages."+uuid);
         File langFile = new File(plugin.getDataFolder()+"/locales",localeFileName+".yml");
         Util.setLocale(player, langFile);
-        plugin.getSetPlayerLobbyManager().setPlayerInLobby(player);
-    }
-
-    @EventHandler
-    public void onLeave(PlayerQuitEvent event){
-        Util.removePlayer(event.getPlayer());
     }
 
 }

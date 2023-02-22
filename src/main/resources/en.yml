@@ -10,3 +10,7 @@ PlayerHider:
 BuildCommand:
   BuildJoined: '&7You are now in the &abuild mode&7.'
   BuildLeave: '&7You are not longer in the &cbuild mode&7.'
+
+JoinQuit:
+  JoinMessage: '&b%PLAYER% &6joined the Server.'
+  QuitMessage: '&b%PLAYER% &6left the Server.'

@@ -30,3 +30,12 @@ Permissions:
 
 Inventory:
   MainInventoryTitle: '&bLobby&4X&f - &6Main'
+  ProfileInventoryTitle: '&bLobby&4X&f - &6Profile'
+
+#Tablist
+#Change tablist look
+
+Tablist:
+  #Use '~' to create paragraphs!
+  Header: '&r ~ &bLobby&4X &8- &6Lobby ~ &aOnline: &6%SERVER_ONLINE%&8/&6%SERVER_MAX_PLAYERS% &8● &dServer: &b%PLAYER_SERVER% ~'
+  Footer: '&r~ &bTwitter &8» §f@????? &8&l| &9TeamSpeak &8» &f????? &8&l| &4Youtube: &8» &f?????'

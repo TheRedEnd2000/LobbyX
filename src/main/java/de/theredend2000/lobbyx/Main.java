@@ -4,15 +4,17 @@ import de.theredend2000.lobbyx.commands.LobbyXCommand;
 import de.theredend2000.lobbyx.commands.playercommand.BuildCommand;
 import de.theredend2000.lobbyx.commands.playercommand.HubCommand;
 import de.theredend2000.lobbyx.commands.playercommand.LobbyCommand;
-import de.theredend2000.lobbyx.listeners.BlockBreakEventListener;
-import de.theredend2000.lobbyx.listeners.BlockPlaceEventListener;
-import de.theredend2000.lobbyx.listeners.FoodLevelChangeEventListener;
+import de.theredend2000.lobbyx.listeners.*;
 import de.theredend2000.lobbyx.listeners.itemListeners.PlayerHiderListener;
+import de.theredend2000.lobbyx.listeners.itemListeners.ProfileListeners;
 import de.theredend2000.lobbyx.managers.LobbyXMenuManager;
+import de.theredend2000.lobbyx.managers.ProfileMenuManager;
 import de.theredend2000.lobbyx.managers.SetPlayerLobbyManager;
+import de.theredend2000.lobbyx.managers.TablistManager;
 import de.theredend2000.lobbyx.messages.LanguageListeners;
 import de.theredend2000.lobbyx.messages.Util;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -21,6 +23,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public final class Main extends JavaPlugin {
     private ArrayList<World> lobbyWorlds;
@@ -29,6 +32,8 @@ public final class Main extends JavaPlugin {
     public YamlConfiguration yaml;
     private LobbyXMenuManager lobbyXMenuManager;
     private SetPlayerLobbyManager setPlayerLobbyManager;
+    private TablistManager tablistManager;
+    private ProfileMenuManager profileMenuManager;
     public File data = new File("plugins/LobbyX", "database.yml");
 
 
@@ -77,12 +82,21 @@ public final class Main extends JavaPlugin {
         new BlockPlaceEventListener(this);
         new FoodLevelChangeEventListener(this);
         new PlayerHiderListener(this);
+        new JoinAndQuitEventListener(this);
+        new EntityExplodeEventListener(this);
+        new ProfileListeners(this);
     }
     private void initManagers(){
         new Util(this);
         lobbyXMenuManager = new LobbyXMenuManager(this);
         setPlayerLobbyManager = new SetPlayerLobbyManager(this);
+        tablistManager = new TablistManager(this);
+        profileMenuManager = new ProfileMenuManager(this);
     }
+
+    public static final String GO_BACK_SKULL_TEXTURE = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6L"
+            + "y90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYmQ2OWUwNmU1ZGFkZmQ4NGU1ZjNkMWMyMTA2M2YyNTUzY"
+            + "jJmYTk0NWVlMWQ0ZDcxNTJmZGM1NDI1YmMxMmE5In19fQ==";
 
 
     public void saveData() {
@@ -107,5 +121,25 @@ public final class Main extends JavaPlugin {
 
     public SetPlayerLobbyManager getSetPlayerLobbyManager() {
         return setPlayerLobbyManager;
+    }
+
+    public TablistManager getTablistManager() {
+        return tablistManager;
+    }
+
+    public ProfileMenuManager getProfileMenuManager() {
+        return profileMenuManager;
+    }
+
+    public Material getMaterial(String materialString) {
+        try {
+            Material material = Material.getMaterial(Objects.requireNonNull(getConfig().getString(materialString)));
+            if (material == null) {
+                return Material.BARRIER;
+            }
+            return material;
+        } catch (Exception ex) {
+            return Material.BARRIER;
+        }
     }
 }
