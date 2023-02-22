@@ -85,6 +85,14 @@ public final class Main extends JavaPlugin {
         new JoinAndQuitEventListener(this);
         new EntityExplodeEventListener(this);
         new ProfileListeners(this);
+        new EntityDamageEventListener(this);
+        new HangingBreakByEntityEventListener(this);
+        new LeavesDecayEventListener(this);
+        new PlayerArmorStandManipulateEventListener(this);
+        new PlayerBucketChangeEventListeners(this);
+        new PlayerItemDropEventListener(this);
+        new PlayerFishEventListener(this);
+        new PlayerInteractEventListener(this);
     }
     private void initManagers(){
         new Util(this);
@@ -94,7 +102,7 @@ public final class Main extends JavaPlugin {
         profileMenuManager = new ProfileMenuManager(this);
     }
 
-    public static final String GO_BACK_SKULL_TEXTURE = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6L"
+    public static final String BACK_SKULL_TEXTURE = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6L"
             + "y90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYmQ2OWUwNmU1ZGFkZmQ4NGU1ZjNkMWMyMTA2M2YyNTUzY"
             + "jJmYTk0NWVlMWQ0ZDcxNTJmZGM1NDI1YmMxMmE5In19fQ==";
 

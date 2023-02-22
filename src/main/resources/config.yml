@@ -11,7 +11,7 @@ Prefix: '&f[&b&lLobby&4&lX&f] &r'
 #Change the settings as they are perfect for you
 
 Settings:
-
+  MobDamageInLobbys: false
 
 #LobbyWorlds
 
