@@ -37,8 +37,9 @@ Inventory:
 
 Tablist:
   #Use '~' to create paragraphs!
-  Header: '&r ~ &bLobby&4X &8- &6Lobby ~ &aOnline: &6%SERVER_ONLINE%&8/&6%SERVER_MAX_PLAYERS% &8● &dServer: &b%PLAYER_SERVER% ~'
+  Header: '&r ~ &bLobby&4X &8- &6Lobby ~ &aOnline: &6%SERVER_ONLINE%&8/&6%SERVER_MAX_PLAYERS% &8● &dServer: &b%PLAYER_SERVER% &8● &2Ping: &b%PLAYER_PING%ms ~'
   Footer: '&r~ &bTwitter &8» §f@????? &8&l| &9TeamSpeak &8» &f????? &8&l| &4Youtube: &8» &f?????'
+  Update_Delay: 20 #in minecraft ticks bsp. 20 ticks = 1 sec          !!!Attention, the smaller the number, the more the server can lie!!
 
 #Items
 #Customize the Lobby-Items
@@ -73,3 +74,12 @@ Items:
     slot: 8
     material: FIREWORK_STAR
     displayname: '&fLobby Selector'
+
+#Titles
+#Customize the Titles
+
+Titles:
+  WelcomeTitle:
+    enabled: true
+    title: '&aWelcome &6%PLAYER%'
+    subtitle: '&7Have fun on &bYourServer.net'
