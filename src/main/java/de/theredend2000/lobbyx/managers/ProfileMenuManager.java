@@ -34,7 +34,7 @@ public class ProfileMenuManager implements Listener {
         inventory.setItem(33, new ItemBuilder(Material.COMPARATOR).setDisplayname("HierkannsteEinstellungenmachen").setLocalizedName("MainInventory.Settings").build());
         inventory.setItem(40, new ItemBuilder(Material.DIAMOND).setDisplayname("Sozial").setLocalizedName("MainInventory.Sozial").build());
         player.openInventory(inventory);
-
+//kp
     }
     public  void createSozialInventory(Player player){
         Inventory s = Bukkit.createInventory(player,54,Objects.requireNonNull(plugin.getConfig().getString("Inventory.SozailInventoryTitle")).replaceAll("&","§"));
