@@ -31,6 +31,7 @@ Permissions:
 Inventory:
   MainInventoryTitle: '&bLobby&4X&f - &6Main'
   ProfileInventoryTitle: '&bLobby&4X&f - &6Profile'
+  SozailInventoryTitle: '&9Sozail'
 
 #Tablist
 #Change tablist look
