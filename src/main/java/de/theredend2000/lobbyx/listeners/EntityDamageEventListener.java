@@ -23,14 +23,21 @@ public class EntityDamageEventListener implements Listener {
         if(event.getEntity() instanceof Player){
             Player player = (Player) event.getEntity();
             if(plugin.getLobbyWorlds().contains(player.getWorld())){
+                if(plugin.getBuildPlayers().contains(player)){
+                    if(event.getEntity().getType() == EntityType.ITEM_FRAME || event.getEntity().getType() == EntityType.ARMOR_STAND){
+                        return;
+                    }
+                }
                 event.setCancelled(true);
             }
         }
         if(!plugin.getConfig().getBoolean("Settings.MobDamageInLobbys")){
             Entity entity = event.getEntity();
             if(plugin.getLobbyWorlds().contains(entity.getWorld())){
-                if(event.getEntity().getType() == EntityType.ITEM_FRAME || event.getEntity().getType() == EntityType.ARMOR_STAND){
-                    return;
+                if(plugin.getBuildPlayers().contains(entity)){
+                    if(event.getEntity().getType() == EntityType.ITEM_FRAME || event.getEntity().getType() == EntityType.ARMOR_STAND){
+                        return;
+                    }
                 }
                 event.setCancelled(true);
             }

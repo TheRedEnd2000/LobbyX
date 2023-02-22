@@ -5,6 +5,7 @@ import de.theredend2000.lobbyx.commands.playercommand.BuildCommand;
 import de.theredend2000.lobbyx.commands.playercommand.HubCommand;
 import de.theredend2000.lobbyx.commands.playercommand.LobbyCommand;
 import de.theredend2000.lobbyx.listeners.*;
+import de.theredend2000.lobbyx.listeners.inventoryListeners.ProfileListener;
 import de.theredend2000.lobbyx.listeners.itemListeners.PlayerHiderListener;
 import de.theredend2000.lobbyx.listeners.itemListeners.ProfileListeners;
 import de.theredend2000.lobbyx.managers.LobbyXMenuManager;
@@ -93,6 +94,7 @@ public final class Main extends JavaPlugin {
         new PlayerItemDropEventListener(this);
         new PlayerFishEventListener(this);
         new PlayerInteractEventListener(this);
+        new ProfileListener(this);
     }
     private void initManagers(){
         new Util(this);

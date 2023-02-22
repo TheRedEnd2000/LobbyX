@@ -1,6 +1,5 @@
 package de.theredend2000.lobbyx.managers;
 
-import com.sun.tools.javac.jvm.Items;
 import de.theredend2000.lobbyx.Main;
 import de.theredend2000.lobbyx.listeners.itemListeners.ProfileListeners;
 import de.theredend2000.lobbyx.util.ItemBuilder;
