@@ -26,10 +26,6 @@ public class JnrCommand implements CommandExecutor {
                 player.sendMessage(Util.getMessage(Util.getLocale(player), "AlreadyStarted"));
                 return true;
             }
-            if(args[0].equalsIgnoreCase("lb")){
-                new Leaderboard(plugin,player.getLocation());
-                return true;
-            }
             if (plugin.getLobbyWorlds().contains(player.getWorld())) {
                 JumpAndRun jumpAndRun = new JumpAndRun(player, plugin);
                 jumpAndRun.start(player);

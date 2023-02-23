@@ -80,6 +80,7 @@ public class FriendCommand implements CommandExecutor {
                             player.sendMessage(Util.getMessage(Util.getLocale(player), "FriendRequestAcceptReceiver").replaceAll("%PLAYER_REQUEST_ACCEPT%", player.getName()).replaceAll("%PLAYER_REQUEST_SENDER%", friendAccept.getName()));
                             friendAccept.sendMessage(Util.getMessage(Util.getLocale(player), "FriendRequestAcceptSender").replaceAll("%PLAYER_REQUEST_ACCEPT%", player.getName()).replaceAll("%PLAYER_REQUEST_SENDER%", friendAccept.getName()));
                             new ConfigLocationUtil(plugin,"Friends."+friendAccept.getUniqueId()+"."+player.getName()+".").saveFriend(player);
+                            new ConfigLocationUtil(plugin,"Friends."+player.getUniqueId()+"."+friendAccept.getName()+".").saveFriend(friendAccept);
                         }else
                             player.sendMessage(Util.getMessage(Util.getLocale(player), "NotFriendRequest"));
                     }else if(args[0].equalsIgnoreCase("deny")){
@@ -100,7 +101,9 @@ public class FriendCommand implements CommandExecutor {
                         if(plugin.yaml.getString("Friends."+player.getUniqueId()) != null) {
                             for (String friends : plugin.yaml.getConfigurationSection("Friends." + player.getUniqueId()).getKeys(false)) {
                                 if (friends.equalsIgnoreCase(friendtoremove)) {
+                                    String friendtoremoveUUID = plugin.yaml.getString("Friends."+player.getUniqueId()+"."+friendtoremove+".UUID");
                                     plugin.yaml.set("Friends."+player.getUniqueId()+"."+friendtoremove, null);
+                                    plugin.yaml.set("Friends."+friendtoremoveUUID+"."+player.getName(), null);
                                     plugin.saveData();
                                     player.sendMessage(Util.getMessage(Util.getLocale(player),"FriendRemoveSender").replaceAll("%PLAYER_REMOVED%",friendtoremove).replaceAll("%PLAYER_REMOVED_FRIEND%",player.getName()));
                                     Player removed = Bukkit.getPlayer(friendtoremove);
@@ -111,10 +114,18 @@ public class FriendCommand implements CommandExecutor {
                                     player.sendMessage(Util.getMessage(Util.getLocale(player), "FriendRemoveNotFriend").replaceAll("%PLAYER_REMOVED%",friendtoremove).replaceAll("%PLAYER_REMOVED_FRIEND%",player.getName()));
                             }
                         }
-                    }
-                }
+                    }else
+                        player.sendMessage(Util.getMessage(Util.getLocale(player), "FriendCommandUsage"));
+                }else if(args.length == 1){
+                    if(args[0].equalsIgnoreCase("list")){
+                        plugin.getProfileMenuManager().createFriendInventory(player);
+                    }else
+                        player.sendMessage(Util.getMessage(Util.getLocale(player), "FriendCommandUsage"));
+                }else
+                    player.sendMessage(Util.getMessage(Util.getLocale(player), "FriendCommandUsage"));
             }
-        }
+        }else
+            sender.sendMessage(Util.getMessage("en","OnlyPlayerUse"));
         return false;
     }
 }

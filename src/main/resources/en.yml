@@ -30,6 +30,7 @@ Friend:
   FriendRemoveSender: '&7You have &6%PLAYER_REMOVED% &cremoved &7from your friend list.'
   FriendRemoveReceiver: '&6%PLAYER_REMOVED_FRIEND% &7has &cremoved &7you form their friend list.'
   FriendRemoveNotFriend: '&6%PLAYER_REMOVED% &7is &cnot &7you friend.'
+  FriendCommandUsage: '&7Usages: &6/friend add <Player> &8| &6/friend accept <Player> &8| &6/friend deny <Player> &8| &6/friend remove <Player> &8| &6/friend list&7!'
 
 Locations:
   SetHub: '&7The &9Hub &7was set&a successfully&7.'
@@ -39,3 +40,7 @@ JumpAndRun:
   AlreadyStarted: '&cYou have already started a jump and run.'
   StartJnr: '&7You started the &6Jump and Run&7.'
   StopJnr: '&7You&c fell&7. You point are &6%JUMP_AND_RUN_POINTS%'
+
+Languages:
+  LanguagesUsage: '&7Usages: &6/setLang &7[&3ENGLISH &8| &3ENGLISH &8| &3SPAIN&7]'
+  LangSelectEnglish: '&7Language set to: &6English&7.'

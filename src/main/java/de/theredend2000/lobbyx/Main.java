@@ -7,6 +7,7 @@ import de.theredend2000.lobbyx.commands.playercommand.HubCommand;
 import de.theredend2000.lobbyx.commands.playercommand.LobbyCommand;
 import de.theredend2000.lobbyx.jumpandrun.JnrCommand;
 import de.theredend2000.lobbyx.jumpandrun.JumpAndRun;
+import de.theredend2000.lobbyx.jumpandrun.Leaderboard;
 import de.theredend2000.lobbyx.jumpandrun.PlayerMoveListener;
 import de.theredend2000.lobbyx.listeners.*;
 import de.theredend2000.lobbyx.listeners.inventoryListeners.LobbxListener;

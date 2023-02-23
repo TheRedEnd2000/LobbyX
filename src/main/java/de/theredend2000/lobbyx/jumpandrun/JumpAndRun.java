@@ -86,10 +86,18 @@ public class JumpAndRun {
                 if(nextLocation.getBlock().getType() == Material.AIR) {
                     this.currentLocation.subtract(0.0, 1.0, 0.0).getBlock().setType(plugin.getMaterial("JumpAndRun.Blocks.StandingBlock"));
                     this.nextLocation.subtract(0.0, 1.0, 0.0).getBlock().setType(plugin.getMaterial("JumpAndRun.Blocks.NewBlock"));
+                    return;
                 }else{
-                    stop(player);
-                    player.sendMessage("§cThere was an error. §4§l(NO-FREE-BLOCK-FOUND) \n§cPlease contact an admin.");
-                    currentLocation.getBlock().setType(Material.AIR);
+                    int counter = 0;
+                    if(counter == 10){
+                        stop(player);
+                        player.sendMessage("§cThere was an error. §4§l(NO-FREE-BLOCK-FOUND) \n§cPlease contact an admin.");
+                        nextLocation.getBlock().setType(Material.AIR);
+                        return;
+                    }
+                    nextBlock(player, true);
+                    counter++;
+                    player.sendMessage(String.valueOf(counter));
                 }
             }
         }

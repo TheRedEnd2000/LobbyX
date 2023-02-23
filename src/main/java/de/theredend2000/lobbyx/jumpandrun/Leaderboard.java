@@ -14,7 +14,7 @@ import java.util.Random;
 
 public class Leaderboard {
 
-    private List<ArmorStand> armorStands = new ArrayList<>();
+    private static List<ArmorStand> armorStands = new ArrayList<>();
     private static final String HEADER = "§a§lLEADERBOARD";
     private static final String TITLE = "§5Top Score";
     private static final String FOOTER = "§bYourServer.net";
@@ -27,6 +27,7 @@ public class Leaderboard {
         createLeaderBoard();
         plugin.getServer().getScheduler().runTaskTimer(plugin,this::update,0,10L);
     }
+
 
     private void createLeaderBoard(){
         Location loc = location.clone();
@@ -62,9 +63,12 @@ public class Leaderboard {
                 for(Entity entity : player.getNearbyEntities(100,100,100)){
                     if(entity.getType().equals(EntityType.ARMOR_STAND)){
                         ArmorStand armorStand = (ArmorStand) entity;
-                        if(armorStand.hasAI()) {
-                            if(!armorStands.contains(armorStand))
+                        if(armorStand.getScoreboardTags().contains("jnr.lb")) {
+                            if(!armorStands.contains(armorStand)) {
                                 armorStands.add(armorStand);
+                                player.sendMessage(armorStand.getUniqueId()+" added");
+                            }
+                            player.sendMessage(String.valueOf(armorStands.size()));
                             Bukkit.getConsoleSender().sendMessage(armorStand.getUniqueId());
                         }
                     }
@@ -79,7 +83,7 @@ public class Leaderboard {
         armorStand.setVisible(false);
         armorStand.setCustomName(name);
         armorStand.setCustomNameVisible(true);
-        armorStand.setAI(true);
+        armorStand.addScoreboardTag("jnr.lb");
         return armorStand;
     }
 
