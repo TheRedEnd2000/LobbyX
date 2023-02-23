@@ -31,7 +31,7 @@ public class ProfileListener implements Listener {
                         break;
                     case "MainInventory.Stats":
                         break;
-                    case"MainInventory.Languages":
+                    case"MainInventory.Settings":
                         plugin.getProfileMenuManager().createLanguageInventar(player);
                         break;
                     case"MainInventory.Social":
