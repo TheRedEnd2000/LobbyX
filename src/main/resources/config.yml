@@ -33,6 +33,7 @@ Inventory:
   ProfileInventoryTitle: '&bLobby&4X&f - &6Profile'
   SocialInventoryTitle: '&bLobby&4X&f - &9Social'
   FriendInventoryTitle: '&bLobby&4X&f - &3Friends'
+  LocationInventoryTitle: '&bLobby&4X&f - &9Locations'
 
 #Tablist
 #Change tablist look
@@ -65,17 +66,17 @@ Items:
     enabled: true
     slot: 7
     material: LIME_DYE
-    displayname: '&7Player: &aShown'
+    displayname: '&7Player: &aShown &8| &7Right-Click'
   Hider_OFF:
     enabled: true
     slot: 7
     material: GRAY_DYE
-    displayname: '&7Player: &cHidden'
+    displayname: '&7Player: &cHidden &8| &7Right-Click'
   Selector:
     enabled: true
     slot: 8
     material: FIREWORK_STAR
-    displayname: '&fLobby Selector'
+    displayname: '&dLobby Selector &8| &7Right-Click'
 
 #Titles
 #Customize the Titles
@@ -85,3 +86,18 @@ Titles:
     enabled: true
     title: '&aWelcome &6%PLAYER%'
     subtitle: '&7Have fun on &bYourServer.net'
+
+#JumpAndRun
+#Customize the JumpAndRun
+
+JumpAndRun:
+  Sounds:
+    StartSound: ENTITY_PLAYER_LEVELUP
+    StopSound: ITEM_SHIELD_BREAK
+    NewBlockSound: BLOCK_NOTE_BLOCK_PLING
+  Actionbar:
+    enabled: true
+    ActionbarText: '&bYour points: &6%JUMP_AND_RUN_POINTS%'
+  Blocks:
+    NewBlock: WHITE_WOOL
+    StandingBlock: WHITE_CONCRETE

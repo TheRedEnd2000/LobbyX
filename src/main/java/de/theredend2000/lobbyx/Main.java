@@ -5,7 +5,11 @@ import de.theredend2000.lobbyx.commands.playercommand.BuildCommand;
 import de.theredend2000.lobbyx.commands.playercommand.FriendCommand;
 import de.theredend2000.lobbyx.commands.playercommand.HubCommand;
 import de.theredend2000.lobbyx.commands.playercommand.LobbyCommand;
+import de.theredend2000.lobbyx.jumpandrun.JnrCommand;
+import de.theredend2000.lobbyx.jumpandrun.JumpAndRun;
+import de.theredend2000.lobbyx.jumpandrun.PlayerMoveListener;
 import de.theredend2000.lobbyx.listeners.*;
+import de.theredend2000.lobbyx.listeners.inventoryListeners.LobbxListener;
 import de.theredend2000.lobbyx.listeners.inventoryListeners.ProfileListener;
 import de.theredend2000.lobbyx.listeners.itemListeners.PlayerHiderListener;
 import de.theredend2000.lobbyx.listeners.itemListeners.ProfileListeners;
@@ -15,6 +19,7 @@ import de.theredend2000.lobbyx.managers.SetPlayerLobbyManager;
 import de.theredend2000.lobbyx.managers.TablistManager;
 import de.theredend2000.lobbyx.messages.LanguageListeners;
 import de.theredend2000.lobbyx.messages.Util;
+import de.theredend2000.lobbyx.util.DatetimeUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -24,7 +29,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Objects;
 
 public final class Main extends JavaPlugin {
@@ -36,6 +44,7 @@ public final class Main extends JavaPlugin {
     private SetPlayerLobbyManager setPlayerLobbyManager;
     private TablistManager tablistManager;
     private ProfileMenuManager profileMenuManager;
+    private DatetimeUtils datetimeUtils;
     public File data = new File("plugins/LobbyX", "database.yml");
 
 
@@ -44,6 +53,7 @@ public final class Main extends JavaPlugin {
         saveDefaultConfig();
         this.yaml = YamlConfiguration.loadConfiguration(this.data);
         this.saveData();
+        datetimeUtils = new DatetimeUtils();
         initManagers();
         Util.loadMessages();
 
@@ -55,7 +65,13 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        Iterator var1 = JumpAndRun.getJumpAndRuns().values().iterator();
 
+        while(var1.hasNext()) {
+            JumpAndRun jumpAndRun = (JumpAndRun)var1.next();
+            jumpAndRun.getCurrentLocation().getBlock().setType(Material.AIR);
+            jumpAndRun.getNextLocation().getBlock().setType(Material.AIR);
+        }
     }
 
     private void initLists(){
@@ -77,6 +93,7 @@ public final class Main extends JavaPlugin {
         getCommand("hub").setExecutor(new HubCommand(this));
         getCommand("build").setExecutor(new BuildCommand(this));
         getCommand("friend").setExecutor(new FriendCommand(this));
+        getCommand("jnr").setExecutor(new JnrCommand(this));
     }
 
     private void initListeners(){
@@ -97,6 +114,8 @@ public final class Main extends JavaPlugin {
         new PlayerFishEventListener(this);
         new PlayerInteractEventListener(this);
         new ProfileListener(this);
+        new LobbxListener(this);
+        new PlayerMoveListener(this);
     }
     private void initManagers(){
         new Util(this);
@@ -153,5 +172,8 @@ public final class Main extends JavaPlugin {
         } catch (Exception ex) {
             return Material.BARRIER;
         }
+    }
+    public DatetimeUtils getDatetimeUtils() {
+        return datetimeUtils;
     }
 }

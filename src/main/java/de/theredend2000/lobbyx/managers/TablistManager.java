@@ -38,8 +38,10 @@ public class TablistManager {
             @Override
             public void run() {
                 for(Player player : Bukkit.getServer().getOnlinePlayers()){
-                    if(plugin.getLobbyWorlds().contains(player.getWorld())){
-                        setPlayerList(player);
+                    if(plugin.getLobbyWorlds() != null) {
+                        if (plugin.getLobbyWorlds().contains(player.getWorld())) {
+                            setPlayerList(player);
+                        }
                     }
                 }
             }

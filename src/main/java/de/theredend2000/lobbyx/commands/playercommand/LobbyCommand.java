@@ -21,7 +21,7 @@ public class LobbyCommand implements CommandExecutor {
         if(sender instanceof Player){
             Player player = (Player) sender;
             if(args.length == 0){
-                ConfigLocationUtil locationUtil = new ConfigLocationUtil(plugin,"Lobby");
+                ConfigLocationUtil locationUtil = new ConfigLocationUtil(plugin,"Locations.Lobby");
                 if(locationUtil.loadLocation() != null){
                     player.teleport(locationUtil.loadLocation());
                     player.sendMessage("§8Sending you to the lobby...");

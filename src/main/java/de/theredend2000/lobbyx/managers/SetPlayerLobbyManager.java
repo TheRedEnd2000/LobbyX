@@ -36,6 +36,7 @@ public class SetPlayerLobbyManager {
             //HEAL
             setItems(player);
 
+
             if(plugin.getConfig().getBoolean("Titles.WelcomeTitle.enabled"))
                 player.sendTitle(plugin.getConfig().getString("Titles.WelcomeTitle.title").replaceAll("&","§").replaceAll("%PLAYER%",player.getName()),plugin.getConfig().getString("Titles.WelcomeTitle.subtitle").replaceAll("&","§").replaceAll("%PLAYER%",player.getName()),20,100,40);
 

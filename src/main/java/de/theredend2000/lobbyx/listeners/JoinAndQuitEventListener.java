@@ -1,6 +1,7 @@
 package de.theredend2000.lobbyx.listeners;
 
 import de.theredend2000.lobbyx.Main;
+import de.theredend2000.lobbyx.jumpandrun.JumpAndRun;
 import de.theredend2000.lobbyx.messages.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -41,6 +42,10 @@ public class JoinAndQuitEventListener implements Listener {
                     lobbyPlayers.sendMessage(Util.getMessage(Util.getLocale(lobbyPlayers), "QuitMessage").replaceAll("%PLAYER%",player.getName()));
                 }
             }
+        }
+        if (JumpAndRun.getJumpAndRuns().containsKey(player.getUniqueId())) {
+            JumpAndRun jumpAndRun = (JumpAndRun)JumpAndRun.getJumpAndRuns().get(player.getUniqueId());
+            jumpAndRun.stop(player);
         }
     }
 

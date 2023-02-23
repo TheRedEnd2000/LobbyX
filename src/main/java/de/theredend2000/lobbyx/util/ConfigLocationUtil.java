@@ -5,6 +5,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 
 import java.time.ZoneId;
 
@@ -36,6 +37,15 @@ public class ConfigLocationUtil {
         plugin.saveData();
     }
 
+    public void saveFriend(Player friend) {
+        FileConfiguration config = plugin.yaml;
+        config.set(root + ".Name", friend.getName());
+        config.set(root + ".UUID", friend.getUniqueId().toString());
+        config.set(root + ".Date", plugin.getDatetimeUtils().getNowDate());
+        config.set(root + ".Time", plugin.getDatetimeUtils().getNowTime());
+        config.set(root + ".BestFriend", false);
+        plugin.saveData();
+    }
     public Location loadLocation() {
         FileConfiguration config = plugin.yaml;
         if (config.contains(root)) {

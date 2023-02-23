@@ -14,3 +14,28 @@ BuildCommand:
 JoinQuit:
   JoinMessage: '&b%PLAYER% &6joined the Server.'
   QuitMessage: '&b%PLAYER% &6left the Server.'
+
+Friend:
+  FriendRequestSender: '&7You send &6%FRIEND_REQUEST_RECEIVER% &7a friend request. He has &e3 minutes &7to &aaccept&7.'
+  FriendRequestReceiver: '&7Friend request from &6%FRIEND_REQUEST_SENDER%&7.'
+  AlreadySend: '&cYou can only send one friend request at the time. Please wait.'
+  PlayerNotFound: '&cI cant fin this Player!'
+  NotFriendRequest: '&cYou have no friend requests!'
+  FriendAlreadyAdded: '&c%PLAYER_REQUEST_RECEIVER% is already you friend!'
+  NotAddYourself: '&cYou cant send yourself a friend request!'
+  FriendRequestAcceptSender: '&6%PLAYER_REQUEST_ACCEPT% &7has&a accepted &7your &bfriend request&7.'
+  FriendRequestAcceptReceiver: '&7You have &6%PLAYER_REQUEST_SENDER%&b friend request&a accepted&7.'
+  FriendRequestDenySender: '&6%PLAYER_REQUEST_ACCEPT% &7has&c denied &7your &bfriend request&7.'
+  FriendRequestDenyReceiver: '&7You have &6%PLAYER_REQUEST_SENDER%&b friend request&c denied&7.'
+  FriendRemoveSender: '&7You have &6%PLAYER_REMOVED% &cremoved &7from your friend list.'
+  FriendRemoveReceiver: '&6%PLAYER_REMOVED_FRIEND% &7has &cremoved &7you form their friend list.'
+  FriendRemoveNotFriend: '&6%PLAYER_REMOVED% &7is &cnot &7you friend.'
+
+Locations:
+  SetHub: '&7The &9Hub &7was set&a successfully&7.'
+  SetLobby: '&7The &bLobby &7was set&a successfully&7.'
+
+JumpAndRun:
+  AlreadyStarted: '&cYou have already started a jump and run.'
+  StartJnr: '&7You started the &6Jump and Run&7.'
+  StopJnr: '&7You&c fell&7. You point are &6%JUMP_AND_RUN_POINTS%'

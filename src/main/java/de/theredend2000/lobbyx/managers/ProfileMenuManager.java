@@ -13,10 +13,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.material.Skull;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 public class ProfileMenuManager implements Listener {
 
@@ -61,18 +58,24 @@ public class ProfileMenuManager implements Listener {
         playerHead.setItemMeta(skullMeta);
         inventory.setItem(4, playerHead);
         inventory.setItem(45, new ItemBuilder(Material.ARROW).setDisplayname("§eBack").setLocalizedName("friendInventory.back").build());
-        inventory.setItem(47, new ItemBuilder(Material.OAK_SIGN).setDisplayname("§6Search").setLocalizedName("friendInventory.search").build());
-        inventory.setItem(48, new ItemBuilder(Material.NETHER_STAR).setDisplayname("§9Main Menu").setLocalizedName("friendInventory.main").build());
-        inventory.setItem(49, new ItemBuilder(Material.HOPPER).setDisplayname("§aSort").setLocalizedName("friendInventory.sort").build());
-        inventory.setItem(50, new ItemBuilder(Material.BOOK).setDisplayname("§7Bookmark").setLocalizedName("friendInventory.bookmark").build());
-        ArrayList<String> offlinePlayerFriend = new ArrayList<>(Collections.singleton(plugin.yaml.getString("Friends." + player.getName())));
-        for(String friends : offlinePlayerFriend){
-            ItemStack playerHead2 = new ItemStack(Material.PLAYER_HEAD);
-            SkullMeta skullMeta2 = (SkullMeta) playerHead2.getItemMeta();
-            skullMeta2.setOwner(friends);
-            skullMeta2.setDisplayName(friends);
-            playerHead2.setItemMeta(skullMeta);
-            inventory.addItem(playerHead2);
+        inventory.setItem(48, new ItemBuilder(Material.OAK_SIGN).setDisplayname("§6Search").setLocalizedName("friendInventory.search").build());
+        inventory.setItem(49, new ItemBuilder(Material.NETHER_STAR).setDisplayname("§9Main Menu").setLocalizedName("friendInventory.main").build());
+        inventory.setItem(50, new ItemBuilder(Material.HOPPER).setDisplayname("§aSort").setLocalizedName("friendInventory.sort").build());
+        inventory.setItem(51, new ItemBuilder(Material.BOOK).setDisplayname("§7Bookmark").setLocalizedName("friendInventory.bookmark").build());
+        if(plugin.yaml.getString("Friends."+player.getUniqueId()) != null) {
+            for (String friends : plugin.yaml.getConfigurationSection("Friends." + player.getUniqueId()).getKeys(false)) {
+                ItemStack playerHead2 = new ItemStack(Material.PLAYER_HEAD);
+                SkullMeta skullMeta2 = (SkullMeta) playerHead2.getItemMeta();
+                skullMeta2.setOwner(friends);
+                skullMeta2.setDisplayName("§6" + friends);
+                Player friend = Bukkit.getPlayer(friends);
+                if (friend != null) {
+                    skullMeta2.setLore(Arrays.asList("§aOnline", "§eClick to manage."));
+                } else
+                    skullMeta2.setLore(Arrays.asList("§cOffline", "§eClick to manage."));
+                playerHead2.setItemMeta(skullMeta2);
+                inventory.addItem(playerHead2);
+            }
         }
         player.openInventory(inventory);
     }

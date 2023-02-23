@@ -12,3 +12,4 @@ commands:
     description: teleports you to the hub
   build:
   friend:
+  jnr:

@@ -38,13 +38,10 @@ public class ProfileListener implements Listener {
                         break;
                     default:
                         break;
+                    }
                 }
             }
         }
-        }
-
-
-
     }
 
 }
