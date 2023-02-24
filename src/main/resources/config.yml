@@ -36,9 +36,11 @@ Inventory:
   SocialInventoryTitle: '&bLobby&4X&f - &9Social'
   FriendInventoryTitle: '&bLobby&4X&f - &3Friends'
   LocationInventoryTitle: '&bLobby&4X&f - &9Locations'
-  LanguageInventoryTitle: '&bLobby&4x&f - &3Language'
-  FriendSettingsInventoryTitle: '&bLobby&4x&f - &bFriend Settings'
-  FriendRemoveInventoryTitle: '&bLobby&4x&f - &cRemove this Friend'
+  LanguageInventoryTitle: '&bLobby&4X&f - &3Language'
+  FriendSettingsInventoryTitle: '&bLobby&4X&f - &bFriend Settings'
+  FriendRemoveInventoryTitle: '&bLobby&4X&f - &cRemove this Friend'
+  ClanInventory:
+    ClanChooseInventoryTitle: '&bLobby&4X&f - &4You aren´t in a Clan&f - &aHere you can Join one'
 
 #Tablist
 #Change tablist look

@@ -39,7 +39,9 @@ public class ProfileListener implements Listener {
                 switch(event.getCurrentItem().getItemMeta().getLocalizedName()){
                     case "MainInventory.Profil":
                         break;
-                    case "MainInventory.Stats":
+                    case "MainInventory.Clan":
+                        plugin.getProfileMenuManager().createClanchooseInventory(player);
+
                         break;
                     case"MainInventory.Settings":
                         plugin.getProfileMenuManager().createLanguageInventory(player);
@@ -195,6 +197,33 @@ public class ProfileListener implements Listener {
                     }
                 }
             }
+        }else if (event.getView().getTitle().equals(Objects.requireNonNull(plugin.getConfig().getString("Inventory.SocialInventoryTitle").replaceAll("&","§")))){
+            event.setCancelled(true);
+            if (event.getCurrentItem()!=null){
+                if (event.getCurrentItem().getItemMeta().hasLocalizedName()){
+                    switch (event.getCurrentItem().getItemMeta().getLocalizedName()){
+                        case"Sozial.Back":
+                            plugin.getProfileMenuManager().createProfileInventory(player);
+                            break;
+                        case"Sozial.MainMenu":
+                            plugin.getProfileMenuManager().createProfileInventory(player);
+                            break;
+                    }
+                }
+            }
+        }else if (event.getView().getTitle().equals(Objects.requireNonNull(plugin.getConfig().getString("Inventory.ClanInventory.ClanChooseInventoryTitle").replaceAll("&","§")))){
+            event.setCancelled(true);
+            if (event.getCurrentItem()!=null){
+                if (event.getCurrentItem().getItemMeta().hasLocalizedName()){
+                    switch (event.getCurrentItem().getItemMeta().getLocalizedName()){
+                        case";":
+                            break;
+                        case ":":
+                            break;
+                    }
+                }
+            }
+
         }
     }
 
