@@ -102,6 +102,11 @@ public class ProfileListener implements Listener {
                             plugin.getProfileMenuManager().createFriendInventory(player);
                             break;
                         case "friendInventory.sort3":
+                            plugin.yaml.set("Settings."+player.getUniqueId()+".FriendSort","Bookmarked");
+                            plugin.saveData();
+                            plugin.getProfileMenuManager().createFriendInventory(player);
+                            break;
+                        case "friendInventory.sort4":
                             plugin.yaml.set("Settings."+player.getUniqueId()+".FriendSort","All");
                             plugin.saveData();
                             plugin.getProfileMenuManager().createFriendInventory(player);

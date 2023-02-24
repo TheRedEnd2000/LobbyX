@@ -69,7 +69,7 @@ public class ProfileMenuManager implements Listener {
             player.sendMessage("§4§lThere was an error. Please try again.");
             return;
         }
-        int[] ornageglass = new int[]{0,1,2,3,5,6,7,8,9,17,18,26,27,35,36,44,46,47,52,53};
+        int[] ornageglass = new int[]{0,1,2,3,5,6,7,8,9,17,18,26,27,35,36,44,46,47,51,52,53};
         for (int i = 0; i<ornageglass.length;i++){inventory.setItem(ornageglass[i], new ItemBuilder(Material.ORANGE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
         ItemStack playerHead = new ItemStack(Material.PLAYER_HEAD);
         SkullMeta skullMeta = (SkullMeta) playerHead.getItemMeta();
@@ -80,7 +80,6 @@ public class ProfileMenuManager implements Listener {
         inventory.setItem(45, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§7Back").setSkullOwner(Main.BACK_SKULL_TEXTURE).setLocalizedName("friendInventory.back").build());
         inventory.setItem(48, new ItemBuilder(Material.OAK_SIGN).setDisplayname("§6Search").setLocalizedName("friendInventory.search").build());
         inventory.setItem(49, new ItemBuilder(Material.NETHER_STAR).setDisplayname("§9Main Menu").setLocalizedName("friendInventory.main").build());
-        inventory.setItem(51, new ItemBuilder(Material.BOOK).setDisplayname("§7Bookmark").setLocalizedName("friendInventory.bookmark").build());
         if(plugin.yaml.getString("Friends."+player.getUniqueId()) != null) {
             for (String friends : plugin.yaml.getConfigurationSection("Friends."+player.getUniqueId()+".").getKeys(false)) {
                 if(sort.equalsIgnoreCase("All")){
@@ -96,7 +95,7 @@ public class ProfileMenuManager implements Listener {
                         skullMeta2.setLore(Arrays.asList(plugin.yaml.getBoolean("Friends."+player.getUniqueId()+"."+friends+".Bookmarked") ? "§a§lBookmarked" : "","§cOffline","","§eClick to manage friendship."));
                     playerHead2.setItemMeta(skullMeta2);
                     inventory.addItem(playerHead2);
-                    inventory.setItem(50, new ItemBuilder(Material.HOPPER).setDisplayname("§aSort").setLore("§6➤ All Friends","§7Online Friends","§7Offline Friends").setLocalizedName("friendInventory.sort1").build());
+                    inventory.setItem(50, new ItemBuilder(Material.HOPPER).setDisplayname("§aSort").setLore("§6➤ All Friends","§7Online Friends","§7Offline Friends","§7Bookmarked").setLocalizedName("friendInventory.sort1").build());
                 }else if(sort.equalsIgnoreCase("Online")){
                     Player friendOnline = Bukkit.getPlayer(friends);
                     if(friendOnline != null){
@@ -109,7 +108,7 @@ public class ProfileMenuManager implements Listener {
                         playerHead2.setItemMeta(skullMeta2);
                         inventory.addItem(playerHead2);
                     }
-                    inventory.setItem(50, new ItemBuilder(Material.HOPPER).setDisplayname("§aSort").setLore("§7All Friends","§6➤ Online Friends","§7Offline Friends").setLocalizedName("friendInventory.sort2").build());
+                    inventory.setItem(50, new ItemBuilder(Material.HOPPER).setDisplayname("§aSort").setLore("§7All Friends","§6➤ Online Friends","§7Offline Friends","§7Bookmarked").setLocalizedName("friendInventory.sort2").build());
                 }else if(sort.equalsIgnoreCase("Offline")){
                     Player friendOnline = Bukkit.getPlayer(friends);
                     if(friendOnline == null){
@@ -122,7 +121,20 @@ public class ProfileMenuManager implements Listener {
                         playerHead2.setItemMeta(skullMeta2);
                         inventory.addItem(playerHead2);
                     }
-                    inventory.setItem(50, new ItemBuilder(Material.HOPPER).setDisplayname("§aSort").setLore("§7All Friends","§7Online Friends","§6➤ Offline Friends").setLocalizedName("friendInventory.sort3").build());
+                    inventory.setItem(50, new ItemBuilder(Material.HOPPER).setDisplayname("§aSort").setLore("§7All Friends","§7Online Friends","§6➤ Offline Friends","§7Bookmarked").setLocalizedName("friendInventory.sort3").build());
+                }else if(sort.equalsIgnoreCase("Bookmarked")){
+                    Player friendOnline = Bukkit.getPlayer(friends);
+                    if(plugin.yaml.getBoolean("Friends."+player.getUniqueId()+"."+friends+".Bookmarked")){
+                        ItemStack playerHead2 = new ItemStack(Material.PLAYER_HEAD);
+                        SkullMeta skullMeta2 = (SkullMeta) playerHead2.getItemMeta();
+                        skullMeta2.setOwner(friends);
+                        skullMeta2.setDisplayName("§5"+friends);
+                        skullMeta2.setLocalizedName("friend."+friends);
+                        skullMeta2.setLore(Arrays.asList(plugin.yaml.getBoolean("Friends."+player.getUniqueId()+"."+friends+".Bookmarked") ? "§a§lBookmarked" : "","§cOffline","","§eClick to manage friendship."));
+                        playerHead2.setItemMeta(skullMeta2);
+                        inventory.addItem(playerHead2);
+                    }
+                    inventory.setItem(50, new ItemBuilder(Material.HOPPER).setDisplayname("§aSort").setLore("§7All Friends","§7Online Friends","§7Offline Friends","§6➤ Bookmarked").setLocalizedName("friendInventory.sort4").build());
                 }
             }
         }
