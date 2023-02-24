@@ -1,7 +1,10 @@
 package de.theredend2000.lobbyx;
 
+import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.properties.Property;
 import de.theredend2000.lobbyx.commands.LobbyXCommand;
 import de.theredend2000.lobbyx.commands.playercommand.*;
+import de.theredend2000.lobbyx.heads.CustomHeads;
 import de.theredend2000.lobbyx.jumpandrun.JnrCommand;
 import de.theredend2000.lobbyx.jumpandrun.JumpAndRun;
 import de.theredend2000.lobbyx.jumpandrun.Leaderboard;
@@ -23,15 +26,19 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Objects;
+import java.util.UUID;
 
 public final class Main extends JavaPlugin {
     private ArrayList<World> lobbyWorlds;
@@ -172,6 +179,22 @@ public final class Main extends JavaPlugin {
         } catch (Exception ex) {
             return Material.BARRIER;
         }
+    }
+    public static ItemStack createCustomSkull(String url, String name){
+        ItemStack head = new ItemStack(Material.PLAYER_HEAD,1,(short) 3);
+        if(url.isEmpty()) return head;
+        SkullMeta headMeta = (SkullMeta) head.getItemMeta();
+        GameProfile profile = new GameProfile(UUID.randomUUID(),null);
+        profile.getProperties().put("textures", new Property("textures", url));
+        try {
+            Field profileField = headMeta.getClass().getDeclaredField("profile");
+            profileField.setAccessible(true);
+            profileField.set(headMeta, profile);
+        } catch (NoSuchFieldException | IllegalAccessException | SecurityException error) {
+            error.printStackTrace();
+        }
+        head.setItemMeta(headMeta);
+        return head;
     }
     public DatetimeUtils getDatetimeUtils() {
         return datetimeUtils;

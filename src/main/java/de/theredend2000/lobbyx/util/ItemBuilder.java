@@ -1,5 +1,9 @@
 package de.theredend2000.lobbyx.util;
 
+import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.properties.Property;
+import de.theredend2000.lobbyx.Main;
+import de.theredend2000.lobbyx.heads.CustomHeads;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -8,7 +12,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
+import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.Map;
+import java.util.UUID;
 
 public class ItemBuilder {
 
@@ -50,13 +57,26 @@ public class ItemBuilder {
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }
-    public ItemBuilder setSkullOwner(Player owner){
-        try{
-            SkullMeta im = (SkullMeta)itemStack.getItemMeta();
-            im.setOwningPlayer(owner);
-            itemStack.setItemMeta(im);
-        }catch(ClassCastException expected){}
+    public ItemBuilder setSkullOwner(String texture) {
+        try {
+            SkullMeta skullMeta = (SkullMeta) this.itemMeta;
+            GameProfile profile = new GameProfile(UUID.randomUUID(), null);
+            profile.getProperties().put("textures", new Property("textures", texture));
+            Field field = skullMeta.getClass().getDeclaredField("profile");
+            field.setAccessible(true);
+            field.set(skullMeta, profile);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         return this;
+    }
+    public ItemStack getHead(String name){
+        for(CustomHeads heads : CustomHeads.values()){
+            if(heads.getName().equals(name)){
+                return heads.getItemStack();
+            }
+        }
+        return null;
     }
 
     public ItemBuilder addEnchant(Enchantment ench, int level){
