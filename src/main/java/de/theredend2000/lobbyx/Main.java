@@ -1,10 +1,7 @@
 package de.theredend2000.lobbyx;
 
 import de.theredend2000.lobbyx.commands.LobbyXCommand;
-import de.theredend2000.lobbyx.commands.playercommand.BuildCommand;
-import de.theredend2000.lobbyx.commands.playercommand.FriendCommand;
-import de.theredend2000.lobbyx.commands.playercommand.HubCommand;
-import de.theredend2000.lobbyx.commands.playercommand.LobbyCommand;
+import de.theredend2000.lobbyx.commands.playercommand.*;
 import de.theredend2000.lobbyx.jumpandrun.JnrCommand;
 import de.theredend2000.lobbyx.jumpandrun.JumpAndRun;
 import de.theredend2000.lobbyx.jumpandrun.Leaderboard;
@@ -95,6 +92,8 @@ public final class Main extends JavaPlugin {
         getCommand("build").setExecutor(new BuildCommand(this));
         getCommand("friend").setExecutor(new FriendCommand(this));
         getCommand("jnr").setExecutor(new JnrCommand(this));
+        getCommand("setLang").setExecutor(new SetLangCommand(this));
+        String s = "Language";
     }
 
     private void initListeners(){

@@ -1,16 +1,43 @@
-Admin:
-  OnlyPlayerUse: '&cOnly Player can use this command.'
-  NoPermissionMessage: '&cYou do not have the &6%PERMISSION% permission &cto use this command!'
-
 PlayerHider:
-  PlayerHider_Hide: '&7Player visibility has been &6successfully §cdisabled&7.'
-  PlayerHider_Show: '&7Player visibility has been &6successfully §aenabled&7.'
-  PlayerHider_Wait: '&cPlease wait before doing this again!'
+  PlayerHider_Hide: '&7Die Sichtbarkeit von Spielern wurde &6erfolgreich§c ausgeschalten&7.'
+  PlayerHider_Show: '&7Die Sichtbarkeit von Spielern wurde &6erfolgreich§a eingeschalten&7.'
+  PlayerHider_Wait: '&cBitte warte, bis du das wieder tun kannst!'
 
 BuildCommand:
   BuildJoined: '&7Du bist nun im &aBau Modus&7.'
   BuildLeave: '&7Du bist nun nicht mehr im &cBau Modus&7.'
 
 JoinQuit:
-  JoinMessage: '&b%PLAYER% &6joined the Server.'
-  QuitMessage: '&b%PLAYER% &6left the Server.'
+  JoinMessage: '&b%PLAYER% &6hat den Server betreten.'
+  QuitMessage: '&b%PLAYER% &6hat den Server verlassen.'
+
+Friend:
+  FriendRequestSender: '&7Du hast &6%FRIEND_REQUEST_RECEIVER% &7a eine Freundschaftsanfrage gesendet. Er hat &e3 minuten &7um diese zu&a akzeptieren&7.'
+  FriendRequestReceiver: '&7Freundschaftsanfrage von &6%FRIEND_REQUEST_SENDER%&7.'
+  AlreadySend: '&cDu kannst nur eine Freundschaftsanfrage gleichzeitig senden. Bitte warte kurz.'
+  PlayerNotFound: '&cIch konnte den Spieler nicht finden!'
+  NotFriendRequest: '&cDu hast keine ausstehende Freundschaftsanfrage!'
+  FriendAlreadyAdded: '&c%PLAYER_REQUEST_RECEIVER% ist bereits mit dir befreundet!'
+  NotAddYourself: '&cDu kannst dir selber keine Freundschaftsanfrage senden!'
+  FriendRequestAcceptSender: '&6%PLAYER_REQUEST_ACCEPT% &7hat deine &bFreundschaftsanfrage&a angenommen&7.'
+  FriendRequestAcceptReceiver: '&7Du hast &6%PLAYER_REQUEST_SENDER%´s&b Freundschaftsanfrage&a akzeptiert&7.'
+  FriendRequestDenySender: '&6%PLAYER_REQUEST_ACCEPT% &7hat deine&b Freundschaftsanfrage&c abgelehnt&7.'
+  FriendRequestDenyReceiver: '&7Du hast &6%PLAYER_REQUEST_SENDER%´s&b Freundschaftsanfrage&c abgelehnt&7.'
+  FriendRemoveSender: '&7Du hast &6%PLAYER_REMOVED% aus deiner Freunde-Liste&c entfernt&7.'
+  FriendRemoveReceiver: '&6%PLAYER_REMOVED_FRIEND% &7hat dich aus seiner Freunde-Liste&c entfernt&7.'
+  FriendRemoveNotFriend: '&6%PLAYER_REMOVED% &7ist &ckein &7Freund von dir.'
+  FriendCommandUsage: '&7Benutzung: &6/friend add <Player> &8| &6/friend accept <Player> &8| &6/friend deny <Player> &8| &6/friend remove <Player> &8| &6/friend list&7!'
+
+Locations:
+  SetHub: '&7Der &9Hub &7wurde &a erfolgreich&7 gesetzt.'
+  SetLobby: '&7Die &bLobby &7wurde &a erfolgreich&7 gesetzt.'
+
+JumpAndRun:
+  AlreadyStarted: '&cDu hast den Jump and Run bereits gestartet.'
+  StartJnr: '&7Du hast den &6Jump and Run&7gestartet.'
+  StopJnr: '&7Du bist&c runtergefallen&7. Deine Punktzahl ist: &6%JUMP_AND_RUN_POINTS%'
+
+Languages:
+  LanguagesUsage: '&7Benutzung: &6/setLang &7[&3ENGLISH &8| &3GERMAN &8| &3SPAIN&7]'
+  LangSelectEnglish: '&7Sprache wurde geändert zu: &6Deutsch&7.'
+  LanguagesNotFound: '&cDiese Sprache gibt es nicht.'

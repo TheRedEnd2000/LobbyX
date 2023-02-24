@@ -19,7 +19,7 @@ Friend:
   FriendRequestSender: '&7You send &6%FRIEND_REQUEST_RECEIVER% &7a friend request. He has &e3 minutes &7to &aaccept&7.'
   FriendRequestReceiver: '&7Friend request from &6%FRIEND_REQUEST_SENDER%&7.'
   AlreadySend: '&cYou can only send one friend request at the time. Please wait.'
-  PlayerNotFound: '&cI cant fin this Player!'
+  PlayerNotFound: '&cI cant find this Player!'
   NotFriendRequest: '&cYou have no friend requests!'
   FriendAlreadyAdded: '&c%PLAYER_REQUEST_RECEIVER% is already you friend!'
   NotAddYourself: '&cYou cant send yourself a friend request!'
@@ -42,5 +42,6 @@ JumpAndRun:
   StopJnr: '&7You&c fell&7. You point are &6%JUMP_AND_RUN_POINTS%'
 
 Languages:
-  LanguagesUsage: '&7Usages: &6/setLang &7[&3ENGLISH &8| &3ENGLISH &8| &3SPAIN&7]'
+  LanguagesUsage: '&7Usages: &6/setLang &7[&3ENGLISH &8| &3GERMAN &8| &3SPAIN&7]'
   LangSelectEnglish: '&7Language set to: &6English&7.'
+  LanguagesNotFound: '&cThis Language doesnt exists.'

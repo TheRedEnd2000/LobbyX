@@ -12,4 +12,11 @@ commands:
     description: teleports you to the hub
   build:
   friend:
+    aliases:
+      - fr
   jnr:
+    aliases:
+      - jumpandrun
+  setLang:
+    aliases:
+      - setLanguage

@@ -5,6 +5,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 
 public class EntityDamageEventListener implements Listener {
@@ -26,16 +27,22 @@ public class EntityDamageEventListener implements Listener {
                 }
             }
         }
-        /*if(!plugin.getConfig().getBoolean("Settings.MobDamageInLobbys")){
+
+    }
+
+    @EventHandler
+    public void onDamageEntitybyEntity(EntityDamageByEntityEvent event){
+        if(!plugin.getConfig().getBoolean("Settings.MobDamageInLobbys")){
             Entity entity = event.getEntity();
-            if(!(entity instanceof ItemFrame || entity instanceof ArmorStand)) {
-                if (plugin.getLobbyWorlds().contains(entity.getWorld())) {
-                    event.setCancelled(true);
-                    entity.sendMessage(String.valueOf(event.getEntity().getType()));
+            if(event.getDamager() instanceof Player){
+                Player player = (Player) event.getDamager();
+                if(plugin.getLobbyWorlds().contains(player.getWorld()) && plugin.getLobbyWorlds().contains(entity.getWorld())){
+                    if(!plugin.getBuildPlayers().contains(player)){
+                        event.setCancelled(true);
+                    }
                 }
-            }else
-                Bukkit.getConsoleSender().sendMessage("ne");
-        }*/
+            }
+        }
     }
 
 }

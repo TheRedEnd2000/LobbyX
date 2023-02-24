@@ -65,30 +65,6 @@ public class LobbxListener implements Listener {
                     }
                 }
             }
-        }else if (event.getView().getTitle().equals(Objects.requireNonNull(plugin.getConfig().getString("Inventory.LocationInventoryTitle")).replaceAll("&","§"))){
-            event.setCancelled(true);
-            if (event.getCurrentItem()!=null){
-                if (event.getCurrentItem().getItemMeta().hasLocalizedName()){
-                    switch(event.getCurrentItem().getItemMeta().getLocalizedName()){
-                        case "player.":
-                            plugin.getLobbyXMenuManager().createMainInventory(player);
-                            break;
-                        case "lobbyx.locations.hub":
-                            new ConfigLocationUtil(plugin,player.getLocation(),"Locations.Hub").saveLocation();
-                            player.sendMessage(Util.getMessage(Util.getLocale(player),"SetHub"));
-                            player.closeInventory();
-                            break;
-                        case"lobbyx.locations.lobby":
-                            new ConfigLocationUtil(plugin,player.getLocation(),"Locations.Lobby").saveLocation();
-                            player.sendMessage(Util.getMessage(Util.getLocale(player),"SetLobby"));
-                            player.closeInventory();
-                            break;
-                        case"lobbyx.locations.close":
-                            player.closeInventory();
-                            break;
-                    }
-                }
-            }
         }
     }
 

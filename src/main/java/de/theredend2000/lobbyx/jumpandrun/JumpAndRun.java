@@ -53,6 +53,7 @@ public class JumpAndRun {
     }
 
     public void nextBlock(Player player, boolean isStarted) {
+        int counter = 0;
         if (!this.finished) {
             if (!isStarted) {
                 player.playSound(player.getLocation(), Sound.valueOf(plugin.getConfig().getString("JumpAndRun.Sounds.NewBlockSound")), 1.0F, 1.0F);
@@ -88,7 +89,6 @@ public class JumpAndRun {
                     this.nextLocation.subtract(0.0, 1.0, 0.0).getBlock().setType(plugin.getMaterial("JumpAndRun.Blocks.NewBlock"));
                     return;
                 }else{
-                    int counter = 0;
                     if(counter == 10){
                         stop(player);
                         player.sendMessage("§cThere was an error. §4§l(NO-FREE-BLOCK-FOUND) \n§cPlease contact an admin.");
@@ -96,8 +96,7 @@ public class JumpAndRun {
                         return;
                     }
                     nextBlock(player, true);
-                    counter++;
-                    player.sendMessage(String.valueOf(counter));
+                    counter = counter+1;
                 }
             }
         }

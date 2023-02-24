@@ -48,6 +48,18 @@ public class Util {
             localSettings.put(p,locale);
         }else{
             localSettings.put(p, file);
+            if(file.getName().equals("en.yml")){
+                plugin.yaml.set("Languages."+p.getUniqueId(),"en");
+            }else if(file.getName().equals("de.yml")){
+                plugin.yaml.set("Languages."+p.getUniqueId(),"de");
+            }else if(file.getName().equals("sp.yml")){
+                plugin.yaml.set("Languages."+p.getUniqueId(),"sp");
+            }else {
+                File locale = new File(plugin.getDataFolder()+ "/locales","en.yml");
+                localSettings.put(p, locale);
+                return;
+            }
+            plugin.saveData();
         }
     }
 
