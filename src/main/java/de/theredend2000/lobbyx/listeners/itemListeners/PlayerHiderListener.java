@@ -52,7 +52,7 @@ public class PlayerHiderListener implements Listener {
                         }
                         plugin.saveData();
                         plugin.getSetPlayerLobbyManager().setItems(player);
-                        playerHiderCooldown.put(player.getName(),System.currentTimeMillis()+3000);
+                        playerHiderCooldown.put(player.getName(),System.currentTimeMillis()+2000);
                     }
                 }
             }

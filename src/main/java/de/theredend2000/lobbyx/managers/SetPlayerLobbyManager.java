@@ -84,8 +84,8 @@ public class SetPlayerLobbyManager {
     private void checkConfig(Player player){
         if(plugin.yaml.getString("Settings."+player.getUniqueId()+".FriendSort") == null){
             plugin.yaml.set("Settings."+player.getUniqueId()+".FriendSort","All");
-            plugin.saveData();
         }
+        plugin.saveData();
     }
 
     private void setGamemode(Player player){

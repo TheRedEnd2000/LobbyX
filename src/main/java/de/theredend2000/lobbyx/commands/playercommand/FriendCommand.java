@@ -11,6 +11,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
 
@@ -18,10 +19,14 @@ public class FriendCommand implements CommandExecutor {
 
     private Main plugin;
     private HashMap<Player, Player> friendRequest;
+    private HashMap<Player, Integer> friendRequestTime;
 
     public FriendCommand(Main plugin){
         this.plugin = plugin;
         friendRequest = new HashMap<>();
+        friendRequestTime = new HashMap<>();
+
+        checkFriendRequestTimeOut();
     }
 
     @Override
@@ -68,6 +73,7 @@ public class FriendCommand implements CommandExecutor {
                         friendtoadd.spigot().sendMessage(c);
                         friendtoadd.sendMessage("§4§l-=-=-=-=-=-=-=-=-=-=-=-=-");
                         friendRequest.put(player,friendtoadd);
+                        friendRequestTime.put(player,300);
                     }else if(args[0].equalsIgnoreCase("accept")){
                         Player friendAccept = Bukkit.getPlayer(args[1]);
                         if(friendAccept == null){
@@ -76,6 +82,7 @@ public class FriendCommand implements CommandExecutor {
                         }
                         if(friendRequest.containsKey(friendAccept) && friendRequest.containsValue(player)){
                             friendRequest.remove(friendAccept);
+                            friendRequestTime.remove(friendAccept);
                             friendRequest.values().remove(player);
                             player.sendMessage(Util.getMessage(Util.getLocale(player), "FriendRequestAcceptReceiver").replaceAll("%PLAYER_REQUEST_ACCEPT%", player.getName()).replaceAll("%PLAYER_REQUEST_SENDER%", friendAccept.getName()));
                             friendAccept.sendMessage(Util.getMessage(Util.getLocale(player), "FriendRequestAcceptSender").replaceAll("%PLAYER_REQUEST_ACCEPT%", player.getName()).replaceAll("%PLAYER_REQUEST_SENDER%", friendAccept.getName()));
@@ -91,6 +98,7 @@ public class FriendCommand implements CommandExecutor {
                         }
                         if(friendRequest.containsKey(friendDeny) && friendRequest.containsValue(player)){
                             friendRequest.remove(friendDeny);
+                            friendRequestTime.remove(friendDeny);
                             friendRequest.values().remove(player);
                             player.sendMessage(Util.getMessage(Util.getLocale(player), "FriendRequestDenyReceiver").replaceAll("%PLAYER_REQUEST_ACCEPT%", player.getName()).replaceAll("%PLAYER_REQUEST_SENDER%", friendDeny.getName()));
                             friendDeny.sendMessage(Util.getMessage(Util.getLocale(player), "FriendRequestDenySender").replaceAll("%PLAYER_REQUEST_ACCEPT%", player.getName()).replaceAll("%PLAYER_REQUEST_SENDER%", friendDeny.getName()));
@@ -128,4 +136,29 @@ public class FriendCommand implements CommandExecutor {
             sender.sendMessage(Util.getMessage("en","OnlyPlayerUse"));
         return false;
     }
+
+    private void checkFriendRequestTimeOut(){
+        for(Player player : Bukkit.getServer().getOnlinePlayers()){
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    if(plugin.getLobbyWorlds().contains(player.getWorld())){
+                        if(friendRequest.containsKey(player)){
+                            if(friendRequestTime.get(player) == 0){
+                                 friendRequest.remove(player);
+                                 friendRequestTime.remove(player);
+                                 player.sendMessage(Util.getMessage(Util.getLocale(player), "FriendRequestExpired"));
+                                 return;
+                            }
+                            int time = friendRequestTime.get(player);
+                            time -=1;
+                            friendRequestTime.remove(player);
+                            friendRequestTime.put(player,time);
+                        }
+                    }
+                }
+            }.runTaskTimer(plugin,0,20);
+        }
+    }
+
 }

@@ -16,11 +16,12 @@ JoinQuit:
   QuitMessage: '&b%PLAYER% &6left the Server.'
 
 Friend:
-  FriendRequestSender: '&7You send &6%FRIEND_REQUEST_RECEIVER% &7a friend request. He has &e3 minutes &7to &aaccept&7.'
+  FriendRequestSender: '&7You send &6%FRIEND_REQUEST_RECEIVER% &7a friend request. He has &e5 minutes &7to &aaccept&7.'
   FriendRequestReceiver: '&7Friend request from &6%FRIEND_REQUEST_SENDER%&7.'
   AlreadySend: '&cYou can only send one friend request at the time. Please wait.'
   PlayerNotFound: '&cI cant find this Player!'
   NotFriendRequest: '&cYou have no friend requests!'
+  FriendRequestExpired: '&cYour friend requests expired!'
   FriendAlreadyAdded: '&c%PLAYER_REQUEST_RECEIVER% is already your friend!'
   NotAddYourself: '&cYou cant send yourself a friend request!'
   FriendRequestAcceptSender: '&6%PLAYER_REQUEST_ACCEPT% &7has&a accepted &7your &bfriend request&7.'
