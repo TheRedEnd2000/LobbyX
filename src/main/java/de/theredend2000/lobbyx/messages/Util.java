@@ -114,9 +114,10 @@ public class Util {
                 plugin.saveData();
                 return;
             }
-            String localeFileName = plugin.getConfig().getString("Languages."+uuid);
+            String localeFileName = plugin.yaml.getString("Languages."+uuid);
             File langFile = new File(plugin.getDataFolder()+"/locales",localeFileName+".yml");
             Util.setLocale(player, langFile);
+            Bukkit.getConsoleSender().sendMessage(player.getName()+" in "+langFile);
         }
 
     }

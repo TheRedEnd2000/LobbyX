@@ -33,19 +33,13 @@ public class PlayerMoveListener implements Listener {
             if (player.getLocation().getY() < jumpAndRun.getCurrentLocation().getY()) {
                 jumpAndRun.stop(player);
             }
-        }
-    }
-
-    @EventHandler
-    public void onInteractPlayer(PlayerInteractEvent event){
-        Player player = event.getPlayer();
-        if(!JumpAndRun.getJumpAndRuns().containsKey(player.getUniqueId())){
-            if (plugin.getLobbyWorlds().contains(player.getWorld())) {
+            if(!JumpAndRun.getJumpAndRuns().containsKey(player.getUniqueId())){
+                if (plugin.getLobbyWorlds().contains(player.getWorld())) {
                     if(player.getLocation().getBlock().getType().equals(Material.LIGHT_WEIGHTED_PRESSURE_PLATE)){
-                        JumpAndRun jumpAndRun = new JumpAndRun(player, plugin);
                         jumpAndRun.start(player);
                         JumpAndRun.getJumpAndRuns().put(player.getUniqueId(), jumpAndRun);
                     }
+                }
             }
         }
     }

@@ -5,6 +5,7 @@ import de.theredend2000.lobbyx.messages.Util;
 import de.theredend2000.lobbyx.util.ConfigLocationUtil;
 import de.theredend2000.lobbyx.util.ItemBuilder;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -36,6 +37,7 @@ public class SetPlayerLobbyManager {
             //HEAL
             setItems(player);
             checkConfig(player);
+            setGamemode(player);
 
             if(plugin.getConfig().getBoolean("Titles.WelcomeTitle.enabled"))
                 player.sendTitle(plugin.getConfig().getString("Titles.WelcomeTitle.title").replaceAll("&","§").replaceAll("%PLAYER%",player.getName()),plugin.getConfig().getString("Titles.WelcomeTitle.subtitle").replaceAll("&","§").replaceAll("%PLAYER%",player.getName()),20,100,40);
@@ -83,6 +85,24 @@ public class SetPlayerLobbyManager {
         if(plugin.yaml.getString("Settings."+player.getUniqueId()+".FriendSort") == null){
             plugin.yaml.set("Settings."+player.getUniqueId()+".FriendSort","All");
             plugin.saveData();
+        }
+    }
+
+    private void setGamemode(Player player){
+        String weatherType = plugin.getConfig().getString("Settings.DefaultGamemode").toUpperCase();
+        switch (weatherType) {
+            case ("SURVIVAL"):
+                player.setGameMode(GameMode.SURVIVAL);
+                break;
+            case ("SPECTATOR"):
+                player.setGameMode(GameMode.SPECTATOR);
+                break;
+            case ("CREATIVE"):
+                player.setGameMode(GameMode.CREATIVE);
+                break;
+            case ("ADVENTURE"):
+                player.setGameMode(GameMode.ADVENTURE);
+                break;
         }
     }
 

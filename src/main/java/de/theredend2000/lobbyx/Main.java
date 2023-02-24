@@ -22,6 +22,7 @@ import de.theredend2000.lobbyx.messages.Util;
 import de.theredend2000.lobbyx.util.DatetimeUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.WeatherType;
 import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -87,7 +88,26 @@ public final class Main extends JavaPlugin {
         for (World world : Bukkit.getWorlds()) {
             if (getConfig().getStringList("Lobby_Worlds").contains(world.getName())) {
                 lobbyWorlds.add(world);
+                setLobbyWeather(world);
             }
+        }
+    }
+
+    private void setLobbyWeather(World world){
+        String weatherType = getConfig().getString("Settings.DefaultWeather").toUpperCase();
+        switch (weatherType) {
+            case ("CLEAR"):
+                world.setStorm(false);
+                world.setThundering(false);
+                break;
+            case ("RAIN"):
+                world.setStorm(true);
+                world.setThundering(false);
+                break;
+            case ("THUNDER"):
+                world.setStorm(true);
+                world.setThundering(true);
+                break;
         }
     }
 

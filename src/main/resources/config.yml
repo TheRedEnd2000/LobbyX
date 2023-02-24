@@ -12,6 +12,8 @@ Prefix: '&f[&b&lLobby&4&lX&f] &r'
 
 Settings:
   MobDamageInLobbys: false
+  DefaultWeather: CLEAR #Select between Clear, Rain, Thunder
+  DefaultGamemode: SURVIVAL
 
 #LobbyWorlds
 
