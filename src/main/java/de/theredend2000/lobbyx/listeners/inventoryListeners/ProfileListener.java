@@ -45,6 +45,7 @@ public class ProfileListener implements Listener {
                         plugin.getProfileMenuManager().createLanguageInventory(player);
                         break;
                     case"MainInventory.Social":
+                        plugin.getProfileMenuManager().createSozailMenu(player);
                         break;
                     default:
                         break;
