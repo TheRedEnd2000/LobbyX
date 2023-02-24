@@ -145,6 +145,32 @@ public class ProfileMenuManager implements Listener {
         int[] White = new int[]{0,8,45,53};
 
     }
+    public void createSozailMenu(Player player){
+        Inventory Sozial = Bukkit.createInventory(player,54,Objects.requireNonNull(plugin.getConfig().getString("Inventory.SocialInventoryTitle").replaceAll("&","§")));
+        int[] Blau1 = new int[]{0,9,14,15,16,18,27,37,38,39,40,44,53};
+        int[] Blau2 = new int[]{1,2,3,4,5,6,7,19,25,28,34,46,47,48,50,51,52};
+        int[] Blau3 = new int[]{8,10,11,12,13,17,26,35,36,41,42,43};
+        for (int i =0; i < Blau1.length;i++){Sozial.setItem(Blau1[i],new ItemBuilder(Material.LIGHT_BLUE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
+        for (int i =0; i < Blau2.length;i++){Sozial.setItem(Blau2[i],new ItemBuilder(Material.CYAN_STAINED_GLASS_PANE).setDisplayname("§c").build());}
+        for (int i =0; i < Blau3.length;i++){Sozial.setItem(Blau3[i],new ItemBuilder(Material.BLUE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
+        Sozial.setItem(22,new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).setDisplayname("§c").build());
+        Sozial.setItem(31,new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setDisplayname("§c").build());
+        Sozial.setItem(45,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§7Back").setSkullOwner(Main.BACK_SKULL_TEXTURE).setLocalizedName("Sozial.Back").build());
+        Sozial.setItem(49,new ItemBuilder(Material.NETHER_STAR).setDisplayname("§eMainMenu").setLocalizedName("Sozial.MainMenu").build());
+        Sozial.setItem(20,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§7Back").setSkullOwner(Main.getTexture("Nzg3M2MxMmJmZmI1MjUxYTBiODhkNWFlNzVjNzI0N2NiMzlhNzVmZjFhODFjYmU0YzhhMzliMzExZGRlZGEifX19")).setLocalizedName("Sozial.Dc").build());
+        Sozial.setItem(21,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§7Back").setSkullOwner(Main.getTexture("YjQzNTNmZDBmODYzMTQzNTM4NzY1ODYwNzViOWJkZjBjNDg0YWFiMDMzMWI4NzJkZjExYmQ1NjRmY2IwMjllZCJ9fX0=")).setLocalizedName("Sozial.Yt").build());
+        Sozial.setItem(23,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§7Back").setSkullOwner(Main.getTexture("YWM4OGQ2MTYzZmFiZTdjNWU2MjQ1MGViMzdhMDc0ZTJlMmM4ODYxMWM5OTg1MzZkYmQ4NDI5ZmFhMDgxOTQ1MyJ9fX0=")).setLocalizedName("Sozial.Instagram").build());
+        Sozial.setItem(24,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§7Back").setSkullOwner(Main.getTexture("ZGViNDYxMjY5MDQ0NjNmMDdlY2ZjOTcyYWFhMzczNzNhMjIzNTliNWJhMjcxODIxYjY4OWNkNTM2N2Y3NTc2MiJ9fX0=")).setLocalizedName("Sozial.Facebook").build());
+        Sozial.setItem(29,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§7Back").setSkullOwner(Main.getTexture("YjI1ODA0ODliMmQ0NGU1ZDlhOWIzZjgzNmVmMjE5ZjAzMTI5OTJkNDBiMTRkOTlmNTZjNWFmMDVjNDBmNzE1In19fQ==")).setLocalizedName("Sozial.Twitch").build());
+        Sozial.setItem(30,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§7Back").setSkullOwner(Main.getTexture("YmNmMjEwNWJiNzM3NjM4ODMzMDMzZGQ4MjQ0MDcxZTc1ODcwZTJlMTFjMjYxN2U1NDJlODkyNGZiMmI5MDE4MCJ9fX0=")).setLocalizedName("Sozial.Tiktok").build());
+        Sozial.setItem(32,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§7Back").setSkullOwner(Main.getTexture("NmFkNDZhNDIyYWU1OTYwM2ZkODg5YzI1MzQ0ZmY2N2JjODQzYWY4ZWU1MTg5MzJjMmUyYWQwN2NkYmY5MzliMyJ9fX0=")).setLocalizedName("Sozial.Twitter").build());
+        Sozial.setItem(33,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§7Back").setSkullOwner(Main.getTexture("MjZlMjdkYTEyODE5YThiMDUzZGEwY2MyYjYyZGVjNGNkYTkxZGU2ZWVlYzIxY2NmM2JmZTZkZDhkNDQzNmE3In19fQ==")).setLocalizedName("Sozial.Github").build());
+        player.openInventory(Sozial);
+
+
+
+
+    }
     public void createLanguageInventory(Player player){
         Inventory Language = Bukkit.createInventory(player, 27, Objects.requireNonNull(plugin.getConfig().getString("Inventory.LanguageInventoryTitle")).replaceAll("&","§"));
         int[] Orange = new int[]{0,1,2,3,4,5,6,7,8,9,10,12,14,16,17,19,20,21,22,23,24,25,26};
