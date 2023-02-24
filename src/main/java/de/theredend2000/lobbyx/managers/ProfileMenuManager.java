@@ -14,10 +14,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 public class ProfileMenuManager implements Listener {
 
@@ -84,6 +81,7 @@ public class ProfileMenuManager implements Listener {
                 SkullMeta skullMeta2 = (SkullMeta) playerHead2.getItemMeta();
                 skullMeta2.setOwner(friends);
                 skullMeta2.setDisplayName(friends);
+                skullMeta2.setLore(Arrays.asList(plugin.yaml.getBoolean("Friends."+player.getUniqueId()+"."+friends+".BestFriend") ? "BestFriend" : "NotFriend"));
                 playerHead2.setItemMeta(skullMeta2);
                 inventory.addItem(playerHead2);
             }
