@@ -71,17 +71,22 @@ public class ProfileMenuManager implements Listener {
         playerHead.setItemMeta(skullMeta);
         inventory.setItem(4, playerHead);
         inventory.setItem(45, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§7Back").setSkullOwner(Main.BACK_SKULL_TEXTURE).setLocalizedName("friendInventory.back").build());
-        inventory.setItem(47, new ItemBuilder(Material.OAK_SIGN).setDisplayname("§6Search").setLocalizedName("friendInventory.search").build());
-        inventory.setItem(48, new ItemBuilder(Material.NETHER_STAR).setDisplayname("§9Main Menu").setLocalizedName("friendInventory.main").build());
-        inventory.setItem(49, new ItemBuilder(Material.HOPPER).setDisplayname("§aSort").setLocalizedName("friendInventory.sort").build());
-        inventory.setItem(50, new ItemBuilder(Material.BOOK).setDisplayname("§7Bookmark").setLocalizedName("friendInventory.bookmark").build());
+        inventory.setItem(48, new ItemBuilder(Material.OAK_SIGN).setDisplayname("§6Search").setLocalizedName("friendInventory.search").build());
+        inventory.setItem(49, new ItemBuilder(Material.NETHER_STAR).setDisplayname("§9Main Menu").setLocalizedName("friendInventory.main").build());
+        inventory.setItem(50, new ItemBuilder(Material.HOPPER).setDisplayname("§aSort").setLocalizedName("friendInventory.sort").build());
+        inventory.setItem(51, new ItemBuilder(Material.BOOK).setDisplayname("§7Bookmark").setLocalizedName("friendInventory.bookmark").build());
         if(plugin.yaml.getString("Friends."+player.getUniqueId()) != null) {
             for (String friends : plugin.yaml.getConfigurationSection("Friends."+player.getUniqueId()+".").getKeys(false)) {
                 ItemStack playerHead2 = new ItemStack(Material.PLAYER_HEAD);
                 SkullMeta skullMeta2 = (SkullMeta) playerHead2.getItemMeta();
                 skullMeta2.setOwner(friends);
-                skullMeta2.setDisplayName(friends);
-                skullMeta2.setLore(Arrays.asList(plugin.yaml.getBoolean("Friends."+player.getUniqueId()+"."+friends+".BestFriend") ? "BestFriend" : "NotFriend"));
+                skullMeta2.setDisplayName("§5"+friends);
+                skullMeta2.setLocalizedName("friend."+friends);
+                Player online = Bukkit.getPlayer(friends);
+                if(online != null){
+                    skullMeta2.setLore(Arrays.asList(plugin.yaml.getBoolean("Friends."+player.getUniqueId()+"."+friends+".BestFriend") ? "§aThis Friend is §a§lBookmarked§a." : "§cThis Friend isn't §c§lBookmarked§c.","§aOnline","","§eClick to manage friendship."));
+                }else
+                    skullMeta2.setLore(Arrays.asList(plugin.yaml.getBoolean("Friends."+player.getUniqueId()+"."+friends+".BestFriend") ? "BestFriend" : "NotFriend","§cOffline","","§eClick to manage friendship."));
                 playerHead2.setItemMeta(skullMeta2);
                 inventory.addItem(playerHead2);
             }
