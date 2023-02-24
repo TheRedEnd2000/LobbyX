@@ -216,7 +216,8 @@ public class ProfileListener implements Listener {
             if (event.getCurrentItem()!=null){
                 if (event.getCurrentItem().getItemMeta().hasLocalizedName()){
                     switch (event.getCurrentItem().getItemMeta().getLocalizedName()){
-                        case";":
+                        case"ClanChoose.Back":
+                            plugin.getProfileMenuManager().createProfileInventory(player);
                             break;
                         case ":":
                             break;

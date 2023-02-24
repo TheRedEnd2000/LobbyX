@@ -171,15 +171,15 @@ public class ProfileMenuManager implements Listener {
     public void createClanchooseInventory(Player player){
         Inventory ClanChoose = Bukkit.createInventory(player,27,Objects.requireNonNull(plugin.getConfig().getString("Inventory.ClanInventory.ClanChooseInventoryTitle").replaceAll("&","§")));
         int[] Orange = new int[]{0,1,2,3,4,5,6,7,8,9,17,19,20,21,22,23,24,25,26};
-        int[] Black = new int[]{12,14};
-        int[] red = new int[]{11,16};
+        int[] Black = new int[]{11,13,15};
+        int[] red = new int[]{10,16};
         for (int i =0; i < Orange.length;i++){ClanChoose.setItem(Orange[i],new ItemBuilder(Material.ORANGE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
         for (int i =0; i < Black.length;i++){ClanChoose.setItem(Black[i],new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).setDisplayname("§c").build());}
         for (int i =0; i < red.length;i++){ClanChoose.setItem(red[i],new ItemBuilder(Material.RED_STAINED_GLASS_PANE).setDisplayname("§c").build());}
         ClanChoose.setItem(18,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§7Back").setSkullOwner(Main.BACK_SKULL_TEXTURE).setLocalizedName("ClanChoose.Back").build());
-        ClanChoose.setItem(11,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§1Invite").setSkullOwner(Main.getTexture("Y2Q5MWY1MTI2NmVkZGM2MjA3ZjEyYWU4ZDdhNDljNWRiMDQxNWFkYTA0ZGFiOTJiYjc2ODZhZmRiMTdmNGQ0ZSJ9fX0=")).setLore("§eList all Invites you have gotten").setLocalizedName("ClanChoose.InvitesList").build());
-        ClanChoose.setItem(13,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§3Create Clan").setSkullOwner(Main.getTexture("OWE5YTdmMDdkYTliZGEyODBiMGY5MDliNDk1ZWJjOWZiMWFlZTM1NTJjYjE3ZTM5YmExYjRjOTZkMDJhMjBjYSJ9fX0=")).setLore("§eCreate your own Clan").setLocalizedName("ClanChoose.CreateClan").build());
-        ClanChoose.setItem(13,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§bJoin Clan").setSkullOwner(Main.getTexture("NDNlZDM2ODgyMWI0NjZkMzliZGY1N2U3OGZjMWRkZjc1ZWM5NjZjMTY5NTVlMDJlNTk0OGJlN2FkZmQxZmU1NSJ9fX0=")).setLore("§eJoin an already created Clan").setLocalizedName("ClanChoose.JoinClan").build());
+        //ClanChoose.setItem(11,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§1Invite").setSkullOwner(Main.getTexture("Y2Q5MWY1MTI2NmVkZGM2MjA3ZjEyYWU4ZDdhNDljNWRiMDQxNWFkYTA0ZGFiOTJiYjc2ODZhZmRiMTdmNGQ0ZSJ9fX0=")).setLore("§eList all Invites you have gotten").setLocalizedName("ClanChoose.InvitesList").build());
+        ClanChoose.setItem(12,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§3Create Clan").setSkullOwner(Main.getTexture("OWE5YTdmMDdkYTliZGEyODBiMGY5MDliNDk1ZWJjOWZiMWFlZTM1NTJjYjE3ZTM5YmExYjRjOTZkMDJhMjBjYSJ9fX0=")).setLore("§eCreate your own Clan").setLocalizedName("ClanChoose.CreateClan").build());
+        ClanChoose.setItem(14,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§bJoin Clan").setSkullOwner(Main.getTexture("NDNlZDM2ODgyMWI0NjZkMzliZGY1N2U3OGZjMWRkZjc1ZWM5NjZjMTY5NTVlMDJlNTk0OGJlN2FkZmQxZmU1NSJ9fX0=")).setLore("§eJoin an already created Clan").setLocalizedName("ClanChoose.JoinClan").build());
         player.openInventory(ClanChoose);
     }
     public void createLanguageInventory(Player player){
