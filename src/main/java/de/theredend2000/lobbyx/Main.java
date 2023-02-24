@@ -4,7 +4,6 @@ import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import de.theredend2000.lobbyx.commands.LobbyXCommand;
 import de.theredend2000.lobbyx.commands.playercommand.*;
-import de.theredend2000.lobbyx.heads.CustomHeads;
 import de.theredend2000.lobbyx.jumpandrun.JnrCommand;
 import de.theredend2000.lobbyx.jumpandrun.JumpAndRun;
 import de.theredend2000.lobbyx.jumpandrun.Leaderboard;
@@ -180,21 +179,10 @@ public final class Main extends JavaPlugin {
             return Material.BARRIER;
         }
     }
-    public static ItemStack createCustomSkull(String url, String name){
-        ItemStack head = new ItemStack(Material.PLAYER_HEAD,1,(short) 3);
-        if(url.isEmpty()) return head;
-        SkullMeta headMeta = (SkullMeta) head.getItemMeta();
-        GameProfile profile = new GameProfile(UUID.randomUUID(),null);
-        profile.getProperties().put("textures", new Property("textures", url));
-        try {
-            Field profileField = headMeta.getClass().getDeclaredField("profile");
-            profileField.setAccessible(true);
-            profileField.set(headMeta, profile);
-        } catch (NoSuchFieldException | IllegalAccessException | SecurityException error) {
-            error.printStackTrace();
-        }
-        head.setItemMeta(headMeta);
-        return head;
+    public static String getTexture(String texture){
+        String prefix = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUv";
+        texture = prefix+texture;
+        return texture;
     }
     public DatetimeUtils getDatetimeUtils() {
         return datetimeUtils;

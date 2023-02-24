@@ -3,7 +3,6 @@ package de.theredend2000.lobbyx.util;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import de.theredend2000.lobbyx.Main;
-import de.theredend2000.lobbyx.heads.CustomHeads;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -69,14 +68,6 @@ public class ItemBuilder {
             ex.printStackTrace();
         }
         return this;
-    }
-    public ItemStack getHead(String name){
-        for(CustomHeads heads : CustomHeads.values()){
-            if(heads.getName().equals(name)){
-                return heads.getItemStack();
-            }
-        }
-        return null;
     }
 
     public ItemBuilder addEnchant(Enchantment ench, int level){

@@ -1,7 +1,6 @@
 package de.theredend2000.lobbyx.managers;
 
 import de.theredend2000.lobbyx.Main;
-import de.theredend2000.lobbyx.heads.CustomHeads;
 import de.theredend2000.lobbyx.listeners.itemListeners.ProfileListeners;
 import de.theredend2000.lobbyx.util.ItemBuilder;
 import org.bukkit.Bukkit;
@@ -65,6 +64,7 @@ public class ProfileMenuManager implements Listener {
 
     public void createFriendInventory(Player player){
         Inventory inventory = Bukkit.createInventory(player,54,Objects.requireNonNull(plugin.getConfig().getString("Inventory.FriendInventoryTitle")).replaceAll("&","§"));
+        inventory.clear();
         int[] ornageglass = new int[]{0,1,2,3,5,6,7,8,9,17,18,26,27,35,36,44,46,47,52,53};
         for (int i = 0; i<ornageglass.length;i++){inventory.setItem(ornageglass[i], new ItemBuilder(Material.ORANGE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
         ItemStack playerHead = new ItemStack(Material.PLAYER_HEAD);
@@ -73,19 +73,20 @@ public class ProfileMenuManager implements Listener {
         skullMeta.setDisplayName("§aYour Friends");
         playerHead.setItemMeta(skullMeta);
         inventory.setItem(4, playerHead);
-        inventory.setItem(45, new ItemBuilder(Material.ARROW).setDisplayname("§eBack").setLocalizedName("friendInventory.back").build());
+        inventory.setItem(45, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§7Back").setSkullOwner(Main.BACK_SKULL_TEXTURE).setLocalizedName("friendInventory.back").build());
         inventory.setItem(47, new ItemBuilder(Material.OAK_SIGN).setDisplayname("§6Search").setLocalizedName("friendInventory.search").build());
         inventory.setItem(48, new ItemBuilder(Material.NETHER_STAR).setDisplayname("§9Main Menu").setLocalizedName("friendInventory.main").build());
         inventory.setItem(49, new ItemBuilder(Material.HOPPER).setDisplayname("§aSort").setLocalizedName("friendInventory.sort").build());
         inventory.setItem(50, new ItemBuilder(Material.BOOK).setDisplayname("§7Bookmark").setLocalizedName("friendInventory.bookmark").build());
-        ArrayList<String> offlinePlayerFriend = new ArrayList<>(Collections.singleton(plugin.yaml.getString("Friends." + player.getName())));
-        for(String friends : offlinePlayerFriend){
-            ItemStack playerHead2 = new ItemStack(Material.PLAYER_HEAD);
-            SkullMeta skullMeta2 = (SkullMeta) playerHead2.getItemMeta();
-            skullMeta2.setOwner(friends);
-            skullMeta2.setDisplayName(friends);
-            playerHead2.setItemMeta(skullMeta);
-            inventory.addItem(playerHead2);
+        if(plugin.yaml.getString("Friends."+player.getUniqueId()) != null) {
+            for (String friends : plugin.yaml.getConfigurationSection("Friends."+player.getUniqueId()+".").getKeys(false)) {
+                ItemStack playerHead2 = new ItemStack(Material.PLAYER_HEAD);
+                SkullMeta skullMeta2 = (SkullMeta) playerHead2.getItemMeta();
+                skullMeta2.setOwner(friends);
+                skullMeta2.setDisplayName(friends);
+                playerHead2.setItemMeta(skullMeta2);
+                inventory.addItem(playerHead2);
+            }
         }
         player.openInventory(inventory);
     }
@@ -98,9 +99,9 @@ public class ProfileMenuManager implements Listener {
         Inventory Language = Bukkit.createInventory(player, 27, Objects.requireNonNull(plugin.getConfig().getString("Inventory.LanguageInventoryTitle")).replaceAll("&","§"));
         int[] Orange = new int[]{0,1,2,3,4,5,6,7,8,9,10,12,14,16,17,19,20,21,22,23,24,25,26};
         for (int i = 0; i< Orange.length;i++){Language.setItem(Orange[i],new ItemBuilder(Material.ORANGE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
-        Language.setItem(11, new ItemBuilder(Material.PLAYER_HEAD).getHead("english"));
-        Language.setItem(13, new ItemBuilder(Material.PAPER).setDisplayname("§6Spanish").setLocalizedName("Settings.Language.Spanisch").build());
-        Language.setItem(15, new ItemBuilder(Material.PAPER).setDisplayname("§bDeutsch").setLocalizedName("Settings.Language.Deutsch").build());
+        Language.setItem(11, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§cEnglish").setSkullOwner(Main.getTexture("ODgzMWM3M2Y1NDY4ZTg4OGMzMDE5ZTI4NDdlNDQyZGZhYTg4ODk4ZDUwY2NmMDFmZDJmOTE0YWY1NDRkNTM2OCJ9fX0=")).setLocalizedName("Settings.Language.English").build());
+        Language.setItem(13, new ItemBuilder(Material.PLAYER_HEAD).setSkullOwner(Main.getTexture("YzJkNzMwYjZkZGExNmI1ODQ3ODNiNjNkMDgyYTgwMDQ5YjVmYTcwMjI4YWJhNGFlODg0YzJjMWZjMGMzYThiYyJ9fX0=")).setDisplayname("§6Spanish").setLocalizedName("Settings.Language.Spanisch").build());
+        Language.setItem(15, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§bDeutsch").setSkullOwner(Main.getTexture("NWU3ODk5YjQ4MDY4NTg2OTdlMjgzZjA4NGQ5MTczZmU0ODc4ODY0NTM3NzQ2MjZiMjRiZDhjZmVjYzc3YjNmIn19fQ==")).setLocalizedName("Settings.Language.Deutsch").build());
         Language.setItem(18, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§7Back").setSkullOwner(Main.BACK_SKULL_TEXTURE).setLocalizedName("Settings.Language.Back").build());
         player.openInventory(Language);
     }

@@ -57,7 +57,7 @@ public class ProfileListener implements Listener {
                             Util.setLocale(player, file1);
                             player.sendMessage(Util.getMessage(Util.getLocale(player), "LangSelectEnglish"));
                             break;
-                        case"Settings.Language.Englisch":
+                        case"Settings.Language.English":
                             player.closeInventory();
                             File file2 = new File(plugin.getDataFolder()+"/locales","en.yml");
                             Util.setLocale(player, file2);
