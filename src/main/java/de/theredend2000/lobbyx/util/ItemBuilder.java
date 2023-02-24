@@ -32,6 +32,11 @@ public class ItemBuilder {
         itemMeta.setLocalizedName(s);
         return this;
     }
+    public ItemBuilder setOwner(String name){
+        SkullMeta skullMeta = (SkullMeta) this.itemMeta;
+        skullMeta.setOwner(name);
+        return this;
+    }
     public ItemBuilder setLore(String... s){
         itemMeta.setLore(Arrays.asList(s));
         return this;

@@ -35,7 +35,7 @@ public class SetPlayerLobbyManager {
             player.setFoodLevel(20);
             //HEAL
             setItems(player);
-
+            checkConfig(player);
 
             if(plugin.getConfig().getBoolean("Titles.WelcomeTitle.enabled"))
                 player.sendTitle(plugin.getConfig().getString("Titles.WelcomeTitle.title").replaceAll("&","§").replaceAll("%PLAYER%",player.getName()),plugin.getConfig().getString("Titles.WelcomeTitle.subtitle").replaceAll("&","§").replaceAll("%PLAYER%",player.getName()),20,100,40);
@@ -77,6 +77,13 @@ public class SetPlayerLobbyManager {
             player.getInventory().setItem(plugin.getConfig().getInt("Items.Teleporter.slot"),new ItemBuilder(plugin.getMaterial("Items.Teleporter.material")).setDisplayname(plugin.getConfig().getString("Items.Teleporter.displayname").replaceAll("&","§")).build());
         if(plugin.getConfig().getBoolean("Items.Selector.enabled"))
             player.getInventory().setItem(plugin.getConfig().getInt("Items.Selector.slot"),new ItemBuilder(plugin.getMaterial("Items.Selector.material")).setDisplayname(plugin.getConfig().getString("Items.Selector.displayname").replaceAll("&","§")).build());
+    }
+
+    private void checkConfig(Player player){
+        if(plugin.yaml.getString("Settings."+player.getUniqueId()+".FriendSort") == null){
+            plugin.yaml.set("Settings."+player.getUniqueId()+".FriendSort","All");
+            plugin.saveData();
+        }
     }
 
 }

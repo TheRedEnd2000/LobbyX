@@ -34,7 +34,7 @@ Locations:
 
 JumpAndRun:
   AlreadyStarted: '&cDu hast den Jump and Run bereits gestartet.'
-  StartJnr: '&7Du hast den &6Jump and Run&7gestartet.'
+  StartJnr: '&7Du hast den &6Jump and Run&7 gestartet.'
   StopJnr: '&7Du bist&c runtergefallen&7. Deine Punktzahl ist: &6%JUMP_AND_RUN_POINTS%'
 
 Languages:

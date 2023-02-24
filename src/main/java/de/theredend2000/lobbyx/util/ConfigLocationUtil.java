@@ -43,7 +43,7 @@ public class ConfigLocationUtil {
         config.set(root + ".UUID", friend.getUniqueId().toString());
         config.set(root + ".Date", plugin.getDatetimeUtils().getNowDate());
         config.set(root + ".Time", plugin.getDatetimeUtils().getNowTime());
-        config.set(root + ".BestFriend", false);
+        config.set(root + ".Bookmarked", false);
         plugin.saveData();
     }
     public Location loadLocation() {

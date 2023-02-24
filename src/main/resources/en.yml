@@ -21,7 +21,7 @@ Friend:
   AlreadySend: '&cYou can only send one friend request at the time. Please wait.'
   PlayerNotFound: '&cI cant find this Player!'
   NotFriendRequest: '&cYou have no friend requests!'
-  FriendAlreadyAdded: '&c%PLAYER_REQUEST_RECEIVER% is already you friend!'
+  FriendAlreadyAdded: '&c%PLAYER_REQUEST_RECEIVER% is already your friend!'
   NotAddYourself: '&cYou cant send yourself a friend request!'
   FriendRequestAcceptSender: '&6%PLAYER_REQUEST_ACCEPT% &7has&a accepted &7your &bfriend request&7.'
   FriendRequestAcceptReceiver: '&7You have &6%PLAYER_REQUEST_SENDER%&b friend request&a accepted&7.'

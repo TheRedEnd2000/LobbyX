@@ -20,4 +20,4 @@ commands:
       - jumpandrun
   setLang:
     aliases:
-      - setLanguage
+      - setlanguage

@@ -122,6 +122,10 @@ public final class Main extends JavaPlugin {
         new ProfileListener(this);
         new LobbxListener(this);
         new PlayerMoveListener(this);
+        new PlayerItemConsumeListener(this);
+        new PlayerItemDamageEventListener(this);
+        new PlayerPickupItemEventListener(this);
+        new PlayerSwapHandItemsEventListener(this);
     }
     private void initManagers(){
         new Util(this);
@@ -176,7 +180,7 @@ public final class Main extends JavaPlugin {
             }
             return material;
         } catch (Exception ex) {
-            return Material.BARRIER;
+            return Material.STONE;
         }
     }
     public static String getTexture(String texture){

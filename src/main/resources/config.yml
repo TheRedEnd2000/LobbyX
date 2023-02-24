@@ -34,8 +34,9 @@ Inventory:
   SocialInventoryTitle: '&bLobby&4X&f - &9Social'
   FriendInventoryTitle: '&bLobby&4X&f - &3Friends'
   LocationInventoryTitle: '&bLobby&4X&f - &9Locations'
-  LanguageInventoryTitle: '&bLobby&4x&f - &gLanguage'
-  SettingsInventoryTitle: ''
+  LanguageInventoryTitle: '&bLobby&4x&f - &3Language'
+  FriendSettingsInventoryTitle: '&bLobby&4x&f - &bFriend Settings'
+  FriendRemoveInventoryTitle: '&bLobby&4x&f - &cRemove this Friend'
 
 #Tablist
 #Change tablist look

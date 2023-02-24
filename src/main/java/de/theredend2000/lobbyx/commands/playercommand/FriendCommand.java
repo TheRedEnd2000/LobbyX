@@ -100,15 +100,15 @@ public class FriendCommand implements CommandExecutor {
                         String friendtoremove = args[1];
                         if(plugin.yaml.getString("Friends."+player.getUniqueId()) != null) {
                             for (String friends : plugin.yaml.getConfigurationSection("Friends." + player.getUniqueId()).getKeys(false)) {
-                                if (friends.equalsIgnoreCase(friendtoremove)) {
+                                if (friends.equalsIgnoreCase(friendtoremove) && plugin.yaml.contains("Friends." + player.getUniqueId()+"."+friends)) {
                                     String friendtoremoveUUID = plugin.yaml.getString("Friends."+player.getUniqueId()+"."+friendtoremove+".UUID");
-                                    plugin.yaml.set("Friends."+player.getUniqueId()+"."+friendtoremove, null);
-                                    plugin.yaml.set("Friends."+friendtoremoveUUID+"."+player.getName(), null);
-                                    plugin.saveData();
                                     player.sendMessage(Util.getMessage(Util.getLocale(player),"FriendRemoveSender").replaceAll("%PLAYER_REMOVED%",friendtoremove).replaceAll("%PLAYER_REMOVED_FRIEND%",player.getName()));
                                     Player removed = Bukkit.getPlayer(friendtoremove);
                                     if(removed != null)
                                         removed.sendMessage(Util.getMessage(Util.getLocale(removed),"FriendRemoveReceiver").replaceAll("%PLAYER_REMOVED%",friendtoremove).replaceAll("%PLAYER_REMOVED_FRIEND%",player.getName()));
+                                    plugin.yaml.set("Friends."+player.getUniqueId()+"."+friendtoremove, null);
+                                    plugin.yaml.set("Friends."+friendtoremoveUUID+"."+player.getName(), null);
+                                    plugin.saveData();
                                     return true;
                                 }else
                                     player.sendMessage(Util.getMessage(Util.getLocale(player), "FriendRemoveNotFriend").replaceAll("%PLAYER_REMOVED%",friendtoremove).replaceAll("%PLAYER_REMOVED_FRIEND%",player.getName()));
