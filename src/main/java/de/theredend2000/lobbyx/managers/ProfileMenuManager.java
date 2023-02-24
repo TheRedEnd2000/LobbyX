@@ -98,7 +98,7 @@ public class ProfileMenuManager implements Listener {
         Inventory Language = Bukkit.createInventory(player, 27, Objects.requireNonNull(plugin.getConfig().getString("Inventory.LanguageInventoryTitle")).replaceAll("&","§"));
         int[] Orange = new int[]{0,1,2,3,4,5,6,7,8,9,10,12,14,16,17,19,20,21,22,23,24,25,26};
         for (int i = 0; i< Orange.length;i++){Language.setItem(Orange[i],new ItemBuilder(Material.ORANGE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
-        Language.setItem(11, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§4English").setLocalizedName("Settings.Language.Englisch").build());
+        Language.setItem(11, new ItemBuilder(Material.PLAYER_HEAD).getHead("english"));
         Language.setItem(13, new ItemBuilder(Material.PAPER).setDisplayname("§6Spanish").setLocalizedName("Settings.Language.Spanisch").build());
         Language.setItem(15, new ItemBuilder(Material.PAPER).setDisplayname("§bDeutsch").setLocalizedName("Settings.Language.Deutsch").build());
         Language.setItem(18, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§7Back").setSkullOwner(Main.BACK_SKULL_TEXTURE).setLocalizedName("Settings.Language.Back").build());
