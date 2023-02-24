@@ -196,7 +196,7 @@ public class ProfileListener implements Listener {
                             break;
                     }
                 }
-            }
+            }//kp
         }else if (event.getView().getTitle().equals(Objects.requireNonNull(plugin.getConfig().getString("Inventory.SocialInventoryTitle").replaceAll("&","§")))){
             event.setCancelled(true);
             if (event.getCurrentItem()!=null){

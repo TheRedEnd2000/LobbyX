@@ -40,7 +40,7 @@ Inventory:
   FriendSettingsInventoryTitle: '&bLobby&4X&f - &bFriend Settings'
   FriendRemoveInventoryTitle: '&bLobby&4X&f - &cRemove this Friend'
   ClanInventory:
-    ClanChooseInventoryTitle: '&bLobby&4X&f - &4You aren´t in a Clan&f - &aHere you can Join one'
+    ClanChooseInventoryTitle: '&bLobby&4X&f - &4You aren´t in a Clan&f - &aHere you can Join one'#kp
 
 #Tablist
 #Change tablist look

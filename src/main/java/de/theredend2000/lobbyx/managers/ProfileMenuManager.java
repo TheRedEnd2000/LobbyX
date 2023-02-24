@@ -191,7 +191,7 @@ public class ProfileMenuManager implements Listener {
         Language.setItem(15, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§bDeutsch").setSkullOwner(Main.getTexture("NWU3ODk5YjQ4MDY4NTg2OTdlMjgzZjA4NGQ5MTczZmU0ODc4ODY0NTM3NzQ2MjZiMjRiZDhjZmVjYzc3YjNmIn19fQ==")).setLocalizedName("Settings.Language.Deutsch").build());
         Language.setItem(18, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§7Back").setSkullOwner(Main.BACK_SKULL_TEXTURE).setLocalizedName("Settings.Language.Back").build());
         player.openInventory(Language);
-    }
+    }//kp
     public void  createFriendSettingsInventory(Player player, String friend){
         Inventory Friend = Bukkit.createInventory(player,54,Objects.requireNonNull(plugin.getConfig().getString("Inventory.FriendSettingsInventoryTitle")).replaceAll("&","§"));
         int[] orange = new int[]{1,2,3,5,6,7,9,17,18,26,27,35,36,44,46,47,48,50,51,52};
