@@ -46,6 +46,25 @@ public class ConfigLocationUtil {
         config.set(root + ".Bookmarked", false);
         plugin.saveData();
     }
+    public void createClan(Player clanCreator,String clanName) {
+        FileConfiguration config = plugin.yaml;
+        config.set(root + ".ClanName", clanName);
+        config.set(root + ".Owner", clanCreator.getName());
+        config.set(root + ".OwnerUUID", clanCreator.getUniqueId().toString());
+        config.set(root + ".Date", plugin.getDatetimeUtils().getNowDate());
+        config.set(root + ".Time", plugin.getDatetimeUtils().getNowTime());
+        config.set(root + ".Private", true);
+        plugin.saveData();
+    }
+    public void joinClan(Player joiner) {
+        FileConfiguration config = plugin.yaml;
+        config.set(root + ".Name", joiner.getName());
+        config.set(root + ".OwnerUUID", joiner.getUniqueId().toString());
+        config.set(root + ".Date", plugin.getDatetimeUtils().getNowDate());
+        config.set(root + ".Time", plugin.getDatetimeUtils().getNowTime());
+        config.set(root + ".Rank", "default");
+        plugin.saveData();
+    }
     public Location loadLocation() {
         FileConfiguration config = plugin.yaml;
         if (config.contains(root)) {

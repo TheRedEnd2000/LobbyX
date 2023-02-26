@@ -49,14 +49,9 @@ public class LobbxListener implements Listener {
                         case "lobbyx.locations.back":
                             plugin.getLobbyXMenuManager().createMainInventory(player);
                             break;
-                        case "lobbyx.locations.hub":
-                            new ConfigLocationUtil(plugin,player.getLocation(),"Locations.Hub").saveLocation();
-                            player.sendMessage(Util.getMessage(Util.getLocale(player),"SetHub"));
-                            player.closeInventory();
-                            break;
                         case"lobbyx.locations.lobby":
-                            new ConfigLocationUtil(plugin,player.getLocation(),"Locations.Lobby").saveLocation();
-                            player.sendMessage(Util.getMessage(Util.getLocale(player),"SetLobby"));
+                            new ConfigLocationUtil(plugin,player.getLocation(),"Locations.Lobby."+player.getWorld().getName()).saveLocation();
+                            player.sendMessage(Util.getMessage(Util.getLocale(player),"SetLobby").replaceAll("%WORLD_NAME%",player.getWorld().getName()));
                             player.closeInventory();
                             break;
                         case"lobbyx.locations.close":

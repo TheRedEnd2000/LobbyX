@@ -28,11 +28,10 @@ public class LobbyXMenuManager {
 
     public void createLocationsInventpry(Player player){
         Inventory inventory = Bukkit.createInventory(player,9, Objects.requireNonNull(Objects.requireNonNull(plugin.getConfig().getString("Inventory.LocationInventoryTitle")).replaceAll("&","§")));
-        int[] ornageglass = new int[]{1,2,4,6,7};
+        int[] ornageglass = new int[]{1,2,3,5,6,7};
         for (int i = 0; i<ornageglass.length;i++){inventory.setItem(ornageglass[i], new ItemBuilder(Material.ORANGE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
         inventory.setItem(0, new ItemBuilder(Material.ARROW).setDisplayname("§eBack").setLocalizedName("lobbyx.locations.back").build());
-        inventory.setItem(3, new ItemBuilder(Material.LAPIS_BLOCK).setDisplayname("§9Hub").setLore("§eClick to set the Hub.","§4§lReplaces the old hub!").setLocalizedName("lobbyx.locations.hub").build());
-        inventory.setItem(5, new ItemBuilder(Material.DIAMOND_BLOCK).setDisplayname("§bLobby").setLore("§eClick to set the Lobby.","§4§lReplaces the old lobby!").setLocalizedName("lobbyx.locations.lobby").build());
+        inventory.setItem(4, new ItemBuilder(Material.DIAMOND_BLOCK).setDisplayname("§bLobby").setLore("§eClick to set the Lobby.","§4§lReplaces the old lobby!").setLocalizedName("lobbyx.locations.lobby").build());
         inventory.setItem(8, new ItemBuilder(Material.BARRIER).setDisplayname("§cClose").setLocalizedName("lobbyx.locations.close").build());
         player.openInventory(inventory);
     }

@@ -14,12 +14,13 @@ BuildCommand:
 JoinQuit:
   JoinMessage: '&b%PLAYER% &6joined the Server.'
   QuitMessage: '&b%PLAYER% &6left the Server.'
+  ChangeLobbyJoinMessage: '&6%PLAYER% &7joined the &bLobby&7.'
+  ChangeLobbyLeaveMessage: '&6%PLAYER% &7left the &bLobby&7.'
 
 Friend:
   FriendRequestSender: '&7You send &6%FRIEND_REQUEST_RECEIVER% &7a friend request. He has &e5 minutes &7to &aaccept&7.'
   FriendRequestReceiver: '&7Friend request from &6%FRIEND_REQUEST_SENDER%&7.'
   AlreadySend: '&cYou can only send one friend request at the time. Please wait.'
-  PlayerNotFound: '&cI cant find this Player!'
   NotFriendRequest: '&cYou have no friend requests!'
   FriendRequestExpired: '&cYour friend requests expired!'
   FriendAlreadyAdded: '&c%PLAYER_REQUEST_RECEIVER% is already your friend!'
@@ -33,9 +34,12 @@ Friend:
   FriendRemoveNotFriend: '&6%PLAYER_REMOVED% &7is &cnot &7you friend.'
   FriendCommandUsage: '&7Usages: &6/friend add <Player> &8| &6/friend accept <Player> &8| &6/friend deny <Player> &8| &6/friend remove <Player> &8| &6/friend list&7!'
 
+Other:
+  PlayerNotFound: '&cI cant find this Player!'
+
 Locations:
   SetHub: '&7The &9Hub &7was set&a successfully&7.'
-  SetLobby: '&7The &bLobby &7was set&a successfully&7.'
+  SetLobby: '&7The &bLobby &7for the world &6%WORLD_NAME% &7was set&a successfully&7.'
 
 JumpAndRun:
   AlreadyStarted: '&cYou have already started a jump and run.'
@@ -46,3 +50,23 @@ Languages:
   LanguagesUsage: '&7Usages: &6/setLang &7[&3ENGLISH &8| &3GERMAN &8| &3SPAIN&7]'
   LangSelectEnglish: '&7Language set to: &6English&7.'
   LanguagesNotFound: '&cThis Language doesnt exists.'
+
+Clan:
+  HasAlreadyCreatedClan: '&cYou have already created a clan!'
+  HasNoClan: '&cYou have no clan!'
+  CreatedClan: '&aThe clan &6%CLAN_NAME% &awas created!'
+  InviterMessage: '&7You invited &6%PLAYER_RECEIVER%&7 to &2your clan&7.'
+  ReceiverMessage: '&6%PLAYER_INVITER% &7invited you to their clan &5%CLAN_NAME%&7.'
+  AlreadyInClan: '&6%PLAYER_NAME% &7is already in a &aClan&7.'
+  AlreadyInClanPersonal: '&cYou are already in a clan.'
+  AlreadyInYourClan: '&6%PLAYER_NAME% &7is already in your &aClan&7.'
+  JoinClan: '&7You &ajoined the clan &5%CLAN_NAME%&7.'
+  JoinClanMessageInviter: '&6%PLAYER_NAME% &ajoined &7the clan.'
+  DenyClanMessageInviter: '&6%PLAYER_NAME%&c denied &7the clan invasion.'
+  DenyClan: '&7You&c denied&7 the clan &6invasion&7.'
+  ClanCommandUsage: '&7Usages: &6/clan create <ClanName> &8| &6/clan invite <Player> &8| &6/clan join <Player> &8| &6/clan deny <Player> &8| &6/clan manage&7!'
+
+Lobby:
+  TeleportToLobby: '&8Sending you to the lobby...'
+  LobbyCommandUsage: '&7Usages: &6/lobby &8| &6/l &8| &6/hub'
+  LobbyInNotSet: '&cThe lobby inst set yet. &4Please contact and admin!'

@@ -1,6 +1,5 @@
 package de.theredend2000.lobbyx.managers;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
 import de.theredend2000.lobbyx.Main;
 import de.theredend2000.lobbyx.listeners.itemListeners.ProfileListeners;
 import de.theredend2000.lobbyx.util.ItemBuilder;
@@ -91,9 +90,9 @@ public class ProfileMenuManager implements Listener {
                     skullMeta2.setLocalizedName("friend."+friends);
                     Player online = Bukkit.getPlayer(friends);
                     if(online != null){
-                        skullMeta2.setLore(Arrays.asList(plugin.yaml.getBoolean("Friends."+player.getUniqueId()+"."+friends+".Bookmarked") ? "§a§lBookmarked" : "","§aOnline","","§eClick to manage friendship."));
+                        skullMeta2.setLore(Arrays.asList(plugin.yaml.getBoolean("Friends."+player.getUniqueId()+"."+friends+".Bookmarked") ? "§a§lBookmarked" : "","§aOnline","§7Friends since:","§6"+plugin.yaml.getString("Friends."+player.getUniqueId()+"."+friends+".Date")+" §f§l- §6"+plugin.yaml.getString("Friends."+player.getUniqueId()+"."+friends+".Time"),"","§eClick to manage friendship."));
                     }else
-                        skullMeta2.setLore(Arrays.asList(plugin.yaml.getBoolean("Friends."+player.getUniqueId()+"."+friends+".Bookmarked") ? "§a§lBookmarked" : "","§cOffline","","§eClick to manage friendship."));
+                        skullMeta2.setLore(Arrays.asList(plugin.yaml.getBoolean("Friends."+player.getUniqueId()+"."+friends+".Bookmarked") ? "§a§lBookmarked" : "","§cOffline","§6"+plugin.yaml.getString("Friends."+player.getUniqueId()+"."+friends+".Date")+" §f§l- §6"+plugin.yaml.getString("Friends."+player.getUniqueId()+"."+friends+".Time"),"","§eClick to manage friendship."));
                     playerHead2.setItemMeta(skullMeta2);
                     inventory.addItem(playerHead2);
                     inventory.setItem(50, new ItemBuilder(Material.HOPPER).setDisplayname("§aSort").setLore("§6➤ All Friends","§7Online Friends","§7Offline Friends","§7Bookmarked").setLocalizedName("friendInventory.sort1").build());
@@ -105,7 +104,7 @@ public class ProfileMenuManager implements Listener {
                         skullMeta2.setOwner(friends);
                         skullMeta2.setDisplayName("§5"+friends);
                         skullMeta2.setLocalizedName("friend."+friends);
-                        skullMeta2.setLore(Arrays.asList(plugin.yaml.getBoolean("Friends."+player.getUniqueId()+"."+friends+".Bookmarked") ? "§a§lBookmarked" : "","§aOnline","","§eClick to manage friendship."));
+                        skullMeta2.setLore(Arrays.asList(plugin.yaml.getBoolean("Friends."+player.getUniqueId()+"."+friends+".Bookmarked") ? "§a§lBookmarked" : "","§aOnline","§6"+plugin.yaml.getString("Friends."+player.getUniqueId()+"."+friends+".Date")+" §f§l- §6"+plugin.yaml.getString("Friends."+player.getUniqueId()+"."+friends+".Time"),"","§eClick to manage friendship."));
                         playerHead2.setItemMeta(skullMeta2);
                         inventory.addItem(playerHead2);
                     }
@@ -118,20 +117,19 @@ public class ProfileMenuManager implements Listener {
                         skullMeta2.setOwner(friends);
                         skullMeta2.setDisplayName("§5"+friends);
                         skullMeta2.setLocalizedName("friend."+friends);
-                        skullMeta2.setLore(Arrays.asList(plugin.yaml.getBoolean("Friends."+player.getUniqueId()+"."+friends+".Bookmarked") ? "§a§lBookmarked" : "","§cOffline","","§eClick to manage friendship."));
+                        skullMeta2.setLore(Arrays.asList(plugin.yaml.getBoolean("Friends."+player.getUniqueId()+"."+friends+".Bookmarked") ? "§a§lBookmarked" : "","§cOffline","§6"+plugin.yaml.getString("Friends."+player.getUniqueId()+"."+friends+".Date")+" §f§l- §6"+plugin.yaml.getString("Friends."+player.getUniqueId()+"."+friends+".Time"),"","§eClick to manage friendship."));
                         playerHead2.setItemMeta(skullMeta2);
                         inventory.addItem(playerHead2);
                     }
                     inventory.setItem(50, new ItemBuilder(Material.HOPPER).setDisplayname("§aSort").setLore("§7All Friends","§7Online Friends","§6➤ Offline Friends","§7Bookmarked").setLocalizedName("friendInventory.sort3").build());
                 }else if(sort.equalsIgnoreCase("Bookmarked")){
-                    Player friendOnline = Bukkit.getPlayer(friends);
                     if(plugin.yaml.getBoolean("Friends."+player.getUniqueId()+"."+friends+".Bookmarked")){
                         ItemStack playerHead2 = new ItemStack(Material.PLAYER_HEAD);
                         SkullMeta skullMeta2 = (SkullMeta) playerHead2.getItemMeta();
                         skullMeta2.setOwner(friends);
                         skullMeta2.setDisplayName("§5"+friends);
                         skullMeta2.setLocalizedName("friend."+friends);
-                        skullMeta2.setLore(Arrays.asList(plugin.yaml.getBoolean("Friends."+player.getUniqueId()+"."+friends+".Bookmarked") ? "§a§lBookmarked" : "","§cOffline","","§eClick to manage friendship."));
+                        skullMeta2.setLore(Arrays.asList(plugin.yaml.getBoolean("Friends."+player.getUniqueId()+"."+friends+".Bookmarked") ? "§a§lBookmarked" : "","§cOffline","§6"+plugin.yaml.getString("Friends."+player.getUniqueId()+"."+friends+".Date")+" §f§l- §6"+plugin.yaml.getString("Friends."+player.getUniqueId()+"."+friends+".Time"),"","§eClick to manage friendship."));
                         playerHead2.setItemMeta(skullMeta2);
                         inventory.addItem(playerHead2);
                     }
@@ -159,11 +157,11 @@ public class ProfileMenuManager implements Listener {
         Sozial.setItem(45,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§7Back").setSkullOwner(Main.BACK_SKULL_TEXTURE).setLocalizedName("Sozial.Back").build());
         Sozial.setItem(49,new ItemBuilder(Material.NETHER_STAR).setDisplayname("§eMainMenu").setLocalizedName("Sozial.MainMenu").build());
         Sozial.setItem(20,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§bDiscord").setSkullOwner(Main.getTexture("Nzg3M2MxMmJmZmI1MjUxYTBiODhkNWFlNzVjNzI0N2NiMzlhNzVmZjFhODFjYmU0YzhhMzliMzExZGRlZGEifX19")).setLocalizedName("Sozial.Dc").build());
-        Sozial.setItem(21,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§4Y§fo§4u§ft§4u§fb§4e").setSkullOwner(Main.getTexture("YjQzNTNmZDBmODYzMTQzNTM4NzY1ODYwNzViOWJkZjBjNDg0YWFiMDMzMWI4NzJkZjExYmQ1NjRmY2IwMjllZCJ9fX0=")).setLocalizedName("Sozial.Yt").build());
+        Sozial.setItem(21,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§cYoutube").setSkullOwner(Main.getTexture("YjQzNTNmZDBmODYzMTQzNTM4NzY1ODYwNzViOWJkZjBjNDg0YWFiMDMzMWI4NzJkZjExYmQ1NjRmY2IwMjllZCJ9fX0=")).setLocalizedName("Sozial.Yt").build());
         Sozial.setItem(23,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§dInstagram").setSkullOwner(Main.getTexture("YWM4OGQ2MTYzZmFiZTdjNWU2MjQ1MGViMzdhMDc0ZTJlMmM4ODYxMWM5OTg1MzZkYmQ4NDI5ZmFhMDgxOTQ1MyJ9fX0=")).setLocalizedName("Sozial.Instagram").build());
         Sozial.setItem(24,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§9Facebook").setSkullOwner(Main.getTexture("ZGViNDYxMjY5MDQ0NjNmMDdlY2ZjOTcyYWFhMzczNzNhMjIzNTliNWJhMjcxODIxYjY4OWNkNTM2N2Y3NTc2MiJ9fX0=")).setLocalizedName("Sozial.Facebook").build());
         Sozial.setItem(29,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§5Twitch").setSkullOwner(Main.getTexture("YjI1ODA0ODliMmQ0NGU1ZDlhOWIzZjgzNmVmMjE5ZjAzMTI5OTJkNDBiMTRkOTlmNTZjNWFmMDVjNDBmNzE1In19fQ==")).setLocalizedName("Sozial.Twitch").build());
-        Sozial.setItem(30,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§4Tik§f-§bTok").setSkullOwner(Main.getTexture("YmNmMjEwNWJiNzM3NjM4ODMzMDMzZGQ4MjQ0MDcxZTc1ODcwZTJlMTFjMjYxN2U1NDJlODkyNGZiMmI5MDE4MCJ9fX0=")).setLocalizedName("Sozial.Tiktok").build());
+        Sozial.setItem(30,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§4Tik§bTok").setSkullOwner(Main.getTexture("YmNmMjEwNWJiNzM3NjM4ODMzMDMzZGQ4MjQ0MDcxZTc1ODcwZTJlMTFjMjYxN2U1NDJlODkyNGZiMmI5MDE4MCJ9fX0=")).setLocalizedName("Sozial.Tiktok").build());
         Sozial.setItem(32,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§bTwitter").setSkullOwner(Main.getTexture("NmFkNDZhNDIyYWU1OTYwM2ZkODg5YzI1MzQ0ZmY2N2JjODQzYWY4ZWU1MTg5MzJjMmUyYWQwN2NkYmY5MzliMyJ9fX0=")).setLocalizedName("Sozial.Twitter").build());
         Sozial.setItem(33,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§8Github").setSkullOwner(Main.getTexture("MjZlMjdkYTEyODE5YThiMDUzZGEwY2MyYjYyZGVjNGNkYTkxZGU2ZWVlYzIxY2NmM2JmZTZkZDhkNDQzNmE3In19fQ==")).setLocalizedName("Sozial.Github").build());
         player.openInventory(Sozial);

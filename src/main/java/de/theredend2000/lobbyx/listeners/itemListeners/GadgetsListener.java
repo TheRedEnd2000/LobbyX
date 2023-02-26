@@ -7,13 +7,14 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+
 import java.util.Objects;
 
-public class ProfileListeners implements Listener {
+public class GadgetsListener implements Listener {
 
     private Main plugin;
 
-    public ProfileListeners(Main plugin){
+    public GadgetsListener(Main plugin){
         this.plugin = plugin;
         Bukkit.getPluginManager().registerEvents(this, plugin);
     }
@@ -24,8 +25,8 @@ public class ProfileListeners implements Listener {
         if(plugin.getLobbyWorlds().contains(player.getWorld())){
             if(event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK){
                 if(event.getItem() != null && event.getItem().hasItemMeta()){
-                    if(Objects.requireNonNull(event.getItem().getItemMeta()).getLocalizedName().equals("lobbyx.profile")){
-                        plugin.getGadgetsMenuManager().createGadgetsInventory(player);
+                    if(Objects.requireNonNull(event.getItem().getItemMeta()).getLocalizedName().equals("lobbyx.gadgets")){
+                        plugin.getProfileMenuManager().createProfileInventory(player);
                     }
                 }
             }

@@ -11,12 +11,10 @@ import de.theredend2000.lobbyx.jumpandrun.PlayerMoveListener;
 import de.theredend2000.lobbyx.listeners.*;
 import de.theredend2000.lobbyx.listeners.inventoryListeners.LobbxListener;
 import de.theredend2000.lobbyx.listeners.inventoryListeners.ProfileListener;
+import de.theredend2000.lobbyx.listeners.itemListeners.GadgetsListener;
 import de.theredend2000.lobbyx.listeners.itemListeners.PlayerHiderListener;
 import de.theredend2000.lobbyx.listeners.itemListeners.ProfileListeners;
-import de.theredend2000.lobbyx.managers.LobbyXMenuManager;
-import de.theredend2000.lobbyx.managers.ProfileMenuManager;
-import de.theredend2000.lobbyx.managers.SetPlayerLobbyManager;
-import de.theredend2000.lobbyx.managers.TablistManager;
+import de.theredend2000.lobbyx.managers.*;
 import de.theredend2000.lobbyx.messages.LanguageListeners;
 import de.theredend2000.lobbyx.messages.Util;
 import de.theredend2000.lobbyx.util.DatetimeUtils;
@@ -49,7 +47,9 @@ public final class Main extends JavaPlugin {
     private SetPlayerLobbyManager setPlayerLobbyManager;
     private TablistManager tablistManager;
     private ProfileMenuManager profileMenuManager;
+    private ClanManager clanManager;
     private DatetimeUtils datetimeUtils;
+    private GadgetsMenuManager gadgetsMenuManager;
     public File data = new File("plugins/LobbyX", "database.yml");
 
 
@@ -114,12 +114,11 @@ public final class Main extends JavaPlugin {
     private void initCommand(){
         getCommand("lobby").setExecutor(new LobbyCommand(this));
         getCommand("lobbyx").setExecutor(new LobbyXCommand(this));
-        getCommand("hub").setExecutor(new HubCommand(this));
         getCommand("build").setExecutor(new BuildCommand(this));
         getCommand("friend").setExecutor(new FriendCommand(this));
         getCommand("jnr").setExecutor(new JnrCommand(this));
         getCommand("setLang").setExecutor(new SetLangCommand(this));
-        String s = "Language";
+        getCommand("clan").setExecutor(new ClanCommands(this));
     }
 
     private void initListeners(){
@@ -146,6 +145,10 @@ public final class Main extends JavaPlugin {
         new PlayerItemDamageEventListener(this);
         new PlayerPickupItemEventListener(this);
         new PlayerSwapHandItemsEventListener(this);
+        new WeatherChangeEventListener(this);
+        new InventoryClickEventListener(this);
+        new GadgetsListener(this);
+        new PlayerChangeWorldEventListener(this);
     }
     private void initManagers(){
         new Util(this);
@@ -153,6 +156,8 @@ public final class Main extends JavaPlugin {
         setPlayerLobbyManager = new SetPlayerLobbyManager(this);
         tablistManager = new TablistManager(this);
         profileMenuManager = new ProfileMenuManager(this);
+        clanManager = new ClanManager(this);
+        gadgetsMenuManager = new GadgetsMenuManager(this);
     }
 
     public static final String BACK_SKULL_TEXTURE = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6L"
@@ -210,5 +215,13 @@ public final class Main extends JavaPlugin {
     }
     public DatetimeUtils getDatetimeUtils() {
         return datetimeUtils;
+    }
+
+    public ClanManager getClanManager() {
+        return clanManager;
+    }
+
+    public GadgetsMenuManager getGadgetsMenuManager() {
+        return gadgetsMenuManager;
     }
 }

@@ -1,6 +1,7 @@
 package de.theredend2000.lobbyx.commands.playercommand;
 
 import de.theredend2000.lobbyx.Main;
+import de.theredend2000.lobbyx.messages.Util;
 import de.theredend2000.lobbyx.util.ConfigLocationUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -24,13 +25,13 @@ public class LobbyCommand implements CommandExecutor {
                 ConfigLocationUtil locationUtil = new ConfigLocationUtil(plugin,"Locations.Lobby");
                 if(locationUtil.loadLocation() != null){
                     player.teleport(locationUtil.loadLocation());
-                    player.sendMessage("§8Sending you to the lobby...");
+                    player.sendMessage(Util.getMessage(Util.getLocale(player),"TeleportToLobby"));
                 }else
-                    player.sendMessage("§cThe lobby isn't set yet. Please contact an admin.");
+                    player.sendMessage(Util.getMessage(Util.getLocale(player),"LobbyInNotSet"));
             }else
-                player.sendMessage("§7Usage: §b/lobby");
+                player.sendMessage(Util.getMessage(Util.getLocale(player),"LobbyCommandUsage"));
         }else
-            sender.sendMessage("§cOnly players can use this command.");
+            sender.sendMessage(Util.getMessage("en","OnlyPlayerUse"));
         return false;
     }
 }

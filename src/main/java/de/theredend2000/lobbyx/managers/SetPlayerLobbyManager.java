@@ -39,16 +39,13 @@ public class SetPlayerLobbyManager {
             checkConfig(player);
             setGamemode(player);
 
-            if(plugin.getConfig().getBoolean("Titles.WelcomeTitle.enabled"))
-                player.sendTitle(plugin.getConfig().getString("Titles.WelcomeTitle.title").replaceAll("&","§").replaceAll("%PLAYER%",player.getName()),plugin.getConfig().getString("Titles.WelcomeTitle.subtitle").replaceAll("&","§").replaceAll("%PLAYER%",player.getName()),20,100,40);
-
-            ConfigLocationUtil locationUtil = new ConfigLocationUtil(plugin,"Locations.Lobby");
+            ConfigLocationUtil locationUtil = new ConfigLocationUtil(plugin,"Locations.Lobby."+player.getWorld().getName());
             if(locationUtil.loadLocation() != null){
                 player.teleport(locationUtil.loadLocation());
             }else{
                 for(Player admins : Bukkit.getOnlinePlayers()){
                     if(admins.isOp()){
-                        admins.sendMessage("§cThe Lobby is not set. Please do this now!");
+                        admins.sendMessage("§cThe Lobby for the world "+player.getWorld().getName()+" is not set. Please do this!");
                     }
                 }
             }
@@ -59,7 +56,7 @@ public class SetPlayerLobbyManager {
     public void setItems(Player player) {
         player.getInventory().clear();
         if(plugin.getConfig().getBoolean("Items.Gadgets.enabled"))
-            player.getInventory().setItem(plugin.getConfig().getInt("Items.Gadgets.slot"),new ItemBuilder(plugin.getMaterial("Items.Gadgets.material")).setDisplayname(plugin.getConfig().getString("Items.Gadgets.displayname").replaceAll("&","§")).build());
+            player.getInventory().setItem(plugin.getConfig().getInt("Items.Gadgets.slot"),new ItemBuilder(plugin.getMaterial("Items.Gadgets.material")).setDisplayname(plugin.getConfig().getString("Items.Gadgets.displayname").replaceAll("&","§")).setLocalizedName("lobbyx.gadgets").build());
         ItemStack playerHead = new ItemStack(Material.PLAYER_HEAD);
         SkullMeta skullMeta = (SkullMeta) playerHead.getItemMeta();
         skullMeta.setOwner(player.getName());

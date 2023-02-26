@@ -10,6 +10,8 @@ BuildCommand:
 JoinQuit:
   JoinMessage: '&b%PLAYER% &6hat den Server betreten.'
   QuitMessage: '&b%PLAYER% &6hat den Server verlassen.'
+  ChangeLobbyJoinMessage: '&6%PLAYER% &7hat die &bLobby&7 betreten.'
+  ChangeLobbyLeaveMessage: '&6%PLAYER% &7hat die &bLobby&7 verlassen.'
 
 Friend:
   FriendRequestSender: '&7Du hast &6%FRIEND_REQUEST_RECEIVER% &7a eine Freundschaftsanfrage gesendet. Er hat &e5 Minuten &7um diese zu&a akzeptieren&7.'
@@ -31,7 +33,7 @@ Friend:
 
 Locations:
   SetHub: '&7Der &9Hub &7wurde &a erfolgreich&7 gesetzt.'
-  SetLobby: '&7Die &bLobby &7wurde &a erfolgreich&7 gesetzt.'
+  SetLobby: '&7Die &bLobby &7für die Welt &6%WORLD_NAME% &7wurde&a erfolgreich&7 gesetzt.'
 
 JumpAndRun:
   AlreadyStarted: '&cDu hast den Jump and Run bereits gestartet.'

@@ -6,12 +6,15 @@ author: XMC-Plugins
 commands:
   lobby:
     description: teleports you to the lobby
+    aliases:
+      - l
+      - hub
   lobbyx:
     aliases:
       - lx
-  hub:
-    description: teleports you to the hub
   build:
+    aliases:
+      - b
   friend:
     aliases:
       - fr
@@ -21,3 +24,6 @@ commands:
   setLang:
     aliases:
       - setlanguage
+  clan:
+    aliases:
+      - cl

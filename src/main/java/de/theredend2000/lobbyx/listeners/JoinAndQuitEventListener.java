@@ -29,6 +29,8 @@ public class JoinAndQuitEventListener implements Listener {
                 lobbyPlayers.sendMessage(Util.getMessage(Util.getLocale(lobbyPlayers),"JoinMessage").replaceAll("%PLAYER%",player.getName()));
             }
             player.sendMessage(Util.getMessage(Util.getLocale(player),"JoinMessage").replaceAll("%PLAYER%",player.getName()));
+            if(plugin.getConfig().getBoolean("Titles.WelcomeTitle.enabled"))
+                player.sendTitle(plugin.getConfig().getString("Titles.WelcomeTitle.title").replaceAll("&","§").replaceAll("%PLAYER%",player.getName()),plugin.getConfig().getString("Titles.WelcomeTitle.subtitle").replaceAll("&","§").replaceAll("%PLAYER%",player.getName()),20,100,40);
         }
     }
 
