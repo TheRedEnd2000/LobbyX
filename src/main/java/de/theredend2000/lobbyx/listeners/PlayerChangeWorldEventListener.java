@@ -30,6 +30,8 @@ public class PlayerChangeWorldEventListener implements Listener {
             plugin.getSetPlayerLobbyManager().setPlayerInLobby(player);
         }else{
             player.getInventory().clear();
+            player.setPlayerListHeaderFooter(null,null);
+            player.sendMessage("left loby");
         }
     }
 

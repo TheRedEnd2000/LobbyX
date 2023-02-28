@@ -39,10 +39,13 @@ Inventory:
   LanguageInventoryTitle: '&bLobby&4X&f - &3Language'
   FriendSettingsInventoryTitle: '&bLobby&4X&f - &bFriend Settings'
   FriendRemoveInventoryTitle: '&bLobby&4X&f - &cRemove this Friend'
+  LobbySelectorInventoryTitle: '&bLobby&4X&f - &dLobbys'
   ClanInventory:
     ClanChooseInventoryTitle: '&bLobby&4X&f - &4You aren´t in a Clan&f - &aHere you can Join one'
   GadgetsInventory:
-    GadgetsMainMenu: '&bLobby&4X&f - &bGadgets Main Menu'
+    GadgetsMainMenu: '&bLobby&4X&f - &3Gadgets Main Menu'
+    HeadInventory: '&bLobby&4X&f - &eHeads'
+    SpecialItemInventory: '&bLobby&4X&f - &9Special Items'
 
 #Tablist
 #Change tablist look
@@ -110,3 +113,8 @@ JumpAndRun:
   Blocks:
     NewBlock: WHITE_WOOL
     StandingBlock: WHITE_CONCRETE
+
+LobbySelector:
+  enabled: true
+  Material: GHAST_TEAR
+  Name: '&6Lobby &f&l- &b%WORLD_NAME%'

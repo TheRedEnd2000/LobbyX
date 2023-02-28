@@ -7,6 +7,7 @@ import de.theredend2000.lobbyx.util.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -14,6 +15,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.Objects;
+import java.util.Random;
 
 public class SetPlayerLobbyManager {
 
@@ -39,13 +41,15 @@ public class SetPlayerLobbyManager {
             checkConfig(player);
             setGamemode(player);
 
-            ConfigLocationUtil locationUtil = new ConfigLocationUtil(plugin,"Locations.Lobby."+player.getWorld().getName());
-            if(locationUtil.loadLocation() != null){
-                player.teleport(locationUtil.loadLocation());
-            }else{
-                for(Player admins : Bukkit.getOnlinePlayers()){
-                    if(admins.isOp()){
-                        admins.sendMessage("§cThe Lobby for the world "+player.getWorld().getName()+" is not set. Please do this!");
+            if(!plugin.getLobbyWorlds().isEmpty()) {
+                ConfigLocationUtil locationUtil = new ConfigLocationUtil(plugin, "Locations.Lobby." + player.getWorld().getName());
+                if (locationUtil.loadLocation() != null) {
+                    player.teleport(locationUtil.loadLocation());
+                } else {
+                    for (Player admins : Bukkit.getOnlinePlayers()) {
+                        if (admins.isOp()) {
+                            admins.sendMessage("§cThe Lobby for the world " + player.getWorld().getName() + " is not set. Please do this!");
+                        }
                     }
                 }
             }
@@ -65,6 +69,15 @@ public class SetPlayerLobbyManager {
         playerHead.setItemMeta(skullMeta);
         if(plugin.getConfig().getBoolean("Items.Profile.enabled"))
             player.getInventory().setItem(plugin.getConfig().getInt("Items.Profile.slot"),playerHead);
+        setPlayerHider(player);
+        if(plugin.getConfig().getBoolean("Items.Teleporter.enabled"))
+            player.getInventory().setItem(plugin.getConfig().getInt("Items.Teleporter.slot"),new ItemBuilder(plugin.getMaterial("Items.Teleporter.material")).setDisplayname(plugin.getConfig().getString("Items.Teleporter.displayname").replaceAll("&","§")).build());
+        if(plugin.getConfig().getBoolean("Items.Selector.enabled"))
+            player.getInventory().setItem(plugin.getConfig().getInt("Items.Selector.slot"),new ItemBuilder(plugin.getMaterial("Items.Selector.material")).setDisplayname(plugin.getConfig().getString("Items.Selector.displayname").replaceAll("&","§")).setLocalizedName("lobbyx.lobbyselector").build());
+        setPlayerSelectedItems(player);
+    }
+
+    public void setPlayerHider(Player player){
         if(plugin.yaml.getBoolean("Settings."+player.getUniqueId()+".PlayerHidden")){
             if(plugin.getConfig().getBoolean("Items.Hider_OFF.enabled"))
                 player.getInventory().setItem(plugin.getConfig().getInt("Items.Hider_OFF.slot"),new ItemBuilder(plugin.getMaterial("Items.Hider_OFF.material")).setDisplayname(plugin.getConfig().getString("Items.Hider_OFF.displayname").replaceAll("&","§")).setLocalizedName("lobbyx.player_hider").build());
@@ -72,15 +85,37 @@ public class SetPlayerLobbyManager {
             if(plugin.getConfig().getBoolean("Items.Hider_ON.enabled"))
                 player.getInventory().setItem(plugin.getConfig().getInt("Items.Hider_ON.slot"),new ItemBuilder(plugin.getMaterial("Items.Hider_ON.material")).setDisplayname(plugin.getConfig().getString("Items.Hider_ON.displayname").replaceAll("&","§")).setLocalizedName("lobbyx.player_hider").build());
         }
-        if(plugin.getConfig().getBoolean("Items.Teleporter.enabled"))
-            player.getInventory().setItem(plugin.getConfig().getInt("Items.Teleporter.slot"),new ItemBuilder(plugin.getMaterial("Items.Teleporter.material")).setDisplayname(plugin.getConfig().getString("Items.Teleporter.displayname").replaceAll("&","§")).build());
-        if(plugin.getConfig().getBoolean("Items.Selector.enabled"))
-            player.getInventory().setItem(plugin.getConfig().getInt("Items.Selector.slot"),new ItemBuilder(plugin.getMaterial("Items.Selector.material")).setDisplayname(plugin.getConfig().getString("Items.Selector.displayname").replaceAll("&","§")).build());
+    }
+
+    public void setPlayerSelectedItems(Player player){
+        for(String items : plugin.gadgetsYaml.getConfigurationSection("Gadgets.SpecialItems").getKeys(false)){
+            String checkPath = plugin.yaml.getString("Selected_Items."+player.getUniqueId()+".Inv");
+            if(items.equals(checkPath)){
+                String gadgetName = plugin.gadgetsYaml.getString("Gadgets.SpecialItems."+items+".name");
+                Material material = plugin.getGadgetsMaterial("Gadgets.SpecialItems."+items+".item");
+                player.getInventory().setItem(5, new ItemBuilder(material).setDisplayname(gadgetName.replaceAll("&","§")).build());
+            }
+        }
+        for(String heads : plugin.gadgetsYaml.getConfigurationSection("Gadgets.Heads").getKeys(false)){
+            String checkPath = plugin.yaml.getString("Selected_Items."+player.getUniqueId()+".Head");
+            if(heads.equals(checkPath)){
+                String headName = plugin.gadgetsYaml.getString("Gadgets.Heads."+heads+".name");
+                String headTexture = plugin.gadgetsYaml.getString("Gadgets.Heads."+heads+".texture");
+                player.getInventory().setHelmet(new ItemBuilder(Material.PLAYER_HEAD).setDisplayname(headName.replaceAll("&","§")).setSkullOwner(Main.getTexture(headTexture)).build());
+            }
+        }
     }
 
     private void checkConfig(Player player){
-        if(plugin.yaml.getString("Settings."+player.getUniqueId()+".FriendSort") == null){
+        if(!plugin.yaml.contains("Settings."+player.getUniqueId()+".FriendSort")){
             plugin.yaml.set("Settings."+player.getUniqueId()+".FriendSort","All");
+        }
+        if(!plugin.yaml.contains("Selected_Items."+player.getUniqueId())){
+            plugin.yaml.set("Selected_Items."+player.getUniqueId()+".Inv","null");
+            plugin.yaml.set("Selected_Items."+player.getUniqueId()+".Head","null");
+            plugin.yaml.set("Selected_Items."+player.getUniqueId()+".Chest","null");
+            plugin.yaml.set("Selected_Items."+player.getUniqueId()+".Leggins","null");
+            plugin.yaml.set("Selected_Items."+player.getUniqueId()+".Boots","null");
         }
         plugin.saveData();
     }

@@ -51,7 +51,7 @@ public class PlayerHiderListener implements Listener {
                             plugin.yaml.set("Settings."+player.getUniqueId()+".PlayerHidden", true);
                         }
                         plugin.saveData();
-                        plugin.getSetPlayerLobbyManager().setItems(player);
+                        plugin.getSetPlayerLobbyManager().setPlayerHider(player);
                         playerHiderCooldown.put(player.getName(),System.currentTimeMillis()+2000);
                     }
                 }

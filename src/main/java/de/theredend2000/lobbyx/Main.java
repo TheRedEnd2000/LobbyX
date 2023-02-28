@@ -1,48 +1,40 @@
 package de.theredend2000.lobbyx;
 
-import com.mojang.authlib.GameProfile;
-import com.mojang.authlib.properties.Property;
 import de.theredend2000.lobbyx.commands.LobbyXCommand;
 import de.theredend2000.lobbyx.commands.playercommand.*;
 import de.theredend2000.lobbyx.jumpandrun.JnrCommand;
 import de.theredend2000.lobbyx.jumpandrun.JumpAndRun;
-import de.theredend2000.lobbyx.jumpandrun.Leaderboard;
 import de.theredend2000.lobbyx.jumpandrun.PlayerMoveListener;
 import de.theredend2000.lobbyx.listeners.*;
+import de.theredend2000.lobbyx.listeners.inventoryListeners.GadgetsInventoryListener;
 import de.theredend2000.lobbyx.listeners.inventoryListeners.LobbxListener;
 import de.theredend2000.lobbyx.listeners.inventoryListeners.ProfileListener;
-import de.theredend2000.lobbyx.listeners.itemListeners.GadgetsListener;
-import de.theredend2000.lobbyx.listeners.itemListeners.PlayerHiderListener;
-import de.theredend2000.lobbyx.listeners.itemListeners.ProfileListeners;
+import de.theredend2000.lobbyx.listeners.itemListeners.*;
 import de.theredend2000.lobbyx.managers.*;
 import de.theredend2000.lobbyx.messages.LanguageListeners;
 import de.theredend2000.lobbyx.messages.Util;
 import de.theredend2000.lobbyx.util.DatetimeUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.WeatherType;
 import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Field;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Objects;
-import java.util.UUID;
 
 public final class Main extends JavaPlugin {
     private ArrayList<World> lobbyWorlds;
     private ArrayList<Player> buildPlayers;
 
     public YamlConfiguration yaml;
+    public YamlConfiguration gadgetsYaml;
     private LobbyXMenuManager lobbyXMenuManager;
     private SetPlayerLobbyManager setPlayerLobbyManager;
     private TablistManager tablistManager;
@@ -50,7 +42,9 @@ public final class Main extends JavaPlugin {
     private ClanManager clanManager;
     private DatetimeUtils datetimeUtils;
     private GadgetsMenuManager gadgetsMenuManager;
+    private LobbySelectorManager lobbySelectorManager;
     public File data = new File("plugins/LobbyX", "database.yml");
+    public File gadgetData;
 
 
     @Override
@@ -58,6 +52,9 @@ public final class Main extends JavaPlugin {
         saveDefaultConfig();
         this.yaml = YamlConfiguration.loadConfiguration(this.data);
         this.saveData();
+        createGadgetsYaml();
+        this.gadgetsYaml = YamlConfiguration.loadConfiguration(this.gadgetData);
+        saveGadgets();
         datetimeUtils = new DatetimeUtils();
         initManagers();
         Util.loadMessages();
@@ -65,7 +62,8 @@ public final class Main extends JavaPlugin {
         initLists();
         initCommand();
         initListeners();
-        addLobbyWorlds();
+        if(isNaggable())
+            addLobbyWorlds();
     }
 
     @Override
@@ -79,6 +77,19 @@ public final class Main extends JavaPlugin {
         }
     }
 
+    private void createGadgetsYaml(){
+        gadgetData = new File(getDataFolder(),"gadgets.yml");
+        try {
+            if(!gadgetData.exists()){
+                InputStream in = getResource("gadgets.yml");
+                assert in != null;
+                Files.copy(in,gadgetData.toPath());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void initLists(){
         lobbyWorlds = new ArrayList<>();
         buildPlayers = new ArrayList<>();
@@ -89,6 +100,7 @@ public final class Main extends JavaPlugin {
             if (getConfig().getStringList("Lobby_Worlds").contains(world.getName())) {
                 lobbyWorlds.add(world);
                 setLobbyWeather(world);
+                Bukkit.getConsoleSender().sendMessage("§aThe world §6'"+world.getName()+"'§a was added to the lobby world.");
             }
         }
     }
@@ -119,6 +131,7 @@ public final class Main extends JavaPlugin {
         getCommand("jnr").setExecutor(new JnrCommand(this));
         getCommand("setLang").setExecutor(new SetLangCommand(this));
         getCommand("clan").setExecutor(new ClanCommands(this));
+        getCommand("music").setExecutor(new MusicCommand());
     }
 
     private void initListeners(){
@@ -149,6 +162,9 @@ public final class Main extends JavaPlugin {
         new InventoryClickEventListener(this);
         new GadgetsListener(this);
         new PlayerChangeWorldEventListener(this);
+        new LobbySelectorListener(this);
+        new GadgetsInventoryListener(this);
+        new SpecialItemsListener(this);
     }
     private void initManagers(){
         new Util(this);
@@ -158,6 +174,7 @@ public final class Main extends JavaPlugin {
         profileMenuManager = new ProfileMenuManager(this);
         clanManager = new ClanManager(this);
         gadgetsMenuManager = new GadgetsMenuManager(this);
+        lobbySelectorManager = new LobbySelectorManager(this);
     }
 
     public static final String BACK_SKULL_TEXTURE = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6L"
@@ -168,6 +185,13 @@ public final class Main extends JavaPlugin {
     public void saveData() {
         try {
             this.yaml.save(this.data);
+        } catch (IOException var2) {
+            var2.printStackTrace();
+        }
+    }
+    public void saveGadgets() {
+        try {
+            this.gadgetsYaml.save(this.gadgetData);
         } catch (IOException var2) {
             var2.printStackTrace();
         }
@@ -205,6 +229,19 @@ public final class Main extends JavaPlugin {
             }
             return material;
         } catch (Exception ex) {
+            Bukkit.getConsoleSender().sendMessage("§4Material Error:");
+            return Material.STONE;
+        }
+    }
+    public Material getGadgetsMaterial(String materialString) {
+        try {
+            Material material = Material.getMaterial(Objects.requireNonNull(gadgetsYaml.getString(materialString)));
+            if (material == null) {
+                return Material.BARRIER;
+            }
+            return material;
+        } catch (Exception ex) {
+            Bukkit.getConsoleSender().sendMessage("§4Material Error:");
             return Material.STONE;
         }
     }
@@ -223,5 +260,8 @@ public final class Main extends JavaPlugin {
 
     public GadgetsMenuManager getGadgetsMenuManager() {
         return gadgetsMenuManager;
+    }
+    public LobbySelectorManager getLobbySelectorManager() {
+        return lobbySelectorManager;
     }
 }

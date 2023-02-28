@@ -19,13 +19,13 @@ public class ProfileListeners implements Listener {
     }
 
     @EventHandler
-    public void onInteractWithHiderEvent(PlayerInteractEvent event){
+    public void onInteractWithItemEvent(PlayerInteractEvent event){
         Player player = event.getPlayer();
         if(plugin.getLobbyWorlds().contains(player.getWorld())){
             if(event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK){
                 if(event.getItem() != null && event.getItem().hasItemMeta()){
                     if(Objects.requireNonNull(event.getItem().getItemMeta()).getLocalizedName().equals("lobbyx.profile")){
-                        plugin.getGadgetsMenuManager().createGadgetsInventory(player);
+                        plugin.getProfileMenuManager().createProfileInventory(player);
                     }
                 }
             }

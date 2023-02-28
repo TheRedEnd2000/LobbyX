@@ -3,6 +3,7 @@ version: '${project.version}'
 main: de.theredend2000.lobbyx.Main
 api-version: 1.19
 author: XMC-Plugins
+softdepend: [NoteBlockAPI]
 commands:
   lobby:
     description: teleports you to the lobby
@@ -27,3 +28,4 @@ commands:
   clan:
     aliases:
       - cl
+  music:

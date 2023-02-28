@@ -1,0 +1,31 @@
+Gadgets:
+  Heads:
+    Wither_Goggles:
+      texture: 'ZGMxZTJkNGJkMzllYTI1M2RkYTZhMzZmNmJjMzUyZjY5ZWYxNjlmYWNjMmI3Njc3OThjMTgxNmFhZjcwZjQ5OCJ9fX0='
+      name: '&6Wither Goggles'
+    Knight:
+      texture: 'N2Q0ZDQ5NmIxZGEwNzUzNmM5NGMxMzEyNGE1ODMzZWJlMGM1MzgyYzhhMzM2YWFkODQ2YzY4MWEyOGQ5MzU2MyJ9fX0='
+      name: '&8Knight'
+    Dragon:
+      texture: 'YmVlYmU1YzNlYmYyMzAwZWEyNmRiMzRmODQxOThmNjA4NDc3NjVjMjExMDFlN2UxMWM5MGRiNjY0YzRlZmVjOSJ9fX0='
+      name: '&5Dragon'
+    Bee:
+      texture: 'ZDcxMGY5YWEzMjZjNzIwNTAzODM5MmFlYjEyZjQ1Y2UyMmNmNmExMzM2YjgyMTI5NjY4YmVhMWZjNDZkNDI4NSJ9fX0='
+      name: '&eBee'
+    Devil:
+      texture: 'OGYwN2FhNDk2MTdhMTIyNTIzMDc1NWUxNWMwNTIwMzE5ZGE4NWZjNGZhOGYxZGViMTM5NzgwOGNjMDZjMTkzMyJ9fX0='
+      name: '&4Devil'
+    Protogen:
+      texture: 'MWIwNzkwMmI1MTYyNTMzM2YwZWNjZWU0NzE1MWFkYjYyZTIyZWMwNTgwOTZlYWRlM2Q0YmIwMzU5NDYzYjA2MSJ9fX0='
+      name: '&3Protogen'
+
+
+  SpecialItems:
+    #Only change Item or name. Also, you cant add more items.
+    Grappling_Hook:
+      item: FISHING_ROD
+      name: '&9Grappling Hook'
+      vector: 0.1
+    Paint_Ball:
+      item: STICK
+      name: '&3Paint Ball'

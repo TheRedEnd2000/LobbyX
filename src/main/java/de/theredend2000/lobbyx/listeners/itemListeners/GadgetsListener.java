@@ -1,6 +1,7 @@
 package de.theredend2000.lobbyx.listeners.itemListeners;
 
 import de.theredend2000.lobbyx.Main;
+import de.theredend2000.lobbyx.messages.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -20,13 +21,13 @@ public class GadgetsListener implements Listener {
     }
 
     @EventHandler
-    public void onInteractWithHiderEvent(PlayerInteractEvent event){
+    public void onInteractWithGadgetsEvent(PlayerInteractEvent event){
         Player player = event.getPlayer();
         if(plugin.getLobbyWorlds().contains(player.getWorld())){
             if(event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK){
-                if(event.getItem() != null && event.getItem().hasItemMeta()){
+                if(event.getItem() != null && event.getItem().hasItemMeta() && event.getItem().getItemMeta().hasLocalizedName()){
                     if(Objects.requireNonNull(event.getItem().getItemMeta()).getLocalizedName().equals("lobbyx.gadgets")){
-                        plugin.getProfileMenuManager().createProfileInventory(player);
+                        plugin.getGadgetsMenuManager().createGadgetsInventory(player);
                     }
                 }
             }

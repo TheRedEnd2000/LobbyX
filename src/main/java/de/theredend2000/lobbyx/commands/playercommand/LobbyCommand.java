@@ -4,10 +4,13 @@ import de.theredend2000.lobbyx.Main;
 import de.theredend2000.lobbyx.messages.Util;
 import de.theredend2000.lobbyx.util.ConfigLocationUtil;
 import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.util.Random;
 
 public class LobbyCommand implements CommandExecutor {
 
@@ -22,7 +25,19 @@ public class LobbyCommand implements CommandExecutor {
         if(sender instanceof Player){
             Player player = (Player) sender;
             if(args.length == 0){
-                ConfigLocationUtil locationUtil = new ConfigLocationUtil(plugin,"Locations.Lobby");
+                if(plugin.getLobbyWorlds().isEmpty()){
+                    player.sendMessage(Util.getMessage(Util.getLocale(player),"NoLobbys"));
+                    return true;
+                }
+                World world = null;
+                if(plugin.getLobbyWorlds().contains(player.getWorld())){
+                    world = player.getWorld();
+                }else{
+                    Random r = new Random();
+                    int lobbby = r.nextInt(plugin.getLobbyWorlds().size());
+                    world = plugin.getLobbyWorlds().get(lobbby);
+                }
+                ConfigLocationUtil locationUtil = new ConfigLocationUtil(plugin,"Locations.Lobby."+world.getName());
                 if(locationUtil.loadLocation() != null){
                     player.teleport(locationUtil.loadLocation());
                     player.sendMessage(Util.getMessage(Util.getLocale(player),"TeleportToLobby"));

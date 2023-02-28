@@ -92,7 +92,7 @@ public class ProfileMenuManager implements Listener {
                     if(online != null){
                         skullMeta2.setLore(Arrays.asList(plugin.yaml.getBoolean("Friends."+player.getUniqueId()+"."+friends+".Bookmarked") ? "§a§lBookmarked" : "","§aOnline","§7Friends since:","§6"+plugin.yaml.getString("Friends."+player.getUniqueId()+"."+friends+".Date")+" §f§l- §6"+plugin.yaml.getString("Friends."+player.getUniqueId()+"."+friends+".Time"),"","§eClick to manage friendship."));
                     }else
-                        skullMeta2.setLore(Arrays.asList(plugin.yaml.getBoolean("Friends."+player.getUniqueId()+"."+friends+".Bookmarked") ? "§a§lBookmarked" : "","§cOffline","§6"+plugin.yaml.getString("Friends."+player.getUniqueId()+"."+friends+".Date")+" §f§l- §6"+plugin.yaml.getString("Friends."+player.getUniqueId()+"."+friends+".Time"),"","§eClick to manage friendship."));
+                        skullMeta2.setLore(Arrays.asList(plugin.yaml.getBoolean("Friends."+player.getUniqueId()+"."+friends+".Bookmarked") ? "§a§lBookmarked" : "","§cOffline","§7Friends since:","§6"+plugin.yaml.getString("Friends."+player.getUniqueId()+"."+friends+".Date")+" §f§l- §6"+plugin.yaml.getString("Friends."+player.getUniqueId()+"."+friends+".Time"),"","§eClick to manage friendship."));
                     playerHead2.setItemMeta(skullMeta2);
                     inventory.addItem(playerHead2);
                     inventory.setItem(50, new ItemBuilder(Material.HOPPER).setDisplayname("§aSort").setLore("§6➤ All Friends","§7Online Friends","§7Offline Friends","§7Bookmarked").setLocalizedName("friendInventory.sort1").build());
@@ -104,7 +104,7 @@ public class ProfileMenuManager implements Listener {
                         skullMeta2.setOwner(friends);
                         skullMeta2.setDisplayName("§5"+friends);
                         skullMeta2.setLocalizedName("friend."+friends);
-                        skullMeta2.setLore(Arrays.asList(plugin.yaml.getBoolean("Friends."+player.getUniqueId()+"."+friends+".Bookmarked") ? "§a§lBookmarked" : "","§aOnline","§6"+plugin.yaml.getString("Friends."+player.getUniqueId()+"."+friends+".Date")+" §f§l- §6"+plugin.yaml.getString("Friends."+player.getUniqueId()+"."+friends+".Time"),"","§eClick to manage friendship."));
+                        skullMeta2.setLore(Arrays.asList(plugin.yaml.getBoolean("Friends."+player.getUniqueId()+"."+friends+".Bookmarked") ? "§a§lBookmarked" : "","§aOnline","§7Friends since:","§6"+plugin.yaml.getString("Friends."+player.getUniqueId()+"."+friends+".Date")+" §f§l- §6"+plugin.yaml.getString("Friends."+player.getUniqueId()+"."+friends+".Time"),"","§eClick to manage friendship."));
                         playerHead2.setItemMeta(skullMeta2);
                         inventory.addItem(playerHead2);
                     }
@@ -117,7 +117,7 @@ public class ProfileMenuManager implements Listener {
                         skullMeta2.setOwner(friends);
                         skullMeta2.setDisplayName("§5"+friends);
                         skullMeta2.setLocalizedName("friend."+friends);
-                        skullMeta2.setLore(Arrays.asList(plugin.yaml.getBoolean("Friends."+player.getUniqueId()+"."+friends+".Bookmarked") ? "§a§lBookmarked" : "","§cOffline","§6"+plugin.yaml.getString("Friends."+player.getUniqueId()+"."+friends+".Date")+" §f§l- §6"+plugin.yaml.getString("Friends."+player.getUniqueId()+"."+friends+".Time"),"","§eClick to manage friendship."));
+                        skullMeta2.setLore(Arrays.asList(plugin.yaml.getBoolean("Friends."+player.getUniqueId()+"."+friends+".Bookmarked") ? "§a§lBookmarked" : "","§cOffline","§7Friends since:","§6"+plugin.yaml.getString("Friends."+player.getUniqueId()+"."+friends+".Date")+" §f§l- §6"+plugin.yaml.getString("Friends."+player.getUniqueId()+"."+friends+".Time"),"","§eClick to manage friendship."));
                         playerHead2.setItemMeta(skullMeta2);
                         inventory.addItem(playerHead2);
                     }
@@ -129,7 +129,7 @@ public class ProfileMenuManager implements Listener {
                         skullMeta2.setOwner(friends);
                         skullMeta2.setDisplayName("§5"+friends);
                         skullMeta2.setLocalizedName("friend."+friends);
-                        skullMeta2.setLore(Arrays.asList(plugin.yaml.getBoolean("Friends."+player.getUniqueId()+"."+friends+".Bookmarked") ? "§a§lBookmarked" : "","§cOffline","§6"+plugin.yaml.getString("Friends."+player.getUniqueId()+"."+friends+".Date")+" §f§l- §6"+plugin.yaml.getString("Friends."+player.getUniqueId()+"."+friends+".Time"),"","§eClick to manage friendship."));
+                        skullMeta2.setLore(Arrays.asList(plugin.yaml.getBoolean("Friends."+player.getUniqueId()+"."+friends+".Bookmarked") ? "§a§lBookmarked" : "","§cOffline","§7Friends since:","§6"+plugin.yaml.getString("Friends."+player.getUniqueId()+"."+friends+".Date")+" §f§l- §6"+plugin.yaml.getString("Friends."+player.getUniqueId()+"."+friends+".Time"),"","§eClick to manage friendship."));
                         playerHead2.setItemMeta(skullMeta2);
                         inventory.addItem(playerHead2);
                     }
