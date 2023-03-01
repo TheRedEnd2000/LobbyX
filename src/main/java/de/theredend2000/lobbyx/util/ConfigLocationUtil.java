@@ -59,7 +59,7 @@ public class ConfigLocationUtil {
     public void joinClan(Player joiner) {
         FileConfiguration config = plugin.yaml;
         config.set(root + ".Name", joiner.getName());
-        config.set(root + ".OwnerUUID", joiner.getUniqueId().toString());
+        config.set(root + ".PlayerUUID", joiner.getUniqueId().toString());
         config.set(root + ".Date", plugin.getDatetimeUtils().getNowDate());
         config.set(root + ".Time", plugin.getDatetimeUtils().getNowTime());
         config.set(root + ".Rank", "default");

@@ -6,6 +6,7 @@ import de.theredend2000.lobbyx.util.ConfigLocationUtil;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -56,11 +57,22 @@ public class ClanManager {
         return clanName;
     }
 
-    public boolean isAlreadyInClan(UUID ownerUUID, Player player, String clanName){
-        if(plugin.yaml.contains("Clans."+ownerUUID+"."+clanName+".Member."+player.getName())){
+    public boolean isAlreadyInClan(UUID ownerUUID, String player, String clanName){
+        if(plugin.yaml.contains("Clans."+ownerUUID+"."+clanName+".Member."+player)){
             return true;
         }else
             return false;
+    }
+    public void kickPlayer(Player player, String leaver, String clanName){
+        if(isAlreadyInClan(player.getUniqueId(),leaver,clanName)){
+            plugin.yaml.set("Clans."+player.getUniqueId()+"."+clanName+".Member."+leaver,null);
+            plugin.saveData();
+            player.sendMessage(Util.getMessage(Util.getLocale(player),"KickPlayerSenderMessage").replaceAll("%PLAYER_NAME%",leaver).replaceAll("%CLAN_NAME%",clanName));
+            Player leaverPlayer = Bukkit.getPlayer(leaver);
+            if(leaverPlayer != null)
+                leaverPlayer.sendMessage(Util.getMessage(Util.getLocale(leaverPlayer),"KickPlayerReceiver").replaceAll("%PLAYER_NAME%",player.getName()).replaceAll("%CLAN_NAME%",clanName));
+        }else
+            player.sendMessage(Util.getMessage(Util.getLocale(player),"NotInYourClan").replaceAll("%PLAYER_NAME%",leaver).replaceAll("%CLAN_NAME%",clanName));
     }
 
 }
