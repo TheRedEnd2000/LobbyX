@@ -69,7 +69,7 @@ public class ClanCommands implements CommandExecutor {
                                 }
                                 if(!plugin.getClanManager().hasClan(receiver)) {
                                     plugin.getClanManager().inviteToClan(player, receiver, clanName);
-                                    clanRequestTime.put(player,10);
+                                    clanRequestTime.put(player,300);
                                     clanRequest.put(player, receiver);
                                 }else
                                     player.sendMessage(Util.getMessage(Util.getLocale(player),"AlreadyInClan").replaceAll("%PLAYER_NAME%",receiver.getName()));
@@ -119,9 +119,6 @@ public class ClanCommands implements CommandExecutor {
                             plugin.getClanManager().kickPlayer(player,leaver, clanName);
                         }else
                             player.sendMessage(Util.getMessage(Util.getLocale(player),"HasNoClan"));
-                    }else if(args[0].equalsIgnoreCase("leave")){
-                        String leaver = args[1];
-
                     }else
                         player.sendMessage(Util.getMessage(Util.getLocale(player),"ClanCommandUsage"));
                 }else if(args.length == 1){
@@ -130,6 +127,26 @@ public class ClanCommands implements CommandExecutor {
                             player.sendMessage("OpenInv");
                         }else
                             player.sendMessage(Util.getMessage(Util.getLocale(player),"HasNoClan"));
+                    }else if(args[0].equalsIgnoreCase("leave")){
+                        if(plugin.yaml.contains("Clans")) {
+                            for (String clanOwner : plugin.yaml.getConfigurationSection("Clans.").getKeys(false)) {
+                                for(String clanNames : plugin.yaml.getConfigurationSection("Clans."+clanOwner+".").getKeys(false)) {
+                                    String name = plugin.yaml.getString("Clans."+clanOwner+"."+clanNames+".Owner");
+                                    if(player.getName().equals(name)){
+                                        player.sendMessage(Util.getMessage(Util.getLocale(player),"CantLeaveOwnClan"));
+                                        return true;
+                                    }
+                                    if (plugin.getClanManager().isAlreadyInClan(UUID.fromString(clanOwner), player.getName(), clanNames)) {
+                                        player.sendMessage(Util.getMessage(Util.getLocale(player),"LeaveClan").replaceAll("%CLAN_NAME%", clanNames));
+                                        Player owner = Bukkit.getPlayer(name);
+                                        if(owner != null)
+                                            owner.sendMessage(Util.getMessage(Util.getLocale(owner),"PlayerLeftClan").replaceAll("%PLAYER_NAME%",player.getName()));
+                                        plugin.getClanManager().leaveClan(UUID.fromString(clanOwner),player,clanNames);
+                                    }else
+                                        player.sendMessage(Util.getMessage(Util.getLocale(player),"NotInAClan"));
+                                }
+                            }
+                        }
                     }else
                         player.sendMessage(Util.getMessage(Util.getLocale(player),"ClanCommandUsage"));
                 }else

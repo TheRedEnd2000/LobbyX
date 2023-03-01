@@ -30,6 +30,10 @@ public class ClanManager {
         }else
             return false;
     }
+    public void leaveClan(UUID ownerUUID, Player leaver, String clanName){
+        plugin.yaml.set("Clans."+ownerUUID+"."+clanName+".Member."+leaver.getName(), null);
+        plugin.saveData();
+    }
 
     public void inviteToClan(Player inviter, Player receiver, String clanName){
         inviter.sendMessage(Util.getMessage(Util.getLocale(inviter),"InviterMessage").replaceAll("%PLAYER_INVITER%",inviter.getName()).replaceAll("%PLAYER_RECEIVER%", receiver.getName()).replaceAll("%CLAN_NAME%",clanName));
