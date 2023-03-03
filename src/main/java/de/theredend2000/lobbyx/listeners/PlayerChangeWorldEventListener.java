@@ -28,10 +28,11 @@ public class PlayerChangeWorldEventListener implements Listener {
                 lobbyPlayers.sendMessage(Util.getMessage(Util.getLocale(lobbyPlayers),"ChangeLobbyLeaveMessage").replaceAll("%PLAYER%",player.getName()));
             }
             plugin.getSetPlayerLobbyManager().setPlayerInLobby(player);
+            plugin.getSetPlayerLobbyManager().updateLobbyInventory();
         }else{
             player.getInventory().clear();
             player.setPlayerListHeaderFooter(null,null);
-            player.sendMessage("left loby");
+            player.sendMessage("left lobby");
         }
     }
 

@@ -1,0 +1,74 @@
+
+
+#If you're using a custom head, you need to add the texture. See at slot 10
+
+
+Navigator:
+  Settings:
+    size: 54 #You can only use this sizes: 9, 18, 27, 36, 45, 54!
+  Slots:
+    '0':
+      item: WHITE_STAINED_GLASS_PANE
+      name: '&c'
+    '1':
+      item: WHITE_STAINED_GLASS_PANE
+      name: '&c'
+    '2':
+      item: WHITE_STAINED_GLASS_PANE
+      name: '&c'
+    '3':
+      item: WHITE_STAINED_GLASS_PANE
+      name: '&c'
+    '4':
+      item: WHITE_STAINED_GLASS_PANE
+      name: '&c'
+    '5':
+      item: WHITE_STAINED_GLASS_PANE
+      name: '&c'
+    '6':
+      item: WHITE_STAINED_GLASS_PANE
+      name: '&c'
+    '7':
+      item: WHITE_STAINED_GLASS_PANE
+      name: '&c'
+    '8':
+      item: WHITE_STAINED_GLASS_PANE
+      name: '&c'
+    '9':
+      item: WHITE_STAINED_GLASS_PANE
+      name: '&c'
+    '10':
+      item: PLAYER_HEAD
+      texture: 'ZjAwZTdiMzNlZTJhNjAwMjc1OGFjZmUwOGM3ZGY2YmQzN2E0OTdkYzlmODAwMGMzY2E5ODI0YTJjZmFiY2FkZCJ9fX0='
+      name: '&6Game 1'
+    '11':
+      item: PLAYER_HEAD
+      texture: 'YTg4MzJjMTQ2NmM4NDFjYzc5ZDVmMTAyOTVkNDY0Mjc5OTY3OTc1YTI0NTFjN2E1MzNjNzk5Njg5NzQwOGJlYSJ9fX0='
+      name: '&6Game 2'
+    '12':
+      item: PLAYER_HEAD
+      texture: 'YTVkNzZkOTBiMzc4MDgzZDE0Nzc1NjgwNTA1ZGRiMWU2YzJjNmRjZjRkZGU3ZjliMWY1ODgwOWJlYzZjNjVjOCJ9fX0='
+      name: '&6Game 3'
+    '13':
+      item: PLAYER_HEAD
+      texture: 'ZDZjYzZiODM3NjNhNjdmY2FkYTFlYTE4NGMyZDE3NTJhZDI0MDc0NmM2YmUyNThhNzM5ODNkOGI2NTdmNGJiNSJ9fX0='
+      name: '&6Game 4'
+    '14':
+      item: PLAYER_HEAD
+      texture: 'YmFhOTUyOTFmOTNhNzBkYjZmMWFhMWViODQ4MjRiOWRmM2I5ZmMwYTI1NDZmN2ZmODFhMTJjNTY3NjBmZWFhIn19fQ=='
+      name: '&6Game 5'
+    '15':
+      item: PLAYER_HEAD
+      texture: 'MjI2MjQzNDYzMmFjMzNlZGQyYzRiZDQwNGU5NmRiZWQ2OWEyOGNmMzQ4OWM0NWVjYTNkY2Y4YzRhYmZkYmQ4NCJ9fX0='
+      name: '&6Game 6'
+    '16':
+      item: PLAYER_HEAD
+      texture: 'YzdlNmM0MGY2OGI3NzVmMmVmY2Q3YmQ5OTE2YjMyNzg2OWRjZjI3ZTI0Yzg1NWQwYTE4ZTA3YWMwNGZlMSJ9fX0='
+      name: '&6Game 7'
+    '17':
+      item: WHITE_STAINED_GLASS_PANE
+      name: '&c'
+      clickable: false
+    '18':
+      item: WHITE_STAINED_GLASS_PANE
+      name: '&c'

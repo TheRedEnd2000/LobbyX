@@ -40,6 +40,7 @@ public class SetPlayerLobbyManager {
             setItems(player);
             checkConfig(player);
             setGamemode(player);
+            updateLobbyInventory();
 
             if(!plugin.getLobbyWorlds().isEmpty()) {
                 ConfigLocationUtil locationUtil = new ConfigLocationUtil(plugin, "Locations.Lobby." + player.getWorld().getName());
@@ -71,7 +72,7 @@ public class SetPlayerLobbyManager {
             player.getInventory().setItem(plugin.getConfig().getInt("Items.Profile.slot"),playerHead);
         setPlayerHider(player);
         if(plugin.getConfig().getBoolean("Items.Teleporter.enabled"))
-            player.getInventory().setItem(plugin.getConfig().getInt("Items.Teleporter.slot"),new ItemBuilder(plugin.getMaterial("Items.Teleporter.material")).setDisplayname(plugin.getConfig().getString("Items.Teleporter.displayname").replaceAll("&","§")).build());
+            player.getInventory().setItem(plugin.getConfig().getInt("Items.Teleporter.slot"),new ItemBuilder(plugin.getMaterial("Items.Teleporter.material")).setDisplayname(plugin.getConfig().getString("Items.Teleporter.displayname").replaceAll("&","§")).setLocalizedName("lobbyx.teleporter").build());
         if(plugin.getConfig().getBoolean("Items.Selector.enabled"))
             player.getInventory().setItem(plugin.getConfig().getInt("Items.Selector.slot"),new ItemBuilder(plugin.getMaterial("Items.Selector.material")).setDisplayname(plugin.getConfig().getString("Items.Selector.displayname").replaceAll("&","§")).setLocalizedName("lobbyx.lobbyselector").build());
         setPlayerSelectedItems(player);
@@ -135,6 +136,14 @@ public class SetPlayerLobbyManager {
             case ("ADVENTURE"):
                 player.setGameMode(GameMode.ADVENTURE);
                 break;
+        }
+    }
+
+    public void updateLobbyInventory(){
+        for(Player lobbyPlayer : Bukkit.getOnlinePlayers()){
+            if(lobbyPlayer.getOpenInventory().getTitle().equals(Objects.requireNonNull(plugin.getConfig().getString("Inventory.LobbySelectorInventoryTitle")).replaceAll("&","§"))){
+                plugin.getLobbySelectorManager().createLobbySelector(lobbyPlayer);
+            }
         }
     }
 

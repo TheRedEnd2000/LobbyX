@@ -35,6 +35,7 @@ public final class Main extends JavaPlugin {
 
     public YamlConfiguration yaml;
     public YamlConfiguration gadgetsYaml;
+    public YamlConfiguration navigatorYaml;
     private LobbyXMenuManager lobbyXMenuManager;
     private SetPlayerLobbyManager setPlayerLobbyManager;
     private TablistManager tablistManager;
@@ -45,6 +46,7 @@ public final class Main extends JavaPlugin {
     private LobbySelectorManager lobbySelectorManager;
     public File data = new File("plugins/LobbyX", "database.yml");
     public File gadgetData;
+    public File navigatorData;
 
 
     @Override
@@ -55,6 +57,9 @@ public final class Main extends JavaPlugin {
         createGadgetsYaml();
         this.gadgetsYaml = YamlConfiguration.loadConfiguration(this.gadgetData);
         saveGadgets();
+        createNavigatorYaml();
+        this.navigatorYaml = YamlConfiguration.loadConfiguration(this.navigatorData);
+        saveNavigator();
         datetimeUtils = new DatetimeUtils();
         initManagers();
         Util.loadMessages();
@@ -84,6 +89,18 @@ public final class Main extends JavaPlugin {
                 InputStream in = getResource("gadgets.yml");
                 assert in != null;
                 Files.copy(in,gadgetData.toPath());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void createNavigatorYaml(){
+        navigatorData = new File(getDataFolder(),"navigator.yml");
+        try {
+            if(!navigatorData.exists()){
+                InputStream in = getResource("navigator.yml");
+                assert in != null;
+                Files.copy(in,navigatorData.toPath());
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -165,6 +182,7 @@ public final class Main extends JavaPlugin {
         new LobbySelectorListener(this);
         new GadgetsInventoryListener(this);
         new SpecialItemsListener(this);
+        new NavigatorListener(this);
     }
     private void initManagers(){
         new Util(this);
@@ -190,6 +208,13 @@ public final class Main extends JavaPlugin {
         }
     }
     public void saveGadgets() {
+        try {
+            this.gadgetsYaml.save(this.gadgetData);
+        } catch (IOException var2) {
+            var2.printStackTrace();
+        }
+    }
+    public void saveNavigator() {
         try {
             this.gadgetsYaml.save(this.gadgetData);
         } catch (IOException var2) {
@@ -236,6 +261,18 @@ public final class Main extends JavaPlugin {
     public Material getGadgetsMaterial(String materialString) {
         try {
             Material material = Material.getMaterial(Objects.requireNonNull(gadgetsYaml.getString(materialString)));
+            if (material == null) {
+                return Material.BARRIER;
+            }
+            return material;
+        } catch (Exception ex) {
+            Bukkit.getConsoleSender().sendMessage("§4Material Error:");
+            return Material.STONE;
+        }
+    }
+    public Material getNavigatorMaterial(String materialString) {
+        try {
+            Material material = Material.getMaterial(Objects.requireNonNull(navigatorYaml.getString(materialString)));
             if (material == null) {
                 return Material.BARRIER;
             }
