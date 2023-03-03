@@ -18,6 +18,60 @@ Gadgets:
     Protogen:
       texture: 'MWIwNzkwMmI1MTYyNTMzM2YwZWNjZWU0NzE1MWFkYjYyZTIyZWMwNTgwOTZlYWRlM2Q0YmIwMzU5NDYzYjA2MSJ9fX0='
       name: '&3Protogen'
+    Noob:
+      texture: 'ZGEyODRkOTc4MDViZTUzMWNhZGYwNjI3YzVjMjllOTAzNWUxNzEyMTU4MWRjYWJjZjk1MTBmZmQ5ZDQ2MDdmZiJ9fX0='
+      name: '&eNoob'
+    Oldman:
+      texture: 'Njk1MWMwM2FiNDE3MWU1OTMwMGQ0OTJjMGE4ZjgxMjg2NWQzODE0YjA5MzEyYjE1ODE1OTkxYTM1Yzk2Y2NiYiJ9fX0='
+      name: '...'
+    knight:
+      texture: 'YzNhNDdkN2E1MTRmMTY4MTlmMmI5ZTE2NmE4YTZkMDY4MTcxNjBjZDcxZjAwODBiNGZkMDVhOGU4OWI4NjgwNyJ9fX0='
+      name: 'Knight'
+    bread:
+      texture: 'NjMxYjc0Nzk2OWY1YTM1NWE5ZDNhNDYxNmVjN2FjZDgzOTEyNWU4YWMxZWZkNGRmOGExOGY3ZWQ5MTRjNmYxMCJ9fX0='
+      name: 'bread'
+    chest:
+      texture: 'ZWRjMzZjOWNiNTBhNTI3YWE1NTYwN2EwZGY3MTg1YWQyMGFhYmFhOTAzZThkOWFiZmM3ODI2MDcwNTU0MGRlZiJ9fX0='
+      name: 'Chest'
+    tv:
+      texture: 'ZjE1ZjBjOGM1MDI1YmY5ZGFhNjEwOGM5MDU1OWVjNmY0NGRmYTEyMjBkMzAxNzZjNGE1Y2Y4NzE2NmQ3NWQ5MyJ9fX0='
+      name: '&bTv'
+    Leave:
+      texture: 'NGVmZjI5ZWE0NzFiMGRiZGIwZjhjZmZlNTIzZmZmZjZhYjAyYTVlZDI5OTBhYmFmMGUyYzYwNGQyMjdmMTA4NCJ9fX0='
+      name: 'kp'
+    Villager:
+      texture: 'M2UxZmI1MmI3YWU4MmJiMDkxYzU0YzMzYjdmYTZiODBjOGEwMjUwMzcyYjlkMWNiZDZmNzk2NTIyZjY0NzlkIn19fQ=='
+      name: 'Villager'
+    Volcano:
+      texture: 'ZThlZThmMzQxZWFiZjY1NTE1NzE4MTYzZWMzYjQzZWQwMWUxY2RlMjdiM2IyNmM0ZDkyYzYwNzI5OWU0ZDkxIn19fQ=='
+      name: 'Volcano'
+    Save:
+      texture: 'OGI1ZDE2MGJiZGFhMzA4MzUwMzI1ZWU3YTk2ZjYwNTkwMDRhMzEzMzg2MTVkNDM1NjRhNGM3MjJlMjhmN2NlYyJ9fX0='
+      name: 'Save'
+    Pufferfisch:
+      texture: 'ZGIwYmY3MzMzMWNhNWJkNjU3Y2I1OTQ1Y2JhYWJhOWUwZDU4N2FiZmE5YTdkMTM4NGE3NDg4ZGFhMGM2MmVmNSJ9fX0='
+      name: 'Fish'
+    FishinJar:
+      texture: 'MmRlOTE2MmY2MzBlZWMzZWMyZDVjMWE2OWY5YTc5YzFhNTExYjI3YTM2ZWZhOTg2NmMyYzBiOGFiNmJhZmExMyJ9fX0='
+      name: 'Pufferfish'
+    Demon:
+      texture: 'YjYyNGIwMmY3MjdkMjBmYmU0NzlkMTUxMzk4NWEyZTRkM2ExYTQ5MzA5ZGYwNDk2ZDczZDBhNDE0ZDA4ODdlMCJ9fX0='
+      name: 'Demon'
+    Demon2:
+      texture: 'MzI3MDE4N2IzOGM0ZGYzNjM3MjFhMmQ1NTQ2Mjc3ZTdkNzU3YWZiZDI1N2M3ODNhYzE5NjkzNzUyZWUwOGQ2NSJ9fX0='
+      name: 'Demon'
+    Netherportel:
+      texture: 'MzI2OTc5Mjk0NjU5NTBjY2QzYTQ5MjNhNWU2ZWIxNWI0ZmUyYmEyYjI4NzE1ZjRhNzk5Njc4NWQ3MDYxNTgifX19'
+      name: 'Portal'
+    Question:
+      texture: 'NjM4YzUzZTY2ZjI4Y2YyYzdmYjE1MjNjOWU1ZGUxYWUwY2Y0ZDdhMWZhZjU1M2U3NTI0OTRhOGQ2ZDJlMzIifX19'
+      name: 'Questionmark'
+
+
+
+
+
+
 
 
   SpecialItems:
