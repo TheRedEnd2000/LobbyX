@@ -41,7 +41,6 @@ public final class Main extends JavaPlugin {
     private SetPlayerLobbyManager setPlayerLobbyManager;
     private TablistManager tablistManager;
     private ProfileMenuManager profileMenuManager;
-    private NPCManager npcManager;
     private ClanManager clanManager;
     private DatetimeUtils datetimeUtils;
     private GadgetsMenuManager gadgetsMenuManager;
@@ -67,7 +66,6 @@ public final class Main extends JavaPlugin {
         datetimeUtils = new DatetimeUtils();
         initManagers();
         Util.loadMessages();
-        this.npcManager = new NPCManager(this, USE_REFLECTION);
 
         initLists();
         initCommand();
@@ -85,7 +83,6 @@ public final class Main extends JavaPlugin {
             jumpAndRun.getCurrentLocation().getBlock().setType(Material.AIR);
             jumpAndRun.getNextLocation().getBlock().setType(Material.AIR);
         }
-        npcManager.deleteAllNPCs();
     }
 
     private void createGadgetsYaml(){
@@ -314,7 +311,4 @@ public final class Main extends JavaPlugin {
         return navigatorMenuManager;
     }
 
-    public NPCManager getNpcManager() {
-        return npcManager;
-    }
 }
