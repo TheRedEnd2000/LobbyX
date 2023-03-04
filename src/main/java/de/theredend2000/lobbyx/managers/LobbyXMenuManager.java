@@ -23,6 +23,7 @@ public class LobbyXMenuManager {
         int[] ornageglass = new int[]{0,1,2,3,4,5,6,7,8,9,17,18,26,27,35,36,44,45,46,47,48,49,50,51,52,53};
         for (int i = 0; i<ornageglass.length;i++){inventory.setItem(ornageglass[i], new ItemBuilder(Material.ORANGE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
         inventory.setItem(13, new ItemBuilder(Material.END_PORTAL_FRAME).setDisplayname("§9Locations").setLore("§eClick to manage.").setLocalizedName("lobbyx.locations").build());
+        inventory.setItem(14, new ItemBuilder(Material.COMPASS).setDisplayname("§5Edit Navigator").setLore("§eClick to edit the navigator.").setLocalizedName("lobbyx.editNavigator").build());
         player.openInventory(inventory);
     }
 

@@ -31,12 +31,8 @@ public class LobbxListener implements Listener {
                         case "lobbyx.locations":
                             plugin.getLobbyXMenuManager().createLocationsInventpry(player);
                             break;
-                        case "MainInventory.Stats":
-                            break;
-                        case"MainInventory.Languages":
-                            plugin.getProfileMenuManager().createFriendInventory(player);
-                            break;
-                        case"MainInventory.Social":
+                        case "lobbyx.editNavigator":
+                            plugin.getNavigatorMenuManager().createSelectSlotInventory(player);
                             break;
                     }
                 }

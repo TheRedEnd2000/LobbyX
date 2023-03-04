@@ -44,6 +44,7 @@ public final class Main extends JavaPlugin {
     private DatetimeUtils datetimeUtils;
     private GadgetsMenuManager gadgetsMenuManager;
     private LobbySelectorManager lobbySelectorManager;
+    private NavigatorMenuManager navigatorMenuManager;
     public File data = new File("plugins/LobbyX", "database.yml");
     public File gadgetData;
     public File navigatorData;
@@ -193,6 +194,7 @@ public final class Main extends JavaPlugin {
         clanManager = new ClanManager(this);
         gadgetsMenuManager = new GadgetsMenuManager(this);
         lobbySelectorManager = new LobbySelectorManager(this);
+        navigatorMenuManager = new NavigatorMenuManager(this);
     }
 
     public static final String BACK_SKULL_TEXTURE = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6L"
@@ -216,7 +218,7 @@ public final class Main extends JavaPlugin {
     }
     public void saveNavigator() {
         try {
-            this.gadgetsYaml.save(this.gadgetData);
+            this.navigatorYaml.save(this.navigatorData);
         } catch (IOException var2) {
             var2.printStackTrace();
         }
@@ -300,5 +302,9 @@ public final class Main extends JavaPlugin {
     }
     public LobbySelectorManager getLobbySelectorManager() {
         return lobbySelectorManager;
+    }
+
+    public NavigatorMenuManager getNavigatorMenuManager() {
+        return navigatorMenuManager;
     }
 }

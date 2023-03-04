@@ -4,7 +4,7 @@ Gadgets:
       texture: 'ZGMxZTJkNGJkMzllYTI1M2RkYTZhMzZmNmJjMzUyZjY5ZWYxNjlmYWNjMmI3Njc3OThjMTgxNmFhZjcwZjQ5OCJ9fX0='
       name: '&6Wither Goggles'
     Knight:
-      texture: 'N2Q0ZDQ5NmIxZGEwNzUzNmM5NGMxMzEyNGE1ODMzZWJlMGM1MzgyYzhhMzM2YWFkODQ2YzY4MWEyOGQ5MzU2MyJ9fX0='
+      texture: 'YzNhNDdkN2E1MTRmMTY4MTlmMmI5ZTE2NmE4YTZkMDY4MTcxNjBjZDcxZjAwODBiNGZkMDVhOGU4OWI4NjgwNyJ9fX0='
       name: '&8Knight'
     Dragon:
       texture: 'YmVlYmU1YzNlYmYyMzAwZWEyNmRiMzRmODQxOThmNjA4NDc3NjVjMjExMDFlN2UxMWM5MGRiNjY0YzRlZmVjOSJ9fX0='
@@ -21,51 +21,48 @@ Gadgets:
     Noob:
       texture: 'ZGEyODRkOTc4MDViZTUzMWNhZGYwNjI3YzVjMjllOTAzNWUxNzEyMTU4MWRjYWJjZjk1MTBmZmQ5ZDQ2MDdmZiJ9fX0='
       name: '&eNoob'
-    Oldman:
+    Old_Man:
       texture: 'Njk1MWMwM2FiNDE3MWU1OTMwMGQ0OTJjMGE4ZjgxMjg2NWQzODE0YjA5MzEyYjE1ODE1OTkxYTM1Yzk2Y2NiYiJ9fX0='
-      name: '...'
-    knight:
-      texture: 'YzNhNDdkN2E1MTRmMTY4MTlmMmI5ZTE2NmE4YTZkMDY4MTcxNjBjZDcxZjAwODBiNGZkMDVhOGU4OWI4NjgwNyJ9fX0='
-      name: 'Knight'
-    bread:
+      name: '§8Old Man'
+    Bread:
       texture: 'NjMxYjc0Nzk2OWY1YTM1NWE5ZDNhNDYxNmVjN2FjZDgzOTEyNWU4YWMxZWZkNGRmOGExOGY3ZWQ5MTRjNmYxMCJ9fX0='
-      name: 'bread'
-    chest:
+      name: '&7Bread'
+    Chest:
       texture: 'ZWRjMzZjOWNiNTBhNTI3YWE1NTYwN2EwZGY3MTg1YWQyMGFhYmFhOTAzZThkOWFiZmM3ODI2MDcwNTU0MGRlZiJ9fX0='
-      name: 'Chest'
-    tv:
+      name: '&bChest'
+    TV:
       texture: 'ZjE1ZjBjOGM1MDI1YmY5ZGFhNjEwOGM5MDU1OWVjNmY0NGRmYTEyMjBkMzAxNzZjNGE1Y2Y4NzE2NmQ3NWQ5MyJ9fX0='
-      name: '&bTv'
-    Leave:
+      name: '&bTV'
+    Leaves:
       texture: 'NGVmZjI5ZWE0NzFiMGRiZGIwZjhjZmZlNTIzZmZmZjZhYjAyYTVlZDI5OTBhYmFmMGUyYzYwNGQyMjdmMTA4NCJ9fX0='
-      name: 'kp'
+      name: '&dLeaves'
     Villager:
       texture: 'M2UxZmI1MmI3YWU4MmJiMDkxYzU0YzMzYjdmYTZiODBjOGEwMjUwMzcyYjlkMWNiZDZmNzk2NTIyZjY0NzlkIn19fQ=='
-      name: 'Villager'
+      name: '&cVillager'
     Volcano:
       texture: 'ZThlZThmMzQxZWFiZjY1NTE1NzE4MTYzZWMzYjQzZWQwMWUxY2RlMjdiM2IyNmM0ZDkyYzYwNzI5OWU0ZDkxIn19fQ=='
-      name: 'Volcano'
+      name: '&4Volcano'
     Save:
       texture: 'OGI1ZDE2MGJiZGFhMzA4MzUwMzI1ZWU3YTk2ZjYwNTkwMDRhMzEzMzg2MTVkNDM1NjRhNGM3MjJlMjhmN2NlYyJ9fX0='
-      name: 'Save'
-    Pufferfisch:
+      name: '&8Save'
+    Slime:
       texture: 'ZGIwYmY3MzMzMWNhNWJkNjU3Y2I1OTQ1Y2JhYWJhOWUwZDU4N2FiZmE5YTdkMTM4NGE3NDg4ZGFhMGM2MmVmNSJ9fX0='
-      name: 'Fish'
-    FishinJar:
+      name: '&aSlime'
+    PufferFish:
       texture: 'MmRlOTE2MmY2MzBlZWMzZWMyZDVjMWE2OWY5YTc5YzFhNTExYjI3YTM2ZWZhOTg2NmMyYzBiOGFiNmJhZmExMyJ9fX0='
-      name: 'Pufferfish'
+      name: '&ePufferfish'
     Demon:
       texture: 'YjYyNGIwMmY3MjdkMjBmYmU0NzlkMTUxMzk4NWEyZTRkM2ExYTQ5MzA5ZGYwNDk2ZDczZDBhNDE0ZDA4ODdlMCJ9fX0='
-      name: 'Demon'
-    Demon2:
+      name: '&4Demon'
+    Demon_King:
       texture: 'MzI3MDE4N2IzOGM0ZGYzNjM3MjFhMmQ1NTQ2Mjc3ZTdkNzU3YWZiZDI1N2M3ODNhYzE5NjkzNzUyZWUwOGQ2NSJ9fX0='
-      name: 'Demon'
-    Netherportel:
+      name: '&4Demon King'
+    Nether_Portal:
       texture: 'MzI2OTc5Mjk0NjU5NTBjY2QzYTQ5MjNhNWU2ZWIxNWI0ZmUyYmEyYjI4NzE1ZjRhNzk5Njc4NWQ3MDYxNTgifX19'
-      name: 'Portal'
+      name: '&5Portal'
     Question:
       texture: 'NjM4YzUzZTY2ZjI4Y2YyYzdmYjE1MjNjOWU1ZGUxYWUwY2Y0ZDdhMWZhZjU1M2U3NTI0OTRhOGQ2ZDJlMzIifX19'
-      name: 'Questionmark'
+      name: '&3Question'
 
 
 

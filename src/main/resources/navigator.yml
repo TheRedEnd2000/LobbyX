@@ -10,65 +10,226 @@ Navigator:
     '0':
       item: WHITE_STAINED_GLASS_PANE
       name: '&c'
+      action: none
     '1':
       item: WHITE_STAINED_GLASS_PANE
       name: '&c'
+      action: none
     '2':
       item: WHITE_STAINED_GLASS_PANE
       name: '&c'
+      action: none
     '3':
       item: WHITE_STAINED_GLASS_PANE
       name: '&c'
+      action: none
     '4':
       item: WHITE_STAINED_GLASS_PANE
       name: '&c'
+      action: none
     '5':
       item: WHITE_STAINED_GLASS_PANE
       name: '&c'
+      action: none
     '6':
       item: WHITE_STAINED_GLASS_PANE
       name: '&c'
+      action: none
     '7':
       item: WHITE_STAINED_GLASS_PANE
       name: '&c'
+      action: none
     '8':
       item: WHITE_STAINED_GLASS_PANE
       name: '&c'
+      action: none
     '9':
       item: WHITE_STAINED_GLASS_PANE
       name: '&c'
+      action: none
     '10':
       item: PLAYER_HEAD
       texture: 'ZjAwZTdiMzNlZTJhNjAwMjc1OGFjZmUwOGM3ZGY2YmQzN2E0OTdkYzlmODAwMGMzY2E5ODI0YTJjZmFiY2FkZCJ9fX0='
       name: '&6Game 1'
+      action: teleport
     '11':
       item: PLAYER_HEAD
       texture: 'YTg4MzJjMTQ2NmM4NDFjYzc5ZDVmMTAyOTVkNDY0Mjc5OTY3OTc1YTI0NTFjN2E1MzNjNzk5Njg5NzQwOGJlYSJ9fX0='
       name: '&6Game 2'
+      action: teleport
     '12':
       item: PLAYER_HEAD
       texture: 'YTVkNzZkOTBiMzc4MDgzZDE0Nzc1NjgwNTA1ZGRiMWU2YzJjNmRjZjRkZGU3ZjliMWY1ODgwOWJlYzZjNjVjOCJ9fX0='
       name: '&6Game 3'
+      action: teleport
     '13':
       item: PLAYER_HEAD
       texture: 'ZDZjYzZiODM3NjNhNjdmY2FkYTFlYTE4NGMyZDE3NTJhZDI0MDc0NmM2YmUyNThhNzM5ODNkOGI2NTdmNGJiNSJ9fX0='
       name: '&6Game 4'
+      action: teleport
     '14':
       item: PLAYER_HEAD
       texture: 'YmFhOTUyOTFmOTNhNzBkYjZmMWFhMWViODQ4MjRiOWRmM2I5ZmMwYTI1NDZmN2ZmODFhMTJjNTY3NjBmZWFhIn19fQ=='
       name: '&6Game 5'
+      action: teleport
     '15':
       item: PLAYER_HEAD
       texture: 'MjI2MjQzNDYzMmFjMzNlZGQyYzRiZDQwNGU5NmRiZWQ2OWEyOGNmMzQ4OWM0NWVjYTNkY2Y4YzRhYmZkYmQ4NCJ9fX0='
       name: '&6Game 6'
+      action: teleport
     '16':
       item: PLAYER_HEAD
       texture: 'YzdlNmM0MGY2OGI3NzVmMmVmY2Q3YmQ5OTE2YjMyNzg2OWRjZjI3ZTI0Yzg1NWQwYTE4ZTA3YWMwNGZlMSJ9fX0='
       name: '&6Game 7'
+      action: teleport
     '17':
       item: WHITE_STAINED_GLASS_PANE
       name: '&c'
-      clickable: false
+      action: none
     '18':
       item: WHITE_STAINED_GLASS_PANE
       name: '&c'
+      action: none
+    '19':
+      item: GRAY_STAINED_GLASS_PANE
+      name: '&c'
+      action: none
+    '20':
+      item: GRAY_STAINED_GLASS_PANE
+      name: '&c'
+      action: none
+    '21':
+      item: PLAYER_HEAD
+      texture: 'YzdlNmM0MGY2OGI3NzVmMmVmY2Q3YmQ5OTE2YjMyNzg2OWRjZjI3ZTI0Yzg1NWQwYTE4ZTA3YWMwNGZlMSJ9fX0='
+      name: '&6Game 8'
+      action: teleport
+    '22':
+      item: PLAYER_HEAD
+      texture: 'YzdlNmM0MGY2OGI3NzVmMmVmY2Q3YmQ5OTE2YjMyNzg2OWRjZjI3ZTI0Yzg1NWQwYTE4ZTA3YWMwNGZlMSJ9fX0='
+      name: '&6Game 9'
+      action: teleport
+    '23':
+      item: PLAYER_HEAD
+      texture: 'YzdlNmM0MGY2OGI3NzVmMmVmY2Q3YmQ5OTE2YjMyNzg2OWRjZjI3ZTI0Yzg1NWQwYTE4ZTA3YWMwNGZlMSJ9fX0='
+      name: '&6Game 10'
+      action: teleport
+    '24':
+      item: GRAY_STAINED_GLASS_PANE
+      name: '&c'
+      action: none
+    '25':
+      item: GRAY_STAINED_GLASS_PANE
+      name: '&c'
+      action: none
+    '26':
+      item: WHITE_STAINED_GLASS_PANE
+      name: '&c'
+      action: none
+    '27':
+      item: WHITE_STAINED_GLASS_PANE
+      name: '&c'
+      action: none
+    '28':
+      item: GRAY_STAINED_GLASS_PANE
+      name: '&c'
+      action: none
+    '29':
+      item: GRAY_STAINED_GLASS_PANE
+      name: '&c'
+      action: none
+    '30':
+      item: GRAY_STAINED_GLASS_PANE
+      name: '&c'
+      action: none
+    '31':
+      item: GRAY_STAINED_GLASS_PANE
+      name: '&c'
+      action: none
+    '32':
+      item: GRAY_STAINED_GLASS_PANE
+      name: '&c'
+      action: none
+    '33':
+      item: GRAY_STAINED_GLASS_PANE
+      name: '&c'
+      action: none
+    '34':
+      item: GRAY_STAINED_GLASS_PANE
+      name: '&c'
+      action: none
+    '35':
+      item: WHITE_STAINED_GLASS_PANE
+      name: '&c'
+      action: none
+    '36':
+      item: WHITE_STAINED_GLASS_PANE
+      name: '&c'
+      action: none
+    '37':
+      item: GRAY_STAINED_GLASS_PANE
+      name: '&c'
+      action: none
+    '38':
+      item: GRAY_STAINED_GLASS_PANE
+      name: '&c'
+      action: none
+    '39':
+      item: GRAY_STAINED_GLASS_PANE
+      name: '&c'
+      action: none
+    '40':
+      item: GRASS
+      name: '&6RANDOM'
+      action: teleport
+    '41':
+      item: GRAY_STAINED_GLASS_PANE
+      name: '&c'
+      action: none
+    '42':
+      item: GRAY_STAINED_GLASS_PANE
+      name: '&c'
+      action: none
+    '43':
+      item: GRAY_STAINED_GLASS_PANE
+      name: '&c'
+      action: none
+    '44':
+      item: WHITE_STAINED_GLASS_PANE
+      name: '&c'
+      action: none
+    '45':
+      item: WHITE_STAINED_GLASS_PANE
+      name: '&c'
+      action: none
+    '46':
+      item: WHITE_STAINED_GLASS_PANE
+      name: '&c'
+      action: none
+    '47':
+      item: WHITE_STAINED_GLASS_PANE
+      name: '&c'
+      action: none
+    '48':
+      item: WHITE_STAINED_GLASS_PANE
+      name: '&c'
+      action: none
+    '49':
+      item: BARRIER
+      name: '&4Close'
+      action: close
+    '50':
+      item: WHITE_STAINED_GLASS_PANE
+      name: '&c'
+      action: none
+    '51':
+      item: WHITE_STAINED_GLASS_PANE
+      name: '&c'
+      action: none
+    '52':
+      item: WHITE_STAINED_GLASS_PANE
+      name: '&c'
+      action: none
+    '53':
+      item: WHITE_STAINED_GLASS_PANE
+      name: '&c'
+      action: none

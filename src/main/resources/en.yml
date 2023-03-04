@@ -91,3 +91,12 @@ Gadgets:
   FailedResetHead: '&cYou dont have a custom head on.'
   SelectHead: '&aYou selected the head: %HEAD%'
   SelectSpecialItems: '&aYou selected the gadget: %GADGET%'
+
+Teleporter:
+  TeleportPlayerToLocation: '&aYou have been teleported to &6%GAME%'
+  LocationNotSet: '&cThis Location isnt set. Please contact an admin.'
+  EnterNewNameInChat: '&aWrite &6name &ain chat. Type "&ccancel&a" to cancel'
+  EnterNewMaterialInChat: '&aWrite &6material &ain chat. Type "&ccancel&a" to cancel'
+  LocationSaved: '§7The &6location &7was saved&a successfully&7.'
+  NotAMaterial: '&4%MATERIAL% &cis not an available material. Please try again.'
+  EnterInChatCanceled: '&cYou canceled the action.'
