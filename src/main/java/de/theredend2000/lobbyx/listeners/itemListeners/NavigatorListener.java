@@ -187,7 +187,7 @@ public class NavigatorListener implements Listener {
                 materialPlayer.remove(player);
                 return;
             }
-            plugin.navigatorYaml.set("Navigator.Slots." + slot + ".item", event.getMessage().toUpperCase());
+            plugin.navigatorYaml.set("Navigator.Slots." + slot + ".item", event.getMessage().toUpperCase() );
             plugin.saveNavigator();
             plugin.getNavigatorMenuManager().createSlotEditInventory(player, slot);
             materialPlayer.remove(player);

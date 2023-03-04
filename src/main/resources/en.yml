@@ -78,7 +78,7 @@ Clan:
   DenyClanMessageInviter: '&6%PLAYER_NAME%&c denied &7the clan invasion.'
   DenyClan: '&7You&c denied&7 the clan &6invasion&7.'
   KickPlayerSenderMessage: '&7You &ckicked &6%PLAYER_NAME% &7from the clan &a%CLAN_NAME%&7.'
-  KickPlayerReceiver: '&7you got &ckicked &7out of the clan &a%CLAN_NAME%&7.'
+  KickPlayerReceiver: '&7You got &ckicked &7out of the clan &a%CLAN_NAME%&7.'
   ClanCommandUsage: '&7Usages: &6/clan create <ClanName> &8| &6/clan invite <Player> &8| &6/clan join <Player> &8| &6/clan deny <Player> &8| &6/clan kick <Player> &8| &6/clan manage &8| &6/clan leave&7!'
 
 Lobby:

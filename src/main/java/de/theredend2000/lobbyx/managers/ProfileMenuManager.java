@@ -5,9 +5,6 @@ import de.theredend2000.lobbyx.listeners.itemListeners.ProfileListeners;
 import de.theredend2000.lobbyx.util.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.block.Skull;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
@@ -80,6 +77,7 @@ public class ProfileMenuManager implements Listener {
         inventory.setItem(45, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§7Back").setSkullOwner(Main.BACK_SKULL_TEXTURE).setLocalizedName("friendInventory.back").build());
         inventory.setItem(48, new ItemBuilder(Material.OAK_SIGN).setDisplayname("§6Search").setLocalizedName("friendInventory.search").build());
         inventory.setItem(49, new ItemBuilder(Material.NETHER_STAR).setDisplayname("§9Main Menu").setLocalizedName("friendInventory.main").build());
+        inventory.setItem(50, new ItemBuilder(Material.HOPPER).setDisplayname("§aSort").setLore("§6➤ All Friends","§7Online Friends","§7Offline Friends","§7Bookmarked").setLocalizedName("friendInventory.sort1").build());
         if(plugin.yaml.getString("Friends."+player.getUniqueId()) != null) {
             for (String friends : plugin.yaml.getConfigurationSection("Friends."+player.getUniqueId()+".").getKeys(false)) {
                 if(sort.equalsIgnoreCase("All")){
@@ -139,11 +137,6 @@ public class ProfileMenuManager implements Listener {
         }
         player.openInventory(inventory);
     }
-    public void craetesettingsMenu(Player player){
-        int[] Black = new int[]{9,17,18,26,27,35,36,44};
-        int[] White = new int[]{0,8,45,53};
-
-    }
     public void createSozailMenu(Player player){
         Inventory Sozial = Bukkit.createInventory(player,54,Objects.requireNonNull(plugin.getConfig().getString("Inventory.SocialInventoryTitle").replaceAll("&","§")));
         int[] Blau1 = new int[]{0,9,14,15,16,18,27,37,38,39,40,44,53};
@@ -166,7 +159,7 @@ public class ProfileMenuManager implements Listener {
         Sozial.setItem(33,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§8Github").setSkullOwner(Main.getTexture("MjZlMjdkYTEyODE5YThiMDUzZGEwY2MyYjYyZGVjNGNkYTkxZGU2ZWVlYzIxY2NmM2JmZTZkZDhkNDQzNmE3In19fQ==")).setLocalizedName("Sozial.Github").build());
         player.openInventory(Sozial);
     }
-    public void createClanchooseInventory(Player player){
+    public void createClanChooseInventory(Player player){
         Inventory ClanChoose = Bukkit.createInventory(player,27,Objects.requireNonNull(plugin.getConfig().getString("Inventory.ClanInventory.ClanChooseInventoryTitle").replaceAll("&","§")));
         int[] Orange = new int[]{0,1,2,3,4,5,6,7,8,9,17,19,20,21,22,23,24,25,26};
         int[] Black = new int[]{11,13,15};
@@ -180,6 +173,12 @@ public class ProfileMenuManager implements Listener {
         ClanChoose.setItem(14,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§bJoin Clan").setSkullOwner(Main.getTexture("NDNlZDM2ODgyMWI0NjZkMzliZGY1N2U3OGZjMWRkZjc1ZWM5NjZjMTY5NTVlMDJlNTk0OGJlN2FkZmQxZmU1NSJ9fX0=")).setLore("§eJoin an already created Clan").setLocalizedName("ClanChoose.JoinClan").build());
         player.openInventory(ClanChoose);
     }
+    public void createClanMemberInventory(Player player){
+        Inventory inventory = Bukkit.createInventory(player,54,"");
+        int[] blue = new int[]{1,2,3,5,6,7,9,17,18,26,27,35,36,44,46,47,48,50,51,52};
+        for(int i = 0; i<blue.length;i++){inventory.setItem(blue[i], new ItemBuilder(Material.BLUE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
+    }
+
     public void createLanguageInventory(Player player){
         Inventory Language = Bukkit.createInventory(player, 27, Objects.requireNonNull(plugin.getConfig().getString("Inventory.LanguageInventoryTitle")).replaceAll("&","§"));
         int[] Orange = new int[]{0,1,2,3,4,5,6,7,8,9,10,12,14,16,17,19,20,21,22,23,24,25,26};
@@ -203,7 +202,7 @@ public class ProfileMenuManager implements Listener {
         Friend.setItem(4, new ItemBuilder(Material.PLAYER_HEAD).setOwner(friend).setDisplayname("§6"+friend).setLore("§7You manage "+friend).build());
         Friend.setItem(45, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§7Back").setSkullOwner(Main.BACK_SKULL_TEXTURE).setLocalizedName("Settings.Friends.Back").build());
         Friend.setItem(49, new ItemBuilder(Material.NETHER_STAR).setDisplayname("§9Main Menu").setLocalizedName("Settings.Friends.Main").build());
-        Friend.setItem(12, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§ePlaytime").setSkullOwner(Main.getTexture("NmVmNzc3N2RmOTAyZDQ1MWY0ZmY5ZDEzYjAwZDdkY2Y3ZjY4OWU5NmIwYWU0YTBkNWQ0ZGE4MWE3M2NkNDQyNiJ9fX0=")).build());
+        Friend.setItem(12, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§dInformation").setSkullOwner(Main.getTexture("M2Y4MzEzNTYxN2NmNTllNjlmNDVjZDhkYzYzYmIxNzQ5NDU2NWI3MGJiYmI4MmE3MjViODkyYWVlZGY4MDA1In19fQ==")).setLore("").build());
         Friend.setItem(14, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§9Clan").setSkullOwner(Main.getTexture("NmE1MzYxYjUyZGFmNGYxYzVjNTQ4MGEzOWZhYWExMDg5NzU5NWZhNTc2M2Y3NTdiZGRhMzk1NjU4OGZlYzY3OCJ9fX0=")).setLocalizedName("Settings.Friends.Clan").build());
         if(plugin.yaml.getBoolean("Friends."+player.getUniqueId()+"."+friend+".Bookmarked")){
             Friend.setItem(39, new ItemBuilder(Material.BOOK).setDisplayname("§2Bookmark").setLore("§a§lThis Player is Bookmarked","§7Click to unbookmark this player.").setLocalizedName("Settings.Friends.Bookmark").build());
