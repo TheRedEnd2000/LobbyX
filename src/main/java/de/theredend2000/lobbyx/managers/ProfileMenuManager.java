@@ -223,4 +223,7 @@ public class ProfileMenuManager implements Listener {
         confirmInventory.setItem(15,new ItemBuilder(Material.RED_CONCRETE).setDisplayname("§4Cancel").setLocalizedName("Friend.cancel").build());
         player.openInventory(confirmInventory);
     }
+    public  void createClanGuiMamber1(Player player){
+        Inventory Clan = Bukkit.createInventory(player,54,Objects.requireNonNull(plugin.getConfig().getString("Inventory.FriendRemoveInventoryTitle")).replaceAll("&","§"));
+    }
 }
