@@ -13,7 +13,6 @@ import de.theredend2000.lobbyx.listeners.itemListeners.*;
 import de.theredend2000.lobbyx.managers.*;
 import de.theredend2000.lobbyx.messages.LanguageListeners;
 import de.theredend2000.lobbyx.messages.Util;
-import de.theredend2000.lobbyx.npcs.NPCManager;
 import de.theredend2000.lobbyx.util.DatetimeUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -41,7 +40,6 @@ public final class Main extends JavaPlugin {
     private SetPlayerLobbyManager setPlayerLobbyManager;
     private TablistManager tablistManager;
     private ProfileMenuManager profileMenuManager;
-    private NPCManager npcManager;
     private ClanManager clanManager;
     private DatetimeUtils datetimeUtils;
     private GadgetsMenuManager gadgetsMenuManager;
@@ -67,7 +65,6 @@ public final class Main extends JavaPlugin {
         datetimeUtils = new DatetimeUtils();
         initManagers();
         Util.loadMessages();
-        this.npcManager = new NPCManager(this, USE_REFLECTION);
 
         initLists();
         initCommand();
@@ -85,7 +82,6 @@ public final class Main extends JavaPlugin {
             jumpAndRun.getCurrentLocation().getBlock().setType(Material.AIR);
             jumpAndRun.getNextLocation().getBlock().setType(Material.AIR);
         }
-        npcManager.deleteAllNPCs();
     }
 
     private void createGadgetsYaml(){
@@ -155,7 +151,6 @@ public final class Main extends JavaPlugin {
         getCommand("setLang").setExecutor(new SetLangCommand(this));
         getCommand("clan").setExecutor(new ClanCommands(this));
         getCommand("music").setExecutor(new MusicCommand());
-        getCommand("spawnNPC").setExecutor(new CreateDailyNPC(this));
     }
 
     private void initListeners(){
@@ -312,9 +307,5 @@ public final class Main extends JavaPlugin {
 
     public NavigatorMenuManager getNavigatorMenuManager() {
         return navigatorMenuManager;
-    }
-
-    public NPCManager getNpcManager() {
-        return npcManager;
     }
 }

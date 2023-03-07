@@ -26,6 +26,7 @@ Lobby_Worlds: #All worlds where the lobby system is to be used
 Permissions:
   LobbyXCommandPermission: lobbyx.lobbyx
   BuildCommandPermission: lobbyx.build
+  CreateNewLobbyWorld: lobbyx.world
 
 #Inventorys
 #Change the inventory titles
@@ -40,6 +41,7 @@ Inventory:
   FriendSettingsInventoryTitle: '&bLobby&4X&f - &bFriend Settings'
   FriendRemoveInventoryTitle: '&bLobby&4X&f - &cRemove this Friend'
   LobbySelectorInventoryTitle: '&bLobby&4X&f - &dLobbys'
+  WorldCreatorInventoryTitle: '&bLobby&4X&f - &2World Creator'
   TeleporterInventoryTitle: '&bLobby&4X&f - &5Navigator'
   ClanInventory:
     ClanChooseInventoryTitle: '&bLobby&4X&f - &4You arent in a Clan'

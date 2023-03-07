@@ -100,3 +100,13 @@ Teleporter:
   LocationSaved: '§7The &6location &7was saved&a successfully&7.'
   NotAMaterial: '&4%MATERIAL% &cis not an available material. Please try again.'
   EnterInChatCanceled: '&cYou canceled the action.'
+
+WorldCreator:
+  EnterWorldNameInChat: '&aEnter your world name in Chat. §7Type "&ccancel&7" to cancel.'
+  CanceledAction: '&cAction canceled.'
+  CantContain: '&cYou world name cant contains dots or spaces.'
+  NewWorldName: '&aWorld name was updated &2successfully&a.'
+  NoWorldName: '&cPlease enter a world name.'
+  WorldAlreadyExists: '&cA world with the name &6%WORLD_NAME%&c does already exists.'
+  CreatingWorld: '&aStarting creating world &6%WORLD_NAME%&a.'
+  FinishCreatingWorld: '&aYou create a new LobbyWorld with the name &6%WORLD_NAME%&a.'
