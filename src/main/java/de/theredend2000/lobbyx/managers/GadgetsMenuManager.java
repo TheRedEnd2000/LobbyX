@@ -66,10 +66,10 @@ public class GadgetsMenuManager {
         inventory.setItem(11,new ItemBuilder(Material.LIME_CONCRETE).setDisplayname("§2Confirm").setLocalizedName("gadgets.buy.confirm").build());
         for(String heads : plugin.gadgetsYaml.getConfigurationSection("Gadgets.Heads").getKeys(false)){
             if(heads.equals(item)){
-                String headName = plugin.gadgetsYaml.getString("Gadgets.Heads."+heads+".name");
-                String headTexture = plugin.gadgetsYaml.getString("Gadgets.Heads."+heads+".texture");
-                int coinCost = plugin.gadgetsYaml.getInt("Gadgets.Heads."+heads+".coins");
-                inventory.setItem(13,new ItemBuilder(Material.PLAYER_HEAD).setLore("§7Costs: §6"+coinCost).setDisplayname(headName.replaceAll("&","§")).setSkullOwner(Main.getTexture(headTexture)).setLocalizedName(heads).build());
+                String headName = plugin.gadgetsYaml.getString("Gadgets.Heads."+item+".name");
+                String headTexture = plugin.gadgetsYaml.getString("Gadgets.Heads."+item+".texture");
+                int coinCost = plugin.gadgetsYaml.getInt("Gadgets.Heads."+item+".coins");
+                inventory.setItem(13,new ItemBuilder(Material.PLAYER_HEAD).setLore("§7Costs: §6"+coinCost).setDisplayname(headName.replaceAll("&","§")).setSkullOwner(Main.getTexture(headTexture)).setLocalizedName(item).build());
             }
         }
         inventory.setItem(15,new ItemBuilder(Material.RED_CONCRETE).setSkullOwner(Main.BACK_SKULL_TEXTURE).setDisplayname("§4Cancel").setLocalizedName("gadgets.buy.cancel").build());

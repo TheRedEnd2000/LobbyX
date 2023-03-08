@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.PlayerChatEvent;
@@ -56,6 +57,10 @@ public class LobbySelectorListener implements Listener {
                         plugin.getLobbySelectorManager().createWorldCreatorInventory(player);
                         return;
                     }
+                    if(event.getAction().equals(InventoryAction.PICKUP_HALF)){
+                        player.sendMessage("Manage Inv");
+                        return;
+                    }
                     World world = Bukkit.getWorld(event.getCurrentItem().getItemMeta().getLocalizedName());
                     if(world == null){
                         player.sendMessage("§4§lThere was an error. Please try again.");
@@ -75,9 +80,6 @@ public class LobbySelectorListener implements Listener {
                         return;
                     }
                     plugin.getSetPlayerLobbyManager().setPlayerInLobby(player);
-                    if(event.getCurrentItem().getItemMeta().getLocalizedName().equals("ls.create")){
-                        plugin.getLobbySelectorManager().createWorldCreatorInventory(player);
-                    }
                 }
             }
         }else if (event.getView().getTitle().equals(Objects.requireNonNull(plugin.getConfig().getString("Inventory.WorldCreatorInventoryTitle")).replaceAll("&","§"))){
@@ -144,6 +146,9 @@ public class LobbySelectorListener implements Listener {
                             player.sendMessage(Util.getMessage(Util.getLocale(player),"FinishCreatingWorld").replaceAll("%WORLD_NAME%",name));
                             plugin.yaml.set("WorldCreator."+player.getUniqueId(),null);
                             plugin.saveData();
+                            plugin.getConfig().set("Lobby_Worlds."+name+".maintenance", false);
+                            plugin.saveConfig();
+                            plugin.addLobbyWorlds();
                             break;
                     }
                 }

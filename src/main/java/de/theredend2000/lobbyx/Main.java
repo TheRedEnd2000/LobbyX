@@ -117,12 +117,12 @@ public final class Main extends JavaPlugin {
         buildPlayers = new ArrayList<>();
     }
 
-    private void addLobbyWorlds(){
+    public void addLobbyWorlds(){
+        lobbyWorlds.clear();
         for (World world : Bukkit.getWorlds()) {
             if (getConfig().getConfigurationSection("Lobby_Worlds").getKeys(false).contains(world.getName())) {
                 lobbyWorlds.add(world);
                 setLobbyWeather(world);
-                Bukkit.getConsoleSender().sendMessage("§aThe world §6'"+world.getName()+"'§a was added to the lobby world.");
             }
         }
     }
