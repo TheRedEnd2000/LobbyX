@@ -21,7 +21,7 @@ public class CoinsCommand implements CommandExecutor {
         if(sender instanceof Player){
             Player player = (Player) sender;
             if(args.length == 0){
-                double coins = plugin.getCoinManager().getCoins(player);
+                int coins = plugin.getCoinManager().getCoins(player);
                 player.sendMessage(Util.getMessage(Util.getLocale(player),"GetCoins").replaceAll("%COINS%", String.valueOf(coins)));
             }else if(args.length == 1){
                 Player getCoinsPlayer = Bukkit.getPlayer(args[0]);
@@ -29,7 +29,7 @@ public class CoinsCommand implements CommandExecutor {
                     player.sendMessage(Util.getMessage(Util.getLocale(player),"PlayerNotFound"));
                     return true;
                 }
-                double getPlayerCoins = plugin.getCoinManager().getCoins(getCoinsPlayer);
+                int getPlayerCoins = plugin.getCoinManager().getCoins(getCoinsPlayer);
                 player.sendMessage(Util.getMessage(Util.getLocale(player),"GetCoinsPlayer").replaceAll("%PLAYER%",getCoinsPlayer.getName()).replaceAll("%COINS%", String.valueOf(getPlayerCoins)));
             }else if(args.length == 3){
                 String per = plugin.getConfig().getString("Permissions.CoinsCommandPermission");
@@ -44,6 +44,7 @@ public class CoinsCommand implements CommandExecutor {
                         try {
                             int coins = Integer.parseInt(args[2]);
                             plugin.getCoinManager().addCoins(getPlayer, coins);
+                            player.sendMessage(Util.getMessage(Util.getLocale(player),"AddCoinsPlayer").replaceAll("%PLAYER%",getPlayer.getName()).replaceAll("%COINS%", String.valueOf(coins)));
                         }catch (NumberFormatException e){
                             player.sendMessage(Util.getMessage(Util.getLocale(player),"CoinCommandUsage"));
                         }
@@ -56,6 +57,7 @@ public class CoinsCommand implements CommandExecutor {
                         try {
                             int coins = Integer.parseInt(args[2]);
                             plugin.getCoinManager().removeCoins(getPlayer, coins);
+                            player.sendMessage(Util.getMessage(Util.getLocale(player),"RemoveCoinsPlayer").replaceAll("%PLAYER%",getPlayer.getName()).replaceAll("%COINS%", String.valueOf(coins)));
                         }catch (NumberFormatException e){
                             player.sendMessage(Util.getMessage(Util.getLocale(player),"CoinCommandUsage"));
                         }
@@ -68,6 +70,7 @@ public class CoinsCommand implements CommandExecutor {
                         try {
                             int coins = Integer.parseInt(args[2]);
                             plugin.getCoinManager().setCoins(getPlayer, coins);
+                            player.sendMessage(Util.getMessage(Util.getLocale(player),"SetCoinsPlayer").replaceAll("%PLAYER%",getPlayer.getName()).replaceAll("%COINS%", String.valueOf(coins)));
                         }catch (NumberFormatException e){
                             player.sendMessage(Util.getMessage(Util.getLocale(player),"CoinCommandUsage"));
                         }
@@ -78,10 +81,13 @@ public class CoinsCommand implements CommandExecutor {
                             return true;
                         }
                         plugin.getCoinManager().resetCoins(player);
-                    }
+                        player.sendMessage(Util.getMessage(Util.getLocale(player),"ResetCoinsPlayer").replaceAll("%PLAYER%",getPlayer.getName()));
+                    }else
+                        player.sendMessage(Util.getMessage(Util.getLocale(player),"CoinCommandUsage"));
                 }else
                     player.sendMessage(Util.getMessage(Util.getLocale(player),"NoPermissionMessage").replaceAll("%PERMISSION%",per));
-            }
+            }else
+                player.sendMessage(Util.getMessage(Util.getLocale(player),"CoinCommandUsage"));
         }else
             sender.sendMessage(Util.getMessage("en","OnlyPlayerUse"));
         return false;

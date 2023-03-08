@@ -45,7 +45,7 @@ public class CoinManager {
         double coins = cfg.getInt(player.getUniqueId()+".Coins");
         return !(coins < cost);
     }
-    public double getCoins(Player player){
+    public int getCoins(Player player){
         FileConfiguration cfg = YamlConfiguration.loadConfiguration(getCoinFile());
         return cfg.getInt(player.getUniqueId()+".Coins");
     }

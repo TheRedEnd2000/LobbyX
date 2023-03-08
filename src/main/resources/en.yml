@@ -97,6 +97,10 @@ Gadgets:
 Coins:
   GetCoins: '&7You have &6%COINS% coins &7in you &5purse&7.'
   GetCoinsPlayer: '&3%PLAYER% &7has &6%COINS% coins &7in his &5purse&7.'
+  AddCoinsPlayer: '&7You added &6%COINS% coins &7to &3%PLAYER%`s &5purse&7.'
+  SetCoinsPlayer: '&7You set &3%PLAYER%`s &5purse&7 to &6%COINS% coins&7.'
+  RemoveCoinsPlayer: '&7You remove &6%COINS% coins &7from &3%PLAYER%`s &5purse&7.'
+  ResetCoinsPlayer: '&7You reset the &5purse from &3%PLAYER%&7.'
   CoinCommandUsage: '&7Usages: &6/coins add <Player> <Coins> &8| &6/coins remove <Player> <Coins> &8| &6/coins set <Player> <Coins> &8| &6/coins reset <Player> confirm&7!'
 
 Teleporter:
