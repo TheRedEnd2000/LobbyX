@@ -3,7 +3,6 @@ version: '${project.version}'
 main: de.theredend2000.lobbyx.Main
 api-version: 1.19
 author: XMC-Plugins
-depend: [ProtocolLib]
 softdepend: [NoteBlockAPI]
 commands:
   lobby:
@@ -30,3 +29,8 @@ commands:
     aliases:
       - cl
   music:
+  daily:
+    aliases:
+      - reward
+      - dailyreward
+  coins:

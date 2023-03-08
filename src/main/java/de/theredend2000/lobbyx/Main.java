@@ -41,35 +41,36 @@ public final class Main extends JavaPlugin {
     private TablistManager tablistManager;
     private ProfileMenuManager profileMenuManager;
     private ClanManager clanManager;
+    private RewardManager rewardManager;
     private DatetimeUtils datetimeUtils;
     private GadgetsMenuManager gadgetsMenuManager;
     private LobbySelectorManager lobbySelectorManager;
     private NavigatorMenuManager navigatorMenuManager;
+    private CoinManager coinManager;
+    private PlayerDataManager playerDataManager;
     public File data = new File("plugins/LobbyX", "database.yml");
     public File gadgetData;
     public File navigatorData;
-    private final boolean USE_REFLECTION = false;
 
 
     @Override
     public void onEnable() {
-        saveDefaultConfig();
-        this.yaml = YamlConfiguration.loadConfiguration(this.data);
-        this.saveData();
-        createGadgetsYaml();
-        this.gadgetsYaml = YamlConfiguration.loadConfiguration(this.gadgetData);
-        saveGadgets();
-        createNavigatorYaml();
-        this.navigatorYaml = YamlConfiguration.loadConfiguration(this.navigatorData);
-        saveNavigator();
-        datetimeUtils = new DatetimeUtils();
-        initManagers();
-        Util.loadMessages();
+            saveDefaultConfig();
+            this.yaml = YamlConfiguration.loadConfiguration(this.data);
+            this.saveData();
+            createGadgetsYaml();
+            this.gadgetsYaml = YamlConfiguration.loadConfiguration(this.gadgetData);
+            saveGadgets();
+            createNavigatorYaml();
+            this.navigatorYaml = YamlConfiguration.loadConfiguration(this.navigatorData);
+            saveNavigator();
+            datetimeUtils = new DatetimeUtils();
+            initManagers();
+            Util.loadMessages();
 
-        initLists();
-        initCommand();
-        initListeners();
-        if(isNaggable())
+            initLists();
+            initCommand();
+            initListeners();
             addLobbyWorlds();
     }
 
@@ -82,6 +83,8 @@ public final class Main extends JavaPlugin {
             jumpAndRun.getCurrentLocation().getBlock().setType(Material.AIR);
             jumpAndRun.getNextLocation().getBlock().setType(Material.AIR);
         }
+        yaml.set("WorldCreator",null);
+        saveData();
     }
 
     private void createGadgetsYaml(){
@@ -116,7 +119,7 @@ public final class Main extends JavaPlugin {
 
     private void addLobbyWorlds(){
         for (World world : Bukkit.getWorlds()) {
-            if (getConfig().getStringList("Lobby_Worlds").contains(world.getName())) {
+            if (getConfig().getConfigurationSection("Lobby_Worlds").getKeys(false).contains(world.getName())) {
                 lobbyWorlds.add(world);
                 setLobbyWeather(world);
                 Bukkit.getConsoleSender().sendMessage("§aThe world §6'"+world.getName()+"'§a was added to the lobby world.");
@@ -151,6 +154,8 @@ public final class Main extends JavaPlugin {
         getCommand("setLang").setExecutor(new SetLangCommand(this));
         getCommand("clan").setExecutor(new ClanCommands(this));
         getCommand("music").setExecutor(new MusicCommand());
+        getCommand("daily").setExecutor(new DailyRewardCommand(this));
+        getCommand("coins").setExecutor(new CoinsCommand(this));
     }
 
     private void initListeners(){
@@ -196,6 +201,9 @@ public final class Main extends JavaPlugin {
         gadgetsMenuManager = new GadgetsMenuManager(this);
         lobbySelectorManager = new LobbySelectorManager(this);
         navigatorMenuManager = new NavigatorMenuManager(this);
+        rewardManager = new RewardManager(this);
+        coinManager = new CoinManager(this);
+        playerDataManager = new PlayerDataManager(this);
     }
 
     public static final String BACK_SKULL_TEXTURE = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6L"
@@ -293,19 +301,25 @@ public final class Main extends JavaPlugin {
     public DatetimeUtils getDatetimeUtils() {
         return datetimeUtils;
     }
-
     public ClanManager getClanManager() {
         return clanManager;
     }
-
     public GadgetsMenuManager getGadgetsMenuManager() {
         return gadgetsMenuManager;
     }
     public LobbySelectorManager getLobbySelectorManager() {
         return lobbySelectorManager;
     }
-
     public NavigatorMenuManager getNavigatorMenuManager() {
         return navigatorMenuManager;
+    }
+    public RewardManager getRewardManager() {
+        return rewardManager;
+    }
+    public CoinManager getCoinManager() {
+        return coinManager;
+    }
+    public PlayerDataManager getPlayerDataManager() {
+        return playerDataManager;
     }
 }

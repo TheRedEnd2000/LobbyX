@@ -42,7 +42,7 @@ public class Util {
         return localSettings.get(p);
     }
     public static void setLocale(Player p, File file){
-        localSettings.remove(p);
+        removePlayer(p);
         if(!file.exists()){
             File locale = new File(plugin.getDataFolder()+ "/locales","en.yml");
             localSettings.put(p,locale);
@@ -104,7 +104,6 @@ public class Util {
                 }
             }
             messages.put(file,localesMessages);
-            System.out.println(file.getName()+ " loaded");
         }
         for(Player player : Bukkit.getOnlinePlayers()){
             UUID uuid = player.getUniqueId();
@@ -117,7 +116,6 @@ public class Util {
             String localeFileName = plugin.yaml.getString("Languages."+uuid);
             File langFile = new File(plugin.getDataFolder()+"/locales",localeFileName+".yml");
             Util.setLocale(player, langFile);
-            Bukkit.getConsoleSender().sendMessage(player.getName()+" in "+langFile);
         }
 
     }

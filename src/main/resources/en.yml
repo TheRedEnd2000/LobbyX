@@ -91,6 +91,13 @@ Gadgets:
   FailedResetHead: '&cYou dont have a custom head on.'
   SelectHead: '&aYou selected the head: %HEAD%'
   SelectSpecialItems: '&aYou selected the gadget: %GADGET%'
+  BuyNewGadget: '&7You have &asuccessfully &7bought the gadget &6%GADGET%&7. §5Coins left: §6%COINS%'
+  NotEnoughCoins: '&cYou dont have enough coins.'
+
+Coins:
+  GetCoins: '&7You have &6%COINS% coins &7in you &5purse&7.'
+  GetCoinsPlayer: '&3%PLAYER% &7has &6%COINS% coins &7in his &5purse&7.'
+  CoinCommandUsage: '&7Usages: &6/coins add <Player> <Coins> &8| &6/coins remove <Player> <Coins> &8| &6/coins set <Player> <Coins> &8| &6/coins reset <Player> confirm&7!'
 
 Teleporter:
   TeleportPlayerToLocation: '&aYou have been teleported to &6%GAME%'
@@ -110,3 +117,9 @@ WorldCreator:
   WorldAlreadyExists: '&cA world with the name &6%WORLD_NAME%&c does already exists.'
   CreatingWorld: '&aStarting creating world &6%WORLD_NAME%&a.'
   FinishCreatingWorld: '&aYou create a new LobbyWorld with the name &6%WORLD_NAME%&a.'
+
+DailyReward:
+  AlreadyClaimed: '&cYou have already claimed your daily reward.'
+  RewardTimeLayOut: '&7Come back in: &6%HOURS%h %MINUTES%m %SECONDS%s&7!'
+  ClaimReward: '&aYou claimed your &6Daily Reward&a!'
+  CoinsLayout: '&7Your &6%COINS_AMOUNT% coins&7 was added to you &5purse&7. You have now &6%COINS_BALANCE% coins.'

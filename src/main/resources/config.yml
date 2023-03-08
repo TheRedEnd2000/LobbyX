@@ -14,12 +14,15 @@ Settings:
   MobDamageInLobbys: false
   DefaultWeather: CLEAR #Select between Clear, Rain, Thunder
   DefaultGamemode: SURVIVAL
+  DailyRewardCoinsAmount: 2000.0
 
 #LobbyWorlds
 
 Lobby_Worlds: #All worlds where the lobby system is to be used
-  - world
-  - lobby
+  world:
+    maintenance: false
+  lobby:
+    maintenance: false
 
 #Permissions
 #Change the permission for commands and other thinks
@@ -27,6 +30,8 @@ Permissions:
   LobbyXCommandPermission: lobbyx.lobbyx
   BuildCommandPermission: lobbyx.build
   CreateNewLobbyWorld: lobbyx.world
+  CoinsCommandPermission: lobbyx.coins
+  MaintenanceModsPermission: lobbyx.maintenance
 
 #Inventorys
 #Change the inventory titles

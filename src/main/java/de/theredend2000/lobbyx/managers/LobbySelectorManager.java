@@ -21,7 +21,7 @@ public class LobbySelectorManager {
         int[] pinkglass = new int[]{45,46,47,48,49,50,51,52,53};
         for (int i = 0; i<pinkglass.length;i++){inventory.setItem(pinkglass[i], new ItemBuilder(Material.PINK_STAINED_GLASS_PANE).setDisplayname("§c").build());}
         for(World world : plugin.getLobbyWorlds()){
-            inventory.addItem(new ItemBuilder(plugin.getMaterial("LobbySelector.Material")).setDisplayname(plugin.getConfig().getString("LobbySelector.Name").replaceAll("%WORLD_NAME%", world.getName()).replaceAll("&","§")).setLore("§7Player: §9§l"+world.getPlayers().size(),"§eClick to warp.").setLocalizedName(world.getName()).build());
+            inventory.addItem(new ItemBuilder(plugin.getMaterial("LobbySelector.Material")).setDisplayname(plugin.getConfig().getString("LobbySelector.Name").replaceAll("%WORLD_NAME%", world.getName()).replaceAll("&","§")).setLore("§7Player: §9§l"+world.getPlayers().size(),plugin.getConfig().getBoolean("Lobby_Worlds.maintenance") ? "§4MAINTENANCE-MODE §cThis world is currently disabled" : "§eClick to warp.",player.isOp() || player.hasPermission("Permissions.MaintenanceModsPermission") ? "§7Right-Click to set this world in maintenance." : null).setLocalizedName(world.getName()).build());
         }
         if(player.isOp() || player.hasPermission(Objects.requireNonNull(plugin.getConfig().getString("Permissions.CreateNewLobbyWorld")))){
             inventory.setItem(53, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§6World Creator").setLocalizedName("ls.create").setSkullOwner(Main.getTexture("YzY5MTk2YjMzMGM2Yjg5NjJmMjNhZDU2MjdmYjZlY2NlNDcyZWFmNWM5ZDQ0Zjc5MWY2NzA5YzdkMGY0ZGVjZSJ9fX0=")).build());

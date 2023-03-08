@@ -142,9 +142,8 @@ public class LobbySelectorListener implements Listener {
                             }
                             worldCreator.createWorld();
                             player.sendMessage(Util.getMessage(Util.getLocale(player),"FinishCreatingWorld").replaceAll("%WORLD_NAME%",name));
-                            /*plugin.getConfig().set("Lobby_Worlds.","- "+name);
-                            plugin.getConfig().setComments("Lobby_Worlds.",);
-                            plugin.saveConfig();*/
+                            plugin.yaml.set("WorldCreator."+player.getUniqueId(),null);
+                            plugin.saveData();
                             break;
                     }
                 }

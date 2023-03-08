@@ -10,6 +10,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.Arrays;
 
 public class JoinAndQuitEventListener implements Listener {
@@ -24,6 +28,7 @@ public class JoinAndQuitEventListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event){
         Player player = event.getPlayer();
+        plugin.getPlayerDataManager().checkPlayerData(player);
         if(plugin.getLobbyWorlds().contains(player.getWorld())){
             plugin.getSetPlayerLobbyManager().setPlayerInLobby(player);
             event.setJoinMessage(null);

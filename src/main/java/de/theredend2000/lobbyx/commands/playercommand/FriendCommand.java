@@ -33,7 +33,7 @@ public class FriendCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(sender instanceof Player){
             Player player = (Player) sender;
-            //if(plugin.getLobbyWorlds().contains(player.getWorld())){
+            if(plugin.getLobbyWorlds().contains(player.getWorld())){
                 if(args.length == 2){
                     if(args[0].equalsIgnoreCase("add")){
                         Player friendtoadd = Bukkit.getPlayer(args[1]);
@@ -131,7 +131,7 @@ public class FriendCommand implements CommandExecutor {
                         player.sendMessage(Util.getMessage(Util.getLocale(player), "FriendCommandUsage"));
                 }else
                     player.sendMessage(Util.getMessage(Util.getLocale(player), "FriendCommandUsage"));
-            //}
+            }
         }else
             sender.sendMessage(Util.getMessage("en","OnlyPlayerUse"));
         return false;

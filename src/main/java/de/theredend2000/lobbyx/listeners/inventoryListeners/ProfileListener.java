@@ -2,7 +2,6 @@ package de.theredend2000.lobbyx.listeners.inventoryListeners;
 
 import de.theredend2000.lobbyx.Main;
 import de.theredend2000.lobbyx.messages.Util;
-import de.theredend2000.lobbyx.searchguis.SearchSignGUI;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.WorldCreator;
@@ -124,7 +123,7 @@ public class ProfileListener implements Listener {
                             plugin.getProfileMenuManager().createProfileInventory(player);
                             break;
                         case "friendInventory.search":
-                            new SearchSignGUI(player,plugin);
+                            player.sendMessage("SOON");
                             break;
                     }
                 }
