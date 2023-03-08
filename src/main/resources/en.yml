@@ -49,6 +49,7 @@ JumpAndRun:
   AlreadyStarted: '&cYou have already started a jump and run.'
   StartJnr: '&7You started the &6Jump and Run&7.'
   StopJnr: '&7You&c fell&7. You point are &6%JUMP_AND_RUN_POINTS%'
+  NewHighScore: '&2&lNEW HIGHSCORE! &7Your new personal best is &6%JUMP_AND_RUN_POINTS%'
 
 Languages:
   LanguagesUsage: '&7Usages: &6/setLang &7[&3ENGLISH &8| &3GERMAN &8| &3SPAIN&7]'
