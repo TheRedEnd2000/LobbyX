@@ -222,7 +222,22 @@ public class ProfileMenuManager implements Listener {
         confirmInventory.setItem(15,new ItemBuilder(Material.RED_CONCRETE).setDisplayname("§4Cancel").setLocalizedName("Friend.cancel").build());
         player.openInventory(confirmInventory);
     }
-    public  void createClanGuiMamber1(Player player){
+    public  void createClanGuiLeader(Player player){
         Inventory Clan = Bukkit.createInventory(player,54,Objects.requireNonNull(plugin.getConfig().getString("Inventory.FriendRemoveInventoryTitle")).replaceAll("&","§"));
+        int[] whiteglass = new int[]{21,23,29,30,32,33,37,39,40,41,43};
+        int[] Blueglass = new int[]{0,1,2,3,5,6,7,8,9,17,18,26,27,35,36,44};
+        int[] TurkischGlass = new int[]{10,11,12,14,15,16,19,25,28,34};
+        int[] HelleresTürkisGlass = new int[]{46,47,48,50,51,52};
+        Clan.setItem(31,new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).setDisplayname("§c").build());
+        for (int i = 0; i < whiteglass.length;i++){Clan.setItem(whiteglass[i], new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
+        for (int i = 0; i < Blueglass.length;i++){Clan.setItem(Blueglass[i], new ItemBuilder(Material.BLUE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
+        for (int i = 0; i < TurkischGlass.length;i++){Clan.setItem(TurkischGlass[i], new ItemBuilder(Material.CYAN_STAINED_GLASS_PANE).setDisplayname("§c").build());}
+        for (int i = 0; i < HelleresTürkisGlass.length;i++){Clan.setItem(HelleresTürkisGlass[i], new ItemBuilder(Material.LIGHT_BLUE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
+        Clan.setItem(4,new ItemBuilder(Material.BOOK).setDisplayname("§cIcon ")/*todo Icons vom Clan menu sollten änderbar sein vom Leader in Leader Settings */.setLocalizedName("ClanMenu.Leader.ClanIcon").build());
+        Clan.setItem(13,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§eKopf der Leader")/*todo Kopf vom Leader des Clans sollte hier erscheinen anstatt des spieler kopfes */.setLocalizedName("ClanMenu.Leader.ClanIcon.Leader").build());
+        Clan.setItem(45,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§7Back").setSkullOwner(Main.BACK_SKULL_TEXTURE).setLocalizedName("ClanMenu.Leader.Back").build());
+        Clan.setItem(4,new ItemBuilder(Material.BOOK).setDisplayname("§Clan das wird allerdings no geändert").setLocalizedName("ClanMenu.Leader.ClanIcon").build());
+
+
     }
 }

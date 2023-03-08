@@ -35,15 +35,18 @@ public class ProfileListener implements Listener {
                     case "MainInventory.Profil":
                         break;
                     case "MainInventory.Clan":
-                        for (String clanOwner : plugin.yaml.getConfigurationSection("Clans.").getKeys(false)){
-                            for(String clanNames : plugin.yaml.getConfigurationSection("Clans."+clanOwner+".").getKeys(false)){
-                                if(plugin.getClanManager().hasClan(player) || plugin.getClanManager().isAlreadyInClan(UUID.fromString(clanOwner), player.getName(), clanNames)){
-                                    player.sendMessage("Edit Menu");
-                                    player.closeInventory();
-                                }else
-                                    plugin.getProfileMenuManager().createClanChooseInventory(player);
+                        if(plugin.yaml.contains("Clans.")) {
+                            for (String clanOwner : plugin.yaml.getConfigurationSection("Clans.").getKeys(false)) {
+                                for (String clanNames : plugin.yaml.getConfigurationSection("Clans." + clanOwner + ".").getKeys(false)) {
+                                    if (plugin.getClanManager().hasClan(player) || plugin.getClanManager().isAlreadyInClan(UUID.fromString(clanOwner), player.getName(), clanNames)) {
+                                        player.sendMessage("Edit Menu");
+                                        player.closeInventory();
+                                    } else
+                                        plugin.getProfileMenuManager().createClanChooseInventory(player);
+                                }
                             }
-                        }
+                        }else
+                            plugin.getProfileMenuManager().createClanChooseInventory(player);
                         break;
                     case"MainInventory.Settings":
                         plugin.getProfileMenuManager().createLanguageInventory(player);

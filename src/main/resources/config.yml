@@ -14,7 +14,7 @@ Settings:
   MobDamageInLobbys: false
   DefaultWeather: CLEAR #Select between Clear, Rain, Thunder
   DefaultGamemode: SURVIVAL
-  DailyRewardCoinsAmount: 2000.0
+  DailyRewardCoinsAmount: 1
 
 #LobbyWorlds
 
