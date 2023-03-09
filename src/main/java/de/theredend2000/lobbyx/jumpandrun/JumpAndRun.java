@@ -111,6 +111,7 @@ public class JumpAndRun {
         if(jumpAndRunPoints.get(player.getUniqueId()) > plugin.yaml.getInt("JumpAndRun.Points."+player.getName())){
             plugin.yaml.set("JumpAndRun.Points."+player.getName(), jumpAndRunPoints.get(player.getUniqueId()));
             plugin.saveData();
+            player.sendMessage(Util.getMessage(Util.getLocale(player),"NewHighScore").replaceAll("%JUMP_AND_RUN_POINTS%", jumpAndRunPoints.get(player.getUniqueId()).toString()));
         }
         jumpAndRunPoints.remove(player.getUniqueId());
     }
