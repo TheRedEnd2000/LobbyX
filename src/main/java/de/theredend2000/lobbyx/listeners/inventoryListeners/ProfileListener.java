@@ -39,8 +39,10 @@ public class ProfileListener implements Listener {
                             for (String clanOwner : plugin.yaml.getConfigurationSection("Clans.").getKeys(false)) {
                                 for (String clanNames : plugin.yaml.getConfigurationSection("Clans." + clanOwner + ".").getKeys(false)) {
                                     if (plugin.getClanManager().hasClan(player) || plugin.getClanManager().isAlreadyInClan(UUID.fromString(clanOwner), player.getName(), clanNames)) {
-                                        player.sendMessage("Edit Menu");
-                                        player.closeInventory();
+                                        if(plugin.getClanManager().hasClan(player)){
+                                            plugin.getProfileMenuManager().createClanGuiLeader(player);
+                                        }else
+                                            player.sendMessage("§7Member GUI");
                                     } else
                                         plugin.getProfileMenuManager().createClanChooseInventory(player);
                                 }
