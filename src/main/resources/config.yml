@@ -50,7 +50,8 @@ Inventory:
   TeleporterInventoryTitle: '&bLobby&4X&f - &5Navigator'
   ClanInventory:
     ClanChooseInventoryTitle: '&bLobby&4X&f - &4You arent in a Clan'
-    ClanMemberInventoryTitle: '&bLobby&4X&f - &3Clan '
+    ClanMemberInventoryTitle: '&bLobby&4X&f - &3Clan - Member'
+    ClanLeaderInventoryTitle: '&bLobby&4X&f - &3Clan - Leader'
   GadgetsInventory:
     GadgetsMainMenu: '&bLobby&4X&f - &3Gadgets Main Menu'
     HeadInventory: '&bLobby&4X&f - &eHeads'

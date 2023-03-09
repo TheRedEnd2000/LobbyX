@@ -224,7 +224,7 @@ public class ProfileMenuManager implements Listener {
         player.openInventory(confirmInventory);
     }
     public  void createClanGuiLeader(Player player){
-        Inventory Clan = Bukkit.createInventory(player,54,Objects.requireNonNull(plugin.getConfig().getString("Inventory.FriendRemoveInventoryTitle")).replaceAll("&","§"));
+        Inventory Clan = Bukkit.createInventory(player,54,Objects.requireNonNull(plugin.getConfig().getString("Inventory.ClanInventory.ClanLeaderInventoryTitle")).replaceAll("&","§"));
         int[] whiteglass = new int[]{21,22,23,29,30,32,33,37,39,40,41,43};
         int[] Blueglass = new int[]{1,2,3,5,6,7,8,9,17,18,26,27,35,36,44};
         int[] TurkischGlass = new int[]{10,11,12,14,15,16,19,25,28,34};
@@ -234,7 +234,7 @@ public class ProfileMenuManager implements Listener {
         for (int i = 0; i < TurkischGlass.length;i++){Clan.setItem(TurkischGlass[i], new ItemBuilder(Material.CYAN_STAINED_GLASS_PANE).setDisplayname("§c").build());}
         for (int i = 0; i < HelleresTürkisGlass.length;i++){Clan.setItem(HelleresTürkisGlass[i], new ItemBuilder(Material.LIGHT_BLUE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
         Clan.setItem(4,new ItemBuilder(Material.BOOK).setDisplayname("§cIcon ").setLocalizedName("ClanMenu.Leader.ClanIcon").build());//todo Icons vom Clan menu sollten änderbar sein vom Leader in Leader Settings
-        Clan.setItem(13,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§eKopf der Leader").setOwner(player.getName()).setLocalizedName("ClanMenu.Leader.ClanIcon.Leader").build());
+        Clan.setItem(13,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§2§lClan Owner").setOwner(player.getName()).setLocalizedName("ClanMenu.Leader.ClanIcon.Leader").build());
         Clan.setItem(20,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§eMembers").setSkullOwner(Main.getTexture("YjFlZDIwNTY3MDY4Y2IwY2MwNzJkNzMyZjUzMjJkNzM0YmY4NDllNjg4YzdmZTAxMWEzMDJlMWI5NDczZDIwYyJ9fX0=")).setLocalizedName("ClanMenu.Leader.Members").build());
         Clan.setItem(24,new ItemBuilder(Material.NETHERITE_SHOVEL).setDisplayname("§1Rank").setLocalizedName("ClanMenu.Leader.Rank").build());
         Clan.setItem(31,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§aClanItems").setSkullOwner(Main.getTexture("NTZkN2ZkYjUwZjE0YzczMWM3MjdiMGUwZDE4OWI2YTg3NDMxOWZjMGQ3OWM4YTA5OWFjZmM3N2M3YjJkOTE5NiJ9fX0=")).setLocalizedName("ClanMenu.Leader.ClanItems").build());//wichtig dat au
