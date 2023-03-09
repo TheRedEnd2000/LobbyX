@@ -226,7 +226,7 @@ public class ProfileMenuManager implements Listener {
     public  void createClanGuiLeader(Player player){
         Inventory Clan = Bukkit.createInventory(player,54,Objects.requireNonNull(plugin.getConfig().getString("Inventory.ClanInventory.ClanLeaderInventoryTitle")).replaceAll("&","§"));
         int[] whiteglass = new int[]{21,22,23,29,30,32,33,37,39,40,41,43};
-        int[] Blueglass = new int[]{1,2,3,5,6,7,8,9,17,18,26,27,35,36,44};
+        int[] Blueglass = new int[]{0,1,2,3,5,6,7,8,9,17,18,26,27,35,36,44};
         int[] TurkischGlass = new int[]{10,11,12,14,15,16,19,25,28,34};
         int[] HelleresTürkisGlass = new int[]{46,47,48,50,51,52};
         for (int i = 0; i < whiteglass.length;i++){Clan.setItem(whiteglass[i], new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
@@ -237,14 +237,13 @@ public class ProfileMenuManager implements Listener {
         Clan.setItem(13,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§2§lClan Owner").setOwner(player.getName()).setLocalizedName("ClanMenu.Leader.ClanIcon.Leader").build());
         Clan.setItem(20,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§eMembers").setSkullOwner(Main.getTexture("YjFlZDIwNTY3MDY4Y2IwY2MwNzJkNzMyZjUzMjJkNzM0YmY4NDllNjg4YzdmZTAxMWEzMDJlMWI5NDczZDIwYyJ9fX0=")).setLocalizedName("ClanMenu.Leader.Members").build());
         Clan.setItem(24,new ItemBuilder(Material.NETHERITE_SHOVEL).setDisplayname("§1Rank").setLocalizedName("ClanMenu.Leader.Rank").build());
-        Clan.setItem(31,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§aClanItems").setSkullOwner(Main.getTexture("NTZkN2ZkYjUwZjE0YzczMWM3MjdiMGUwZDE4OWI2YTg3NDMxOWZjMGQ3OWM4YTA5OWFjZmM3N2M3YjJkOTE5NiJ9fX0=")).setLocalizedName("ClanMenu.Leader.ClanItems").build());//wichtig dat au
+        Clan.setItem(31,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§aInfo").setSkullOwner(Main.getTexture("Y2Q5MWY1MTI2NmVkZGM2MjA3ZjEyYWU4ZDdhNDljNWRiMDQxNWFkYTA0ZGFiOTJiYjc2ODZhZmRiMTdmNGQ0ZSJ9fX0=")).setLocalizedName("ClanMenu.Leader.ClanItems").build());//wichtig dat au
         Clan.setItem(38,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§fAchivements").setSkullOwner(Main.getTexture("ZTM0YTU5MmE3OTM5N2E4ZGYzOTk3YzQzMDkxNjk0ZmMyZmI3NmM4ODNhNzZjY2U4OWYwMjI3ZTVjOWYxZGZlIn19fQ==")).setLocalizedName("ClanMenu.Leader.Achivements").build());//wichtig der quark muss rein
-        Clan.setItem(42,new ItemBuilder(Material.PLAYER_HEAD).setSkullOwner(Main.getTexture("ZWMyZmYyNDRkZmM5ZGQzYTJjZWY2MzExMmU3NTAyZGM2MzY3YjBkMDIxMzI5NTAzNDdiMmI0NzlhNzIzNjZkZCJ9fX0=")).setDisplayname("ClanSettings").setLocalizedName("ClanMenu.Leader.CLanSettings").build());
+        Clan.setItem(42,new ItemBuilder(Material.PLAYER_HEAD).setSkullOwner(Main.getTexture("ZWMyZmYyNDRkZmM5ZGQzYTJjZWY2MzExMmU3NTAyZGM2MzY3YjBkMDIxMzI5NTAzNDdiMmI0NzlhNzIzNjZkZCJ9fX0=")).setDisplayname("ClanSettings").setLocalizedName("ClanMenu.Leader.CLanSettings").build());//wth CLan Items Kommen in Gadget menu
         Clan.setItem(45,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§7Back").setSkullOwner(Main.BACK_SKULL_TEXTURE).setLocalizedName("ClanMenu.Leader.Back").build());
         Clan.setItem(49,new ItemBuilder(Material.NETHER_STAR).setDisplayname("§9Main Menu").setLocalizedName("ClanMenu.Leader.MainMenu").build());
-        Clan.setItem(53,new ItemBuilder(Material.REDSTONE_BLOCK).setDisplayname("§4Delete CLan").setLocalizedName("ClanMenu.Leader.Clan.del").build());
+        Clan.setItem(53,new ItemBuilder(Material.REDSTONE_BLOCK).setDisplayname("§4Delete Clan").setLocalizedName("ClanMenu.Leader.Clan.del").build());
         player.openInventory(Clan);
-//test
 
 
     }
