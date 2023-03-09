@@ -229,7 +229,6 @@ public class ProfileMenuManager implements Listener {
         int[] Blueglass = new int[]{1,2,3,5,6,7,8,9,17,18,26,27,35,36,44};
         int[] TurkischGlass = new int[]{10,11,12,14,15,16,19,25,28,34};
         int[] HelleresTürkisGlass = new int[]{46,47,48,50,51,52};
-        Clan.setItem(0,new ItemBuilder(Material.PLAYER_HEAD).setSkullOwner(Main.getTexture("ZWMyZmYyNDRkZmM5ZGQzYTJjZWY2MzExMmU3NTAyZGM2MzY3YjBkMDIxMzI5NTAzNDdiMmI0NzlhNzIzNjZkZCJ9fX0=")).setDisplayname("ClanSettings").setLocalizedName("ClanMenu.Leader.CLanSettings").build());
         for (int i = 0; i < whiteglass.length;i++){Clan.setItem(whiteglass[i], new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
         for (int i = 0; i < Blueglass.length;i++){Clan.setItem(Blueglass[i], new ItemBuilder(Material.BLUE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
         for (int i = 0; i < TurkischGlass.length;i++){Clan.setItem(TurkischGlass[i], new ItemBuilder(Material.CYAN_STAINED_GLASS_PANE).setDisplayname("§c").build());}
@@ -245,7 +244,7 @@ public class ProfileMenuManager implements Listener {
         Clan.setItem(49,new ItemBuilder(Material.NETHER_STAR).setDisplayname("§9Main Menu").setLocalizedName("ClanMenu.Leader.MainMenu").build());
         Clan.setItem(53,new ItemBuilder(Material.REDSTONE_BLOCK).setDisplayname("§4Delete CLan").setLocalizedName("ClanMenu.Leader.Clan.del").build());
         player.openInventory(Clan);
-//5
+
 
 
     }
