@@ -233,7 +233,12 @@ public class ProfileMenuManager implements Listener {
         for (int i = 0; i < Blueglass.length;i++){Clan.setItem(Blueglass[i], new ItemBuilder(Material.BLUE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
         for (int i = 0; i < TurkischGlass.length;i++){Clan.setItem(TurkischGlass[i], new ItemBuilder(Material.CYAN_STAINED_GLASS_PANE).setDisplayname("§c").build());}
         for (int i = 0; i < HelleresTürkisGlass.length;i++){Clan.setItem(HelleresTürkisGlass[i], new ItemBuilder(Material.LIGHT_BLUE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
-        Clan.setItem(4,new ItemBuilder(Material.BOOK).setDisplayname("§cIcon ").setLocalizedName("ClanMenu.Leader.ClanIcon").build());//todo Icons vom Clan menu sollten änderbar sein vom Leader in Leader Settings
+        String clanName = plugin.yaml.getString("Clans."+player.getUniqueId()+".");
+        String clanOwnerName = plugin.yaml.getString("Clans."+player.getUniqueId()+"."+clanName+".Owner");
+        String privateBoolean = String.valueOf(plugin.yaml.getBoolean("Clans."+player.getUniqueId()+"."+clanName+".Private"));
+        String createdDate = plugin.yaml.getString("Clans."+player.getUniqueId()+"."+clanName+".Date");
+        String createdTime = plugin.yaml.getString("Clans."+player.getUniqueId()+"."+clanName+".Time");
+        Clan.setItem(4,new ItemBuilder(Material.BOOK).setDisplayname("§cIcon ").setLocalizedName("ClanMenu.Leader.ClanIcon").build());
         Clan.setItem(13,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§2§lClan Owner").setOwner(player.getName()).setLocalizedName("ClanMenu.Leader.ClanIcon.Leader").build());
         Clan.setItem(20,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§eMembers").setSkullOwner(Main.getTexture("YjFlZDIwNTY3MDY4Y2IwY2MwNzJkNzMyZjUzMjJkNzM0YmY4NDllNjg4YzdmZTAxMWEzMDJlMWI5NDczZDIwYyJ9fX0=")).setLocalizedName("ClanMenu.Leader.Members").build());
         Clan.setItem(24,new ItemBuilder(Material.NETHERITE_SHOVEL).setDisplayname("§1Rank").setLocalizedName("ClanMenu.Leader.Rank").build());
@@ -244,7 +249,5 @@ public class ProfileMenuManager implements Listener {
         Clan.setItem(49,new ItemBuilder(Material.NETHER_STAR).setDisplayname("§9Main Menu").setLocalizedName("ClanMenu.Leader.MainMenu").build());
         Clan.setItem(53,new ItemBuilder(Material.REDSTONE_BLOCK).setDisplayname("§4Delete Clan").setLocalizedName("ClanMenu.Leader.Clan.del").build());
         player.openInventory(Clan);
-
-//e
     }
 }
