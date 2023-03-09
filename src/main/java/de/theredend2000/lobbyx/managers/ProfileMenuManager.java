@@ -245,7 +245,7 @@ public class ProfileMenuManager implements Listener {
         Clan.setItem(49,new ItemBuilder(Material.NETHER_STAR).setDisplayname("§9Main Menu").setLocalizedName("ClanMenu.Leader.MainMenu").build());
         Clan.setItem(53,new ItemBuilder(Material.REDSTONE_BLOCK).setDisplayname("§4Delete CLan").setLocalizedName("ClanMenu.Leader.Clan.del").build());
         player.openInventory(Clan);
-//tt
+//5
 
 
     }
