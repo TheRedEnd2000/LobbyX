@@ -233,21 +233,22 @@ public class ProfileMenuManager implements Listener {
         for (int i = 0; i < Blueglass.length;i++){Clan.setItem(Blueglass[i], new ItemBuilder(Material.BLUE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
         for (int i = 0; i < TurkischGlass.length;i++){Clan.setItem(TurkischGlass[i], new ItemBuilder(Material.CYAN_STAINED_GLASS_PANE).setDisplayname("§c").build());}
         for (int i = 0; i < HelleresTürkisGlass.length;i++){Clan.setItem(HelleresTürkisGlass[i], new ItemBuilder(Material.LIGHT_BLUE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
-        String clanName = plugin.yaml.getString("Clans."+player.getUniqueId()+".");
-        String clanOwnerName = plugin.yaml.getString("Clans."+player.getUniqueId()+"."+clanName+".Owner");
-        String privateBoolean = String.valueOf(plugin.yaml.getBoolean("Clans."+player.getUniqueId()+"."+clanName+".Private"));
-        String createdDate = plugin.yaml.getString("Clans."+player.getUniqueId()+"."+clanName+".Date");
-        String createdTime = plugin.yaml.getString("Clans."+player.getUniqueId()+"."+clanName+".Time");
-        Clan.setItem(4,new ItemBuilder(Material.BOOK).setDisplayname("§cIcon ").setLocalizedName("ClanMenu.Leader.ClanIcon").build());
-        Clan.setItem(13,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§2§lClan Owner").setOwner(player.getName()).setLocalizedName("ClanMenu.Leader.ClanIcon.Leader").build());
-        Clan.setItem(20,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§eMembers").setSkullOwner(Main.getTexture("YjFlZDIwNTY3MDY4Y2IwY2MwNzJkNzMyZjUzMjJkNzM0YmY4NDllNjg4YzdmZTAxMWEzMDJlMWI5NDczZDIwYyJ9fX0=")).setLocalizedName("ClanMenu.Leader.Members").build());
-        Clan.setItem(24,new ItemBuilder(Material.NETHERITE_SHOVEL).setDisplayname("§1Rank").setLocalizedName("ClanMenu.Leader.Rank").build());
-        Clan.setItem(31,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§aInfo").setSkullOwner(Main.getTexture("Y2Q5MWY1MTI2NmVkZGM2MjA3ZjEyYWU4ZDdhNDljNWRiMDQxNWFkYTA0ZGFiOTJiYjc2ODZhZmRiMTdmNGQ0ZSJ9fX0=")).setLocalizedName("ClanMenu.Leader.ClanItems").build());//wichtig dat au
-        Clan.setItem(38,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§fAchivements").setSkullOwner(Main.getTexture("ZTM0YTU5MmE3OTM5N2E4ZGYzOTk3YzQzMDkxNjk0ZmMyZmI3NmM4ODNhNzZjY2U4OWYwMjI3ZTVjOWYxZGZlIn19fQ==")).setLocalizedName("ClanMenu.Leader.Achivements").build());//wichtig der quark muss rein
-        Clan.setItem(42,new ItemBuilder(Material.PLAYER_HEAD).setSkullOwner(Main.getTexture("ZWMyZmYyNDRkZmM5ZGQzYTJjZWY2MzExMmU3NTAyZGM2MzY3YjBkMDIxMzI5NTAzNDdiMmI0NzlhNzIzNjZkZCJ9fX0=")).setDisplayname("ClanSettings").setLocalizedName("ClanMenu.Leader.CLanSettings").build());//wth CLan Items Kommen in Gadget menu
-        Clan.setItem(45,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§7Back").setSkullOwner(Main.BACK_SKULL_TEXTURE).setLocalizedName("ClanMenu.Leader.Back").build());
-        Clan.setItem(49,new ItemBuilder(Material.NETHER_STAR).setDisplayname("§9Main Menu").setLocalizedName("ClanMenu.Leader.MainMenu").build());
-        Clan.setItem(53,new ItemBuilder(Material.REDSTONE_BLOCK).setDisplayname("§4Delete Clan").setLocalizedName("ClanMenu.Leader.Clan.del").build());
+        for(String clanName : plugin.yaml.getConfigurationSection("Clans."+player.getUniqueId()+".").getKeys(false)) {
+            String clanOwnerName = plugin.yaml.getString("Clans." + player.getUniqueId() + "." + clanName + ".Owner");
+            boolean privateBoolean = plugin.yaml.getBoolean("Clans." + player.getUniqueId() + "." + clanName + ".Private");
+            String createdDate = plugin.yaml.getString("Clans." + player.getUniqueId() + "." + clanName + ".Date");
+            String createdTime = plugin.yaml.getString("Clans." + player.getUniqueId() + "." + clanName + ".Time");
+            Clan.setItem(4, new ItemBuilder(Material.BOOK).setDisplayname("§cIcon ").setLocalizedName("ClanMenu.Leader.ClanIcon").build());
+            Clan.setItem(13, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§2§lClan Owner").setOwner(player.getName()).setLocalizedName("ClanMenu.Leader.ClanIcon.Leader").build());
+            Clan.setItem(20, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§eMembers").setSkullOwner(Main.getTexture("YjFlZDIwNTY3MDY4Y2IwY2MwNzJkNzMyZjUzMjJkNzM0YmY4NDllNjg4YzdmZTAxMWEzMDJlMWI5NDczZDIwYyJ9fX0=")).setLocalizedName("ClanMenu.Leader.Members").build());
+            Clan.setItem(24, new ItemBuilder(Material.NETHERITE_SHOVEL).setDisplayname("§1Rank").setLocalizedName("ClanMenu.Leader.Rank").build());
+            Clan.setItem(31, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§aInfo").setLore("§7ClanName: §6" + clanName, "§7ClanOwner: §6" + clanOwnerName, privateBoolean ? "§7Clan is §4Private" : "§7Clan is §2Public", "§7Created: §6" + createdDate + "§f§l - §6" + createdTime).setSkullOwner(Main.getTexture("M2Y4MzEzNTYxN2NmNTllNjlmNDVjZDhkYzYzYmIxNzQ5NDU2NWI3MGJiYmI4MmE3MjViODkyYWVlZGY4MDA1In19fQ==")).setLocalizedName("ClanMenu.Leader.ClanItems").build());//wichtig dat au
+            Clan.setItem(38, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§fAchivements").setSkullOwner(Main.getTexture("ZTM0YTU5MmE3OTM5N2E4ZGYzOTk3YzQzMDkxNjk0ZmMyZmI3NmM4ODNhNzZjY2U4OWYwMjI3ZTVjOWYxZGZlIn19fQ==")).setLocalizedName("ClanMenu.Leader.Achivements").build());//wichtig der quark muss rein
+            Clan.setItem(42, new ItemBuilder(Material.PLAYER_HEAD).setSkullOwner(Main.getTexture("ZWMyZmYyNDRkZmM5ZGQzYTJjZWY2MzExMmU3NTAyZGM2MzY3YjBkMDIxMzI5NTAzNDdiMmI0NzlhNzIzNjZkZCJ9fX0=")).setDisplayname("ClanSettings").setLocalizedName("ClanMenu.Leader.CLanSettings").build());//wth CLan Items Kommen in Gadget menu
+            Clan.setItem(45, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§7Back").setSkullOwner(Main.BACK_SKULL_TEXTURE).setLocalizedName("ClanMenu.Leader.Back").build());
+            Clan.setItem(49, new ItemBuilder(Material.NETHER_STAR).setDisplayname("§9Main Menu").setLocalizedName("ClanMenu.Leader.MainMenu").build());
+            Clan.setItem(53, new ItemBuilder(Material.REDSTONE_BLOCK).setDisplayname("§4Delete Clan").setLocalizedName("ClanMenu.Leader.Clan.del").build());
+        }
         player.openInventory(Clan);
     }
 }
