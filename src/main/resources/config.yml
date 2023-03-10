@@ -35,7 +35,7 @@ Permissions:
 
 #Inventorys
 #Change the inventory titles
-#
+
 Inventory:
   MainInventoryTitle: '&bLobby&4X&f - &6Main'
   ProfileInventoryTitle: '&bLobby&4X&f - &6Profile'
