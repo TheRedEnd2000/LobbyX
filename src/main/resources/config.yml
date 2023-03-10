@@ -56,6 +56,7 @@ Inventory:
     GadgetsMainMenu: '&bLobby&4X&f - &3Gadgets Main Menu'
     HeadInventory: '&bLobby&4X&f - &eHeads'
     SpecialItemInventory: '&bLobby&4X&f - &9Special Items'
+    AnimatedHeadsInventory: '&bLobby&4X&f - &6Animated Heads'
 
 #Tablist
 #Change tablist look

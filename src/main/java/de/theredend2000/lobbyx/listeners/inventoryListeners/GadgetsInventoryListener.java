@@ -37,6 +37,9 @@ public class GadgetsInventoryListener implements Listener {
                         case "gadgets.main.heads":
                             plugin.getGadgetsMenuManager().createHeadsGadgetsInventory(player);
                             break;
+                        case "gadgets.main.aheads":
+                            plugin.getGadgetsMenuManager().createAHeadsGadgetsInventory(player);
+                            break;
                         case"gadgets.main.specialItems":
                             plugin.getGadgetsMenuManager().createItemGadgetsInventory(player);
                             break;
@@ -56,6 +59,8 @@ public class GadgetsInventoryListener implements Listener {
                         case "gadgets.heads.reset":
                             if(player.getInventory().getHelmet() != null){
                                 player.getInventory().setHelmet(null);
+                                plugin.yaml.set("Selected_Items."+player.getUniqueId()+".Head","null");
+                                plugin.saveData();
                                 player.closeInventory();
                                 player.sendMessage(Util.getMessage(Util.getLocale(player),"ResetHead"));
                             }else{
@@ -97,6 +102,8 @@ public class GadgetsInventoryListener implements Listener {
                         case "gadgets.items.reset":
                             if(player.getInventory().getHelmet() != null){
                                 player.getInventory().setHelmet(null);
+                                plugin.yaml.set("Selected_Items."+player.getUniqueId()+".Head","null");
+                                plugin.saveData();
                                 player.closeInventory();
                                 player.sendMessage(Util.getMessage(Util.getLocale(player),"ResetHead"));
                             }else{
@@ -142,11 +149,67 @@ public class GadgetsInventoryListener implements Listener {
                                         player.sendMessage(Util.getMessage(Util.getLocale(player),"NotEnoughCoins"));
                                 }
                             }
+                            for(String heads : plugin.gadgetsYaml.getConfigurationSection("Gadgets.AnimatedHeads").getKeys(false)){
+                                String name = event.getInventory().getItem(13).getItemMeta().getLocalizedName();
+                                if(heads.equals(name)){
+                                    int coinCost = plugin.gadgetsYaml.getInt("Gadgets.AnimatedHeads."+heads+".coins");
+                                    if(plugin.getCoinManager().haveEnoughCoins(player, coinCost)) {
+                                        plugin.getCoinManager().removeCoins(player, coinCost);
+                                        plugin.getPlayerDataManager().playerDataYaml.set("Gadgets.AnimatedHeads." + heads, true);
+                                        plugin.getPlayerDataManager().save(player);
+                                        player.sendMessage(Util.getMessage(Util.getLocale(player), "BuyNewGadget").replaceAll("%GADGET%", heads).replaceAll("%COINS%", String.valueOf(plugin.getCoinManager().getCoins(player))));
+                                    }else
+                                        player.sendMessage(Util.getMessage(Util.getLocale(player),"NotEnoughCoins"));
+                                }
+                            }
                             player.closeInventory();
                             break;
                         case "gadgets.buy.cancel":
                             player.closeInventory();
                             break;
+                    }
+                }
+            }
+        }else if (event.getView().getTitle().equals(Objects.requireNonNull(plugin.getConfig().getString("Inventory.GadgetsInventory.AnimatedHeadsInventory")).replaceAll("&","§"))){
+            event.setCancelled(true);
+            if (event.getCurrentItem()!=null){
+                if (event.getCurrentItem().getItemMeta().hasLocalizedName()){
+                    switch(event.getCurrentItem().getItemMeta().getLocalizedName()){
+                        case "gadgets.head.close":
+                            player.closeInventory();
+                            break;
+                        case "gadgets.heads.reset":
+                            if(player.getInventory().getHelmet() != null){
+                                player.getInventory().setHelmet(null);
+                                plugin.yaml.set("Selected_Items."+player.getUniqueId()+".Head","null");
+                                plugin.saveData();
+                                player.closeInventory();
+                                player.sendMessage(Util.getMessage(Util.getLocale(player),"ResetHead"));
+                            }else{
+                                player.closeInventory();
+                                player.sendMessage(Util.getMessage(Util.getLocale(player),"FailedResetHead"));
+                            }
+                            break;
+                        case "gadgets.heads.back":
+                            plugin.getGadgetsMenuManager().createGadgetsInventory(player);
+                            break;
+                    }
+                    for(String heads : plugin.gadgetsYaml.getConfigurationSection("Gadgets.AnimatedHeads").getKeys(false)){
+                        if(event.getCurrentItem().getItemMeta().getLocalizedName().equals(heads)){
+                            plugin.getPlayerDataManager().setYaml(player);
+                            boolean isBought = plugin.getPlayerDataManager().playerDataYaml.getBoolean("Gadgets.AnimatedHeads."+heads);
+                            if(!isBought){
+                                plugin.getGadgetsMenuManager().createGadgetsBugConfirm(player,heads);
+                                return;
+                            }
+                            player.closeInventory();
+                            String headName = plugin.gadgetsYaml.getString("Gadgets.AnimatedHeads."+heads+".name");
+                            player.sendMessage(Util.getMessage(Util.getLocale(player),"SelectHead").replaceAll("%HEAD%", headName.replaceAll("&","§")));
+                            String headTexture = plugin.gadgetsYaml.getString("Gadgets.AnimatedHeads."+heads+".texture");
+                            player.getInventory().setHelmet(new ItemBuilder(Material.PLAYER_HEAD).setDisplayname(headName.replaceAll("&","§")).setSkullOwner(Main.getTexture(headTexture)).build());
+                            plugin.yaml.set("Selected_Items."+player.getUniqueId()+".Head",heads);
+                            plugin.saveData();
+                        }
                     }
                 }
             }

@@ -3,94 +3,87 @@ Gadgets:
     Wither_Goggles:
       texture: 'ZGMxZTJkNGJkMzllYTI1M2RkYTZhMzZmNmJjMzUyZjY5ZWYxNjlmYWNjMmI3Njc3OThjMTgxNmFhZjcwZjQ5OCJ9fX0='
       name: '&6Wither Goggles'
-      coins: 2500.0
+      coins: 2500
     Knight:
       texture: 'YzNhNDdkN2E1MTRmMTY4MTlmMmI5ZTE2NmE4YTZkMDY4MTcxNjBjZDcxZjAwODBiNGZkMDVhOGU4OWI4NjgwNyJ9fX0='
       name: '&8Knight'
-      coins: 2500.0
+      coins: 2500
     Dragon:
       texture: 'YmVlYmU1YzNlYmYyMzAwZWEyNmRiMzRmODQxOThmNjA4NDc3NjVjMjExMDFlN2UxMWM5MGRiNjY0YzRlZmVjOSJ9fX0='
       name: '&5Dragon'
-      coins: 2500.0
+      coins: 2500
     Bee:
       texture: 'ZDcxMGY5YWEzMjZjNzIwNTAzODM5MmFlYjEyZjQ1Y2UyMmNmNmExMzM2YjgyMTI5NjY4YmVhMWZjNDZkNDI4NSJ9fX0='
       name: '&eBee'
-      coins: 2500.0
+      coins: 2500
     Devil:
       texture: 'OGYwN2FhNDk2MTdhMTIyNTIzMDc1NWUxNWMwNTIwMzE5ZGE4NWZjNGZhOGYxZGViMTM5NzgwOGNjMDZjMTkzMyJ9fX0='
       name: '&4Devil'
-      coins: 2500.0
+      coins: 2500
     Protogen:
       texture: 'MWIwNzkwMmI1MTYyNTMzM2YwZWNjZWU0NzE1MWFkYjYyZTIyZWMwNTgwOTZlYWRlM2Q0YmIwMzU5NDYzYjA2MSJ9fX0='
       name: '&3Protogen'
-      coins: 2500.0
+      coins: 2500
     Noob:
       texture: 'ZGEyODRkOTc4MDViZTUzMWNhZGYwNjI3YzVjMjllOTAzNWUxNzEyMTU4MWRjYWJjZjk1MTBmZmQ5ZDQ2MDdmZiJ9fX0='
       name: '&eNoob'
-      coins: 2500.0
+      coins: 2500
     Old_Man:
       texture: 'Njk1MWMwM2FiNDE3MWU1OTMwMGQ0OTJjMGE4ZjgxMjg2NWQzODE0YjA5MzEyYjE1ODE1OTkxYTM1Yzk2Y2NiYiJ9fX0='
       name: '§8Old Man'
-      coins: 2500.0
+      coins: 2500
     Bread:
       texture: 'NjMxYjc0Nzk2OWY1YTM1NWE5ZDNhNDYxNmVjN2FjZDgzOTEyNWU4YWMxZWZkNGRmOGExOGY3ZWQ5MTRjNmYxMCJ9fX0='
       name: '&7Bread'
-      coins: 2500.0
+      coins: 2500
     Chest:
       texture: 'ZWRjMzZjOWNiNTBhNTI3YWE1NTYwN2EwZGY3MTg1YWQyMGFhYmFhOTAzZThkOWFiZmM3ODI2MDcwNTU0MGRlZiJ9fX0='
       name: '&bChest'
-      coins: 2500.0
+      coins: 2500
     TV:
       texture: 'ZjE1ZjBjOGM1MDI1YmY5ZGFhNjEwOGM5MDU1OWVjNmY0NGRmYTEyMjBkMzAxNzZjNGE1Y2Y4NzE2NmQ3NWQ5MyJ9fX0='
       name: '&bTV'
-      coins: 2500.0
+      coins: 2500
     Leaves:
       texture: 'NGVmZjI5ZWE0NzFiMGRiZGIwZjhjZmZlNTIzZmZmZjZhYjAyYTVlZDI5OTBhYmFmMGUyYzYwNGQyMjdmMTA4NCJ9fX0='
       name: '&dLeaves'
-      coins: 2500.0
+      coins: 2500
     Villager:
       texture: 'M2UxZmI1MmI3YWU4MmJiMDkxYzU0YzMzYjdmYTZiODBjOGEwMjUwMzcyYjlkMWNiZDZmNzk2NTIyZjY0NzlkIn19fQ=='
       name: '&cVillager'
-      coins: 2500.0
+      coins: 2500
     Volcano:
       texture: 'ZThlZThmMzQxZWFiZjY1NTE1NzE4MTYzZWMzYjQzZWQwMWUxY2RlMjdiM2IyNmM0ZDkyYzYwNzI5OWU0ZDkxIn19fQ=='
       name: '&4Volcano'
-      coins: 2500.0
+      coins: 2500
     Save:
       texture: 'OGI1ZDE2MGJiZGFhMzA4MzUwMzI1ZWU3YTk2ZjYwNTkwMDRhMzEzMzg2MTVkNDM1NjRhNGM3MjJlMjhmN2NlYyJ9fX0='
       name: '&8Save'
-      coins: 2500.0
+      coins: 2500
     Slime:
       texture: 'ZTMwYWFlYjNjMmI2NmI5Yjg3OTA2OGVlNWMzZjY5YzhhZjg1YWUwOWI1OTk3NzJlY2U1YjM0MzdjMzA1YTdmYSJ9fX0='
       name: '&aSlime'
-      coins: 2500.0
+      coins: 2500
     Fish:
       texture: 'MmRlOTE2MmY2MzBlZWMzZWMyZDVjMWE2OWY5YTc5YzFhNTExYjI3YTM2ZWZhOTg2NmMyYzBiOGFiNmJhZmExMyJ9fX0='
       name: '&eFish'
-      coins: 2500.0
+      coins: 2500
     Demon:
       texture: 'YjYyNGIwMmY3MjdkMjBmYmU0NzlkMTUxMzk4NWEyZTRkM2ExYTQ5MzA5ZGYwNDk2ZDczZDBhNDE0ZDA4ODdlMCJ9fX0='
       name: '&4Demon'
-      coins: 2500.0
+      coins: 2500
     Demon_King:
       texture: 'MzI3MDE4N2IzOGM0ZGYzNjM3MjFhMmQ1NTQ2Mjc3ZTdkNzU3YWZiZDI1N2M3ODNhYzE5NjkzNzUyZWUwOGQ2NSJ9fX0='
       name: '&4Demon King'
-      coins: 2500.0
+      coins: 2500
     Nether_Portal:
       texture: 'MzI2OTc5Mjk0NjU5NTBjY2QzYTQ5MjNhNWU2ZWIxNWI0ZmUyYmEyYjI4NzE1ZjRhNzk5Njc4NWQ3MDYxNTgifX19'
       name: '&5Portal'
-      coins: 2500.0
+      coins: 2500
     Question:
       texture: 'NjM4YzUzZTY2ZjI4Y2YyYzdmYjE1MjNjOWU1ZGUxYWUwY2Y0ZDdhMWZhZjU1M2U3NTI0OTRhOGQ2ZDJlMzIifX19'
       name: '&3Question'
-      coins: 2500.0
-
-
-
-
-
-
-
+      coins: 2500
 
   SpecialItems:
     #Only change Item or name. Also, you cant add more items.
@@ -101,3 +94,10 @@ Gadgets:
     Paint_Ball:
       item: STICK
       name: '&3Paint Ball'
+
+
+  AnimatedHeads:
+    Allay_Die:
+      texture: 'YzRlYTUzYWEwNTM4NjFjOGIzNzg1MTg5MWRlOGM2ZTczY2ZiMTJlMmQ4MzExYjAwMjFjZDY2ZTc3YTBmY2UyOSJ9fX0='
+      name: '&bAllay Die'
+      coins: 5500

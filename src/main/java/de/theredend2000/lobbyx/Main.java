@@ -1,11 +1,13 @@
 package de.theredend2000.lobbyx;
 
+import de.theredend2000.lobbyx.animatedHeads.Allay_Die;
 import de.theredend2000.lobbyx.commands.LobbyXCommand;
 import de.theredend2000.lobbyx.commands.playercommand.*;
 import de.theredend2000.lobbyx.jumpandrun.JnrCommand;
 import de.theredend2000.lobbyx.jumpandrun.JumpAndRun;
 import de.theredend2000.lobbyx.jumpandrun.PlayerMoveListener;
 import de.theredend2000.lobbyx.listeners.*;
+import de.theredend2000.lobbyx.listeners.gadgetsListener.PaintballListener;
 import de.theredend2000.lobbyx.listeners.inventoryListeners.GadgetsInventoryListener;
 import de.theredend2000.lobbyx.listeners.inventoryListeners.LobbxListener;
 import de.theredend2000.lobbyx.listeners.inventoryListeners.ProfileListener;
@@ -71,6 +73,7 @@ public final class Main extends JavaPlugin {
             initLists();
             initCommand();
             initListeners();
+            initAHeads();
             addLobbyWorlds();
     }
 
@@ -190,6 +193,7 @@ public final class Main extends JavaPlugin {
         new GadgetsInventoryListener(this);
         new SpecialItemsListener(this);
         new NavigatorListener(this);
+        new PaintballListener(this);
     }
     private void initManagers(){
         new Util(this);
@@ -204,6 +208,9 @@ public final class Main extends JavaPlugin {
         rewardManager = new RewardManager(this);
         coinManager = new CoinManager(this);
         playerDataManager = new PlayerDataManager(this);
+    }
+    private void initAHeads(){
+        new Allay_Die(this);
     }
 
     public static final String BACK_SKULL_TEXTURE = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6L"
