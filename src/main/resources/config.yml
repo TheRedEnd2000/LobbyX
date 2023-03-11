@@ -48,10 +48,12 @@ Inventory:
   LobbySelectorInventoryTitle: '&bLobby&4X&f - &dLobbys'
   WorldCreatorInventoryTitle: '&bLobby&4X&f - &2World Creator'
   TeleporterInventoryTitle: '&bLobby&4X&f - &5Navigator'
+  RankInventory: '&bLobby&4X&f - &9Rank&f-&bSettings'
   ClanInventory:
     ClanChooseInventoryTitle: '&bLobby&4X&f - &4You arent in a Clan'
     ClanMemberInventoryTitle: '&bLobby&4X&f - &3Clan - Member'
     ClanLeaderInventoryTitle: '&bLobby&4X&f - &3Clan - Leader'
+    ClanMember1InventoryTitle: '&bLobby&4X&f - &3Clan - &7Member'
   GadgetsInventory:
     GadgetsMainMenu: '&bLobby&4X&f - &3Gadgets Main Menu'
     HeadInventory: '&bLobby&4X&f - &eHeads'
