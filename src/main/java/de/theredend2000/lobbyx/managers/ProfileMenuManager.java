@@ -3,6 +3,7 @@ package de.theredend2000.lobbyx.managers;
 import de.theredend2000.lobbyx.Main;
 import de.theredend2000.lobbyx.util.ItemBuilder;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
@@ -309,14 +310,54 @@ public class ProfileMenuManager implements Listener {
     public void createRankInventory(Player player){
         Inventory Rank = Bukkit.createInventory(player, 54, Objects.requireNonNull(plugin.getConfig().getString("Inventory.RankInventory")).replaceAll("&", "§"));
         int[] Schwarz = new int[]{0,8,10,16,37,43,53};
-        int[] Weiß = new int[]{1,2,3,5,6,7,9,17,18,19,25,27,28,34,36,44,46,47,48,49,50,51,52};
+        int[] Weiß = new int[]{1,2,3,5,6,7,9,18,19,25,27,28,34,36,46,47,48,50,51,52};
         for (int i = 0; i < Weiß.length; i++) {Rank.setItem(Weiß[i], new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
         for (int i = 0; i < Schwarz.length; i++) {Rank.setItem(Schwarz[i], new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).setDisplayname("§c").build());}
         Rank.setItem(4, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§5Ranks").setSkullOwner(Main.getTexture("ZDZjYzZiODM3NjNhNjdmY2FkYTFlYTE4NGMyZDE3NTJhZDI0MDc0NmM2YmUyNThhNzM5ODNkOGI2NTdmNGJiNSJ9fX0=")).build());
-        Rank.setItem(26, new ItemBuilder(Material.REPEATER).setDisplayname("§6Change Ranks").setLore("§7Change the Ranks of any online Player.").setLocalizedName("RankSettings.change").build());
+        Rank.setItem(17, new ItemBuilder(Material.COMPARATOR).setDisplayname("§fSettings").setLocalizedName("RankSettings.settings").build());
+        Rank.setItem(26, new ItemBuilder(Material.REPEATER).setDisplayname("§cPlayceholder").setLocalizedName("RankSettings.p").build());
         Rank.setItem(35, new ItemBuilder(Material.GREEN_CONCRETE).setDisplayname("§aCreate Rank").setLocalizedName("RankSettings.create").build());
+        Rank.setItem(44, new ItemBuilder(Material.REDSTONE_BLOCK).setDisplayname("§4Delete").setLocalizedName("RankSettings.delete").build());
         Rank.setItem(45, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§7Back").setSkullOwner(Main.BACK_SKULL_TEXTURE).setLocalizedName("RankSettings.back").build());
-        plugin.getRankManager().listRanks(Rank);
-        player.openInventory(Rank);
+        Rank.setItem(49, new ItemBuilder(Material.NETHER_STAR).setDisplayname("§9Main Menu").setLocalizedName("RankSettings.mainmenu").build());
+    player.openInventory(Rank);
+    }
+    public void createRanksetitingsinventory(Player player){
+        Inventory RankSettings = Bukkit.createInventory(player,54,Objects.requireNonNull(plugin.getConfig().getString("Inventory.Rank.RankSettingsInventory")).replaceAll("&", "§"));
+        int[] red = new int[]{0,8,53};
+        int[]  weiß = new int[]{1,2,3,5,6,7,9,12,14,17,18,21,23,26,27,30,32,39,31,35,36,41,44};
+        for (int i = 0; i < red.length; i++) {RankSettings.setItem(red[i], new ItemBuilder(Material.RED_STAINED_GLASS_PANE).setDisplayname("§c").build());}
+        for (int i = 0; i < weiß.length; i++) {RankSettings.setItem(weiß[i], new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
+        RankSettings.setItem(13,new ItemBuilder(Material.COMMAND_BLOCK).setDisplayname("§4Operator").setLore("§7Click to aktivate Op for the player").build());
+        RankSettings.setItem(22,new ItemBuilder(Material.LIME_DYE).setDisplayname("§aEnable").setLocalizedName("Rank.Ranksettings.Op.Click").build());
+
+        RankSettings.setItem(10,new ItemBuilder(Material.NOTE_BLOCK).setDisplayname("§2Gamemodes").setLocalizedName("Rank.Ranksettings.Gamemoder").build());
+        RankSettings.setItem(11,new ItemBuilder(Material.LIME_DYE).setDisplayname("§aEnable").setLocalizedName("Rank.Ranksettings.Gamemoder.Click").build());
+
+        RankSettings.setItem(15,new ItemBuilder(Material.BRICK).setDisplayname("§1Building").setLocalizedName("Rank.Ranksettings.Build").build());
+        RankSettings.setItem(16,new ItemBuilder(Material.LIME_DYE).setDisplayname("§aEnabled").setLocalizedName("Rank.Ranksettings.Build.Click").build());
+
+        RankSettings.setItem(19,new ItemBuilder(Material.NETHERITE_SHOVEL).setDisplayname("§bGive Ranks").setLocalizedName("Rank.Ranksettings.Ranks").build());
+        RankSettings.setItem(20,new ItemBuilder(Material.LIME_DYE).setDisplayname("§aEnabled").setLocalizedName("Rank.Ranksettings.Ranks.Click").build());
+
+        RankSettings.setItem(24,new ItemBuilder(Material.GOLD_INGOT).setDisplayname("§eCoins").setLocalizedName("Rank.Ranksettings.Coins").build());
+        RankSettings.setItem(25,new ItemBuilder(Material.LIME_DYE).setDisplayname("§aEnabled").setLocalizedName("Rank.Ranksettings.Coins.Click").build());
+
+        RankSettings.setItem(28,new ItemBuilder(Material.LEGACY_BOOK_AND_QUILL).setDisplayname("§cChange and Edit Menus").setLocalizedName("Rank.Ranksettings.EditMenu").build());
+        RankSettings.setItem(29,new ItemBuilder(Material.LIME_DYE).setDisplayname("§aEnabled").setLocalizedName("Rank.Ranksettings.EditMenu.Click").build());
+
+        RankSettings.setItem(33,new ItemBuilder(Material.STRUCTURE_BLOCK).setDisplayname("§Commands").setLocalizedName("Rank.Ranksettings.Commands").build());
+        RankSettings.setItem(34,new ItemBuilder(Material.LIME_DYE).setDisplayname("§aEnabled").setLocalizedName("Rank.Ranksettings.Commands.Click").build());
+
+        RankSettings.setItem(37,new ItemBuilder(Material.BARRIER).setDisplayname("§cPlayer Funktions Disabled").setLocalizedName("Rank.Ranksettings.PlayerFunktions").build());
+        RankSettings.setItem(38,new ItemBuilder(Material.LIME_DYE).setDisplayname("§aEnabled").setLocalizedName("Rank.Ranksettings.PlayerFunktions.Click").build());
+
+        RankSettings.setItem(40,new ItemBuilder(Material.REDSTONE_TORCH).setDisplayname("§fRank Strength").setLore("§7Set the Strengh of the Rank").setLocalizedName("Rank.Ranksettings.RankStrenght.Click").build());
+
+        RankSettings.setItem(42,new ItemBuilder(Material.WHITE_DYE).setDisplayname("§fRankColors/Layout").setLocalizedName("Rank.Ranksettings.RankColors").build());
+
+        RankSettings.setItem(43,new ItemBuilder(Material.OAK_SIGN).setDisplayname("§5Präfix").setLocalizedName("Rank.Ranksettings.Kürzle").build());
+//kick player/ Gamemode / Menu Edit/ Ranks give / Kürzle; Präfix / Rank layout  /Bauen / Coins /
+        player.openInventory(RankSettings);
     }
 }
