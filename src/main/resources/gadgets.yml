@@ -90,10 +90,11 @@ Gadgets:
     Grappling_Hook:
       item: FISHING_ROD
       name: '&9Grappling Hook'
-      vector: 0.1
+      coins: 6000
     Paint_Ball:
       item: STICK
       name: '&3Paint Ball'
+      coins: 3500
 
 
   AnimatedHeads:

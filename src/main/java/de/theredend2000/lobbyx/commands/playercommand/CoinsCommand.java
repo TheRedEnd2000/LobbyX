@@ -80,7 +80,7 @@ public class CoinsCommand implements CommandExecutor {
                             player.sendMessage(Util.getMessage(Util.getLocale(player),"PlayerNotFound"));
                             return true;
                         }
-                        plugin.getCoinManager().resetCoins(player);
+                        plugin.getCoinManager().resetCoins(getPlayer);
                         player.sendMessage(Util.getMessage(Util.getLocale(player),"ResetCoinsPlayer").replaceAll("%PLAYER%",getPlayer.getName()));
                     }else
                         player.sendMessage(Util.getMessage(Util.getLocale(player),"CoinCommandUsage"));

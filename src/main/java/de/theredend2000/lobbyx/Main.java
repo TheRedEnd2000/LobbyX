@@ -3,6 +3,7 @@ package de.theredend2000.lobbyx;
 import de.theredend2000.lobbyx.animatedHeads.Allay_Die;
 import de.theredend2000.lobbyx.commands.LobbyXCommand;
 import de.theredend2000.lobbyx.commands.playercommand.*;
+import de.theredend2000.lobbyx.hologramms.Hologram;
 import de.theredend2000.lobbyx.jumpandrun.JnrCommand;
 import de.theredend2000.lobbyx.jumpandrun.JumpAndRun;
 import de.theredend2000.lobbyx.jumpandrun.PlayerMoveListener;
@@ -15,6 +16,7 @@ import de.theredend2000.lobbyx.listeners.itemListeners.*;
 import de.theredend2000.lobbyx.managers.*;
 import de.theredend2000.lobbyx.messages.LanguageListeners;
 import de.theredend2000.lobbyx.messages.Util;
+import de.theredend2000.lobbyx.util.Broadcaster;
 import de.theredend2000.lobbyx.util.DatetimeUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -50,6 +52,7 @@ public final class Main extends JavaPlugin {
     private NavigatorMenuManager navigatorMenuManager;
     private CoinManager coinManager;
     private PlayerDataManager playerDataManager;
+    private FriendManager friendManager;
     public File data = new File("plugins/LobbyX", "database.yml");
     public File gadgetData;
     public File navigatorData;
@@ -159,6 +162,7 @@ public final class Main extends JavaPlugin {
         getCommand("music").setExecutor(new MusicCommand());
         getCommand("daily").setExecutor(new DailyRewardCommand(this));
         getCommand("coins").setExecutor(new CoinsCommand(this));
+        getCommand("hologram").setExecutor(new hologramCommand());
     }
 
     private void initListeners(){
@@ -208,6 +212,9 @@ public final class Main extends JavaPlugin {
         rewardManager = new RewardManager(this);
         coinManager = new CoinManager(this);
         playerDataManager = new PlayerDataManager(this);
+        friendManager = new FriendManager(this);
+        new Broadcaster(this).startBroadcast();
+        new ScoreboardManager(this);
     }
     private void initAHeads(){
         new Allay_Die(this);
@@ -328,5 +335,8 @@ public final class Main extends JavaPlugin {
     }
     public PlayerDataManager getPlayerDataManager() {
         return playerDataManager;
+    }
+    public FriendManager getFriendManager() {
+        return friendManager;
     }
 }

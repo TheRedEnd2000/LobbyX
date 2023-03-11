@@ -14,7 +14,7 @@ Settings:
   MobDamageInLobbys: false
   DefaultWeather: CLEAR #Select between Clear, Rain, Thunder
   DefaultGamemode: SURVIVAL
-  DailyRewardCoinsAmount: 1
+  DailyRewardCoinsAmount: 2000
 
 #LobbyWorlds
 
@@ -67,6 +67,16 @@ Tablist:
   Footer: '&r~ &bTwitter &8» §f@????? &8&l| &9TeamSpeak &8» &f????? &8&l| &4Youtube: &8» &f?????'
   Update_Delay: 20 #in minecraft ticks bsp. 20 ticks = 1 sec          !!!Attention, the smaller the number, the more the server can lay!!
 
+Broadcaster:
+  enabled: true
+  delay: 300 #delay in seconds
+  messages:
+    - '&fYou can change this messages in the &3config.yml&f file.'
+    - '&fDo &6/lx &fto edit the navigator and more.'
+    - '&fSet you language under &3Profile &f-> &cSettings &f-> &6Language&f!'
+    - '&fDo &5/daily &fto claim you daily coins.'
+    - '&fAdd &3Friends&f with &6/friend add <Player>'
+
 #Items
 #Customize the Lobby-Items
 
@@ -109,6 +119,25 @@ Titles:
     enabled: true
     title: '&aWelcome &6%PLAYER%'
     subtitle: '&7Have fun on &bYourServer.net'
+
+#Scoreboad
+#Customize the Scoreboard
+
+Scoreboard:
+  Title: '&b&lLobby&4&lX &f&l- &5Lobby'
+  UpdateDelay: 20 #in ticks 20 ticks = 1 sec
+  Lines:
+    - "&8%DATE% - %TIME%"
+    - "&1"
+    - "&7Player ➔ &6%PLAYER%"
+    - "&2"
+    - "&7Clan ➔ &6%CLAN%"
+    - "&7Coins ➔ &6%COINS%"
+    - "&7Online Friends ➔ &6%ONLINE_FRIENDS%"
+    - "&3"
+    - "&7Rank ➔ %RANK%"
+    - "&6"
+    - "&aYourServer.net"
 
 #JumpAndRun
 #Customize the JumpAndRun

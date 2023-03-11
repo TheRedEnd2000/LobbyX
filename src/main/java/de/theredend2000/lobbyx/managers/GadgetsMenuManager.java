@@ -75,7 +75,10 @@ public class GadgetsMenuManager {
         for(String items : plugin.gadgetsYaml.getConfigurationSection("Gadgets.SpecialItems").getKeys(false)){
             String itemName = plugin.gadgetsYaml.getString("Gadgets.SpecialItems."+items+".name");
             String material = "Gadgets.SpecialItems."+items+".item";
-            inventory.addItem(new ItemBuilder(plugin.getGadgetsMaterial(material)).setDisplayname(itemName.replaceAll("&","§")).setLocalizedName(items).build());
+            int coinCost = plugin.gadgetsYaml.getInt("Gadgets.SpecialItems."+items+".coins");
+            plugin.getPlayerDataManager().setYaml(player);
+            boolean isBought = plugin.getPlayerDataManager().playerDataYaml.getBoolean("Gadgets.SpecialItems."+items);
+            inventory.addItem(new ItemBuilder(plugin.getGadgetsMaterial(material)).setLore(isBought ? "§a§l✓ Unlocked" : "§7Costs: §6"+coinCost).setDisplayname(itemName.replaceAll("&","§")).setLocalizedName(items).build());
         }
         player.openInventory(inventory);
     }
@@ -96,6 +99,14 @@ public class GadgetsMenuManager {
                 String headTexture = plugin.gadgetsYaml.getString("Gadgets.AnimatedHeads."+item+".texture");
                 int coinCost = plugin.gadgetsYaml.getInt("Gadgets.AnimatedHeads."+item+".coins");
                 inventory.setItem(13,new ItemBuilder(Material.PLAYER_HEAD).setLore("§7Costs: §6"+coinCost).setDisplayname(headName.replaceAll("&","§")).setSkullOwner(Main.getTexture(headTexture)).setLocalizedName(item).build());
+            }
+        }
+        for(String items : plugin.gadgetsYaml.getConfigurationSection("Gadgets.SpecialItems").getKeys(false)){
+            if(items.equals(item)){
+                String itemName = plugin.gadgetsYaml.getString("Gadgets.SpecialItems."+item+".name");
+                Material itemMaterial = plugin.getGadgetsMaterial("Gadgets.SpecialItems."+items+".item");
+                int coinCost = plugin.gadgetsYaml.getInt("Gadgets.SpecialItems."+item+".coins");
+                inventory.setItem(13,new ItemBuilder(itemMaterial).setLore("§7Costs: §6"+coinCost).setDisplayname(itemName.replaceAll("&","§")).setLocalizedName(item).build());
             }
         }
         inventory.setItem(15,new ItemBuilder(Material.RED_CONCRETE).setSkullOwner(Main.BACK_SKULL_TEXTURE).setDisplayname("§4Cancel").setLocalizedName("gadgets.buy.cancel").build());

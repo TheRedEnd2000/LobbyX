@@ -117,6 +117,12 @@ public class GadgetsInventoryListener implements Listener {
                     }
                     for(String items : plugin.gadgetsYaml.getConfigurationSection("Gadgets.SpecialItems").getKeys(false)){
                         if(event.getCurrentItem().getItemMeta().getLocalizedName().equals(items)){
+                            plugin.getPlayerDataManager().setYaml(player);
+                            boolean isBought = plugin.getPlayerDataManager().playerDataYaml.getBoolean("Gadgets.SpecialItems."+items);
+                            if(!isBought){
+                                plugin.getGadgetsMenuManager().createGadgetsBugConfirm(player,items);
+                                return;
+                            }
                             player.closeInventory();
                             String gadgetName = plugin.gadgetsYaml.getString("Gadgets.SpecialItems."+items+".name");
                             Material material = plugin.getGadgetsMaterial("Gadgets.SpecialItems."+items+".item");
@@ -156,6 +162,19 @@ public class GadgetsInventoryListener implements Listener {
                                     if(plugin.getCoinManager().haveEnoughCoins(player, coinCost)) {
                                         plugin.getCoinManager().removeCoins(player, coinCost);
                                         plugin.getPlayerDataManager().playerDataYaml.set("Gadgets.AnimatedHeads." + heads, true);
+                                        plugin.getPlayerDataManager().save(player);
+                                        player.sendMessage(Util.getMessage(Util.getLocale(player), "BuyNewGadget").replaceAll("%GADGET%", heads).replaceAll("%COINS%", String.valueOf(plugin.getCoinManager().getCoins(player))));
+                                    }else
+                                        player.sendMessage(Util.getMessage(Util.getLocale(player),"NotEnoughCoins"));
+                                }
+                            }
+                            for(String heads : plugin.gadgetsYaml.getConfigurationSection("Gadgets.SpecialItems").getKeys(false)){
+                                String name = event.getInventory().getItem(13).getItemMeta().getLocalizedName();
+                                if(heads.equals(name)){
+                                    int coinCost = plugin.gadgetsYaml.getInt("Gadgets.SpecialItems."+heads+".coins");
+                                    if(plugin.getCoinManager().haveEnoughCoins(player, coinCost)) {
+                                        plugin.getCoinManager().removeCoins(player, coinCost);
+                                        plugin.getPlayerDataManager().playerDataYaml.set("Gadgets.SpecialItems." + heads, true);
                                         plugin.getPlayerDataManager().save(player);
                                         player.sendMessage(Util.getMessage(Util.getLocale(player), "BuyNewGadget").replaceAll("%GADGET%", heads).replaceAll("%COINS%", String.valueOf(plugin.getCoinManager().getCoins(player))));
                                     }else

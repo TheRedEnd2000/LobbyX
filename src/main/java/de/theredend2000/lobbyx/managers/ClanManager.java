@@ -60,6 +60,29 @@ public class ClanManager {
         }
         return clanName;
     }
+    public String getClanNameAsMember(Player player){
+        for(String ownerUUID : plugin.yaml.getConfigurationSection("Clans.").getKeys(false)){
+            for(String clanName : plugin.yaml.getConfigurationSection("Clans."+ownerUUID).getKeys(false)){
+                if(plugin.yaml.contains("Clans."+ownerUUID+"."+clanName+".Member."+player.getName())){
+                    return clanName;
+                }
+            }
+        }
+        return "§cNo Clan";
+    }
+    public boolean isInClan(Player player){
+        for(String ownerUUID : plugin.yaml.getConfigurationSection("Clans.").getKeys(false)){
+            if(player.getUniqueId().equals(ownerUUID)){
+                return true;
+            }
+            for(String clanName : plugin.yaml.getConfigurationSection("Clans."+ownerUUID).getKeys(false)){
+                if(plugin.yaml.contains("Clans."+ownerUUID+"."+clanName+".Member."+player.getName())){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     public boolean isAlreadyInClan(UUID ownerUUID, String player, String clanName){
         if(plugin.yaml.contains("Clans."+ownerUUID+"."+clanName+".Member."+player)){

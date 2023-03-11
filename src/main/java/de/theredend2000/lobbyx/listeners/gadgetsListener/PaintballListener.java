@@ -39,7 +39,8 @@ public class PaintballListener implements Listener {
                     int randomIndex = random.nextInt(materials.length);
                     Material randomMaterial = materials[randomIndex];
                     Location impactPoint = snowball.getLocation().getBlock().getLocation().add(0,-1,0);
-                    shooter.sendBlockChange(impactPoint, randomMaterial,(byte)0);
+                    if(!impactPoint.getBlock().getType().equals(Material.AIR))
+                        shooter.sendBlockChange(impactPoint, randomMaterial,(byte)0);
                     snowball.remove();
                 }
             }
