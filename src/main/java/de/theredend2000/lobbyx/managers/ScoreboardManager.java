@@ -42,7 +42,7 @@ public class ScoreboardManager {
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         int onlineFriends = plugin.getFriendManager().getOnlineFriends(player);
         List<String> lines = plugin.getConfig().getStringList("Scoreboard.Lines");
-        for(int i = lines.size(); i >= 0; i--){
+        for(int i = lines.size()-1; i >= 0; i--){
             if(!lines.isEmpty()) {
                 String currentLine = lines.get(0);
                 objective.getScore(currentLine.replaceAll("%PLAYER%", player.getName()).replaceAll("%COINS%", String.valueOf(plugin.getCoinManager().getCoins(player))).replaceAll("%DATE%", plugin.getDatetimeUtils().getNowDate()).replaceAll("%TIME%", plugin.getDatetimeUtils().getNowTime()).replaceAll("%RANK%", "§7default").replaceAll("%ONLINE_FRIENDS%", String.valueOf(onlineFriends)).replaceAll("%CLAN%", getClan(player)).replaceAll("&", "§")).setScore(i);
