@@ -312,7 +312,7 @@ public class ProfileMenuManager implements Listener {
         int[] Weiß = new int[]{1,2,3,5,6,7,9,18,19,25,27,28,34,36,46,47,48,50,51,52};
         for (int i = 0; i < Weiß.length; i++) {Rank.setItem(Weiß[i], new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
         for (int i = 0; i < Schwarz.length; i++) {Rank.setItem(Schwarz[i], new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).setDisplayname("§c").build());}
-        Rank.setItem(4, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§4Rank Settings").setSkullOwner(Main.getTexture("ZDZjYzZiODM3NjNhNjdmY2FkYTFlYTE4NGMyZDE3NTJhZDI0MDc0NmM2YmUyNThhNzM5ODNkOGI2NTdmNGJiNSJ9fX0=")).build());
+        Rank.setItem(4, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§5Ranks").setSkullOwner(Main.getTexture("ZDZjYzZiODM3NjNhNjdmY2FkYTFlYTE4NGMyZDE3NTJhZDI0MDc0NmM2YmUyNThhNzM5ODNkOGI2NTdmNGJiNSJ9fX0=")).build());
         Rank.setItem(17, new ItemBuilder(Material.COMPARATOR).setDisplayname("§fSettings").setLocalizedName("RankSettings.settings").build());
         Rank.setItem(26, new ItemBuilder(Material.REPEATER).setDisplayname("§cPlayceholder").setLocalizedName("RankSettings.p").build());
         Rank.setItem(35, new ItemBuilder(Material.GREEN_CONCRETE).setDisplayname("§aCreate Rank").setLocalizedName("RankSettings.create").build());
