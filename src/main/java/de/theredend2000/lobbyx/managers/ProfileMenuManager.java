@@ -316,7 +316,7 @@ public class ProfileMenuManager implements Listener {
         Rank.setItem(17, new ItemBuilder(Material.COMPARATOR).setDisplayname("§fSettings").setLocalizedName("RankSettings.settings").build());
         Rank.setItem(26, new ItemBuilder(Material.REPEATER).setDisplayname("§cPlayceholder").setLocalizedName("RankSettings.p").build());
         Rank.setItem(35, new ItemBuilder(Material.GREEN_CONCRETE).setDisplayname("§aCreate Rank").setLocalizedName("RankSettings.create").build());
-        Rank.setItem(44, new ItemBuilder(Material.COMPARATOR).setDisplayname("§4Delete").setLocalizedName("RankSettings.delete").build());
+        Rank.setItem(44, new ItemBuilder(Material.REDSTONE_BLOCK).setDisplayname("§4Delete").setLocalizedName("RankSettings.delete").build());
         Rank.setItem(45, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§7Back").setSkullOwner(Main.BACK_SKULL_TEXTURE).setLocalizedName("RankSettings.back").build());
         Rank.setItem(49, new ItemBuilder(Material.NETHER_STAR).setDisplayname("§9Main Menu").setLocalizedName("RankSettings.mainmenu").build());
     player.openInventory(Rank);
