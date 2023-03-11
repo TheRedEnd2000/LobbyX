@@ -49,7 +49,7 @@ Inventory:
   LobbySelectorInventoryTitle: '&bLobby&4X&f - &dLobbys'
   WorldCreatorInventoryTitle: '&bLobby&4X&f - &2World Creator'
   TeleporterInventoryTitle: '&bLobby&4X&f - &5Navigator'
-  RankInventory: '&bLobby&4X&f - &9Rank&f-&bSettings'
+  RankInventory: '&bLobby&4X&f - &9Rank &bSettings'
   ClanInventory:
     ClanChooseInventoryTitle: '&bLobby&4X&f - &4You arent in a Clan'
     ClanMemberInventoryTitle: '&bLobby&4X&f - &3Clan - Member'

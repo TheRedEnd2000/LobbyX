@@ -234,7 +234,19 @@ public class ProfileListener implements Listener {
                     }
                 }
             }
-
+        }else if (event.getView().getTitle().equals(Objects.requireNonNull(plugin.getConfig().getString("Inventory.RankInventory").replaceAll("&","§")))){
+            event.setCancelled(true);
+            if (event.getCurrentItem()!=null){
+                if (event.getCurrentItem().getItemMeta().hasLocalizedName()){
+                    switch (event.getCurrentItem().getItemMeta().getLocalizedName()){
+                        case"ClanChoose.Back":
+                            plugin.getProfileMenuManager().createProfileInventory(player);
+                            break;
+                        case ":":
+                            break;
+                    }
+                }
+            }
         }
     }
 

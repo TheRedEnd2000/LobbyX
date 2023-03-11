@@ -24,6 +24,7 @@ public class LobbyXMenuManager {
         for (int i = 0; i<ornageglass.length;i++){inventory.setItem(ornageglass[i], new ItemBuilder(Material.ORANGE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
         inventory.setItem(13, new ItemBuilder(Material.END_PORTAL_FRAME).setDisplayname("§9Locations").setLore("§eClick to manage.").setLocalizedName("lobbyx.locations").build());
         inventory.setItem(14, new ItemBuilder(Material.COMPASS).setDisplayname("§5Edit Navigator").setLore("§eClick to edit the navigator.").setLocalizedName("lobbyx.editNavigator").build());
+        inventory.setItem(15, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§5Ranks").setLore("§eClick to edit the ranks.").setLocalizedName("lobbyx.editRanks").setSkullOwner(Main.getTexture("ZjY2YmM1MTljZDI2NjJiYmIwYmFjN2U2OWY4MDAyNjFhMTk4M2EzMmIzOWMxODlkM2M5OGJjMjk4YjUyNWJkZCJ9fX0=")).build());
         player.openInventory(inventory);
     }
 

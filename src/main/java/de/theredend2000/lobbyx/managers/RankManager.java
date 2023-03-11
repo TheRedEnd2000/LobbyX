@@ -20,6 +20,7 @@ public class RankManager {
 
     public RankManager(Main plugin){
         this.plugin = plugin;
+        createDefaultRanks();
     }
 
     public File getRankFile() {
@@ -27,13 +28,13 @@ public class RankManager {
     }
 
     public void createRank(String name, String displayName, ChatColor color, boolean op){
-        saveRank("Ranks."+name, displayName, color,op);
+        saveRank(displayName,"Ranks."+name, color,op);
     }
 
     private void saveRank(String displayName, String root, ChatColor color, boolean op){
         FileConfiguration config = YamlConfiguration.loadConfiguration(getRankFile());
         config.set(root + ".DisplayName", displayName);
-        config.set(root + ".Color", color);
+        config.set(root + ".Color", color.asBungee());
         config.set(root + ".Op", op);
         try {
             config.save(getRankFile());
@@ -47,7 +48,7 @@ public class RankManager {
         for(String ranks : config.getConfigurationSection("Ranks.").getKeys(false)){
             ChatColor color = ChatColor.valueOf(config.getString("Ranks."+ranks+".Color"));
             boolean op = config.getBoolean("Ranks."+ranks+".Op");
-            inventory.addItem(new ItemBuilder(Material.PLAYER_HEAD).setSkullOwner(Main.getTexture("ZjY2YmM1MTljZDI2NjJiYmIwYmFjN2U2OWY4MDAyNjFhMTk4M2EzMmIzOWMxODlkM2M5OGJjMjk4YjUyNWJkZCJ9fX0=")).setDisplayname(color+ranks).setLore(op ? "§6§lThis Rank has Op" : "§cThis rank has §c§lNO §cOp").build());
+            inventory.addItem(new ItemBuilder(Material.PLAYER_HEAD).setSkullOwner(Main.getTexture("ZjY2YmM1MTljZDI2NjJiYmIwYmFjN2U2OWY4MDAyNjFhMTk4M2EzMmIzOWMxODlkM2M5OGJjMjk4YjUyNWJkZCJ9fX0=")).setDisplayname(ranks).setLore(op ? "§6§lThis Rank has Op" : "§cThis rank has §c§lNO §cOp").build());
         }
     }
 
@@ -119,6 +120,16 @@ public class RankManager {
             config.save(getRankFile());
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void createDefaultRanks(){
+        FileConfiguration config = YamlConfiguration.loadConfiguration(getRankFile());
+        if(!config.contains("Ranks.")) {
+            createRank("default", "Default", ChatColor.GRAY, false);
+            createRank("vip", "VIP", ChatColor.DARK_PURPLE, false);
+            createRank("mod", "Moderator", ChatColor.GOLD, true);
+            createRank("owner", "Owner", ChatColor.DARK_RED, true);
         }
     }
 
