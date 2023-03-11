@@ -218,7 +218,7 @@ public class ProfileMenuManager implements Listener {
         Language.setItem(15, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§bDeutsch").setSkullOwner(Main.getTexture("NWU3ODk5YjQ4MDY4NTg2OTdlMjgzZjA4NGQ5MTczZmU0ODc4ODY0NTM3NzQ2MjZiMjRiZDhjZmVjYzc3YjNmIn19fQ==")).setLocalizedName("Settings.Language.Deutsch").build());
         Language.setItem(18, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§7Back").setSkullOwner(Main.BACK_SKULL_TEXTURE).setLocalizedName("Settings.Language.Back").build());
         player.openInventory(Language);
-    }//kp
+    }
 
     public void createFriendSettingsInventory(Player player, String friend) {
         Inventory Friend = Bukkit.createInventory(player, 54, Objects.requireNonNull(plugin.getConfig().getString("Inventory.FriendSettingsInventoryTitle")).replaceAll("&", "§"));
@@ -291,7 +291,6 @@ public class ProfileMenuManager implements Listener {
         }
         player.openInventory(Clan);
     }
-/*todo */
     public void CreateClanGuiMember1(Player player) {
         Inventory Clan = Bukkit.createInventory(player, 54, Objects.requireNonNull(plugin.getConfig().getString("Inventory.ClanInventory.ClanMember1InventoryTitle")).replaceAll("&", "§"));
         int[] whiteglass = new int[]{21, 22, 23, 29, 30, 32, 33, 37, 39, 40, 41, 43};
@@ -307,19 +306,19 @@ public class ProfileMenuManager implements Listener {
         Clan.setItem(20, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§eMembers").setSkullOwner(Main.getTexture("YjFlZDIwNTY3MDY4Y2IwY2MwNzJkNzMyZjUzMjJkNzM0YmY4NDllNjg4YzdmZTAxMWEzMDJlMWI5NDczZDIwYyJ9fX0=")).setLocalizedName("ClanMenu.Leader.Members").build());
 
     }
-    public void CreateRankInventory(Player player){
+    public void createRankInventory(Player player){
         Inventory Rank = Bukkit.createInventory(player, 54, Objects.requireNonNull(plugin.getConfig().getString("Inventory.RankInventory")).replaceAll("&", "§"));
         int[] Schwarz = new int[]{0,8,10,16,37,43,53};
         int[] Weiß = new int[]{1,2,3,5,6,7,9,18,19,25,27,28,34,36,46,47,48,50,51,52};
         for (int i = 0; i < Weiß.length; i++) {Rank.setItem(Weiß[i], new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
         for (int i = 0; i < Schwarz.length; i++) {Rank.setItem(Schwarz[i], new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).setDisplayname("§c").build());}
-        Rank.setItem(4, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§9Rank §cSettings").setSkullOwner(Main.getTexture("ZDZjYzZiODM3NjNhNjdmY2FkYTFlYTE4NGMyZDE3NTJhZDI0MDc0NmM2YmUyNThhNzM5ODNkOGI2NTdmNGJiNSJ9fX0=")).build());
-        Rank.setItem(17, new ItemBuilder(Material.COMPARATOR).setDisplayname("§fSettings").setLocalizedName("RankSettings.Settings").build());
-        Rank.setItem(26, new ItemBuilder(Material.REPEATER).setDisplayname("§Playceholder").setLocalizedName("RankSettings.p").build());
-        Rank.setItem(35, new ItemBuilder(Material.GREEN_CONCRETE).setDisplayname("§aCreate Rank").setLocalizedName("RankSettings.Create").build());
-        Rank.setItem(44, new ItemBuilder(Material.COMPARATOR).setDisplayname("§4Delete").setLocalizedName("RankSettings.Delete").build());
-        Rank.setItem(45, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§7Back").setSkullOwner(Main.BACK_SKULL_TEXTURE).setLocalizedName("RankSettings.Back").build());
-        Rank.setItem(49, new ItemBuilder(Material.NETHER_STAR).setDisplayname("§9Main Menu").setLocalizedName("RankSettings.MainMenu").build());
+        Rank.setItem(4, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§4Rank Settings").setSkullOwner(Main.getTexture("ZDZjYzZiODM3NjNhNjdmY2FkYTFlYTE4NGMyZDE3NTJhZDI0MDc0NmM2YmUyNThhNzM5ODNkOGI2NTdmNGJiNSJ9fX0=")).build());
+        Rank.setItem(17, new ItemBuilder(Material.COMPARATOR).setDisplayname("§fSettings").setLocalizedName("RankSettings.settings").build());
+        Rank.setItem(26, new ItemBuilder(Material.REPEATER).setDisplayname("§cPlayceholder").setLocalizedName("RankSettings.p").build());
+        Rank.setItem(35, new ItemBuilder(Material.GREEN_CONCRETE).setDisplayname("§aCreate Rank").setLocalizedName("RankSettings.create").build());
+        Rank.setItem(44, new ItemBuilder(Material.COMPARATOR).setDisplayname("§4Delete").setLocalizedName("RankSettings.delete").build());
+        Rank.setItem(45, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§7Back").setSkullOwner(Main.BACK_SKULL_TEXTURE).setLocalizedName("RankSettings.back").build());
+        Rank.setItem(49, new ItemBuilder(Material.NETHER_STAR).setDisplayname("§9Main Menu").setLocalizedName("RankSettings.mainmenu").build());
     player.openInventory(Rank);
     }
 }
