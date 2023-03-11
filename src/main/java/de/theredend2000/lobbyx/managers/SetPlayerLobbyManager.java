@@ -41,6 +41,12 @@ public class SetPlayerLobbyManager {
             checkConfig(player);
             setGamemode(player);
             updateLobbyInventory();
+            if(!plugin.getRankManager().hasRank(player)) {
+                if(player.isOp())
+                    plugin.getRankManager().setRank("mod", player);
+                else
+                    plugin.getRankManager().setRank("default", player);
+            }
 
             if(!plugin.getLobbyWorlds().isEmpty()) {
                 ConfigLocationUtil locationUtil = new ConfigLocationUtil(plugin, "Locations.Lobby." + player.getWorld().getName());

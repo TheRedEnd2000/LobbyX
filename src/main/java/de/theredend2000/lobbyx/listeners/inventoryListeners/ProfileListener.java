@@ -239,10 +239,11 @@ public class ProfileListener implements Listener {
             if (event.getCurrentItem()!=null){
                 if (event.getCurrentItem().getItemMeta().hasLocalizedName()){
                     switch (event.getCurrentItem().getItemMeta().getLocalizedName()){
-                        case"ClanChoose.Back":
-                            plugin.getProfileMenuManager().createProfileInventory(player);
+                        case"RankSettings.create":
+                            player.sendMessage("create");
                             break;
-                        case ":":
+                        case "RankSettings.back":
+                            plugin.getLobbyXMenuManager().createMainInventory(player);
                             break;
                     }
                 }

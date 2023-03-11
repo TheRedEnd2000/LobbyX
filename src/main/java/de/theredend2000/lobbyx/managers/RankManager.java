@@ -34,7 +34,7 @@ public class RankManager {
     private void saveRank(String displayName, String root, ChatColor color, boolean op){
         FileConfiguration config = YamlConfiguration.loadConfiguration(getRankFile());
         config.set(root + ".DisplayName", displayName);
-        config.set(root + ".Color", color.asBungee());
+        config.set(root + ".Color", color.toString());
         config.set(root + ".Op", op);
         try {
             config.save(getRankFile());
@@ -46,9 +46,10 @@ public class RankManager {
     public void listRanks(Inventory inventory){
         FileConfiguration config = YamlConfiguration.loadConfiguration(getRankFile());
         for(String ranks : config.getConfigurationSection("Ranks.").getKeys(false)){
-            ChatColor color = ChatColor.valueOf(config.getString("Ranks."+ranks+".Color"));
+            String name = config.getString("Ranks."+ranks+".DisplayName");
+            String color = config.getString("Ranks."+ranks+".Color");
             boolean op = config.getBoolean("Ranks."+ranks+".Op");
-            inventory.addItem(new ItemBuilder(Material.PLAYER_HEAD).setSkullOwner(Main.getTexture("ZjY2YmM1MTljZDI2NjJiYmIwYmFjN2U2OWY4MDAyNjFhMTk4M2EzMmIzOWMxODlkM2M5OGJjMjk4YjUyNWJkZCJ9fX0=")).setDisplayname(ranks).setLore(op ? "§6§lThis Rank has Op" : "§cThis rank has §c§lNO §cOp").build());
+            inventory.addItem(new ItemBuilder(Material.PLAYER_HEAD).setSkullOwner(Main.getTexture("ZjY2YmM1MTljZDI2NjJiYmIwYmFjN2U2OWY4MDAyNjFhMTk4M2EzMmIzOWMxODlkM2M5OGJjMjk4YjUyNWJkZCJ9fX0=")).setDisplayname(color+name).setLore(op ? "§2§lThis Rank has Op" : "§cThis rank has §c§lNO §cOp","§eClick to configure this rank.").build());
         }
     }
 
@@ -61,7 +62,22 @@ public class RankManager {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
+        }else
+            player.sendMessage("§cERROR");
+    }
+
+    public boolean hasRank(Player player){
+        FileConfiguration config = YamlConfiguration.loadConfiguration(getRankFile());
+        return config.contains("Ranks_on_Player."+player.getUniqueId());
+    }
+    public String getRank(Player player){
+        FileConfiguration config = YamlConfiguration.loadConfiguration(getRankFile());
+        if(!hasRank(player))
+            setRank("default",player);
+        String rank = config.getString("Ranks_on_Player."+player.getUniqueId());
+        String color = getColor(rank);
+        String name = getName(rank);
+        return color+name;
     }
 
     public void resetRank(Player player){
@@ -91,7 +107,7 @@ public class RankManager {
 
     public String getName(String rank){
         FileConfiguration config = YamlConfiguration.loadConfiguration(getRankFile());
-        return config.getString("Ranks."+rank+".Name");
+        return config.getString("Ranks."+rank+".DisplayName");
     }
     public String getColor(String rank){
         FileConfiguration config = YamlConfiguration.loadConfiguration(getRankFile());
@@ -105,7 +121,7 @@ public class RankManager {
 
     public void setRankName(String newName, String rank){
         FileConfiguration config = YamlConfiguration.loadConfiguration(getRankFile());
-        config.set("Ranks."+rank+".Name", newName);
+        config.set("Ranks."+rank+".DisplayName", newName);
         try {
             config.save(getRankFile());
         } catch (IOException e) {
@@ -126,10 +142,10 @@ public class RankManager {
     private void createDefaultRanks(){
         FileConfiguration config = YamlConfiguration.loadConfiguration(getRankFile());
         if(!config.contains("Ranks.")) {
-            createRank("default", "Default", ChatColor.GRAY, false);
-            createRank("vip", "VIP", ChatColor.DARK_PURPLE, false);
-            createRank("mod", "Moderator", ChatColor.GOLD, true);
             createRank("owner", "Owner", ChatColor.DARK_RED, true);
+            createRank("mod", "Moderator", ChatColor.GOLD, true);
+            createRank("vip", "VIP", ChatColor.DARK_PURPLE, false);
+            createRank("default", "Spieler", ChatColor.GRAY, false);
         }
     }
 

@@ -45,7 +45,7 @@ public class ScoreboardManager {
         for(int i = lines.size()-1; i >= 0; i--){
             if(!lines.isEmpty()) {
                 String currentLine = lines.get(0);
-                objective.getScore(currentLine.replaceAll("%PLAYER%", player.getName()).replaceAll("%COINS%", String.valueOf(plugin.getCoinManager().getCoins(player))).replaceAll("%DATE%", plugin.getDatetimeUtils().getNowDate()).replaceAll("%TIME%", plugin.getDatetimeUtils().getNowTime()).replaceAll("%RANK%", "§7default").replaceAll("%ONLINE_FRIENDS%", String.valueOf(onlineFriends)).replaceAll("%CLAN%", getClan(player)).replaceAll("&", "§")).setScore(i);
+                objective.getScore(currentLine.replaceAll("%PLAYER%", player.getName()).replaceAll("%COINS%", String.valueOf(plugin.getCoinManager().getCoins(player))).replaceAll("%DATE%", plugin.getDatetimeUtils().getNowDate()).replaceAll("%TIME%", plugin.getDatetimeUtils().getNowTime()).replaceAll("%RANK%", plugin.getRankManager().getRank(player)).replaceAll("%ONLINE_FRIENDS%", String.valueOf(onlineFriends)).replaceAll("%CLAN%", getClan(player)).replaceAll("&", "§")).setScore(i);
                 lines.remove(currentLine);
             }
         }
