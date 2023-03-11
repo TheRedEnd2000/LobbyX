@@ -310,19 +310,16 @@ public class ProfileMenuManager implements Listener {
     public void createRankInventory(Player player){
         Inventory Rank = Bukkit.createInventory(player, 54, Objects.requireNonNull(plugin.getConfig().getString("Inventory.RankInventory")).replaceAll("&", "§"));
         int[] Schwarz = new int[]{0,8,10,16,37,43,53};
-        int[] Weiß = new int[]{1,2,3,5,6,7,9,18,19,25,27,28,34,36,46,47,48,50,51,52};
+        int[] Weiß = new int[]{1,2,3,5,6,7,9,17,18,19,25,27,28,34,36,44,46,47,48,50,51,52};
         for (int i = 0; i < Weiß.length; i++) {Rank.setItem(Weiß[i], new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
         for (int i = 0; i < Schwarz.length; i++) {Rank.setItem(Schwarz[i], new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).setDisplayname("§c").build());}
         Rank.setItem(4, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§5Ranks").setSkullOwner(Main.getTexture("ZDZjYzZiODM3NjNhNjdmY2FkYTFlYTE4NGMyZDE3NTJhZDI0MDc0NmM2YmUyNThhNzM5ODNkOGI2NTdmNGJiNSJ9fX0=")).build());
-        Rank.setItem(17, new ItemBuilder(Material.COMPARATOR).setDisplayname("§fSettings").setLocalizedName("RankSettings.settings").build());
-        Rank.setItem(26, new ItemBuilder(Material.REPEATER).setDisplayname("§cPlayceholder").setLocalizedName("RankSettings.p").build());
         Rank.setItem(35, new ItemBuilder(Material.GREEN_CONCRETE).setDisplayname("§aCreate Rank").setLocalizedName("RankSettings.create").build());
-        Rank.setItem(44, new ItemBuilder(Material.REDSTONE_BLOCK).setDisplayname("§4Delete").setLocalizedName("RankSettings.delete").build());
         Rank.setItem(45, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§7Back").setSkullOwner(Main.BACK_SKULL_TEXTURE).setLocalizedName("RankSettings.back").build());
-        Rank.setItem(49, new ItemBuilder(Material.NETHER_STAR).setDisplayname("§9Main Menu").setLocalizedName("RankSettings.mainmenu").build());
-    player.openInventory(Rank);
+        plugin.getRankManager().listRanks(Rank);
+        player.openInventory(Rank);
     }
-    public void createRanksetitingsinventory(Player player){
+    public void createRankSettingsInventory(Player player){
         Inventory RankSettings = Bukkit.createInventory(player,54,Objects.requireNonNull(plugin.getConfig().getString("Inventory.Rank.RankSettingsInventory")).replaceAll("&", "§"));
         int[] red = new int[]{0,8,53};
         int[]  weiß = new int[]{1,2,3,5,6,7,9,12,14,17,18,21,23,26,27,30,32,39,31,35,36,41,44};

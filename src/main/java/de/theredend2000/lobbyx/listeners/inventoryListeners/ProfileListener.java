@@ -5,6 +5,8 @@ import de.theredend2000.lobbyx.messages.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.WorldCreator;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -246,9 +248,18 @@ public class ProfileListener implements Listener {
                             plugin.getLobbyXMenuManager().createMainInventory(player);
                             break;
                     }
+                    FileConfiguration config = YamlConfiguration.loadConfiguration(getRankFile());
+                    for(String ranks : config.getConfigurationSection("Ranks.").getKeys(false)){
+                        if(event.getCurrentItem().getItemMeta().getLocalizedName().equals(ranks)){
+                            plugin.getProfileMenuManager().createRankSettingsInventory(player);
+                        }
+                    }
                 }
             }
         }
+    }
+    public File getRankFile() {
+        return new File(plugin.getDataFolder(), "ranks.yml");
     }
 
 
