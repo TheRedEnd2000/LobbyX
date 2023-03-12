@@ -2,6 +2,7 @@ package de.theredend2000.lobbyx.managers;
 
 import de.theredend2000.lobbyx.Main;
 import de.theredend2000.lobbyx.util.ItemBuilder;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -10,6 +11,8 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.Team;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,13 +30,14 @@ public class RankManager {
         return new File(plugin.getDataFolder(), "ranks.yml");
     }
 
-    public void createRank(String name, String displayName, ChatColor color, boolean op){
-        saveRank(displayName,"Ranks."+name, color,op);
+    public void createRank(String name, String displayName, String prefix, ChatColor color, boolean op){
+        saveRank("Ranks."+name,displayName, prefix, color,op);
     }
 
-    private void saveRank(String displayName, String root, ChatColor color, boolean op){
+    private void saveRank(String root, String displayName, String prefix, ChatColor color, boolean op){
         FileConfiguration config = YamlConfiguration.loadConfiguration(getRankFile());
         config.set(root + ".DisplayName", displayName);
+        config.set(root+".Prefix", prefix);
         config.set(root + ".Color", color.toString());
         config.set(root + ".Op", op);
         try {
@@ -46,11 +50,22 @@ public class RankManager {
     public void listRanks(Inventory inventory){
         FileConfiguration config = YamlConfiguration.loadConfiguration(getRankFile());
         for(String ranks : config.getConfigurationSection("Ranks.").getKeys(false)){
-            String name = config.getString("Ranks."+ranks+".DisplayName");
-            String color = config.getString("Ranks."+ranks+".Color");
-            boolean op = config.getBoolean("Ranks."+ranks+".Op");
-            inventory.addItem(new ItemBuilder(Material.PLAYER_HEAD).setSkullOwner(Main.getTexture("ZjY2YmM1MTljZDI2NjJiYmIwYmFjN2U2OWY4MDAyNjFhMTk4M2EzMmIzOWMxODlkM2M5OGJjMjk4YjUyNWJkZCJ9fX0=")).setDisplayname(color+name).setLore(op ? "§2§lThis Rank has Op" : "§cThis rank has §c§lNO §cOp","§eClick to configure this rank.").build());
+            if(getRankSize() <= 20) {
+                String name = config.getString("Ranks." + ranks + ".DisplayName");
+                String color = config.getString("Ranks." + ranks + ".Color");
+                boolean op = config.getBoolean("Ranks." + ranks + ".Op");
+                inventory.addItem(new ItemBuilder(Material.PLAYER_HEAD).setSkullOwner(Main.getTexture("ZjY2YmM1MTljZDI2NjJiYmIwYmFjN2U2OWY4MDAyNjFhMTk4M2EzMmIzOWMxODlkM2M5OGJjMjk4YjUyNWJkZCJ9fX0=")).setDisplayname(color + name).setLore(op ? "§2§lThis Rank has Op" : "§cThis rank has §c§lNO §cOp", "§eClick to configure this rank.").setLocalizedName(ranks).build());
+            }
         }
+    }
+
+    public int getRankSize(){
+        FileConfiguration config = YamlConfiguration.loadConfiguration(getRankFile());
+        int counter = 0;
+        for(String ranks : config.getConfigurationSection("Ranks.").getKeys(false)){
+            counter++;
+        }
+        return counter;
     }
 
     public void setRank(String name, Player player){
@@ -78,6 +93,38 @@ public class RankManager {
         String color = getColor(rank);
         String name = getName(rank);
         return color+name;
+    }
+    public String getColoredPrefix(Player player){
+        FileConfiguration config = YamlConfiguration.loadConfiguration(getRankFile());
+        if(!hasRank(player))
+            setRank("default",player);
+        String rank = config.getString("Ranks_on_Player."+player.getUniqueId());
+        String color = getColor(rank);
+        String prefix = getPrefix(rank);
+        return color+prefix;
+    }
+
+    public String getBlankRank(Player player){
+        FileConfiguration config = YamlConfiguration.loadConfiguration(getRankFile());
+        if(!hasRank(player))
+            setRank("default",player);
+        return config.getString("Ranks_on_Player."+player.getUniqueId());
+    }
+
+    public void setRanksList(Player player){
+        FileConfiguration config = YamlConfiguration.loadConfiguration(getRankFile());
+        for(String ranks : config.getConfigurationSection("Ranks.").getKeys(false)){
+            if(getBlankRank(player).equals(ranks)) {
+                Scoreboard scoreboard = player.getScoreboard();
+                Team team = scoreboard.getTeam(ranks);
+                if(team == null){
+                    team = scoreboard.registerNewTeam(ranks);
+                }
+                team.setPrefix(getColor(ranks)+getPrefix(ranks)+" §7| ");
+                team.addEntry(player.getName());
+                return;
+            }
+        }
     }
 
     public void resetRank(Player player){
@@ -109,6 +156,10 @@ public class RankManager {
         FileConfiguration config = YamlConfiguration.loadConfiguration(getRankFile());
         return config.getString("Ranks."+rank+".DisplayName");
     }
+    public String getPrefix(String rank){
+        FileConfiguration config = YamlConfiguration.loadConfiguration(getRankFile());
+        return config.getString("Ranks."+rank+".Prefix");
+    }
     public String getColor(String rank){
         FileConfiguration config = YamlConfiguration.loadConfiguration(getRankFile());
         return config.getString("Ranks."+rank+".Color");
@@ -122,6 +173,15 @@ public class RankManager {
     public void setRankName(String newName, String rank){
         FileConfiguration config = YamlConfiguration.loadConfiguration(getRankFile());
         config.set("Ranks."+rank+".DisplayName", newName);
+        try {
+            config.save(getRankFile());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void setRankNick(String newPrefix, String rank){
+        FileConfiguration config = YamlConfiguration.loadConfiguration(getRankFile());
+        config.set("Ranks."+rank+".Prefix", newPrefix);
         try {
             config.save(getRankFile());
         } catch (IOException e) {
@@ -142,10 +202,10 @@ public class RankManager {
     private void createDefaultRanks(){
         FileConfiguration config = YamlConfiguration.loadConfiguration(getRankFile());
         if(!config.contains("Ranks.")) {
-            createRank("owner", "Owner", ChatColor.DARK_RED, true);
-            createRank("mod", "Moderator", ChatColor.GOLD, true);
-            createRank("vip", "VIP", ChatColor.DARK_PURPLE, false);
-            createRank("default", "Spieler", ChatColor.GRAY, false);
+            createRank("owner", "Owner", "OWNER", ChatColor.DARK_RED, true);
+            createRank("mod", "Moderator","MOD", ChatColor.GOLD, true);
+            createRank("vip", "VIP", "VIP", ChatColor.DARK_PURPLE, false);
+            createRank("default", "Player","Player", ChatColor.GRAY, false);
         }
     }
 

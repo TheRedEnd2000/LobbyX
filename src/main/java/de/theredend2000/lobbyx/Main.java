@@ -200,6 +200,7 @@ public final class Main extends JavaPlugin {
         new NavigatorListener(this);
         new PaintballListener(this);
         new PlayerInteractAtEntityEventListener(this);
+        new PlayerChatEventListener(this);
     }
     private void initManagers(){
         new Util(this);
