@@ -4,6 +4,7 @@ import de.theredend2000.lobbyx.Main;
 import de.theredend2000.lobbyx.messages.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.WorldCreator;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -242,7 +243,7 @@ public class ProfileListener implements Listener {
                 if (event.getCurrentItem().getItemMeta().hasLocalizedName()){
                     switch (event.getCurrentItem().getItemMeta().getLocalizedName()){
                         case"RankSettings.create":
-                            player.sendMessage("create");
+                            plugin.getProfileMenuManager().createRankSettingsInventory(player);
                             break;
                         case "RankSettings.back":
                             plugin.getLobbyXMenuManager().createMainInventory(player);
@@ -256,7 +257,57 @@ public class ProfileListener implements Listener {
                     }
                 }
             }
-        }
+        }else if (event.getView().getTitle().equals(Objects.requireNonNull(plugin.getConfig().getString("Inventory.Rank.RankSettingsInventory.RankSettingsInventory")).replaceAll("&", "§"))){
+            event.setCancelled(true);
+            if (event.getCurrentItem()!=null){
+                if (event.getCurrentItem().getItemMeta().hasLocalizedName()){
+                    switch (event.getCurrentItem().getItemMeta().getLocalizedName()){
+                        case "Rank.Ranksettings.Gamemode":
+                            plugin.getProfileMenuManager().createRankSettingsGamemodeInventory(player);
+                            break;
+                        case "Rank.Ranksettings.Build":
+                            break;
+                        case "Rank.Ranksettings.Ranks":
+                            break;
+                        case "Rank.Ranksettings.Coins":
+                            break;
+                        case "Rank.Ranksettings.EditMenu":
+                            break;
+                        case "Rank.Ranksettings.Commands":
+                            break;
+                        case "Rank.Ranksettings.PlayerFunktions":
+                            break;
+                        case"Rank.Ranksettings.RankStrenght.Click":
+                            break;
+                        case "Rank.Ranksettings.RankColors":
+                            break;
+                        case "Rank.Ranksettings.Kürzle":
+                            break;
+                        case "RankSettings.back":
+                            break;
+                        case "RankSettings.Main Menu":
+                    }
+                }
+            }
+        }else if (event.getView().getTitle().equals(Objects.requireNonNull(plugin.getConfig().getString("Inventory.Rank.RankSettingsInventory.GamemodesSelectInventory")).replaceAll("&", "§"))) {
+            event.setCancelled(true);
+            if (event.getCurrentItem() != null) {
+                if (event.getCurrentItem().getItemMeta().hasLocalizedName()) {
+                    switch (event.getCurrentItem().getItemMeta().getLocalizedName()) {
+                        case "Rank.Ranksettings.Gamemode.Survival.Click":
+                            break;
+                        case "Rank.Ranksettings.Gamemode.Adventure.Click":
+                            break;
+                        case "Rank.Ranksettings.Gamemode.Creativ.Click":
+                            break;
+                        case "Rank.Ranksettings.Gamemode.Spactator.Click":
+                            break;
+                        case "Rank.Ranksettings.Gamemode.Fly.Click":
+                            break;
+                    }
+                }
+            }
+        }    
     }
     public File getRankFile() {
         return new File(plugin.getDataFolder(), "ranks.yml");

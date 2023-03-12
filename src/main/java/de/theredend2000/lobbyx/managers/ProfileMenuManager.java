@@ -320,18 +320,19 @@ public class ProfileMenuManager implements Listener {
         player.openInventory(Rank);
     }
     public void createRankSettingsInventory(Player player){
-        Inventory RankSettings = Bukkit.createInventory(player,54,Objects.requireNonNull(plugin.getConfig().getString("Inventory.Rank.RankSettingsInventory")).replaceAll("&", "§"));
+        Inventory RankSettings = Bukkit.createInventory(player,54,Objects.requireNonNull(plugin.getConfig().getString("Inventory.Rank.RankSettingsInventory.RankSettingsInventory")).replaceAll("&", "§"));
         int[] red = new int[]{0,8,53};
-        int[]  weiß = new int[]{1,2,3,5,6,7,9,12,14,17,18,21,23,26,27,30,32,39,31,35,36,41,44};
+        int[]  weiß = new int[]{1,2,3,5,6,7,9,12,14,17,18,21,23,26,27,30,32,39,31,35,36,41,44,46,47,48,50,51,52};
         for (int i = 0; i < red.length; i++) {RankSettings.setItem(red[i], new ItemBuilder(Material.RED_STAINED_GLASS_PANE).setDisplayname("§c").build());}
         for (int i = 0; i < weiß.length; i++) {RankSettings.setItem(weiß[i], new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
+
         RankSettings.setItem(13,new ItemBuilder(Material.COMMAND_BLOCK).setDisplayname("§4Operator").setLore("§7Click to aktivate Op for the player").build());
         RankSettings.setItem(22,new ItemBuilder(Material.LIME_DYE).setDisplayname("§aEnable").setLocalizedName("Rank.Ranksettings.Op.Click").build());
 
-        RankSettings.setItem(10,new ItemBuilder(Material.NOTE_BLOCK).setDisplayname("§2Gamemodes").setLocalizedName("Rank.Ranksettings.Gamemoder").build());
-        RankSettings.setItem(11,new ItemBuilder(Material.LIME_DYE).setDisplayname("§aEnable").setLocalizedName("Rank.Ranksettings.Gamemoder.Click").build());
+        RankSettings.setItem(10,new ItemBuilder(Material.NOTE_BLOCK).setDisplayname("§2Gamemodes").setLocalizedName("Rank.Ranksettings.Gamemode").build());
+        RankSettings.setItem(11,new ItemBuilder(Material.LIME_DYE).setDisplayname("§aEnable").setLocalizedName("Rank.Ranksettings.Gamemode.Click").build());
 
-        RankSettings.setItem(15,new ItemBuilder(Material.BRICK).setDisplayname("§1Building").setLocalizedName("Rank.Ranksettings.Build").build());
+        RankSettings.setItem(15,new ItemBuilder(Material.BRICKS).setDisplayname("§1Building").setLocalizedName("Rank.Ranksettings.Build").build());
         RankSettings.setItem(16,new ItemBuilder(Material.LIME_DYE).setDisplayname("§aEnabled").setLocalizedName("Rank.Ranksettings.Build.Click").build());
 
         RankSettings.setItem(19,new ItemBuilder(Material.NETHERITE_SHOVEL).setDisplayname("§bGive Ranks").setLocalizedName("Rank.Ranksettings.Ranks").build());
@@ -352,9 +353,32 @@ public class ProfileMenuManager implements Listener {
         RankSettings.setItem(40,new ItemBuilder(Material.REDSTONE_TORCH).setDisplayname("§fRank Strength").setLore("§7Set the Strengh of the Rank").setLocalizedName("Rank.Ranksettings.RankStrenght.Click").build());
 
         RankSettings.setItem(42,new ItemBuilder(Material.WHITE_DYE).setDisplayname("§fRankColors/Layout").setLocalizedName("Rank.Ranksettings.RankColors").build());
-
         RankSettings.setItem(43,new ItemBuilder(Material.OAK_SIGN).setDisplayname("§5Präfix").setLocalizedName("Rank.Ranksettings.Kürzle").build());
-//kick player/ Gamemode / Menu Edit/ Ranks give / Kürzle; Präfix / Rank layout  /Bauen / Coins /
+        RankSettings.setItem(45, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§7Back").setSkullOwner(Main.BACK_SKULL_TEXTURE).setLocalizedName("RankSettings.back").build());
+        RankSettings.setItem(45, new ItemBuilder(Material.NETHER_STAR).setDisplayname("§eMain Menu").setSkullOwner(Main.BACK_SKULL_TEXTURE).setLocalizedName("RankSettings.Main Menu").build());
         player.openInventory(RankSettings);
     }
+    public void createRankSettingsGamemodeInventory(Player player){
+        Inventory Gamemodes = Bukkit.createInventory(player,54,Objects.requireNonNull(plugin.getConfig().getString("Inventory.Rank.RankSettingsInventory.GamemodesSelectInventory")).replaceAll("&", "§"));
+        int[] red = new int[]{0,8,53};
+        int[]  weiß = new int[]{1,2,3,5,6,7,9,12,14,17,18,21,23,26,27,30,32,39,31,35,36,41,44,46,47,48,50,51,52};
+        int[]   netz = new int[]{24,25,33,34,42,43};
+        for (int i = 0; i < red.length; i++) {Gamemodes.setItem(red[i], new ItemBuilder(Material.RED_STAINED_GLASS_PANE).setDisplayname("§c").build());}
+        for (int i = 0; i < weiß.length; i++) {Gamemodes.setItem(weiß[i], new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
+        for (int i = 0; i < netz.length; i++) {Gamemodes.setItem(netz[i], new ItemBuilder(Material.COBWEB).setDisplayname("§c").build());}
+        Gamemodes.setItem(40, new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).setDisplayname("§c").build());
+
+        Gamemodes.setItem(10, new ItemBuilder(Material.GRASS_BLOCK).setDisplayname("§fSurvival").build());
+        Gamemodes.setItem(11, new ItemBuilder(Material.LIME_DYE).setDisplayname("§aEnabled").setLocalizedName("Rank.Ranksettings.Gamemode.Survival.Click").build());
+        Gamemodes.setItem(19, new ItemBuilder(Material.PAPER).setDisplayname("§fAdventur").build());
+        Gamemodes.setItem(20, new ItemBuilder(Material.LIME_DYE).setDisplayname("§aEnabled").setLocalizedName("Rank.Ranksettings.Gamemode.Adventure.Click").build());
+        Gamemodes.setItem(27, new ItemBuilder(Material.BRICKS).setDisplayname("§fSurvival").build());
+        Gamemodes.setItem(28, new ItemBuilder(Material.LIME_DYE).setDisplayname("§aEnabled").setLocalizedName("Rank.Ranksettings.Gamemode.Creativ.Click").build());
+        Gamemodes.setItem(36, new ItemBuilder(Material.GRASS_BLOCK).setDisplayname("§fSpactator").build());
+        Gamemodes.setItem(37, new ItemBuilder(Material.LIME_DYE).setDisplayname("§aEnabled").setLocalizedName("Rank.Ranksettings.Gamemode.Spactator.Click").build());
+
+        Gamemodes.setItem(13, new ItemBuilder(Material.FEATHER).setDisplayname("§bFly").setLore("§7Allows the player to fly without being in Creativ").build());
+        Gamemodes.setItem(22, new ItemBuilder(Material.LIME_DYE).setDisplayname("§aEnabled").setLocalizedName("Rank.Ranksettings.Gamemode.Fly.Click").build());
+    }
+
 }

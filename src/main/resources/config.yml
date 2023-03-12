@@ -51,7 +51,9 @@ Inventory:
   TeleporterInventoryTitle: '&bLobby&4X&f - &5Navigator'
   Rank:
     RankInventory: '&bLobby&4X&f - &9Ranks'
-    RankSettingsInventory: '&bLobby&4X&f - &9Rank &bSettings'
+    RankSettingsInventory:
+      RankSettingsInventory: '&bLobby&4X&f - &9Rank &bSettings'
+      GamemodesSelectInventory: '&bLobby&4X&f - &9Gamemodes'
   ClanInventory:
     ClanChooseInventoryTitle: '&bLobby&4X&f - &4You arent in a Clan'
     ClanMemberInventoryTitle: '&bLobby&4X&f - &3Clan - Member'
