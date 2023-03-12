@@ -2,16 +2,16 @@ package de.theredend2000.lobbyx.listeners.inventoryListeners;
 
 import de.theredend2000.lobbyx.Main;
 import de.theredend2000.lobbyx.messages.Util;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
-import org.bukkit.WorldCreator;
+import de.theredend2000.lobbyx.util.ItemBuilder;
+import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.File;
@@ -237,72 +237,50 @@ public class ProfileListener implements Listener {
                     }
                 }
             }
-        }else if (event.getView().getTitle().equals(Objects.requireNonNull(plugin.getConfig().getString("Inventory.RankInventory").replaceAll("&","§")))){
+        }else if (event.getView().getTitle().equals(Objects.requireNonNull(plugin.getConfig().getString("Inventory.Rank.RankInventory").replaceAll("&","§")))){
             event.setCancelled(true);
             if (event.getCurrentItem()!=null){
                 if (event.getCurrentItem().getItemMeta().hasLocalizedName()){
-                    switch (event.getCurrentItem().getItemMeta().getLocalizedName()){
-                        case"RankSettings.create":
-                            plugin.getProfileMenuManager().createRankSettingsInventory(player);
-                            break;
-                        case "RankSettings.back":
-                            plugin.getLobbyXMenuManager().createMainInventory(player);
-                            break;
-                    }
                     FileConfiguration config = YamlConfiguration.loadConfiguration(getRankFile());
                     for(String ranks : config.getConfigurationSection("Ranks.").getKeys(false)){
                         if(event.getCurrentItem().getItemMeta().getLocalizedName().equals(ranks)){
-                            plugin.getProfileMenuManager().createRankSettingsInventory(player);
+                            plugin.getProfileMenuManager().createRankSettingsInventory(player,ranks);
+                            return;
                         }
+                    }
+                    switch (event.getCurrentItem().getItemMeta().getLocalizedName()){
+                        case"RankSettings.create":
+                            plugin.getProfileMenuManager().createRankCreateInventory(player);
+                            break;
+                        case "rankSettings.back":
+                            plugin.getLobbyXMenuManager().createMainInventory(player);
+                            break;
                     }
                 }
             }
-        }else if (event.getView().getTitle().equals(Objects.requireNonNull(plugin.getConfig().getString("Inventory.Rank.RankSettingsInventory.RankSettingsInventory")).replaceAll("&", "§"))){
+        }else if (event.getView().getTitle().equals(Objects.requireNonNull(plugin.getConfig().getString("Inventory.Rank.RankSettingsInventory.CreateRankInventory")).replaceAll("&", "§"))){
             event.setCancelled(true);
             if (event.getCurrentItem()!=null){
                 if (event.getCurrentItem().getItemMeta().hasLocalizedName()){
                     switch (event.getCurrentItem().getItemMeta().getLocalizedName()){
-                        case "Rank.Ranksettings.Gamemode":
-                            plugin.getProfileMenuManager().createRankSettingsGamemodeInventory(player);
+                        case "createRank.back":
+                            plugin.getProfileMenuManager().createRankInventory(player);
                             break;
-                        case "Rank.Ranksettings.Build":
-                            break;
-                        case "Rank.Ranksettings.Ranks":
-                            break;
-                        case "Rank.Ranksettings.Coins":
-                            break;
-                        case "Rank.Ranksettings.EditMenu":
-                            break;
-                        case "Rank.Ranksettings.Commands":
-                            break;
-                        case "Rank.Ranksettings.PlayerFunktions":
-                            break;
-                        case"Rank.Ranksettings.RankStrenght.Click":
-                            break;
-                        case "Rank.Ranksettings.RankColors":
-                            break;
-                        case "Rank.Ranksettings.Kürzle":
-                            break;
-                        case "RankSettings.back":
-                            break;
-                        case "RankSettings.Main Menu":
                     }
                 }
             }
-        }else if (event.getView().getTitle().equals(Objects.requireNonNull(plugin.getConfig().getString("Inventory.Rank.RankSettingsInventory.GamemodesSelectInventory")).replaceAll("&", "§"))) {
+        }else if (event.getView().getTitle().equals(Objects.requireNonNull(plugin.getConfig().getString("Inventory.Rank.RankSettingsInventory.RankSettingsInventory")).replaceAll("&", "§"))) {
             event.setCancelled(true);
             if (event.getCurrentItem() != null) {
                 if (event.getCurrentItem().getItemMeta().hasLocalizedName()) {
                     switch (event.getCurrentItem().getItemMeta().getLocalizedName()) {
-                        case "Rank.Ranksettings.Gamemode.Survival.Click":
+                        case "rankSettings.back":
+                            plugin.getProfileMenuManager().createRankInventory(player);
                             break;
-                        case "Rank.Ranksettings.Gamemode.Adventure.Click":
-                            break;
-                        case "Rank.Ranksettings.Gamemode.Creativ.Click":
-                            break;
-                        case "Rank.Ranksettings.Gamemode.Spactator.Click":
-                            break;
-                        case "Rank.Ranksettings.Gamemode.Fly.Click":
+                        case "rankSettings.select":
+                            checkColor(event.getInventory());
+                            String ranks = event.getInventory().getItem(0).getItemMeta().getLocalizedName();
+                            plugin.getProfileMenuManager().createRankSettingsInventory(player,ranks);
                             break;
                     }
                 }
@@ -311,6 +289,61 @@ public class ProfileListener implements Listener {
     }
     public File getRankFile() {
         return new File(plugin.getDataFolder(), "ranks.yml");
+    }
+
+    private void checkColor(Inventory inventory){
+        String rank = inventory.getItem(0).getItemMeta().getLocalizedName();
+        String rankColor = plugin.getRankManager().getColor(rank);
+        switch (rankColor) {
+            case "§0":
+                plugin.getRankManager().setRankColor("§1", rank);
+                break;
+            case "§1":
+                plugin.getRankManager().setRankColor("§2", rank);
+                break;
+            case "§2":
+                plugin.getRankManager().setRankColor("§3", rank);
+                break;
+            case "§3":
+                plugin.getRankManager().setRankColor("§4", rank);
+                break;
+            case "§4":
+                plugin.getRankManager().setRankColor("§5", rank);
+                break;
+            case "§5":
+                plugin.getRankManager().setRankColor("§6", rank);
+                break;
+            case "§6":
+                plugin.getRankManager().setRankColor("§7", rank);
+                break;
+            case "§7":
+                plugin.getRankManager().setRankColor("§8", rank);
+                break;
+            case "§8":
+                plugin.getRankManager().setRankColor("§9", rank);
+                break;
+            case "§9":
+                plugin.getRankManager().setRankColor("§a", rank);
+                break;
+            case "§a":
+                plugin.getRankManager().setRankColor("§b", rank);
+                break;
+            case "§b":
+                plugin.getRankManager().setRankColor("§c", rank);
+                break;
+            case "§c":
+                plugin.getRankManager().setRankColor("§d", rank);
+                break;
+            case "§d":
+                plugin.getRankManager().setRankColor("§e", rank);
+                break;
+            case "§e":
+                plugin.getRankManager().setRankColor("§f", rank);
+                break;
+            case "§f":
+                plugin.getRankManager().setRankColor("§0", rank);
+                break;
+        }
     }
 
 

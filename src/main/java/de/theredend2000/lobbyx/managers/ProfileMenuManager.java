@@ -3,6 +3,7 @@ package de.theredend2000.lobbyx.managers;
 import de.theredend2000.lobbyx.Main;
 import de.theredend2000.lobbyx.util.ItemBuilder;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -308,7 +309,7 @@ public class ProfileMenuManager implements Listener {
 
     }
     public void createRankInventory(Player player){
-        Inventory Rank = Bukkit.createInventory(player, 54, Objects.requireNonNull(plugin.getConfig().getString("Inventory.RankInventory")).replaceAll("&", "§"));
+        Inventory Rank = Bukkit.createInventory(player, 54, Objects.requireNonNull(plugin.getConfig().getString("Inventory.Rank.RankInventory")).replaceAll("&", "§"));
         int[] Schwarz = new int[]{0,8,10,16,37,43,53};
         int[] Weiß = new int[]{1,2,3,5,6,7,9,17,18,19,25,27,28,34,36,44,46,47,48,50,51,52};
         for (int i = 0; i < Weiß.length; i++) {Rank.setItem(Weiß[i], new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
@@ -319,66 +320,80 @@ public class ProfileMenuManager implements Listener {
         plugin.getRankManager().listRanks(Rank);
         player.openInventory(Rank);
     }
-    public void createRankSettingsInventory(Player player){
-        Inventory RankSettings = Bukkit.createInventory(player,54,Objects.requireNonNull(plugin.getConfig().getString("Inventory.Rank.RankSettingsInventory.RankSettingsInventory")).replaceAll("&", "§"));
-        int[] red = new int[]{0,8,53};
-        int[]  weiß = new int[]{1,2,3,5,6,7,9,12,14,17,18,21,23,26,27,30,32,39,31,35,36,41,44,46,47,48,50,51,52};
-        for (int i = 0; i < red.length; i++) {RankSettings.setItem(red[i], new ItemBuilder(Material.RED_STAINED_GLASS_PANE).setDisplayname("§c").build());}
-        for (int i = 0; i < weiß.length; i++) {RankSettings.setItem(weiß[i], new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
-
-        RankSettings.setItem(13,new ItemBuilder(Material.COMMAND_BLOCK).setDisplayname("§4Operator").setLore("§7Click to aktivate Op for the player").build());
-        RankSettings.setItem(22,new ItemBuilder(Material.LIME_DYE).setDisplayname("§aEnable").setLocalizedName("Rank.Ranksettings.Op.Click").build());
-
-        RankSettings.setItem(10,new ItemBuilder(Material.NOTE_BLOCK).setDisplayname("§2Gamemodes").setLocalizedName("Rank.Ranksettings.Gamemode").build());
-        RankSettings.setItem(11,new ItemBuilder(Material.LIME_DYE).setDisplayname("§aEnable").setLocalizedName("Rank.Ranksettings.Gamemode.Click").build());
-
-        RankSettings.setItem(15,new ItemBuilder(Material.BRICKS).setDisplayname("§1Building").setLocalizedName("Rank.Ranksettings.Build").build());
-        RankSettings.setItem(16,new ItemBuilder(Material.LIME_DYE).setDisplayname("§aEnabled").setLocalizedName("Rank.Ranksettings.Build.Click").build());
-
-        RankSettings.setItem(19,new ItemBuilder(Material.NETHERITE_SHOVEL).setDisplayname("§bGive Ranks").setLocalizedName("Rank.Ranksettings.Ranks").build());
-        RankSettings.setItem(20,new ItemBuilder(Material.LIME_DYE).setDisplayname("§aEnabled").setLocalizedName("Rank.Ranksettings.Ranks.Click").build());
-
-        RankSettings.setItem(24,new ItemBuilder(Material.GOLD_INGOT).setDisplayname("§eCoins").setLocalizedName("Rank.Ranksettings.Coins").build());
-        RankSettings.setItem(25,new ItemBuilder(Material.LIME_DYE).setDisplayname("§aEnabled").setLocalizedName("Rank.Ranksettings.Coins.Click").build());
-
-        RankSettings.setItem(28,new ItemBuilder(Material.LEGACY_BOOK_AND_QUILL).setDisplayname("§cChange and Edit Menus").setLocalizedName("Rank.Ranksettings.EditMenu").build());
-        RankSettings.setItem(29,new ItemBuilder(Material.LIME_DYE).setDisplayname("§aEnabled").setLocalizedName("Rank.Ranksettings.EditMenu.Click").build());
-
-        RankSettings.setItem(33,new ItemBuilder(Material.STRUCTURE_BLOCK).setDisplayname("§Commands").setLocalizedName("Rank.Ranksettings.Commands").build());
-        RankSettings.setItem(34,new ItemBuilder(Material.LIME_DYE).setDisplayname("§aEnabled").setLocalizedName("Rank.Ranksettings.Commands.Click").build());
-
-        RankSettings.setItem(37,new ItemBuilder(Material.BARRIER).setDisplayname("§cPlayer Funktions Disabled").setLocalizedName("Rank.Ranksettings.PlayerFunktions").build());
-        RankSettings.setItem(38,new ItemBuilder(Material.LIME_DYE).setDisplayname("§aEnabled").setLocalizedName("Rank.Ranksettings.PlayerFunktions.Click").build());
-
-        RankSettings.setItem(40,new ItemBuilder(Material.REDSTONE_TORCH).setDisplayname("§fRank Strength").setLore("§7Set the Strengh of the Rank").setLocalizedName("Rank.Ranksettings.RankStrenght.Click").build());
-
-        RankSettings.setItem(42,new ItemBuilder(Material.WHITE_DYE).setDisplayname("§fRankColors/Layout").setLocalizedName("Rank.Ranksettings.RankColors").build());
-        RankSettings.setItem(43,new ItemBuilder(Material.OAK_SIGN).setDisplayname("§5Präfix").setLocalizedName("Rank.Ranksettings.Kürzle").build());
-        RankSettings.setItem(45, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§7Back").setSkullOwner(Main.BACK_SKULL_TEXTURE).setLocalizedName("RankSettings.back").build());
-        RankSettings.setItem(45, new ItemBuilder(Material.NETHER_STAR).setDisplayname("§eMain Menu").setSkullOwner(Main.BACK_SKULL_TEXTURE).setLocalizedName("RankSettings.Main Menu").build());
-        player.openInventory(RankSettings);
+    public void createRankSettingsInventory(Player player, String rank){
+        Inventory rankSettings = Bukkit.createInventory(player,54,Objects.requireNonNull(plugin.getConfig().getString("Inventory.Rank.RankSettingsInventory.RankSettingsInventory")).replaceAll("&", "§"));
+        int[]  whiteGlass = new int[]{0,1,2,3,4,5,6,7,8,9,17,18,26,27,35,36,44,46,47,48,49,50,51,52,53};
+        for (int i = 0; i < whiteGlass.length; i++) {rankSettings.setItem(whiteGlass[i], new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setDisplayname("§c").setLocalizedName(rank).build());}
+        String rankName = plugin.getRankManager().getName(rank);
+        String rankPrefix = plugin.getRankManager().getPrefix(rank);
+        setHopperForColor(rankSettings);
+        rankSettings.setItem(10, new ItemBuilder(Material.NAME_TAG).setDisplayname("§6Rank Name").setLore("§7Set the rank name that's ","§7shown on the scoreboard.","","§7Current: §3"+rankName,"§eClick to change.").setLocalizedName("rankSettings.name").build());
+        rankSettings.setItem(13, new ItemBuilder(Material.NAME_TAG).setDisplayname("§6Rank Prefix").setLore("§7Set the rank prefix that's ","§7shown on the chat.","","§7Current: §3"+rankPrefix,"§eClick to change.").setLocalizedName("rankSettings.prefix").build());
+        rankSettings.setItem(45, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§eBack").setSkullOwner(Main.BACK_SKULL_TEXTURE).setLocalizedName("rankSettings.back").build());
+        player.openInventory(rankSettings);
     }
-    public void createRankSettingsGamemodeInventory(Player player){
-        Inventory Gamemodes = Bukkit.createInventory(player,54,Objects.requireNonNull(plugin.getConfig().getString("Inventory.Rank.RankSettingsInventory.GamemodesSelectInventory")).replaceAll("&", "§"));
-        int[] red = new int[]{0,8,53};
-        int[]  weiß = new int[]{1,2,3,5,6,7,9,12,14,17,18,21,23,26,27,30,32,39,31,35,36,41,44,46,47,48,50,51,52};
-        int[]   netz = new int[]{24,25,33,34,42,43};
-        for (int i = 0; i < red.length; i++) {Gamemodes.setItem(red[i], new ItemBuilder(Material.RED_STAINED_GLASS_PANE).setDisplayname("§c").build());}
-        for (int i = 0; i < weiß.length; i++) {Gamemodes.setItem(weiß[i], new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
-        for (int i = 0; i < netz.length; i++) {Gamemodes.setItem(netz[i], new ItemBuilder(Material.COBWEB).setDisplayname("§c").build());}
-        Gamemodes.setItem(40, new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).setDisplayname("§c").build());
-
-        Gamemodes.setItem(10, new ItemBuilder(Material.GRASS_BLOCK).setDisplayname("§fSurvival").build());
-        Gamemodes.setItem(11, new ItemBuilder(Material.LIME_DYE).setDisplayname("§aEnabled").setLocalizedName("Rank.Ranksettings.Gamemode.Survival.Click").build());
-        Gamemodes.setItem(19, new ItemBuilder(Material.PAPER).setDisplayname("§fAdventur").build());
-        Gamemodes.setItem(20, new ItemBuilder(Material.LIME_DYE).setDisplayname("§aEnabled").setLocalizedName("Rank.Ranksettings.Gamemode.Adventure.Click").build());
-        Gamemodes.setItem(27, new ItemBuilder(Material.BRICKS).setDisplayname("§fSurvival").build());
-        Gamemodes.setItem(28, new ItemBuilder(Material.LIME_DYE).setDisplayname("§aEnabled").setLocalizedName("Rank.Ranksettings.Gamemode.Creativ.Click").build());
-        Gamemodes.setItem(36, new ItemBuilder(Material.GRASS_BLOCK).setDisplayname("§fSpactator").build());
-        Gamemodes.setItem(37, new ItemBuilder(Material.LIME_DYE).setDisplayname("§aEnabled").setLocalizedName("Rank.Ranksettings.Gamemode.Spactator.Click").build());
-
-        Gamemodes.setItem(13, new ItemBuilder(Material.FEATHER).setDisplayname("§bFly").setLore("§7Allows the player to fly without being in Creativ").build());
-        Gamemodes.setItem(22, new ItemBuilder(Material.LIME_DYE).setDisplayname("§aEnabled").setLocalizedName("Rank.Ranksettings.Gamemode.Fly.Click").build());
+    public void createRankCreateInventory(Player player){
+        Inventory createRank = Bukkit.createInventory(player,54,Objects.requireNonNull(plugin.getConfig().getString("Inventory.Rank.RankSettingsInventory.CreateRankInventory")).replaceAll("&", "§"));
+        int[] redGlass = new int[]{0,8,53};
+        int[]  whiteGlass = new int[]{1,2,3,5,6,7,9,12,14,17,18,21,23,26,27,30,32,39,31,35,36,41,44,46,47,48,50,51,52};
+        for (int i = 0; i < redGlass.length; i++) {createRank.setItem(redGlass[i], new ItemBuilder(Material.RED_STAINED_GLASS_PANE).setDisplayname("§c").build());}
+        for (int i = 0; i < whiteGlass.length; i++) {createRank.setItem(whiteGlass[i], new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
+        createRank.setItem(45,new ItemBuilder(Material.PLAYER_HEAD).setSkullOwner(Main.BACK_SKULL_TEXTURE).setDisplayname("§eBack").setLocalizedName("createRank.back").build());
+        player.openInventory(createRank);
+    }
+    private void setHopperForColor(Inventory inventory){
+        String rank = inventory.getItem(0).getItemMeta().getLocalizedName();
+        String rankColor = plugin.getRankManager().getColor(rank);
+        switch (rankColor){
+            case "§0":
+                inventory.setItem(16, new ItemBuilder(Material.HOPPER).setDisplayname("§6Rank Colors").setLore("§6§l➤ §0Black","§1Dark Blue","§2Dark Green","§3Dark Aqua","§4Dark Red","§5Dark Purple","§6Gold","§7Gray","§8Dark Gray","§9Blue","§aGreen","§bAqua","§cRed","§dLight Purple","§eYellow","§fWhite","","§eClick to change.").setLocalizedName("rankSettings.select").build());
+                break;
+            case "§1":
+                inventory.setItem(16, new ItemBuilder(Material.HOPPER).setDisplayname("§6Rank Colors").setLore("§0Black","§6§l➤ §1Dark Blue","§2Dark Green","§3Dark Aqua","§4Dark Red","§5Dark Purple","§6Gold","§7Gray","§8Dark Gray","§9Blue","§aGreen","§bAqua","§cRed","§dLight Purple","§eYellow","§fWhite","","§eClick to change.").setLocalizedName("rankSettings.select").build());
+                break;
+            case "§2":
+                inventory.setItem(16, new ItemBuilder(Material.HOPPER).setDisplayname("§6Rank Colors").setLore("§0Black","§1Dark Blue","§6§l➤ §2Dark Green","§3Dark Aqua","§4Dark Red","§5Dark Purple","§6Gold","§7Gray","§8Dark Gray","§9Blue","§aGreen","§bAqua","§cRed","§dLight Purple","§eYellow","§fWhite","","§eClick to change.").setLocalizedName("rankSettings.select").build());
+                break;
+            case "§3":
+                inventory.setItem(16, new ItemBuilder(Material.HOPPER).setDisplayname("§6Rank Colors").setLore("§0Black","§1Dark Blue","§2Dark Green","§6§l➤ §3Dark Aqua","§4Dark Red","§5Dark Purple","§6Gold","§7Gray","§8Dark Gray","§9Blue","§aGreen","§bAqua","§cRed","§dLight Purple","§eYellow","§fWhite","","§eClick to change.").setLocalizedName("rankSettings.select").build());
+                break;
+            case "§4":
+                inventory.setItem(16, new ItemBuilder(Material.HOPPER).setDisplayname("§6Rank Colors").setLore("§0Black","§1Dark Blue","§2Dark Green","§3Dark Aqua","§6§l➤ §4Dark Red","§5Dark Purple","§6Gold","§7Gray","§8Dark Gray","§9Blue","§aGreen","§bAqua","§cRed","§dLight Purple","§eYellow","§fWhite","","§eClick to change.").setLocalizedName("rankSettings.select").build());
+                break;
+            case "§5":
+                inventory.setItem(16, new ItemBuilder(Material.HOPPER).setDisplayname("§6Rank Colors").setLore("§0Black","§1Dark Blue","§2Dark Green","§3Dark Aqua","§4Dark Red","§6§l➤ §5Dark Purple","§6Gold","§7Gray","§8Dark Gray","§9Blue","§aGreen","§bAqua","§cRed","§dLight Purple","§eYellow","§fWhite","","§eClick to change.").setLocalizedName("rankSettings.select").build());
+                break;
+            case "§6":
+                inventory.setItem(16, new ItemBuilder(Material.HOPPER).setDisplayname("§6Rank Colors").setLore("§0Black","§1Dark Blue","§2Dark Green","§3Dark Aqua","§4Dark Red","§5Dark Purple","§6§l➤ §6Gold","§7Gray","§8Dark Gray","§9Blue","§aGreen","§bAqua","§cRed","§dLight Purple","§eYellow","§fWhite","","§eClick to change.").setLocalizedName("rankSettings.select").build());
+                break;
+            case "§7":
+                inventory.setItem(16, new ItemBuilder(Material.HOPPER).setDisplayname("§6Rank Colors").setLore("§0Black","§1Dark Blue","§2Dark Green","§3Dark Aqua","§4Dark Red","§5Dark Purple","§6Gold","§6§l➤ §7Gray","§8Dark Gray","§9Blue","§aGreen","§bAqua","§cRed","§dLight Purple","§eYellow","§fWhite","","§eClick to change.").setLocalizedName("rankSettings.select").build());
+                break;
+            case "§8":
+                inventory.setItem(16, new ItemBuilder(Material.HOPPER).setDisplayname("§6Rank Colors").setLore("§0Black","§1Dark Blue","§2Dark Green","§3Dark Aqua","§4Dark Red","§5Dark Purple","§6Gold","§7Gray","§6§l➤ §8Dark Gray","§9Blue","§aGreen","§bAqua","§cRed","§dLight Purple","§eYellow","§fWhite","","§eClick to change.").setLocalizedName("rankSettings.select").build());
+                break;
+            case "§9":
+                inventory.setItem(16, new ItemBuilder(Material.HOPPER).setDisplayname("§6Rank Colors").setLore("§0Black","§1Dark Blue","§2Dark Green","§3Dark Aqua","§4Dark Red","§5Dark Purple","§6Gold","§7Gray","§8Dark Gray","§6§l➤ §9Blue","§aGreen","§bAqua","§cRed","§dLight Purple","§eYellow","§fWhite","","§eClick to change.").setLocalizedName("rankSettings.select").build());
+                break;
+            case "§a":
+                inventory.setItem(16, new ItemBuilder(Material.HOPPER).setDisplayname("§6Rank Colors").setLore("§0Black","§1Dark Blue","§2Dark Green","§3Dark Aqua","§4Dark Red","§5Dark Purple","§6Gold","§7Gray","§8Dark Gray","§9Blue","§6§l➤ §aGreen","§bAqua","§cRed","§dLight Purple","§eYellow","§fWhite","","§eClick to change.").setLocalizedName("rankSettings.select").build());
+                break;
+            case "§b":
+                inventory.setItem(16, new ItemBuilder(Material.HOPPER).setDisplayname("§6Rank Colors").setLore("§0Black","§1Dark Blue","§2Dark Green","§3Dark Aqua","§4Dark Red","§5Dark Purple","§6Gold","§7Gray","§8Dark Gray","§9Blue","§aGreen","§6§l➤ §bAqua","§cRed","§dLight Purple","§eYellow","§fWhite","","§eClick to change.").setLocalizedName("rankSettings.select").build());
+                break;
+            case "§c":
+                inventory.setItem(16, new ItemBuilder(Material.HOPPER).setDisplayname("§6Rank Colors").setLore("§0Black","§1Dark Blue","§2Dark Green","§3Dark Aqua","§4Dark Red","§5Dark Purple","§6Gold","§7Gray","§8Dark Gray","§9Blue","§aGreen","§bAqua","§6§l➤ §cRed","§dLight Purple","§eYellow","§fWhite","","§eClick to change.").setLocalizedName("rankSettings.select").build());
+                break;
+            case "§d":
+                inventory.setItem(16, new ItemBuilder(Material.HOPPER).setDisplayname("§6Rank Colors").setLore("§0Black","§1Dark Blue","§2Dark Green","§3Dark Aqua","§4Dark Red","§5Dark Purple","§6Gold","§7Gray","§8Dark Gray","§9Blue","§aGreen","§bAqua","§cRed","§6§l➤ §dLight Purple","§eYellow","§fWhite","","§eClick to change.").setLocalizedName("rankSettings.select").build());
+                break;
+            case "§e":
+                inventory.setItem(16, new ItemBuilder(Material.HOPPER).setDisplayname("§6Rank Colors").setLore("§0Black","§1Dark Blue","§2Dark Green","§3Dark Aqua","§4Dark Red","§5Dark Purple","§6Gold","§7Gray","§8Dark Gray","§9Blue","§aGreen","§bAqua","§cRed","§dLight Purple","§6§l➤ §eYellow","§fWhite","","§eClick to change.").setLocalizedName("rankSettings.select").build());
+                break;
+            case "§f":
+                inventory.setItem(16, new ItemBuilder(Material.HOPPER).setDisplayname("§6Rank Colors").setLore("§0Black","§1Dark Blue","§2Dark Green","§3Dark Aqua","§4Dark Red","§5Dark Purple","§6Gold","§7Gray","§8Dark Gray","§9Blue","§aGreen","§bAqua","§cRed","§dLight Purple","§eYellow","§6§l➤ §fWhite","","§eClick to change.").setLocalizedName("rankSettings.select").build());
+                break;
+        }
     }
 
 }

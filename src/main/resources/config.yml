@@ -52,8 +52,8 @@ Inventory:
   Rank:
     RankInventory: '&bLobby&4X&f - &9Ranks'
     RankSettingsInventory:
-      RankSettingsInventory: '&bLobby&4X&f - &9Rank &bSettings'
-      GamemodesSelectInventory: '&bLobby&4X&f - &9Gamemodes'
+      RankSettingsInventory: '&bLobby&4X&f - &bRank Settings'
+      CreateRankInventory: '&bLobby&4X&f - &2Create Rank'
   ClanInventory:
     ClanChooseInventoryTitle: '&bLobby&4X&f - &4You arent in a Clan'
     ClanMemberInventoryTitle: '&bLobby&4X&f - &3Clan - Member'
