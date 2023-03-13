@@ -1,6 +1,7 @@
 package de.theredend2000.lobbyx.listeners.gadgetsListener;
 
 import de.theredend2000.lobbyx.Main;
+import de.theredend2000.lobbyx.util.xutils.XMaterial;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;

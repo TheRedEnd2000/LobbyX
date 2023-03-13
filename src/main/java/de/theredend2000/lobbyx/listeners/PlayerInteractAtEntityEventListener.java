@@ -30,12 +30,12 @@ public class PlayerInteractAtEntityEventListener implements Listener {
         if(event.getRightClicked() instanceof Player){
             Player rightClicked = (Player) event.getRightClicked();
             if(plugin.getLobbyWorlds().contains(player.getWorld()) && plugin.getLobbyWorlds().contains(rightClicked.getWorld())){
-                player.sendMessage("Info Inv");
+                interactWithPLayerInv(player,rightClicked);
 
             }
         }
     }
-    private void InteractwithPLayerInv(Player player,Player rightClicked){
+    private void interactWithPLayerInv(Player player,Player rightClicked){
         Inventory Playerinfo = Bukkit.createInventory(player, 54,Objects.requireNonNull(plugin.getConfig().getString("Inventory.InteractwithplayerInventory")).replaceAll("&", "§"));
         int[] white = new int[]{10,12,14,16,19,21,22,23,24,25,28,30,31,32,33,34,37,39,41,43};
         int[] orange = new int[]{0,1,2,3,5,6,7,8,9,17,18,26,27,35,36,44,45,46,47,48,50,51,52};
@@ -46,7 +46,7 @@ public class PlayerInteractAtEntityEventListener implements Listener {
         Playerinfo.setItem(53,new ItemBuilder(Material.NETHERITE_SHOVEL).setDisplayname("§1Rank").setLocalizedName("Rank").build());//info: bei jmd der ranks vergeben kann soll hier auch der rank gesetzt werden können
         Playerinfo.setItem(15, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("Invite in Clan").setSkullOwner(Main.getTexture("NmE1MzYxYjUyZGFmNGYxYzVjNTQ4MGEzOWZhYWExMDg5NzU5NWZhNTc2M2Y3NTdiZGRhMzk1NjU4OGZlYzY3OCJ9fX0=")).setLocalizedName("inviteinclan").build());
         Playerinfo.setItem(42,new ItemBuilder(Material.DIAMOND).setDisplayname("Sozial-Info").setLocalizedName("Sozial").build());
-        Playerinfo.setItem(38,new ItemBuilder(Material.LEGACY_BOOK_AND_QUILL).setDisplayname("sendMassages").setLocalizedName("sendmassage").build());
+        Playerinfo.setItem(38,new ItemBuilder(Material.WRITABLE_BOOK).setDisplayname("sendMassages").setLocalizedName("sendmassage").build());
         Playerinfo.setItem(40,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§eCoins").setSkullOwner(Main.getTexture("MjRhZjhkNTc1ZjBhNTI0ZWY2NmEyMTU3M2U4YTRhOGFjN2Q2NDBiMDBkOThlMmU5Mzc0ZTYwNDcwZTdjODZmMCJ9fX0=")).setLocalizedName("Coins").build());
         player.openInventory(Playerinfo);
     }

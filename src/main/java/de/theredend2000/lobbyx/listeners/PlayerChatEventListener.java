@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerChatEvent;
 
 public class PlayerChatEventListener implements Listener {
 
@@ -17,9 +18,12 @@ public class PlayerChatEventListener implements Listener {
     }
 
     @EventHandler
-    public void onChat(AsyncPlayerChatEvent event){
+    public void onChat(PlayerChatEvent event){
         Player player = event.getPlayer();
         if(plugin.getLobbyWorlds().contains(player.getWorld())){
+            if(event.isCancelled()){
+                return;
+            }
             event.setCancelled(true);
             for(Player lobbyPlayer : player.getWorld().getPlayers()){
                 lobbyPlayer.sendMessage("§7["+plugin.getRankManager().getColoredPrefix(player)+"§7] §3"+player.getName()+" §6>> §r"+event.getMessage());

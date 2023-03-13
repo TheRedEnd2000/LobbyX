@@ -2,7 +2,6 @@ package de.theredend2000.lobbyx.listeners.inventoryListeners;
 
 import de.theredend2000.lobbyx.Main;
 import de.theredend2000.lobbyx.messages.Util;
-import de.theredend2000.lobbyx.util.ItemBuilder;
 import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -11,20 +10,28 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.UUID;
 
 public class ProfileListener implements Listener {
 
     private Main plugin;
+    private ArrayList<Player> rankNamePlayers;
+    private ArrayList<Player> rankPrefixPlayers;
+    private ArrayList<Player> rankPermissionPlayers;
 
     public ProfileListener(Main plugin){
         this.plugin = plugin;
         Bukkit.getPluginManager().registerEvents(this, plugin);
+        rankPrefixPlayers = new ArrayList<>();
+        rankNamePlayers = new ArrayList<>();
+        rankPermissionPlayers = new ArrayList<>();
     }
 
     @EventHandler
@@ -241,7 +248,7 @@ public class ProfileListener implements Listener {
             event.setCancelled(true);
             if (event.getCurrentItem()!=null){
                 if (event.getCurrentItem().getItemMeta().hasLocalizedName()){
-                    FileConfiguration config = YamlConfiguration.loadConfiguration(getRankFile());
+                    FileConfiguration config = YamlConfiguration.loadConfiguration(plugin.getRankManager().getRankFile());
                     for(String ranks : config.getConfigurationSection("Ranks.").getKeys(false)){
                         if(event.getCurrentItem().getItemMeta().getLocalizedName().equals(ranks)){
                             plugin.getProfileMenuManager().createRankSettingsInventory(player,ranks);
@@ -273,23 +280,159 @@ public class ProfileListener implements Listener {
             event.setCancelled(true);
             if (event.getCurrentItem() != null) {
                 if (event.getCurrentItem().getItemMeta().hasLocalizedName()) {
+                    String rank = event.getInventory().getItem(0).getItemMeta().getLocalizedName();
                     switch (event.getCurrentItem().getItemMeta().getLocalizedName()) {
                         case "rankSettings.back":
                             plugin.getProfileMenuManager().createRankInventory(player);
+                            break;
+                        case "rankSettings.op":
+                            boolean op = plugin.getRankManager().hasOp(rank);
+                            plugin.getRankManager().changeOp(!op, rank);
+                            plugin.getProfileMenuManager().createRankSettingsInventory(player,rank);
                             break;
                         case "rankSettings.select":
                             checkColor(event.getInventory());
                             String ranks = event.getInventory().getItem(0).getItemMeta().getLocalizedName();
                             plugin.getProfileMenuManager().createRankSettingsInventory(player,ranks);
                             break;
+                        case "rankSettings.name":
+                            rankNamePlayers.add(player);
+                            player.addScoreboardTag(rank);
+                            player.closeInventory();
+                            player.sendMessage(Util.getMessage(Util.getLocale(player),"RankNameInChat"));
+                            break;
+                        case "rankSettings.prefix":
+                            rankPrefixPlayers.add(player);
+                            player.addScoreboardTag(rank);
+                            player.closeInventory();
+                            player.sendMessage(Util.getMessage(Util.getLocale(player),"RankPrefixInChat"));
+                            break;
+                        case "rankSettings.permissions":
+                            plugin.getProfileMenuManager().createRankPermissionInventory(player,rank);
+                            break;
                     }
                 }
             }
-        }    
+        }else if (event.getView().getTitle().equals(Objects.requireNonNull(plugin.getConfig().getString("Inventory.Rank.RankSettingsInventory.RankPermissionInventory")).replaceAll("&", "§"))) {
+            event.setCancelled(true);
+            if (event.getCurrentItem() != null) {
+                if (event.getCurrentItem().getItemMeta().hasLocalizedName()) {
+                    String rank = event.getInventory().getItem(0).getItemMeta().getLocalizedName();
+                    FileConfiguration config = YamlConfiguration.loadConfiguration(plugin.getRankManager().getRankFile());
+                    for(String permissions : config.getConfigurationSection("Ranks."+rank+".Permissions.").getKeys(false)){
+                        String permission = config.getString("Ranks."+rank+".Permissions."+permissions);
+                        if(event.getCurrentItem().getItemMeta().getLocalizedName().equals(permissions) && event.getAction() == InventoryAction.PICKUP_HALF){
+                            plugin.getRankManager().removePermission(permissions,rank);
+                            plugin.getProfileMenuManager().createRankPermissionInventory(player,rank);
+                            player.sendMessage(Util.getMessage(Util.getLocale(player),"RemovePermissionMessage").replaceAll("%PERMISSION%",permission.replaceAll("_",".")));
+                            return;
+                        }
+                    }
+                    switch (event.getCurrentItem().getItemMeta().getLocalizedName()) {
+                        case "permissionRank.add":
+                            rankPermissionPlayers.add(player);
+                            player.closeInventory();
+                            player.addScoreboardTag(rank);
+                            player.sendMessage(Util.getMessage(Util.getLocale(player),"RankPermissionInChat"));
+                            break;
+                        case "permissionRank.back":
+                            plugin.getProfileMenuManager().createRankSettingsInventory(player,rank);
+                            break;
+                    }
+                }
+            }
+        }
     }
-    public File getRankFile() {
-        return new File(plugin.getDataFolder(), "ranks.yml");
+
+    @EventHandler
+    public void onChat(PlayerChatEvent event){
+        Player player = event.getPlayer();
+        if(rankNamePlayers.contains(player)){
+            event.setCancelled(true);
+            String rank = "null";
+            FileConfiguration config = YamlConfiguration.loadConfiguration(plugin.getRankManager().getRankFile());
+            for(String tags : player.getScoreboardTags()){
+                for(String ranks : config.getConfigurationSection("Ranks.").getKeys(false)){
+                    if (ranks.equalsIgnoreCase(tags)) {
+                        rank = tags;
+                    }
+                }
+            }
+            if(event.getMessage().equalsIgnoreCase("cancel")){
+                rankNamePlayers.remove(player);
+                player.sendMessage(Util.getMessage(Util.getLocale(player),"CancelActionMessage"));
+                plugin.getProfileMenuManager().createRankSettingsInventory(player,rank);
+                player.getScoreboardTags().remove(rank);
+                return;
+            }
+            rankNamePlayers.remove(player);
+            player.getScoreboardTags().remove(rank);
+            plugin.getRankManager().setRankName(event.getMessage(),rank);
+            plugin.getProfileMenuManager().createRankSettingsInventory(player,rank);
+            player.sendMessage(Util.getMessage(Util.getLocale(player),"ConfirmMessage"));
+        }
+        if(rankPermissionPlayers.contains(player)){
+            event.setCancelled(true);
+            String rank = "null";
+            FileConfiguration config = YamlConfiguration.loadConfiguration(plugin.getRankManager().getRankFile());
+            for(String tags : player.getScoreboardTags()){
+                for(String ranks : config.getConfigurationSection("Ranks.").getKeys(false)){
+                    if (ranks.equalsIgnoreCase(tags)) {
+                        rank = tags;
+                    }
+                }
+            }
+            if(event.getMessage().equalsIgnoreCase("cancel")){
+                rankPermissionPlayers.remove(player);
+                player.sendMessage(Util.getMessage(Util.getLocale(player),"CancelActionMessage"));
+                plugin.getProfileMenuManager().createRankPermissionInventory(player,rank);
+                player.getScoreboardTags().remove(rank);
+                return;
+            }
+            if(event.getMessage().contains(".")){
+                rankPermissionPlayers.remove(player);
+                player.sendMessage(Util.getMessage(Util.getLocale(player),"NoDotsInPermission"));
+                plugin.getProfileMenuManager().createRankPermissionInventory(player,rank);
+                player.getScoreboardTags().remove(rank);
+                return;
+            }
+            rankPermissionPlayers.remove(player);
+            player.getScoreboardTags().remove(rank);
+            plugin.getRankManager().addPermission(event.getMessage(),rank);
+            plugin.getProfileMenuManager().createRankPermissionInventory(player,rank);
+            player.sendMessage(Util.getMessage(Util.getLocale(player),"ConfirmMessage"));
+        }
+        if(rankPrefixPlayers.contains(player)){
+            event.setCancelled(true);
+            String rank = "null";
+            FileConfiguration config = YamlConfiguration.loadConfiguration(plugin.getRankManager().getRankFile());
+            for(String tags : player.getScoreboardTags()){
+                for(String ranks : config.getConfigurationSection("Ranks.").getKeys(false)){
+                    if (ranks.equalsIgnoreCase(tags)) {
+                        rank = tags;
+                    }
+                }
+            }
+            if(event.getMessage().equalsIgnoreCase("cancel")){
+                rankPrefixPlayers.remove(player);
+                player.sendMessage(Util.getMessage(Util.getLocale(player),"CancelActionMessage"));
+                plugin.getProfileMenuManager().createRankSettingsInventory(player,rank);
+                player.getScoreboardTags().remove(rank);
+                return;
+            }
+            rankPrefixPlayers.remove(player);
+            player.getScoreboardTags().remove(rank);
+            plugin.getRankManager().setRankPrefix(event.getMessage(),rank);
+            plugin.getProfileMenuManager().createRankSettingsInventory(player,rank);
+            player.sendMessage(Util.getMessage(Util.getLocale(player),"ConfirmMessage"));
+        }
     }
+
+
+
+
+
+
 
     private void checkColor(Inventory inventory){
         String rank = inventory.getItem(0).getItemMeta().getLocalizedName();

@@ -4,18 +4,20 @@ import de.theredend2000.lobbyx.Main;
 import de.theredend2000.lobbyx.util.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.permissions.PermissionAttachment;
+import org.bukkit.permissions.PermissionAttachmentInfo;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
 public class RankManager {
 
@@ -24,6 +26,8 @@ public class RankManager {
     public RankManager(Main plugin){
         this.plugin = plugin;
         createDefaultRanks();
+        checkOpPlayers();
+        checkPermissionPlayers();
     }
 
     public File getRankFile() {
@@ -169,6 +173,17 @@ public class RankManager {
         FileConfiguration config = YamlConfiguration.loadConfiguration(getRankFile());
         return config.getBoolean("Ranks."+rank+".Op");
     }
+    public boolean hasPermission(String rank, String permission){
+        FileConfiguration config = YamlConfiguration.loadConfiguration(getRankFile());
+        for(String permissions : config.getConfigurationSection("Ranks."+rank+".Permissions.").getKeys(false)){
+            String finalPermission = config.getString("Ranks."+rank+".Permissions."+permissions);
+            assert finalPermission != null;
+            if(finalPermission.equals(permission)){
+                return true;
+            }
+        }
+        return false;
+    }
 
     public void setRankName(String newName, String rank){
         FileConfiguration config = YamlConfiguration.loadConfiguration(getRankFile());
@@ -179,7 +194,25 @@ public class RankManager {
             e.printStackTrace();
         }
     }
-    public void setRankNick(String newPrefix, String rank){
+    public void addPermission(String permission, String rank){
+        FileConfiguration config = YamlConfiguration.loadConfiguration(getRankFile());
+        config.set("Ranks." + rank + ".Permissions."+permission, permission.replaceAll("_","."));
+        try {
+            config.save(getRankFile());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void removePermission(String permission, String rank){
+        FileConfiguration config = YamlConfiguration.loadConfiguration(getRankFile());
+        config.set("Ranks." + rank + ".Permissions."+permission, null);
+        try {
+            config.save(getRankFile());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void setRankPrefix(String newPrefix, String rank){
         FileConfiguration config = YamlConfiguration.loadConfiguration(getRankFile());
         config.set("Ranks."+rank+".Prefix", newPrefix);
         try {
@@ -219,8 +252,63 @@ public class RankManager {
         }
     }
 
+    private void checkOpPlayers(){
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                FileConfiguration config = YamlConfiguration.loadConfiguration(getRankFile());
+                for(Player player : Bukkit.getOnlinePlayers()){
+                    for(String playerUUID : config.getConfigurationSection("Ranks_on_Player.").getKeys(false)){
+                        if(player.getUniqueId().equals(UUID.fromString(playerUUID))){
+                            String rank = getBlankRank(player);
+                            if(hasOp(rank) && !player.isOp()){
+                                setRank(getDefaultRank(),player);
+                                return;
+                            }
+                            if(!hasOp(rank) && player.isOp()){
+                                setRank(getOperatorRank(),player);
+                                return;
+                            }
+                            player.setOp(hasOp(rank));
+                        }
+                    }
+                }
+            }
+        }.runTaskTimer(plugin,0,10);
+    }
+    private void checkPermissionPlayers(){
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                FileConfiguration config = YamlConfiguration.loadConfiguration(getRankFile());
+                for(Player player : Bukkit.getOnlinePlayers()){
+                    for(String playerUUID : config.getConfigurationSection("Ranks_on_Player.").getKeys(false)){
+                        if(player.getUniqueId().equals(UUID.fromString(playerUUID))){
+                            String rank = getBlankRank(player);
+                            for(String permissions : config.getConfigurationSection("Ranks."+rank+".Permissions.").getKeys(false)){
+                                String permission = config.getString("Ranks."+rank+".Permissions."+permissions);
+                                PermissionAttachment permissionAttachment = player.addAttachment(plugin);
+                                assert permission != null;
+                                if(!hasOp(rank)) {
+                                    if(hasPermission(rank,permission)){
+                                        permissionAttachment.setPermission(permission,true);
+                                        player.sendMessage("added "+permission);
+                                    }
+                                }
+                            }
+                            player.setOp(hasOp(rank));
+                        }
+                    }
+                }
+            }
+        }.runTaskTimer(plugin,0,10);
+    }
+
     public String getDefaultRank(){
         return plugin.getConfig().getString("Settings.DefaultRank");
+    }
+    public String getOperatorRank(){
+        return plugin.getConfig().getString("Settings.OperatorRank");
     }
 
 }

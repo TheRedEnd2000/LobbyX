@@ -128,3 +128,12 @@ DailyReward:
   RewardTimeLayOut: '&7Come back in: &6%HOURS%h %MINUTES%m %SECONDS%s&7!'
   ClaimReward: '&aYou claimed your &6Daily Reward&a!'
   CoinsLayout: '&7Your &6%COINS_AMOUNT% coins&7 was added to you &5purse&7. You have now &6%COINS_BALANCE% coins.'
+
+RankMessages:
+  RankNameInChat: '&aType the &6name &aof the &6rank &ain the chat. &7Type "&ccancel&7" to cancel.'
+  RankPrefixInChat: '&aType the &6prefix &aof the &6rank &ain the chat. &7Type "&ccancel&7" to cancel.'
+  RankPermissionInChat: '&aType the &6permission &aof the &6rank &ain the chat. &7Type "&ccancel&7" to cancel. &4&lIf the permission contains dots use underscores!'
+  CancelActionMessage: '&cAction canceled!'
+  NoDotsInPermission: '&cPlease use underscores instead of dots.'
+  RemovePermissionMessage: '&aSuccessfully &7removed the permission &6%PERMISSION%&7.'
+  ConfirmMessage: '&a&lSuccessfully'

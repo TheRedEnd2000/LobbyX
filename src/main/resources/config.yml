@@ -15,7 +15,8 @@ Settings:
   DefaultWeather: CLEAR #Select between Clear, Rain, Thunder
   DefaultGamemode: SURVIVAL
   DailyRewardCoinsAmount: 2000
-  DefaultRank: default #This rank must exist in the ranks.yml file!
+  DefaultRank: default #This rank MUST exist in the ranks.yml file!
+  OperatorRank: mod #This rank MUST exist tn the ranks.yml file!
 
 #LobbyWorlds
 
@@ -55,6 +56,7 @@ Inventory:
     RankSettingsInventory:
       RankSettingsInventory: '&bLobby&4X&f - &bRank Settings'
       CreateRankInventory: '&bLobby&4X&f - &2Create Rank'
+      RankPermissionInventory: '&bLobby&4X&f - &6Rank Permissions'
   ClanInventory:
     ClanChooseInventoryTitle: '&bLobby&4X&f - &4You arent in a Clan'
     ClanMemberInventoryTitle: '&bLobby&4X&f - &3Clan - Member'

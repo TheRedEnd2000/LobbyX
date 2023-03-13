@@ -6,12 +6,15 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.permissions.PermissionAttachment;
 
 import java.util.*;
 
@@ -316,7 +319,7 @@ public class ProfileMenuManager implements Listener {
         for (int i = 0; i < Schwarz.length; i++) {Rank.setItem(Schwarz[i], new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).setDisplayname("§c").build());}
         Rank.setItem(4, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§5Ranks").setSkullOwner(Main.getTexture("ZDZjYzZiODM3NjNhNjdmY2FkYTFlYTE4NGMyZDE3NTJhZDI0MDc0NmM2YmUyNThhNzM5ODNkOGI2NTdmNGJiNSJ9fX0=")).build());
         Rank.setItem(35, new ItemBuilder(Material.GREEN_CONCRETE).setDisplayname("§aCreate Rank").setLocalizedName("RankSettings.create").build());
-        Rank.setItem(45, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§7Back").setSkullOwner(Main.BACK_SKULL_TEXTURE).setLocalizedName("RankSettings.back").build());
+        Rank.setItem(45, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§eBack").setSkullOwner(Main.BACK_SKULL_TEXTURE).setLocalizedName("RankSettings.back").build());
         plugin.getRankManager().listRanks(Rank);
         player.openInventory(Rank);
     }
@@ -326,20 +329,38 @@ public class ProfileMenuManager implements Listener {
         for (int i = 0; i < whiteGlass.length; i++) {rankSettings.setItem(whiteGlass[i], new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setDisplayname("§c").setLocalizedName(rank).build());}
         String rankName = plugin.getRankManager().getName(rank);
         String rankPrefix = plugin.getRankManager().getPrefix(rank);
+        boolean op = plugin.getRankManager().hasOp(rank);
         setHopperForColor(rankSettings);
         rankSettings.setItem(10, new ItemBuilder(Material.NAME_TAG).setDisplayname("§6Rank Name").setLore("§7Set the rank name that's ","§7shown on the scoreboard.","","§7Current: §3"+rankName,"§eClick to change.").setLocalizedName("rankSettings.name").build());
         rankSettings.setItem(13, new ItemBuilder(Material.NAME_TAG).setDisplayname("§6Rank Prefix").setLore("§7Set the rank prefix that's ","§7shown on the chat.","","§7Current: §3"+rankPrefix,"§eClick to change.").setLocalizedName("rankSettings.prefix").build());
+        rankSettings.setItem(37, new ItemBuilder(Material.COMMAND_BLOCK).setDisplayname("§6Rank Operator").setLore("§7Set if the rank has ","§7operator or not.","",op ? "§7Current: §2true" : "§7Current: §4false","§eClick to change.").setLocalizedName("rankSettings.op").build());
+        rankSettings.setItem(40, new ItemBuilder(Material.OAK_SIGN).setDisplayname("§6Rank Permissions").setLore("§eClick to manage.").setLocalizedName("rankSettings.permissions").build());
         rankSettings.setItem(45, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§eBack").setSkullOwner(Main.BACK_SKULL_TEXTURE).setLocalizedName("rankSettings.back").build());
         player.openInventory(rankSettings);
     }
     public void createRankCreateInventory(Player player){
         Inventory createRank = Bukkit.createInventory(player,54,Objects.requireNonNull(plugin.getConfig().getString("Inventory.Rank.RankSettingsInventory.CreateRankInventory")).replaceAll("&", "§"));
         int[] redGlass = new int[]{0,8,53};
-        int[]  whiteGlass = new int[]{1,2,3,5,6,7,9,12,14,17,18,21,23,26,27,30,32,39,31,35,36,41,44,46,47,48,50,51,52};
+        int[]  whiteGlass = new int[]{1,2,3,4,5,6,7,9,12,14,17,18,21,23,26,27,30,32,39,31,35,36,41,44,46,47,48,50,51,52};
         for (int i = 0; i < redGlass.length; i++) {createRank.setItem(redGlass[i], new ItemBuilder(Material.RED_STAINED_GLASS_PANE).setDisplayname("§c").build());}
         for (int i = 0; i < whiteGlass.length; i++) {createRank.setItem(whiteGlass[i], new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
         createRank.setItem(45,new ItemBuilder(Material.PLAYER_HEAD).setSkullOwner(Main.BACK_SKULL_TEXTURE).setDisplayname("§eBack").setLocalizedName("createRank.back").build());
         player.openInventory(createRank);
+    }
+    public void createRankPermissionInventory(Player player, String rank){
+        Inventory rankPermissions = Bukkit.createInventory(player,54,Objects.requireNonNull(plugin.getConfig().getString("Inventory.Rank.RankSettingsInventory.RankPermissionInventory")).replaceAll("&", "§"));
+        int[]  whiteGlass = new int[]{0,1,2,3,4,5,6,7,8,9,17,18,26,27,35,36,44,46,47,48,49,50,51,52,53};
+        for (int i = 0; i < whiteGlass.length; i++) {rankPermissions.setItem(whiteGlass[i], new ItemBuilder(Material.YELLOW_STAINED_GLASS_PANE).setDisplayname("§c").setLocalizedName(rank).build());}
+        FileConfiguration config = YamlConfiguration.loadConfiguration(plugin.getRankManager().getRankFile());
+        if(config.contains("Ranks."+rank+".Permissions.")) {
+            for (String permissions : config.getConfigurationSection("Ranks." + rank + ".Permissions.").getKeys(false)) {
+                String permission = config.getString("Ranks." + rank + ".Permissions."+permissions);
+                rankPermissions.addItem(new ItemBuilder(Material.OAK_SIGN).setDisplayname("§6§l"+permission).setLore("§8Right-Click to delete this permission").setLocalizedName(permissions).build());
+            }
+        }
+        rankPermissions.setItem(53,new ItemBuilder(Material.LIME_CONCRETE).setDisplayname("§a§lAdd Permission").setLocalizedName("permissionRank.add").build());
+        rankPermissions.setItem(45,new ItemBuilder(Material.PLAYER_HEAD).setSkullOwner(Main.BACK_SKULL_TEXTURE).setDisplayname("§eBack").setLocalizedName("permissionRank.back").build());
+        player.openInventory(rankPermissions);
     }
     private void setHopperForColor(Inventory inventory){
         String rank = inventory.getItem(0).getItemMeta().getLocalizedName();

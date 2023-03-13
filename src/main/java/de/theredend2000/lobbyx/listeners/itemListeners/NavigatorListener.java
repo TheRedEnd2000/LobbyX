@@ -165,6 +165,7 @@ public class NavigatorListener implements Listener {
             if(event.getMessage().equalsIgnoreCase("cancel")){
                 plugin.getNavigatorMenuManager().createSlotEditInventory(player,slot);
                 player.sendMessage(Util.getMessage(Util.getLocale(player),"EnterInChatCanceled"));
+                namePlayer.remove(player);
                 return;
             }
             plugin.navigatorYaml.set("Navigator.Slots." + slot + ".name",event.getMessage());

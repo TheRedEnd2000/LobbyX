@@ -62,7 +62,7 @@ public class NavigatorMenuManager {
 
     public void createSlotEditInventory(Player player, int slot){
         Inventory inventory = Bukkit.createInventory(player,45,"§7Edit Navigator Slot");
-        int[] glass = new int[]{0,1,2,3,5,6,7,8,9,17,18,26,27,35,36,37,38,39,40,41,42,43,44};
+        int[] glass = new int[]{0,1,2,3,4,5,6,7,8,9,17,18,26,27,35,36,37,38,39,40,41,42,43,44};
         for (int i = 0; i<glass.length;i++){inventory.setItem(glass[i], new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setDisplayname("§c").setLocalizedName(String.valueOf(slot)).build());}
         String itemName = plugin.navigatorYaml.getString("Navigator.Slots." + slot + ".name");
         String material = "Navigator.Slots." + slot + ".item";
