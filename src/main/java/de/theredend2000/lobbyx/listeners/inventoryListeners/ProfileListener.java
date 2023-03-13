@@ -341,6 +341,15 @@ public class ProfileListener implements Listener {
                     }
                 }
             }
+        }else if (event.getView().getTitle().equals(Objects.requireNonNull(plugin.getConfig().getString("Inventory.InteractwithplayerInventory")).replaceAll("&", "§"))){
+            event.setCancelled(true);
+            if (event.getCurrentItem() !=null){
+                if (event.getCurrentItem().getItemMeta().hasLocalizedName()){
+                    switch (event.getCurrentItem().getItemMeta().getLocalizedName()){
+                        case "":
+                    }
+                }
+            }
         }
     }
 
