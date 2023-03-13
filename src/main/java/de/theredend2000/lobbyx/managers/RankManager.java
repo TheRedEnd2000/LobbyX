@@ -292,6 +292,7 @@ public class RankManager {
                                 if(!hasOp(rank)) {
                                     if(hasPermission(rank,permission)){
                                         permissionAttachment.setPermission(permission,true);
+                                        player.sendMessage("added "+permission);
                                     }
                                 }
                             }
