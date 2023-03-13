@@ -49,6 +49,7 @@ Inventory:
   LobbySelectorInventoryTitle: '&bLobby&4X&f - &dLobbys'
   WorldCreatorInventoryTitle: '&bLobby&4X&f - &2World Creator'
   TeleporterInventoryTitle: '&bLobby&4X&f - &5Navigator'
+  InteractwithplayerInventory: '&bLobby&4X&f - &3PlayerInfo'
   Rank:
     RankInventory: '&bLobby&4X&f - &9Ranks'
     RankSettingsInventory:
