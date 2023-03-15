@@ -128,3 +128,10 @@ DailyReward:
   RewardTimeLayOut: '&7Come back in: &6%HOURS%h %MINUTES%m %SECONDS%s&7!'
   ClaimReward: '&aYou claimed your &6Daily Reward&a!'
   CoinsLayout: '&7Your &6%COINS_AMOUNT% coins&7 was added to you &5purse&7. You have now &6%COINS_BALANCE% coins.'
+
+TutorialText:
+  TT-Section1: '&7&lWell, now that you have hopefully chosen the right language for you, we can continue.'
+  TT-Section2: '&7&lIf you dont see a scoreboard or anything just yet, its probably because your not in a lobby world. You can add this after the tutorial.'
+  TT-Section3: '&7&lThe command that will interest you the most is the &6/lobbyx manage&7&l. With this command you can make any settings on the plugin. You should also set up the plugin nicely. you can do that in the &6config.yml file'
+  TT-Section4: '&7&lWhat you are probably also interested in is the range that is available. You can set them with the power ranks web editor. if you dont have power ranks, you need to do this now.'
+  TT-Section5: '&7&lSo that would be it for now. if you set or have set everything correctly now, you can now use the plugin without any problems. &6For more information type /lobbyx help'

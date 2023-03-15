@@ -124,7 +124,7 @@ public class ClanCommands implements CommandExecutor, TabCompleter {
                 }else if(args.length == 1){
                     if(args[0].equalsIgnoreCase("manage")){
                         if(plugin.getClanManager().hasClan(player)){
-                            plugin.getProfileMenuManager().createClanGuiLeader(player,false);
+                            plugin.getProfileMenuManager().createClanGuiLeader(player);
                         }else
                             player.sendMessage(Util.getMessage(Util.getLocale(player),"HasNoClan"));
                     }else if(args[0].equalsIgnoreCase("leave")){
