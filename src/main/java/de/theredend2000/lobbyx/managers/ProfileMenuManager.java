@@ -25,27 +25,38 @@ public class ProfileMenuManager implements Listener {
 
     public void createProfileInventory(Player player) {
         Inventory inventory = Bukkit.createInventory(player, 54, Objects.requireNonNull(plugin.getConfig().getString("Inventory.ProfileInventoryTitle")).replaceAll("&", "§"));
-        int[] blauglass = new int[]{2,6,10,16,18,20,24,26,27,29,33,35,37,43,45,53};
-        int[] anderesglass = new int[]{1,3,5,7,28,31,34,36,44,46,48,49,50,52};
-        int[] dunkleresanderesblau = new int[]{9,17,21,23,47,51};
-        int[]  daswasnichtblauist = new int[]{11,12,13,14,15,30,32};
-        for (int i = 0; i < blauglass.length; i++) {inventory.setItem(blauglass[i], new ItemBuilder(Material.BLUE_STAINED_GLASS_PANE).setDisplayname("§c").build());}for (int i = 0; i < dunkleresanderesblau.length; i++) {inventory.setItem(dunkleresanderesblau[i], new ItemBuilder(Material.CYAN_STAINED_GLASS_PANE).setDisplayname("§c").build());}
-        for (int i = 0; i < anderesglass.length; i++) {inventory.setItem(anderesglass[i], new ItemBuilder(Material.LIGHT_BLUE_STAINED_GLASS_PANE).setDisplayname("§c").build());}for (int i = 0; i < daswasnichtblauist.length; i++) {inventory.setItem(daswasnichtblauist[i], new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
+        int[] blau = new int[]{2,6,10,16,18,20,24,26,27,29,33,35,37,43,45,53};
+        int[] hellblau = new int[]{1,3,5,7,28,31,34,36,39,41,44,46,48,49,50,52};
+        int[] Türkis = new int[]{9,17,21,23,47,51};
+        int[] Weiß = new int[]{11,12,13,14,15,30,32};
+        for (int i = 0; i < blau.length; i++) {inventory.setItem(blau[i], new ItemBuilder(Material.BLUE_STAINED_GLASS_PANE).setDisplayname("§c").build());}for (int i = 0; i < Türkis.length; i++) {inventory.setItem(Türkis[i], new ItemBuilder(Material.CYAN_STAINED_GLASS_PANE).setDisplayname("§c").build());}
+        for (int i = 0; i < hellblau.length; i++) {inventory.setItem(hellblau[i], new ItemBuilder(Material.LIGHT_BLUE_STAINED_GLASS_PANE).setDisplayname("§c").build());}for (int i = 0; i < Weiß.length; i++) {inventory.setItem(Weiß[i], new ItemBuilder(Material.WHITE_DYE).setDisplayname("§c").build());}
         ItemStack playerhead = new ItemStack(Material.PLAYER_HEAD);
         SkullMeta skullMeta = (SkullMeta) playerhead.getItemMeta();
         skullMeta.setOwner(player.getName());
         skullMeta.setDisplayName("Profile");
         skullMeta.setLocalizedName("MainInventory.Profil");
         playerhead.setItemMeta(skullMeta);
-        inventory.setItem(0, new ItemBuilder(Material.COMPARATOR).setDisplayname("§Settings").setLocalizedName("MainInventory.Settings").build());
+        inventory.setItem(0, new ItemBuilder(Material.COMPARATOR).setDisplayname("§fSettings").setLocalizedName("MainInventory.Settings").build());
         inventory.setItem(4, new ItemStack(playerhead));
         inventory.setItem(8, new ItemBuilder(Material.BOOK).setDisplayname("§fHelp").setLocalizedName("MainInventory.Help").build());
         inventory.setItem(19, new ItemBuilder(Material.WRITABLE_BOOK).setDisplayname("§fYour Friends").setLocalizedName("MainInventory.Friends").build());
         inventory.setItem(22, new ItemBuilder(Material.EMERALD).setDisplayname("Player Info").setLocalizedName("MainInventory.Info").build());
         inventory.setItem(25, new ItemBuilder(Material.DIAMOND).setDisplayname("Social").setLocalizedName("MainInventory.Social").build());
         inventory.setItem(38, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§9Clan").setSkullOwner(Main.getTexture("NmE1MzYxYjUyZGFmNGYxYzVjNTQ4MGEzOWZhYWExMDg5NzU5NWZhNTc2M2Y3NTdiZGRhMzk1NjU4OGZlYzY3OCJ9fX0=")).setLocalizedName("MainInventory.Clan").build());
-        inventory.setItem(40, new ItemBuilder(Material.GOLD_BLOCK).setDisplayname("§eCoins: §6"+plugin.getCoinManager().getCoins(player)).setLocalizedName("MainInventory.Coins").build());
-        inventory.setItem(42, new ItemBuilder(Material.DIAMOND).setDisplayname("Languages").setLocalizedName("MainInventory.Languages").build());
+        inventory.setItem(40, new ItemBuilder(Material.GOLD_BLOCK).setDisplayname("§eCoins§f:"+(plugin.getCoinManager().getCoins(player))).setLocalizedName("MainInventory.Coins").build());
+        switch (Util.getPlayerLanguage(player)){
+            case"EN":
+                inventory.setItem(42, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§0Lan§4gua§eges").setSkullOwner(Main.getTexture("ODgzMWM3M2Y1NDY4ZTg4OGMzMDE5ZTI4NDdlNDQyZGZhYTg4ODk4ZDUwY2NmMDFmZDJmOTE0YWY1NDRkNTM2OCJ9fX0=")).setLore("§7Current Language§f: English").setLocalizedName("MainInventory.Languages").build());
+                break;
+            case "DE":
+                inventory.setItem(42, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§1Lan§fgua§cges").setSkullOwner(Main.getTexture("NWU3ODk5YjQ4MDY4NTg2OTdlMjgzZjA4NGQ5MTczZmU0ODc4ODY0NTM3NzQ2MjZiMjRiZDhjZmVjYzc3YjNmIn19fQ==")).setLore("§7Current Language§f: Deustch").setLocalizedName("MainInventory.Languages").build());
+                break;
+            case "SP":
+                inventory.setItem(42, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§4Lan§6gua§4ges").setSkullOwner(Main.getTexture("YzJkNzMwYjZkZGExNmI1ODQ3ODNiNjNkMDgyYTgwMDQ5YjVmYTcwMjI4YWJhNGFlODg0YzJjMWZjMGMzYThiYyJ9fX0=")).setLore("§7Current Language§f: Español ").setLocalizedName("MainInventory.Languages").build());
+                break;
+
+        }
         player.openInventory(inventory);
     }
 
@@ -268,13 +279,13 @@ public class ProfileMenuManager implements Listener {
         player.openInventory(confirmInventory);
     }
 
-    public void createClanGuiLeader(Player player,boolean backArrow) {
+    public void createClanGuiLeader(Player player) {
         Inventory Clan = Bukkit.createInventory(player, 54, Objects.requireNonNull(plugin.getConfig().getString("Inventory.ClanInventory.ClanLeaderInventoryTitle")).replaceAll("&", "§"));
-        int[] whiteGlass = new int[]{21,22,23,29,30,32,33,37,39,40,41,43};
-        int[] Blueglass = new int[]{0,1,2,3,5,6,7,8,9,17,18,26,27,35,36,44,45};
-        int[] TurkischGlass = new int[]{10,11,12,14,15,16,19,25,28,34};
-        int[] HelleresTürkisGlass = new int[]{46,47,48,50,51,52};
-        for (int i = 0; i < whiteGlass.length; i++) {Clan.setItem(whiteGlass[i], new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
+        int[] whiteglass = new int[]{21, 22, 23, 29, 30, 32, 33, 37, 39, 40, 41, 43};
+        int[] Blueglass = new int[]{0, 1, 2, 3, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44};
+        int[] TurkischGlass = new int[]{10, 11, 12, 14, 15, 16, 19, 25, 28, 34};
+        int[] HelleresTürkisGlass = new int[]{46, 47, 48, 50, 51, 52};
+        for (int i = 0; i < whiteglass.length; i++) {Clan.setItem(whiteglass[i], new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
         for (int i = 0; i < Blueglass.length; i++) {Clan.setItem(Blueglass[i], new ItemBuilder(Material.BLUE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
         for (int i = 0; i < TurkischGlass.length; i++) {Clan.setItem(TurkischGlass[i], new ItemBuilder(Material.CYAN_STAINED_GLASS_PANE).setDisplayname("§c").build());}
         for (int i = 0; i < HelleresTürkisGlass.length; i++) {Clan.setItem(HelleresTürkisGlass[i], new ItemBuilder(Material.LIGHT_BLUE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
@@ -290,17 +301,16 @@ public class ProfileMenuManager implements Listener {
             Clan.setItem(31, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§aInfo").setLore("§7ClanName: §6" + clanName, "§7ClanOwner: §6" + clanOwnerName, privateBoolean ? "§7Clan is §4Private" : "§7Clan is §2Public", "§7Created: §6" + createdDate + "§f§l - §6" + createdTime).setSkullOwner(Main.getTexture("M2Y4MzEzNTYxN2NmNTllNjlmNDVjZDhkYzYzYmIxNzQ5NDU2NWI3MGJiYmI4MmE3MjViODkyYWVlZGY4MDA1In19fQ==")).setLocalizedName("ClanMenu.Leader.ClanItems").build());//wichtig dat au
             Clan.setItem(38, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§dAdvancements").setSkullOwner(Main.getTexture("ZTM0YTU5MmE3OTM5N2E4ZGYzOTk3YzQzMDkxNjk0ZmMyZmI3NmM4ODNhNzZjY2U4OWYwMjI3ZTVjOWYxZGZlIn19fQ==")).setLocalizedName("ClanMenu.Leader.Achivements").build());//wichtig der quark muss rein
             Clan.setItem(42, new ItemBuilder(Material.PLAYER_HEAD).setSkullOwner(Main.getTexture("ZWMyZmYyNDRkZmM5ZGQzYTJjZWY2MzExMmU3NTAyZGM2MzY3YjBkMDIxMzI5NTAzNDdiMmI0NzlhNzIzNjZkZCJ9fX0=")).setDisplayname("ClanSettings").setLocalizedName("ClanMenu.Leader.CLanSettings").build());//wth CLan Items Kommen in Gadget menu
-            if(backArrow)
-                Clan.setItem(45, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§eBack").setSkullOwner(Main.BACK_SKULL_TEXTURE).setLocalizedName("ClanMenu.Leader.Back").build());
+            Clan.setItem(45, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§7Back").setSkullOwner(Main.BACK_SKULL_TEXTURE).setLocalizedName("ClanMenu.Leader.Back").build());
             Clan.setItem(49, new ItemBuilder(Material.NETHER_STAR).setDisplayname("§9Main Menu").setLocalizedName("ClanMenu.Leader.MainMenu").build());
             Clan.setItem(53, new ItemBuilder(Material.REDSTONE_BLOCK).setDisplayname("§4Delete Clan").setLocalizedName("ClanMenu.Leader.Clan.del").build());
         }
         player.openInventory(Clan);
     }
-    public void CreateClanGuiMember(Player player, boolean backArrow) {
+    public void CreateClanGuiMember1(Player player) {
         Inventory Clan = Bukkit.createInventory(player, 54, Objects.requireNonNull(plugin.getConfig().getString("Inventory.ClanInventory.ClanMember1InventoryTitle")).replaceAll("&", "§"));
         int[] whiteglass = new int[]{21, 22, 23, 29, 30, 32, 33, 37, 39, 40, 41, 43};
-        int[] Blueglass = new int[]{0, 1, 2, 3, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44,45};
+        int[] Blueglass = new int[]{0, 1, 2, 3, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44};
         int[] TurkischGlass = new int[]{10, 11, 12, 14, 15, 16, 19, 25, 28, 34};
         int[] HelleresTürkisGlass = new int[]{46, 47, 48, 50, 51, 52};
         for (int i = 0; i < whiteglass.length; i++) {Clan.setItem(whiteglass[i], new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
@@ -310,9 +320,7 @@ public class ProfileMenuManager implements Listener {
         Clan.setItem(4, new ItemBuilder(Material.BOOK).setDisplayname("§cIcon ").setLocalizedName("ClanMenu.Leader.ClanIcon").build());
         Clan.setItem(13, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§2§lClan Owner").setOwner(player.getName()).setLocalizedName("ClanMenu.Leader.ClanIcon.Leader").build());
         Clan.setItem(20, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§eMembers").setSkullOwner(Main.getTexture("YjFlZDIwNTY3MDY4Y2IwY2MwNzJkNzMyZjUzMjJkNzM0YmY4NDllNjg4YzdmZTAxMWEzMDJlMWI5NDczZDIwYyJ9fX0=")).setLocalizedName("ClanMenu.Leader.Members").build());
-        if(backArrow)
-            Clan.setItem(45, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§eBack").setSkullOwner(Main.BACK_SKULL_TEXTURE).setLocalizedName("ClanMenu.Leader.Back").build());
-        player.openInventory(Clan);
+
     }
 
 }
