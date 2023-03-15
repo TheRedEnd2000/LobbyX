@@ -41,6 +41,9 @@ public class Util {
     public static File getLocale(Player p){
         return localSettings.get(p);
     }
+    public static String getPlayerLanguage(Player player){
+        return plugin.yaml.getString("Languages."+player.getUniqueId()).toUpperCase();
+    }
     public static void setLocale(Player p, File file){
         removePlayer(p);
         if(!file.exists()){
