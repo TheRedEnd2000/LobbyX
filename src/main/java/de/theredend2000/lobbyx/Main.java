@@ -50,7 +50,6 @@ public final class Main extends JavaPlugin {
     private ProfileMenuManager profileMenuManager;
     private ClanManager clanManager;
     private RewardManager rewardManager;
-    private RankManager rankManager;
     private DatetimeUtils datetimeUtils;
     private GadgetsMenuManager gadgetsMenuManager;
     private LobbySelectorManager lobbySelectorManager;
@@ -222,7 +221,6 @@ public final class Main extends JavaPlugin {
         coinManager = new CoinManager(this);
         playerDataManager = new PlayerDataManager(this);
         friendManager = new FriendManager(this);
-        rankManager = new RankManager(this);
         new Broadcaster(this).startBroadcast();
         new ScoreboardManager(this);
     }
@@ -348,9 +346,6 @@ public final class Main extends JavaPlugin {
     }
     public FriendManager getFriendManager() {
         return friendManager;
-    }
-    public RankManager getRankManager() {
-        return rankManager;
     }
     public PowerRanksAPI getApi() {
         return api;

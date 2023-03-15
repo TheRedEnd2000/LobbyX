@@ -15,8 +15,6 @@ Settings:
   DefaultWeather: CLEAR #Select between Clear, Rain, Thunder
   DefaultGamemode: SURVIVAL
   DailyRewardCoinsAmount: 2000
-  DefaultRank: default #This rank MUST exist in the ranks.yml file!
-  OperatorRank: mod #This rank MUST exist tn the ranks.yml file!
 
 #LobbyWorlds
 

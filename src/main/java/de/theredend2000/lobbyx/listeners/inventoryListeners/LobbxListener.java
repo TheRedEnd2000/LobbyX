@@ -35,7 +35,8 @@ public class LobbxListener implements Listener {
                             plugin.getNavigatorMenuManager().createSelectSlotInventory(player);
                             break;
                         case "lobbyx.editRanks":
-                            plugin.getProfileMenuManager().createRankInventory(player);
+                            player.closeInventory();
+                            player.sendMessage("Webeditor");
                             break;
                     }
                 }

@@ -41,7 +41,6 @@ public class TablistManager {
                     if(plugin.getLobbyWorlds() != null) {
                         if (plugin.getLobbyWorlds().contains(player.getWorld())) {
                             setPlayerList(player);
-                            plugin.getRankManager().setRanksList(player);
                         }
                     }
                 }
