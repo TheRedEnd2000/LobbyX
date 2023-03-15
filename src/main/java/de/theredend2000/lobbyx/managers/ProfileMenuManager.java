@@ -24,24 +24,27 @@ public class ProfileMenuManager implements Listener {
 
     public void createProfileInventory(Player player) {
         Inventory inventory = Bukkit.createInventory(player, 54, Objects.requireNonNull(plugin.getConfig().getString("Inventory.ProfileInventoryTitle")).replaceAll("&", "§"));
-        int[] blueglass = new int[]{1, 2, 3, 4, 5, 6, 7, 9, 11, 12, 13, 14, 15, 17, 18, 21, 23, 26, 27, 20, 31, 32, 35, 36, 39, 40, 41, 44, 46, 47, 48, 49, 50, 51, 52};
-        int[] anderesglass = new int[]{0, 8, 10, 16, 19, 20, 24, 25, 28, 34, 37, 38, 42, 43, 45, 53};
-        for (int i = 0; i < blueglass.length; i++) {
-            inventory.setItem(blueglass[i], new ItemBuilder(Material.BLUE_STAINED_GLASS_PANE).setDisplayname("§c").build());
-        }
-        for (int i = 0; i < anderesglass.length; i++) {
-            inventory.setItem(anderesglass[i], new ItemBuilder(Material.CYAN_STAINED_GLASS_PANE).setDisplayname("§c").build());
-        }
+        int[] blauglass = new int[]{2,6,10,16,18,20,24,26,27,29,33,35,37,43,45,53};
+        int[] anderesglass = new int[]{1,3,5,7,28,31,34,36,44,46,48,49,50,52};
+        int[] dunkleresanderesblau = new int[]{9,17,21,23,47,51};
+        int[]  daswasnichtblauist = new int[]{11,12,13,14,15,30,32};
+        for (int i = 0; i < blauglass.length; i++) {inventory.setItem(blauglass[i], new ItemBuilder(Material.BLUE_STAINED_GLASS_PANE).setDisplayname("§c").build());}for (int i = 0; i < dunkleresanderesblau.length; i++) {inventory.setItem(dunkleresanderesblau[i], new ItemBuilder(Material.CYAN_STAINED_GLASS_PANE).setDisplayname("§c").build());}
+        for (int i = 0; i < anderesglass.length; i++) {inventory.setItem(anderesglass[i], new ItemBuilder(Material.LIGHT_BLUE_STAINED_GLASS_PANE).setDisplayname("§c").build());}for (int i = 0; i < daswasnichtblauist.length; i++) {inventory.setItem(daswasnichtblauist[i], new ItemBuilder(Material.WHITE_DYE).setDisplayname("§c").build());}
         ItemStack playerhead = new ItemStack(Material.PLAYER_HEAD);
         SkullMeta skullMeta = (SkullMeta) playerhead.getItemMeta();
         skullMeta.setOwner(player.getName());
         skullMeta.setDisplayName("Profile");
         skullMeta.setLocalizedName("MainInventory.Profil");
         playerhead.setItemMeta(skullMeta);
-        inventory.setItem(22, new ItemStack(playerhead));
-        inventory.setItem(29, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§9Clan").setSkullOwner(Main.getTexture("NmE1MzYxYjUyZGFmNGYxYzVjNTQ4MGEzOWZhYWExMDg5NzU5NWZhNTc2M2Y3NTdiZGRhMzk1NjU4OGZlYzY3OCJ9fX0=")).setLocalizedName("MainInventory.Clan").build());
-        inventory.setItem(33, new ItemBuilder(Material.COMPARATOR).setDisplayname("§Settings").setLocalizedName("MainInventory.Settings").build());
-        inventory.setItem(40, new ItemBuilder(Material.DIAMOND).setDisplayname("Social").setLocalizedName("MainInventory.Social").build());
+        inventory.setItem(0, new ItemBuilder(Material.COMPARATOR).setDisplayname("§Settings").setLocalizedName("MainInventory.Settings").build());
+        inventory.setItem(4, new ItemStack(playerhead));
+        inventory.setItem(8, new ItemBuilder(Material.BOOK).setDisplayname("§fHelp").setLocalizedName("MainInventory.Help").build());
+        inventory.setItem(19, new ItemBuilder(Material.WRITABLE_BOOK).setDisplayname("§fYour Friends").setLocalizedName("MainInventory.Friends").build());
+        inventory.setItem(22, new ItemBuilder(Material.EMERALD).setDisplayname("Player Info").setLocalizedName("MainInventory.Info").build());
+        inventory.setItem(25, new ItemBuilder(Material.DIAMOND).setDisplayname("Social").setLocalizedName("MainInventory.Social").build());
+        inventory.setItem(38, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§9Clan").setSkullOwner(Main.getTexture("NmE1MzYxYjUyZGFmNGYxYzVjNTQ4MGEzOWZhYWExMDg5NzU5NWZhNTc2M2Y3NTdiZGRhMzk1NjU4OGZlYzY3OCJ9fX0=")).setLocalizedName("MainInventory.Clan").build());
+        inventory.setItem(40, new ItemBuilder(Material.GOLD_BLOCK).setDisplayname("§eCoins§f:"+(plugin.getCoinManager().getCoins(player))).setLocalizedName("MainInventory.Coins").build());
+        inventory.setItem(42, new ItemBuilder(Material.DIAMOND).setDisplayname("Languages").setLocalizedName("MainInventory.Languages").build());
         player.openInventory(inventory);
     }
 

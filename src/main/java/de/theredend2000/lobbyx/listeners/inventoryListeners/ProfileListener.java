@@ -42,7 +42,17 @@ public class ProfileListener implements Listener {
             if (event.getCurrentItem()!=null){
                 if (event.getCurrentItem().getItemMeta().hasLocalizedName()){
                 switch(event.getCurrentItem().getItemMeta().getLocalizedName()){
-                    case "MainInventory.Profil":
+                    case "MainInventory.Settings":
+                        break;
+                    case "MainInventory.Help":
+                        break;
+                    case "MainInventory.Friends":
+                        plugin.getProfileMenuManager().createFriendInventory(player);
+                        break;
+                    case"MainInventory.Info":
+                        break;
+                    case"MainInventory.Social":
+                        plugin.getProfileMenuManager().createSozailMenu(player);
                         break;
                     case "MainInventory.Clan":
                         if(plugin.yaml.contains("Clans.")) {
@@ -60,11 +70,8 @@ public class ProfileListener implements Listener {
                         }else
                             plugin.getProfileMenuManager().createClanChooseInventory(player);
                         break;
-                    case"MainInventory.Settings":
+                    case "MainInventory.Languages":
                         plugin.getProfileMenuManager().createLanguageInventory(player);
-                        break;
-                    case"MainInventory.Social":
-                        plugin.getProfileMenuManager().createSozailMenu(player);
                         break;
                     default:
                         break;
