@@ -137,13 +137,13 @@ Scoreboard:
   Lines:
     - "&8%DATE% - %TIME%"
     - "&1"
-    - "&7Player ➔ &6%PLAYER%"
+    - "&7Player ➔ %NAME_COLOR%%PLAYER%"
     - "&2"
     - "&7Clan ➔ &6%CLAN%"
     - "&7Coins ➔ &6%COINS%"
     - "&7Online Friends ➔ &6%ONLINE_FRIENDS%"
     - "&3"
-    - "&7Rank ➔ %RANK%"
+    - "&7Rank ➔ &6%RANK%"
     - "&6"
     - "&aYourServer.net"
 
@@ -168,5 +168,5 @@ LobbySelector:
   Name: '&6Lobby &f&l- &b%WORLD_NAME%'
 
 ChatFormat:
-  ChatFormatRank: '&6[%RANK%&6] &3%PLAYER% &5>> &f%MESSAGE%'
+  ChatFormatRank: '&6[%RANK%&6]&r %NAME_COLOR%%PLAYER% &5>>&r %CHAT_COLOR%%MESSAGE%'
   ChatFormatWithout: '&3%PLAYER% &5>> &f%MESSAGE%'

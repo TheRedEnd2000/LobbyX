@@ -2,13 +2,10 @@ package de.theredend2000.lobbyx.listeners;
 
 import de.theredend2000.lobbyx.Main;
 import de.theredend2000.lobbyx.util.ColorUtils;
-import nl.svenar.PowerRanks.PowerRanks;
 import org.bukkit.Bukkit;
-import org.bukkit.Color;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerChatEvent;
 
 public class PlayerChatEventListener implements Listener {
@@ -32,7 +29,9 @@ public class PlayerChatEventListener implements Listener {
                 if(plugin.getServer().getPluginManager().isPluginEnabled("PowerRanks")) {
                     String rank = plugin.getApi().getPrimaryRank(player);
                     String prefix = plugin.getApi().getPrefix(rank);
-                    lobbyPlayer.sendMessage(plugin.getConfig().getString("ChatFormat.ChatFormatRank").replaceAll("%RANK%", ColorUtils.format('&', prefix, true, true)).replaceAll("%PLAYER%",player.getName()).replaceAll("%MESSAGE%",event.getMessage()).replaceAll("&","§"));
+                    String nameColor = plugin.getApi().getNameColor(rank);
+                    String chatColor = plugin.getApi().getChatColor(rank);
+                    lobbyPlayer.sendMessage(plugin.getConfig().getString("ChatFormat.ChatFormatRank").replaceAll("%RANK%", ColorUtils.format('&', prefix, true, true)).replaceAll("%CHAT_COLOR%",chatColor).replaceAll("%PLAYER%",player.getName()).replaceAll("%MESSAGE%",event.getMessage()).replaceAll("%NAME_COLOR%",nameColor).replaceAll("&","§"));
                 }else
                     lobbyPlayer.sendMessage(plugin.getConfig().getString("ChatFormat.ChatFormatWithout").replaceAll("%PLAYER%",player.getName()).replaceAll("%MESSAGE%",event.getMessage()).replaceAll("&","§"));
             }

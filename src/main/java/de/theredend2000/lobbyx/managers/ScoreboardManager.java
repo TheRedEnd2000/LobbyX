@@ -47,8 +47,8 @@ public class ScoreboardManager {
             if(!lines.isEmpty()) {
                 String currentLine = lines.get(0);
                 String rank = plugin.getApi().getPrimaryRank(player);
-                String prefix = plugin.getApi().getPrefix(rank);
-                objective.getScore(currentLine.replaceAll("%PLAYER%", player.getName()).replaceAll("%COINS%", String.valueOf(plugin.getCoinManager().getCoins(player))).replaceAll("%DATE%", plugin.getDatetimeUtils().getNowDate()).replaceAll("%TIME%", plugin.getDatetimeUtils().getNowTime()).replaceAll("%RANK%", ColorUtils.format('&',prefix,false,true)).replaceAll("%ONLINE_FRIENDS%", String.valueOf(onlineFriends)).replaceAll("%CLAN%", getClan(player)).replaceAll("&", "§")).setScore(i);
+                String nameColor = plugin.getApi().getNameColor(rank);
+                objective.getScore(currentLine.replaceAll("%NAME_COLOR%",nameColor).replaceAll("%PLAYER%", player.getName()).replaceAll("%COINS%", String.valueOf(plugin.getCoinManager().getCoins(player))).replaceAll("%DATE%", plugin.getDatetimeUtils().getNowDate()).replaceAll("%TIME%", plugin.getDatetimeUtils().getNowTime()).replaceAll("%RANK%", rank).replaceAll("%ONLINE_FRIENDS%", String.valueOf(onlineFriends)).replaceAll("%CLAN%", getClan(player)).replaceAll("&", "§")).setScore(i);
                 lines.remove(currentLine);
             }
         }

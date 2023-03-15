@@ -257,6 +257,7 @@ public class ProfileListener implements Listener {
                 if (event.getCurrentItem().getItemMeta().hasLocalizedName()){
                     switch (event.getCurrentItem().getItemMeta().getLocalizedName()){
                         case "":
+                            break;
                     }
                 }
             }

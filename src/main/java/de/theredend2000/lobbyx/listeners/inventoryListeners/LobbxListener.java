@@ -3,6 +3,9 @@ package de.theredend2000.lobbyx.listeners.inventoryListeners;
 import de.theredend2000.lobbyx.Main;
 import de.theredend2000.lobbyx.messages.Util;
 import de.theredend2000.lobbyx.util.ConfigLocationUtil;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -36,7 +39,13 @@ public class LobbxListener implements Listener {
                             break;
                         case "lobbyx.editRanks":
                             player.closeInventory();
-                            player.sendMessage("Webeditor");
+                            TextComponent c = new TextComponent("§7You can edit all the ranks in the webeditor of power ranks. Click here to get the link. ");
+                            TextComponent clickme = new TextComponent("§6§l[HERE]");
+
+                            clickme.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND,"/pr webeditor start"));
+                            clickme.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, TextComponent.fromLegacyText("§aClick to generate webeditor link.")));
+                            c.addExtra(clickme);
+                            player.spigot().sendMessage(c);
                             break;
                     }
                 }
