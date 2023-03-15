@@ -30,7 +30,7 @@ public class ProfileMenuManager implements Listener {
         int[] Türkis = new int[]{9,17,21,23,47,51};
         int[] Weiß = new int[]{11,12,13,14,15,30,32};
         for (int i = 0; i < blau.length; i++) {inventory.setItem(blau[i], new ItemBuilder(Material.BLUE_STAINED_GLASS_PANE).setDisplayname("§c").build());}for (int i = 0; i < Türkis.length; i++) {inventory.setItem(Türkis[i], new ItemBuilder(Material.CYAN_STAINED_GLASS_PANE).setDisplayname("§c").build());}
-        for (int i = 0; i < hellblau.length; i++) {inventory.setItem(hellblau[i], new ItemBuilder(Material.LIGHT_BLUE_STAINED_GLASS_PANE).setDisplayname("§c").build());}for (int i = 0; i < Weiß.length; i++) {inventory.setItem(Weiß[i], new ItemBuilder(Material.WHITE_DYE).setDisplayname("§c").build());}
+        for (int i = 0; i < hellblau.length; i++) {inventory.setItem(hellblau[i], new ItemBuilder(Material.LIGHT_BLUE_STAINED_GLASS_PANE).setDisplayname("§c").build());}for (int i = 0; i < Weiß.length; i++) {inventory.setItem(Weiß[i], new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
         ItemStack playerhead = new ItemStack(Material.PLAYER_HEAD);
         SkullMeta skullMeta = (SkullMeta) playerhead.getItemMeta();
         skullMeta.setOwner(player.getName());
@@ -46,15 +46,9 @@ public class ProfileMenuManager implements Listener {
         inventory.setItem(38, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§9Clan").setSkullOwner(Main.getTexture("NmE1MzYxYjUyZGFmNGYxYzVjNTQ4MGEzOWZhYWExMDg5NzU5NWZhNTc2M2Y3NTdiZGRhMzk1NjU4OGZlYzY3OCJ9fX0=")).setLocalizedName("MainInventory.Clan").build());
         inventory.setItem(40, new ItemBuilder(Material.GOLD_BLOCK).setDisplayname("§eCoins§f:"+(plugin.getCoinManager().getCoins(player))).setLocalizedName("MainInventory.Coins").build());
         switch (Util.getPlayerLanguage(player)){
-            case"EN":
-                inventory.setItem(42, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§0Lan§4gua§eges").setSkullOwner(Main.getTexture("ODgzMWM3M2Y1NDY4ZTg4OGMzMDE5ZTI4NDdlNDQyZGZhYTg4ODk4ZDUwY2NmMDFmZDJmOTE0YWY1NDRkNTM2OCJ9fX0=")).setLore("§7Current Language§f: English").setLocalizedName("MainInventory.Languages").build());
-                break;
-            case "DE":
-                inventory.setItem(42, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§1Lan§fgua§cges").setSkullOwner(Main.getTexture("NWU3ODk5YjQ4MDY4NTg2OTdlMjgzZjA4NGQ5MTczZmU0ODc4ODY0NTM3NzQ2MjZiMjRiZDhjZmVjYzc3YjNmIn19fQ==")).setLore("§7Current Language§f: Deustch").setLocalizedName("MainInventory.Languages").build());
-                break;
-            case "SP":
-                inventory.setItem(42, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§4Lan§6gua§4ges").setSkullOwner(Main.getTexture("YzJkNzMwYjZkZGExNmI1ODQ3ODNiNjNkMDgyYTgwMDQ5YjVmYTcwMjI4YWJhNGFlODg0YzJjMWZjMGMzYThiYyJ9fX0=")).setLore("§7Current Language§f: Español ").setLocalizedName("MainInventory.Languages").build());
-                break;
+            case"EN": inventory.setItem(42, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§1Lan§fgua§cges").setSkullOwner(Main.getTexture("ODgzMWM3M2Y1NDY4ZTg4OGMzMDE5ZTI4NDdlNDQyZGZhYTg4ODk4ZDUwY2NmMDFmZDJmOTE0YWY1NDRkNTM2OCJ9fX0=")).setLore("§7Current Language§f: English").setLocalizedName("MainInventory.Languages").build());break;
+            case "DE": inventory.setItem(42, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§0Lan§4gua§eges").setSkullOwner(Main.getTexture("NWU3ODk5YjQ4MDY4NTg2OTdlMjgzZjA4NGQ5MTczZmU0ODc4ODY0NTM3NzQ2MjZiMjRiZDhjZmVjYzc3YjNmIn19fQ==")).setLore("§7Current Language§f: Deutsch").setLocalizedName("MainInventory.Languages").build());break;
+            case "SP": inventory.setItem(42, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§4Lan§6gua§4ges").setSkullOwner(Main.getTexture("YzJkNzMwYjZkZGExNmI1ODQ3ODNiNjNkMDgyYTgwMDQ5YjVmYTcwMjI4YWJhNGFlODg0YzJjMWZjMGMzYThiYyJ9fX0=")).setLore("§7Current Language§f: Español ").setLocalizedName("MainInventory.Languages").build());break;
 
         }
         player.openInventory(inventory);
