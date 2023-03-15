@@ -2,14 +2,19 @@ package de.theredend2000.lobbyx.commands.playercommand;
 
 import de.theredend2000.lobbyx.Main;
 import de.theredend2000.lobbyx.messages.Util;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-public class SetLangCommand implements CommandExecutor {
+public class SetLangCommand implements CommandExecutor, TabCompleter {
 
     private Main plugin;
 
@@ -44,5 +49,20 @@ public class SetLangCommand implements CommandExecutor {
         }else
             sender.sendMessage(Util.getMessage("en","OnlyPlayerUse"));
         return false;
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
+        Player player = (Player) sender;
+        if(args.length == 0){
+            player.sendMessage(Util.getMessage(Util.getLocale(player), "FriendCommandUsage"));
+        }
+        if(args.length == 1){
+            String[] completes = {"en","de","sp","GERMAN","ENGLISH","SPAIN"};
+            ArrayList<String> completeList = new ArrayList<>();
+            Collections.addAll(completeList, completes);
+            return completeList;
+        }
+        return null;
     }
 }

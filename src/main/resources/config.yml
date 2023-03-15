@@ -168,3 +168,7 @@ LobbySelector:
   enabled: true
   Material: GHAST_TEAR
   Name: '&6Lobby &f&l- &b%WORLD_NAME%'
+
+ChatFormat:
+  ChatFormatRank: '&6[%RANK%&6] &3%PLAYER% &5>> &f%MESSAGE%'
+  ChatFormatWithout: '&3%PLAYER% &5>> &f%MESSAGE%'

@@ -3,8 +3,6 @@ package de.theredend2000.lobbyx.managers;
 import de.theredend2000.lobbyx.Main;
 import de.theredend2000.lobbyx.util.ItemBuilder;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -12,9 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
-import org.bukkit.permissions.PermissionAttachment;
 
 import java.util.*;
 
@@ -320,7 +316,7 @@ public class ProfileMenuManager implements Listener {
         Rank.setItem(4, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§5Ranks").setSkullOwner(Main.getTexture("ZDZjYzZiODM3NjNhNjdmY2FkYTFlYTE4NGMyZDE3NTJhZDI0MDc0NmM2YmUyNThhNzM5ODNkOGI2NTdmNGJiNSJ9fX0=")).build());
         Rank.setItem(35, new ItemBuilder(Material.GREEN_CONCRETE).setDisplayname("§aCreate Rank").setLocalizedName("RankSettings.create").build());
         Rank.setItem(45, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§eBack").setSkullOwner(Main.BACK_SKULL_TEXTURE).setLocalizedName("RankSettings.back").build());
-        plugin.getRankManager().listRanks(Rank);
+        plugin.getRankManager().listRanks(Rank,player);
         player.openInventory(Rank);
     }
     public void createRankSettingsInventory(Player player, String rank){
@@ -352,12 +348,14 @@ public class ProfileMenuManager implements Listener {
         int[]  whiteGlass = new int[]{0,1,2,3,4,5,6,7,8,9,17,18,26,27,35,36,44,46,47,48,49,50,51,52,53};
         for (int i = 0; i < whiteGlass.length; i++) {rankPermissions.setItem(whiteGlass[i], new ItemBuilder(Material.YELLOW_STAINED_GLASS_PANE).setDisplayname("§c").setLocalizedName(rank).build());}
         FileConfiguration config = YamlConfiguration.loadConfiguration(plugin.getRankManager().getRankFile());
-        if(config.contains("Ranks."+rank+".Permissions.")) {
+        /*if(config.contains("Ranks."+rank+".Permissions.")) {
             for (String permissions : config.getConfigurationSection("Ranks." + rank + ".Permissions.").getKeys(false)) {
-                String permission = config.getString("Ranks." + rank + ".Permissions."+permissions);
-                rankPermissions.addItem(new ItemBuilder(Material.OAK_SIGN).setDisplayname("§6§l"+permission).setLore("§8Right-Click to delete this permission").setLocalizedName(permissions).build());
+                String permission = config.getString("Ranks." + rank + ".Permissions."+permissions+".name");
+                boolean enabled = config.getBoolean("Ranks." + rank + ".Permissions."+permissions+".enabled");
+                if(enabled)
+                    rankPermissions.addItem(new ItemBuilder(Material.OAK_SIGN).setDisplayname("§6§l"+permission).setLore("§8Right-Click to delete this permission").setLocalizedName(permissions).build());
             }
-        }
+        }*/
         rankPermissions.setItem(53,new ItemBuilder(Material.LIME_CONCRETE).setDisplayname("§a§lAdd Permission").setLocalizedName("permissionRank.add").build());
         rankPermissions.setItem(45,new ItemBuilder(Material.PLAYER_HEAD).setSkullOwner(Main.BACK_SKULL_TEXTURE).setDisplayname("§eBack").setLocalizedName("permissionRank.back").build());
         player.openInventory(rankPermissions);

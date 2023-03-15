@@ -2,6 +2,9 @@ package de.theredend2000.lobbyx.managers;
 
 import de.theredend2000.lobbyx.Main;
 import de.theredend2000.lobbyx.util.ItemBuilder;
+import nl.svenar.PowerRanks.PowerRanks;
+import nl.svenar.PowerRanks.addons.PowerRanksAddon;
+import nl.svenar.PowerRanks.api.PowerRanksAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -26,8 +29,6 @@ public class RankManager {
     public RankManager(Main plugin){
         this.plugin = plugin;
         createDefaultRanks();
-        checkOpPlayers();
-        checkPermissionPlayers();
     }
 
     public File getRankFile() {
@@ -51,25 +52,14 @@ public class RankManager {
         }
     }
 
-    public void listRanks(Inventory inventory){
-        FileConfiguration config = YamlConfiguration.loadConfiguration(getRankFile());
-        for(String ranks : config.getConfigurationSection("Ranks.").getKeys(false)){
-            if(getRankSize() <= 20) {
-                String name = config.getString("Ranks." + ranks + ".DisplayName");
-                String color = config.getString("Ranks." + ranks + ".Color");
-                boolean op = config.getBoolean("Ranks." + ranks + ".Op");
-                inventory.addItem(new ItemBuilder(Material.PLAYER_HEAD).setSkullOwner(Main.getTexture("ZjY2YmM1MTljZDI2NjJiYmIwYmFjN2U2OWY4MDAyNjFhMTk4M2EzMmIzOWMxODlkM2M5OGJjMjk4YjUyNWJkZCJ9fX0=")).setDisplayname(color + name).setLore(op ? "§2§lThis Rank has Op" : "§cThis rank has §c§lNO §cOp", "§eClick to configure this rank.").setLocalizedName(ranks).build());
-            }
-        }
+    public void listRanks(Inventory inventory,Player player){
+        player.closeInventory();
+        PowerRanks p = new PowerRanks();
+        player.sendMessage("s");
     }
 
     public int getRankSize(){
-        FileConfiguration config = YamlConfiguration.loadConfiguration(getRankFile());
-        int counter = 0;
-        for(String ranks : config.getConfigurationSection("Ranks.").getKeys(false)){
-            counter++;
-        }
-        return counter;
+        return plugin.getApi().getRanks().size();
     }
 
     public void setRank(String name, Player player){
@@ -176,13 +166,17 @@ public class RankManager {
     public boolean hasPermission(String rank, String permission){
         FileConfiguration config = YamlConfiguration.loadConfiguration(getRankFile());
         for(String permissions : config.getConfigurationSection("Ranks."+rank+".Permissions.").getKeys(false)){
-            String finalPermission = config.getString("Ranks."+rank+".Permissions."+permissions);
+            String finalPermission = config.getString("Ranks."+rank+".Permissions."+permissions+".name");
             assert finalPermission != null;
             if(finalPermission.equals(permission)){
                 return true;
             }
         }
         return false;
+    }
+    public boolean hasPermissionEnabled(String rank, String permission){
+        FileConfiguration config = YamlConfiguration.loadConfiguration(getRankFile());
+        return config.getBoolean("Ranks."+rank+".Permissions."+permission+".enabled");
     }
 
     public void setRankName(String newName, String rank){
@@ -196,16 +190,17 @@ public class RankManager {
     }
     public void addPermission(String permission, String rank){
         FileConfiguration config = YamlConfiguration.loadConfiguration(getRankFile());
-        config.set("Ranks." + rank + ".Permissions."+permission, permission.replaceAll("_","."));
+        config.set("Ranks." + rank + ".Permissions."+permission+".enabled", true);
+        config.set("Ranks." + rank + ".Permissions."+permission+".name", permission.replaceAll("_","."));
         try {
             config.save(getRankFile());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    public void removePermission(String permission, String rank){
+    public void removePermission(String permissionSection,String permission, String rank){
         FileConfiguration config = YamlConfiguration.loadConfiguration(getRankFile());
-        config.set("Ranks." + rank + ".Permissions."+permission, null);
+        config.set("Ranks." + rank + ".Permissions."+permissionSection+"."+permission+".enabled", false);
         try {
             config.save(getRankFile());
         } catch (IOException e) {
@@ -252,7 +247,7 @@ public class RankManager {
         }
     }
 
-    private void checkOpPlayers(){
+    /*private void checkOpPlayers(){
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -285,13 +280,23 @@ public class RankManager {
                     for(String playerUUID : config.getConfigurationSection("Ranks_on_Player.").getKeys(false)){
                         if(player.getUniqueId().equals(UUID.fromString(playerUUID))){
                             String rank = getBlankRank(player);
-                            for(String permissions : config.getConfigurationSection("Ranks."+rank+".Permissions.").getKeys(false)){
-                                String permission = config.getString("Ranks."+rank+".Permissions."+permissions);
-                                PermissionAttachment permissionAttachment = player.addAttachment(plugin);
-                                assert permission != null;
-                                if(!hasOp(rank)) {
-                                    if(hasPermission(rank,permission)){
-                                        permissionAttachment.setPermission(permission,true);
+                            if(config.contains("Ranks."+rank+".Permissions")) {
+                                for (String permissions : config.getConfigurationSection("Ranks." + rank + ".Permissions.").getKeys(false)) {
+                                    String permission = config.getString("Ranks." + rank + ".Permissions." + permissions + ".name");
+                                    PermissionAttachment permissionAttachment = player.addAttachment(plugin);
+                                    assert permission != null;
+                                    if (!hasOp(rank)) {
+                                        if (hasPermission(rank, permission) && !player.hasPermission(permission)) {
+                                            permissionAttachment.setPermission(permission, true);
+                                            player.sendMessage(permission + " added");
+                                        }
+                                    }
+                                }
+                                for (PermissionAttachmentInfo per : player.getEffectivePermissions()) {
+                                    if (!hasPermission(rank, per.getPermission())) {
+                                        PermissionAttachment permissionAttachment = player.addAttachment(plugin);
+                                        permissionAttachment.unsetPermission(per.getPermission());
+                                        player.sendMessage(per.getPermission() + " remove");
                                     }
                                 }
                             }
@@ -301,7 +306,7 @@ public class RankManager {
                 }
             }
         }.runTaskTimer(plugin,0,10);
-    }
+    }*/
 
     public String getDefaultRank(){
         return plugin.getConfig().getString("Settings.DefaultRank");

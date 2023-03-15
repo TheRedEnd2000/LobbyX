@@ -320,9 +320,9 @@ public class ProfileListener implements Listener {
                     String rank = event.getInventory().getItem(0).getItemMeta().getLocalizedName();
                     FileConfiguration config = YamlConfiguration.loadConfiguration(plugin.getRankManager().getRankFile());
                     for(String permissions : config.getConfigurationSection("Ranks."+rank+".Permissions.").getKeys(false)){
-                        String permission = config.getString("Ranks."+rank+".Permissions."+permissions);
+                        String permission = config.getString("Ranks."+rank+".Permissions."+permissions+".name");
                         if(event.getCurrentItem().getItemMeta().getLocalizedName().equals(permissions) && event.getAction() == InventoryAction.PICKUP_HALF){
-                            plugin.getRankManager().removePermission(permissions,rank);
+                            plugin.getRankManager().removePermission(permissions, permission,rank);
                             plugin.getProfileMenuManager().createRankPermissionInventory(player,rank);
                             player.sendMessage(Util.getMessage(Util.getLocale(player),"RemovePermissionMessage").replaceAll("%PERMISSION%",permission.replaceAll("_",".")));
                             return;

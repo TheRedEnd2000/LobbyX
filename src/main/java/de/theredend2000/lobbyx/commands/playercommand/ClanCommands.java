@@ -7,13 +7,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.HashMap;
-import java.util.UUID;
+import java.util.*;
 
-public class ClanCommands implements CommandExecutor {
+public class ClanCommands implements CommandExecutor, TabCompleter {
 
     private Main plugin;
     private HashMap<Player, Player> clanRequest;
@@ -179,6 +179,28 @@ public class ClanCommands implements CommandExecutor {
                 }
             }.runTaskTimer(plugin,0,20);
         }
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
+        if(args.length == 1){
+            String[] completes = {"create","invite","join","deny","kick","manage","leave"};
+            ArrayList<String> completeList = new ArrayList<>();
+            Collections.addAll(completeList, completes);
+            Collections.addAll(Bukkit.getOnlinePlayers());
+            return completeList;
+        }
+        if(args.length == 2){
+            if(args[0].equalsIgnoreCase("create")){
+                return Collections.singletonList("<ClanName>");
+            }
+        }
+        if(args.length == 3){
+            if(args[0].equalsIgnoreCase("reset")){
+                return Collections.singletonList("confirm");
+            }
+        }
+        return null;
     }
 
 }

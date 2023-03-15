@@ -10,12 +10,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.HashMap;
+import java.util.*;
 
-public class FriendCommand implements CommandExecutor {
+public class FriendCommand implements CommandExecutor, TabCompleter {
 
     private Main plugin;
     private HashMap<Player, Player> friendRequest;
@@ -161,4 +162,18 @@ public class FriendCommand implements CommandExecutor {
         }
     }
 
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
+        Player player = (Player) sender;
+        if(args.length == 0){
+            player.sendMessage(Util.getMessage(Util.getLocale(player), "FriendCommandUsage"));
+        }
+        if(args.length == 1){
+            String[] completes = {"add","list","remove","accept","deny"};
+            ArrayList<String> completeList = new ArrayList<>();
+            Collections.addAll(completeList, completes);
+            return completeList;
+        }
+        return null;
+    }
 }

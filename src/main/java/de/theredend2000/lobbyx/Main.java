@@ -18,11 +18,15 @@ import de.theredend2000.lobbyx.messages.LanguageListeners;
 import de.theredend2000.lobbyx.messages.Util;
 import de.theredend2000.lobbyx.util.Broadcaster;
 import de.theredend2000.lobbyx.util.DatetimeUtils;
+import nl.svenar.PowerRanks.PowerRanks;
+import nl.svenar.PowerRanks.addons.PowerRanksAddon;
+import nl.svenar.PowerRanks.api.PowerRanksAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -57,10 +61,12 @@ public final class Main extends JavaPlugin {
     public File data = new File("plugins/LobbyX", "database.yml");
     public File gadgetData;
     public File navigatorData;
+    private PowerRanksAPI api;
 
 
     @Override
     public void onEnable() {
+            api = PowerRanks.getInstance().loadAPI();
             saveDefaultConfig();
             this.yaml = YamlConfiguration.loadConfiguration(this.data);
             this.saveData();
@@ -345,5 +351,8 @@ public final class Main extends JavaPlugin {
     }
     public RankManager getRankManager() {
         return rankManager;
+    }
+    public PowerRanksAPI getApi() {
+        return api;
     }
 }
