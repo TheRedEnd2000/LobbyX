@@ -124,6 +124,7 @@ public final class Main extends JavaPlugin {
         }
     }
 
+
     private void initLists(){
         lobbyWorlds = new ArrayList<>();
         buildPlayers = new ArrayList<>();
@@ -254,6 +255,7 @@ public final class Main extends JavaPlugin {
             var2.printStackTrace();
         }
     }
+
 
     public ArrayList<World> getLobbyWorlds() {
         return lobbyWorlds;

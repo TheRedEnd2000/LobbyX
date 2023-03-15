@@ -17,7 +17,6 @@ import java.util.Map;
 import java.util.UUID;
 
 public class ItemBuilder {
-
     private ItemMeta itemMeta;
     private ItemStack itemStack;
     public ItemBuilder(Material mat){
@@ -79,5 +78,6 @@ public class ItemBuilder {
         itemMeta.addEnchant(ench, level, true);
         return this;
     }
+
 
 }
