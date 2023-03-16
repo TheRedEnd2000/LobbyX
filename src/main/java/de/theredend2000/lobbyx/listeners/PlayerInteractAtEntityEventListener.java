@@ -54,7 +54,7 @@ public class PlayerInteractAtEntityEventListener implements Listener {
         Playerinfo.setItem(15, new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("Invite in Clan").setSkullOwner(Main.getTexture("NmE1MzYxYjUyZGFmNGYxYzVjNTQ4MGEzOWZhYWExMDg5NzU5NWZhNTc2M2Y3NTdiZGRhMzk1NjU4OGZlYzY3OCJ9fX0=")).setLocalizedName("inviteinclan").build());
         Playerinfo.setItem(42,new ItemBuilder(Material.DIAMOND).setDisplayname("Sozial-Info").setLocalizedName("Sozial").build());
         Playerinfo.setItem(38,new ItemBuilder(Material.WRITABLE_BOOK).setDisplayname("sendMassages").setLocalizedName("sendmassage").build());
-        Playerinfo.setItem(40,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§eCoins§f:§5"+ (YamlConfiguration.loadConfiguration(plugin.getCoinManager().getCoinFile()).getInt(rightClicked.getUniqueId()+".Coins"))).setSkullOwner(Main.getTexture("MjRhZjhkNTc1ZjBhNTI0ZWY2NmEyMTU3M2U4YTRhOGFjN2Q2NDBiMDBkOThlMmU5Mzc0ZTYwNDcwZTdjODZmMCJ9fX0=")).setLocalizedName("Coins").build());
+        Playerinfo.setItem(40,new ItemBuilder(Material.PLAYER_HEAD).setDisplayname("§eCoins§f: §5"+ (plugin.getCoinManager().allowCoinsSee(rightClicked) ? plugin.getCoinManager().getCoins(rightClicked) : "§4§lPRIVATE")).setSkullOwner(Main.getTexture("MjRhZjhkNTc1ZjBhNTI0ZWY2NmEyMTU3M2U4YTRhOGFjN2Q2NDBiMDBkOThlMmU5Mzc0ZTYwNDcwZTdjODZmMCJ9fX0=")).setLocalizedName("Coins").build());
         player.openInventory(Playerinfo);
     }
 }

@@ -49,6 +49,10 @@ public class CoinManager {
         FileConfiguration cfg = YamlConfiguration.loadConfiguration(getCoinFile());
         return cfg.getInt(player.getUniqueId()+".Coins");
     }
+    public boolean allowCoinsSee(Player player){
+        plugin.getPlayerDataManager().setYaml(player);
+        return plugin.getPlayerDataManager().playerDataYaml.getBoolean("Settings.CoinsAPI");
+    }
 
     private void save(FileConfiguration cfg){
         try {

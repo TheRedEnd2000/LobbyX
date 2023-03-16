@@ -53,6 +53,11 @@ public class ClanManager {
         receiver.sendMessage("§4§l-=-=-=-=-=-=-=-=-=-=-=-=-");
     }
 
+    public boolean acceptClanRequests(Player player){
+        plugin.getPlayerDataManager().setYaml(player);
+        return plugin.getPlayerDataManager().playerDataYaml.getBoolean("Settings.ClanRequests");
+    }
+
     public String getClanName(Player player){
         String clanName = null;
         for(String clans : plugin.yaml.getConfigurationSection("Clans."+player.getUniqueId()).getKeys(false)){

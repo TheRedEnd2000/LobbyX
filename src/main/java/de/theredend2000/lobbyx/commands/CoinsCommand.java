@@ -1,4 +1,4 @@
-package de.theredend2000.lobbyx.commands.playercommand;
+package de.theredend2000.lobbyx.commands;
 
 import de.theredend2000.lobbyx.Main;
 import de.theredend2000.lobbyx.messages.Util;
@@ -35,8 +35,16 @@ public class CoinsCommand implements CommandExecutor, TabCompleter {
                     player.sendMessage(Util.getMessage(Util.getLocale(player),"PlayerNotFound"));
                     return true;
                 }
+                if(getCoinsPlayer.equals(player)){
+                    int coins = plugin.getCoinManager().getCoins(player);
+                    player.sendMessage(Util.getMessage(Util.getLocale(player),"GetCoins").replaceAll("%COINS%", String.valueOf(coins)));
+                    return true;
+                }
                 int getPlayerCoins = plugin.getCoinManager().getCoins(getCoinsPlayer);
-                player.sendMessage(Util.getMessage(Util.getLocale(player),"GetCoinsPlayer").replaceAll("%PLAYER%",getCoinsPlayer.getName()).replaceAll("%COINS%", String.valueOf(getPlayerCoins)));
+                if(plugin.getCoinManager().allowCoinsSee(getCoinsPlayer))
+                    player.sendMessage(Util.getMessage(Util.getLocale(player),"GetCoinsPlayer").replaceAll("%PLAYER%",getCoinsPlayer.getName()).replaceAll("%COINS%", String.valueOf(getPlayerCoins)));
+                else
+                    player.sendMessage(Util.getMessage(Util.getLocale(player),"NotAllowCoinsSee"));
             }else if(args.length == 3){
                 String per = plugin.getConfig().getString("Permissions.CoinsCommandPermission");
                 assert per != null;

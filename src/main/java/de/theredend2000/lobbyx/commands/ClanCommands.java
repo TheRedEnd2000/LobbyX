@@ -1,4 +1,4 @@
-package de.theredend2000.lobbyx.commands.playercommand;
+package de.theredend2000.lobbyx.commands;
 
 import de.theredend2000.lobbyx.Main;
 import de.theredend2000.lobbyx.messages.Util;
@@ -68,9 +68,12 @@ public class ClanCommands implements CommandExecutor, TabCompleter {
                                     return true;
                                 }
                                 if(!plugin.getClanManager().hasClan(receiver)) {
-                                    plugin.getClanManager().inviteToClan(player, receiver, clanName);
-                                    clanRequestTime.put(player,300);
-                                    clanRequest.put(player, receiver);
+                                    if(plugin.getClanManager().acceptClanRequests(receiver)) {
+                                        plugin.getClanManager().inviteToClan(player, receiver, clanName);
+                                        clanRequestTime.put(player, 300);
+                                        clanRequest.put(player, receiver);
+                                    }else
+                                        player.sendMessage(Util.getMessage(Util.getLocale(player),"AcceptNoClanRequests"));
                                 }else
                                     player.sendMessage(Util.getMessage(Util.getLocale(player),"AlreadyInClan").replaceAll("%PLAYER_NAME%",receiver.getName()));
                             }else

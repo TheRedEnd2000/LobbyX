@@ -3,6 +3,7 @@ package de.theredend2000.lobbyx.listeners;
 import de.theredend2000.lobbyx.Main;
 import de.theredend2000.lobbyx.jumpandrun.JumpAndRun;
 import de.theredend2000.lobbyx.messages.Util;
+import de.theredend2000.lobbyx.util.Updater;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -38,6 +39,12 @@ public class JoinAndQuitEventListener implements Listener {
             player.sendMessage(Util.getMessage(Util.getLocale(player),"JoinMessage").replaceAll("%PLAYER%",player.getName()));
             if(plugin.getConfig().getBoolean("Titles.WelcomeTitle.enabled"))
                 player.sendTitle(plugin.getConfig().getString("Titles.WelcomeTitle.title").replaceAll("&","§").replaceAll("%PLAYER%",player.getName()),plugin.getConfig().getString("Titles.WelcomeTitle.subtitle").replaceAll("&","§").replaceAll("%PLAYER%",player.getName()),20,100,40);
+            boolean updates = plugin.getConfig().getBoolean("Settings.CheckForUpdates");
+            if(updates){
+                if(!player.isOp()) return;
+                Updater updater = new Updater(plugin);
+                if(updater.isOutdated(player)) return;
+            }
         }
     }
 

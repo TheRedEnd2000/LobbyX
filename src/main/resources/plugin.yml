@@ -1,5 +1,5 @@
 name: LobbyX
-version: '${project.version}'
+version: 1.0
 main: de.theredend2000.lobbyx.Main
 api-version: 1.19
 author: XMC-Plugins
@@ -38,3 +38,14 @@ commands:
       - dailyreward
   coins:
   hologram:
+  msg:
+    description: send other players messages
+    aliases:
+      - tell
+      - me
+  gamemode:
+    aliases:
+      - gm
+      - mode
+      - gamem
+    description: toggle the gamemode

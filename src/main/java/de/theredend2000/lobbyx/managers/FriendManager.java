@@ -25,4 +25,12 @@ public class FriendManager {
         return ofriends.size();
     }
 
+    public boolean isFriend(Player player, Player friend){
+        return plugin.yaml.contains("Friends." + player.getUniqueId() + "." + friend.getName());
+    }
+    public boolean acceptFriendRequests(Player player){
+        plugin.getPlayerDataManager().setYaml(player);
+        return plugin.getPlayerDataManager().playerDataYaml.getBoolean("Settings.FriendRequests");
+    }
+
 }

@@ -31,7 +31,11 @@ Friend:
   FriendRequestDenyReceiver: '&7You have &6%PLAYER_REQUEST_SENDER%&b friend request&c denied&7.'
   FriendRemoveSender: '&7You have &6%PLAYER_REMOVED% &cremoved &7from your friend list.'
   FriendRemoveReceiver: '&6%PLAYER_REMOVED_FRIEND% &7has &cremoved &7you form their friend list.'
-  FriendRemoveNotFriend: '&6%PLAYER_REMOVED% &7is &cnot &7you friend.'
+  FriendRemoveNotFriend: '&6%PLAYER_REMOVED% &7is &cnot &7your friend.'
+  SearchFriend: '&7Enter &aplayer name &7in chat. Type "&ccancel&7" to cancel.'
+  SearchFriendCancel: '&cYou canceled this action.'
+  SearchFriendNotFound: '&cI cant find a friend with the name &6%PLAYER%&c.'
+  AcceptNoFriendRequests: '&cThis user does not accept friend requests.'
   FriendCommandUsage: '&7Usages: &6/friend add <Player> &8| &6/friend accept <Player> &8| &6/friend deny <Player> &8| &6/friend remove <Player> &8| &6/friend list&7!'
 
 Other:
@@ -40,6 +44,7 @@ Other:
   LobbySelectorAlreadyInThisWorld: '&cYou already on this world.'
   NoLobbys: '&cThere are no lobbys.'
   NoLobbySpawn: '&cThis world has no lobby spawn.'
+  DisabledChat: '&cYou cannot use the chat if you have turned it off. You can change that in the settings.'
 
 Locations:
   SetHub: '&7The &9Hub &7was set&a successfully&7.'
@@ -80,6 +85,7 @@ Clan:
   DenyClan: '&7You&c denied&7 the clan &6invasion&7.'
   KickPlayerSenderMessage: '&7You &ckicked &6%PLAYER_NAME% &7from the clan &a%CLAN_NAME%&7.'
   KickPlayerReceiver: '&7You got &ckicked &7out of the clan &a%CLAN_NAME%&7.'
+  AcceptNoClanRequests: '&cThis user does not accept clan requests.'
   ClanCommandUsage: '&7Usages: &6/clan create <ClanName> &8| &6/clan invite <Player> &8| &6/clan join <Player> &8| &6/clan deny <Player> &8| &6/clan kick <Player> &8| &6/clan manage &8| &6/clan leave&7!'
 
 Lobby:
@@ -102,6 +108,7 @@ Coins:
   SetCoinsPlayer: '&7You set &3%PLAYER%`s &5purse&7 to &6%COINS% coins&7.'
   RemoveCoinsPlayer: '&7You remove &6%COINS% coins &7from &3%PLAYER%`s &5purse&7.'
   ResetCoinsPlayer: '&7You reset the &5purse from &3%PLAYER%&7.'
+  NotAllowCoinsSee: '§cThis user has switched off the coins view by others'
   CoinCommandUsage: '&7Usages: &6/coins add <Player> <Coins> &8| &6/coins remove <Player> <Coins> &8| &6/coins set <Player> <Coins> &8| &6/coins reset <Player> confirm&7!'
 
 Teleporter:
@@ -128,6 +135,19 @@ DailyReward:
   RewardTimeLayOut: '&7Come back in: &6%HOURS%h %MINUTES%m %SECONDS%s&7!'
   ClaimReward: '&aYou claimed your &6Daily Reward&a!'
   CoinsLayout: '&7Your &6%COINS_AMOUNT% coins&7 was added to you &5purse&7. You have now &6%COINS_BALANCE% coins.'
+
+MsgCommand:
+  MsgCommandUsage: '&7Usages: &6/msg <Player> <Message>&7!'
+  MsgCommandNotYourself: '&cYou cant send yourself a msg.'
+  MsgCommandNoPlayerFound: '&cI cant find the player &6%PLAYER%&c.'
+  MsgCommandMsg: '%RANK_COLOR_SENDER%%SENDER% &6to&r %RANK_COLOR_RECEIVER%%RECEIVER%&f:%MESSAGE%'
+  AcceptNoMsg: '&cThis user does not accept msg messages.'
+
+GamemodeCommand:
+  NewGamemodePersonal: '&aSet your personal Gamemode to &6%GAMEMODE%&a.'
+  NewGamemodeOther: '&aSet &3%PLAYER%´s &aGamemode to &6%GAMEMODE%&a'
+  GamemodeUsage: '&7Usage: &6/gamemode <Gamemode> [Player]&7!'
+  GamemodePlayerNotFound: '&cI cant find the player &6%PLAYER%&c.'
 
 TutorialText:
   TT-Section1: '&7&lWell, now that you have hopefully chosen the right language for you, we can continue.'

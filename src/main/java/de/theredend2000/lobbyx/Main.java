@@ -1,8 +1,7 @@
 package de.theredend2000.lobbyx;
 
 import de.theredend2000.lobbyx.animatedHeads.Allay_Die;
-import de.theredend2000.lobbyx.commands.LobbyXCommand;
-import de.theredend2000.lobbyx.commands.playercommand.*;
+import de.theredend2000.lobbyx.commands.*;
 import de.theredend2000.lobbyx.jumpandrun.JnrCommand;
 import de.theredend2000.lobbyx.jumpandrun.JumpAndRun;
 import de.theredend2000.lobbyx.jumpandrun.PlayerMoveListener;
@@ -17,6 +16,7 @@ import de.theredend2000.lobbyx.messages.LanguageListeners;
 import de.theredend2000.lobbyx.messages.Util;
 import de.theredend2000.lobbyx.util.Broadcaster;
 import de.theredend2000.lobbyx.util.DatetimeUtils;
+import de.theredend2000.lobbyx.util.Updater;
 import nl.svenar.PowerRanks.PowerRanks;
 import nl.svenar.PowerRanks.api.PowerRanksAPI;
 import org.bukkit.Bukkit;
@@ -62,6 +62,10 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
+            if(!getServer().getPluginManager().isPluginEnabled("PowerRanks")) {
+                Bukkit.getConsoleSender().sendMessage("§4§lPLEASE INSTALL POWER RANKS");
+                onDisable();
+            }
             api = PowerRanks.getInstance().loadAPI();
             saveDefaultConfig();
             this.yaml = YamlConfiguration.loadConfiguration(this.data);
@@ -167,6 +171,8 @@ public final class Main extends JavaPlugin {
         getCommand("daily").setExecutor(new DailyRewardCommand(this));
         getCommand("coins").setExecutor(new CoinsCommand(this));
         getCommand("hologram").setExecutor(new hologramCommand());
+        getCommand("msg").setExecutor(new MsgCommand(this));
+        getCommand("gamemode").setExecutor(new GamemodeCommand(this));
     }
 
     private void initListeners(){
@@ -204,6 +210,7 @@ public final class Main extends JavaPlugin {
         new PaintballListener(this);
         new PlayerInteractAtEntityEventListener(this);
         new PlayerChatEventListener(this);
+        new Updater(this);
     }
     private void initManagers(){
         new Util(this);

@@ -1,4 +1,4 @@
-package de.theredend2000.lobbyx.commands.playercommand;
+package de.theredend2000.lobbyx.commands;
 
 import de.theredend2000.lobbyx.hologramms.Hologram;
 import org.bukkit.command.Command;

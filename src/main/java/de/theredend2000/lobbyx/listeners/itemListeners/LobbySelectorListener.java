@@ -57,8 +57,7 @@ public class LobbySelectorListener implements Listener {
                         plugin.getLobbySelectorManager().createWorldCreatorInventory(player);
                         return;
                     }
-                    if(event.getAction().equals(InventoryAction.PICKUP_HALF)){
-                        player.sendMessage("Manage Inv");
+                    if(event.getAction().equals(InventoryAction.PICKUP_HALF) && player.hasPermission(Objects.requireNonNull(plugin.getConfig().getString("Permissions.MaintenanceModsPermission")))){
                         return;
                     }
                     World world = Bukkit.getWorld(event.getCurrentItem().getItemMeta().getLocalizedName());

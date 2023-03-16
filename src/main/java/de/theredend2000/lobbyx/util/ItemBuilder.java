@@ -36,6 +36,13 @@ public class ItemBuilder {
         skullMeta.setOwner(name);
         return this;
     }
+    public ItemBuilder withGlow(boolean s){
+        if(s) {
+            itemMeta.addEnchant(Enchantment.LURE, 1, true);
+            itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        }
+        return this;
+    }
     public ItemBuilder setLore(String... s){
         itemMeta.setLore(Arrays.asList(s));
         return this;

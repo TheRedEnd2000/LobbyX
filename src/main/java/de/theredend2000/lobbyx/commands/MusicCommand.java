@@ -1,4 +1,4 @@
-package de.theredend2000.lobbyx.commands.playercommand;
+package de.theredend2000.lobbyx.commands;
 
 import com.xxmicloxx.NoteBlockAPI.NoteBlockAPI;
 import com.xxmicloxx.NoteBlockAPI.model.Song;
