@@ -1,6 +1,7 @@
 package de.theredend2000.lobbyx;
 
-import de.theredend2000.lobbyx.animatedHeads.Allay_Die;
+import com.google.common.base.Charsets;
+import de.theredend2000.lobbyx.othergadgets.Allay_Die;
 import de.theredend2000.lobbyx.commands.*;
 import de.theredend2000.lobbyx.jumpandrun.JnrCommand;
 import de.theredend2000.lobbyx.jumpandrun.JumpAndRun;
@@ -14,6 +15,7 @@ import de.theredend2000.lobbyx.listeners.itemListeners.*;
 import de.theredend2000.lobbyx.managers.*;
 import de.theredend2000.lobbyx.messages.LanguageListeners;
 import de.theredend2000.lobbyx.messages.Util;
+import de.theredend2000.lobbyx.othergadgets.RainbowArmor;
 import de.theredend2000.lobbyx.util.Broadcaster;
 import de.theredend2000.lobbyx.util.DatetimeUtils;
 import de.theredend2000.lobbyx.util.Updater;
@@ -21,6 +23,7 @@ import nl.svenar.PowerRanks.PowerRanks;
 import nl.svenar.PowerRanks.api.PowerRanksAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -29,6 +32,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -228,6 +232,8 @@ public final class Main extends JavaPlugin {
         friendManager = new FriendManager(this);
         new Broadcaster(this).startBroadcast();
         new ScoreboardManager(this);
+        new ParticleManager(this);
+        new RainbowArmor(this);
     }
     private void initAHeads(){
         new Allay_Die(this);
@@ -258,6 +264,30 @@ public final class Main extends JavaPlugin {
         } catch (IOException var2) {
             var2.printStackTrace();
         }
+    }
+    public void reloadData() {
+        yaml = YamlConfiguration.loadConfiguration(data);
+        final InputStream defConfigStream = getResource("database.yml");
+        if (defConfigStream == null) {
+            return;
+        }
+        yaml.setDefaults(YamlConfiguration.loadConfiguration(new InputStreamReader(defConfigStream, Charsets.UTF_8)));
+    }
+    public void reloadGadgets() {
+        gadgetsYaml = YamlConfiguration.loadConfiguration(gadgetData);
+        final InputStream defConfigStream = getResource("gadgets.yml");
+        if (defConfigStream == null) {
+            return;
+        }
+        gadgetsYaml.setDefaults(YamlConfiguration.loadConfiguration(new InputStreamReader(defConfigStream, Charsets.UTF_8)));
+    }
+    public void reloadNavigator() {
+        navigatorYaml = YamlConfiguration.loadConfiguration(navigatorData);
+        final InputStream defConfigStream = getResource("navigator.yml");
+        if (defConfigStream == null) {
+            return;
+        }
+        yaml.setDefaults(YamlConfiguration.loadConfiguration(new InputStreamReader(defConfigStream, Charsets.UTF_8)));
     }
 
 
@@ -319,6 +349,18 @@ public final class Main extends JavaPlugin {
         } catch (Exception ex) {
             Bukkit.getConsoleSender().sendMessage("§4Material Error:");
             return Material.STONE;
+        }
+    }
+    public Particle getParticle(String particleString) {
+        try {
+            Particle particle = Particle.valueOf(particleString);
+            if (particle == null) {
+                return Particle.LANDING_LAVA;
+            }
+            return particle;
+        } catch (Exception ex) {
+            Bukkit.getConsoleSender().sendMessage("§4Particle Error:");
+            return Particle.LANDING_LAVA;
         }
     }
     public static String getTexture(String texture){

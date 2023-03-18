@@ -95,6 +95,10 @@ Gadgets:
       item: STICK
       name: '&3Paint Ball'
       coins: 3500
+    s:
+      item: STICK
+      name: '&3Paint Ball'
+      coins: 3500
 
 
   AnimatedHeads:
@@ -102,3 +106,118 @@ Gadgets:
       texture: 'YzRlYTUzYWEwNTM4NjFjOGIzNzg1MTg5MWRlOGM2ZTczY2ZiMTJlMmQ4MzExYjAwMjFjZDY2ZTc3YTBmY2UyOSJ9fX0='
       name: '&bAllay Die'
       coins: 5500
+
+
+  Particle:
+    Heart:
+      material: GOLDEN_APPLE
+      particle: HEART
+      name: '&cHeart'
+      coins: 6000
+      count: 2
+      location: EYE
+    Good_Deal:
+      material: EMERALD
+      particle: VILLAGER_HAPPY
+      name: '&2Good Deal'
+      coins: 5000
+      count: 7
+      location: BODY
+    Lava:
+      material: LAVA_BUCKET
+      particle: LAVA
+      name: '&4LAVA'
+      coins: 7000
+      count: 2
+      location: EYE
+    Firework:
+      material: FIREWORK_ROCKET
+      particle: FIREWORKS_SPARK
+      name: '&fFirework'
+      coins: 4500
+      count: 5
+      location: BODY
+    Flame:
+      material: FLINT_AND_STEEL
+      particle: FLAME
+      name: '&cFlame'
+      coins: 4500
+      count: 7
+      location: BODY
+    Note:
+      material: NOTE_BLOCK
+      particle: NOTE
+      name: '&5Note'
+      coins: 6500
+      count: 1
+      location: EYE
+    Water_Splash:
+      material: WATER_BUCKET
+      particle: WATER_SPLASH
+      name: '&bWater Splash'
+      coins: 3500
+      count: 20
+      location: BODY
+    END_ROD:
+      material: END_ROD
+      particle: END_ROD
+      name: '&3End Rod'
+      coins: 3500
+      count: 10
+      location: BODY
+    Portal:
+      material: OBSIDIAN
+      particle: PORTAL
+      name: '&5Portal'
+      coins: 5000
+      count: 50
+      location: BODY
+    Soul:
+      material: SOUL_SAND
+      particle: SOUL
+      name: '&5Soul'
+      coins: 6000
+      count: 5
+      location: FEED
+
+
+
+  Armor:
+    RainbowArmor:
+      name: '&6Rainbow Armor'
+      coins: 20000
+      item: LEATHER_CHESTPLATE
+      color: RED
+      Helmet:
+        name: '&6Rainbow Helmet'
+        material: LEATHER_HELMET
+      Chestplate:
+        name: '&6Rainbow Chestplate'
+        material: LEATHER_CHESTPLATE
+      Leggins:
+        name: '&6Rainbow Leggins'
+        material: LEATHER_LEGGINGS
+      Boots:
+        name: '&6Rainbow Boots'
+        material: LEATHER_BOOTS
+    Red_Skeleton:
+      name: '&cRed Skeleton'
+      coins: 10000
+      item: PLAYER_HEAD
+      texture: MTRkNDQ5MDdhNjc5ZjE3MzAzOTJmY2ZhOGZkYWRkZjJhYzc5OGVhZWI4YzRlMTA5MmQ0YmIwMDM3N2I2MTliOCJ9fX0=
+      Helmet:
+        name: '&cRed Skeleton Helmet'
+        material: PLAYER_HEAD
+        texture: MTRkNDQ5MDdhNjc5ZjE3MzAzOTJmY2ZhOGZkYWRkZjJhYzc5OGVhZWI4YzRlMTA5MmQ0YmIwMDM3N2I2MTliOCJ9fX0=
+      Chestplate:
+        name: '&cRed Skeleton Chestplate'
+        material: LEATHER_CHESTPLATE
+        color: RED
+      Leggins:
+        name: '&cRed Skeleton Leggins'
+        material: LEATHER_LEGGINGS
+        color: RED
+      Boots:
+        name: '&cRed Skeleton Boots'
+        material: LEATHER_BOOTS
+        color: RED

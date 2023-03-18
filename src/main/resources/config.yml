@@ -68,6 +68,8 @@ Inventory:
     HeadInventory: '&bLobby&4X&f - &eHeads'
     SpecialItemInventory: '&bLobby&4X&f - &9Special Items'
     AnimatedHeadsInventory: '&bLobby&4X&f - &6Animated Heads'
+    ParticleInventory: '&bLobby&4X&f - &6Particle'
+    ArmorInventory: '&bLobby&4X&f - &bArmor'
 
 #Tablist
 #Change tablist look

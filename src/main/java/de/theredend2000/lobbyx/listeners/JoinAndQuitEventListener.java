@@ -3,6 +3,7 @@ package de.theredend2000.lobbyx.listeners;
 import de.theredend2000.lobbyx.Main;
 import de.theredend2000.lobbyx.jumpandrun.JumpAndRun;
 import de.theredend2000.lobbyx.messages.Util;
+import de.theredend2000.lobbyx.othergadgets.RainbowArmor;
 import de.theredend2000.lobbyx.util.Updater;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -34,9 +35,13 @@ public class JoinAndQuitEventListener implements Listener {
             plugin.getSetPlayerLobbyManager().setPlayerInLobby(player);
             event.setJoinMessage(null);
             for(Player lobbyPlayers : player.getWorld().getPlayers()){
-                lobbyPlayers.sendMessage(Util.getMessage(Util.getLocale(lobbyPlayers),"JoinMessage").replaceAll("%PLAYER%",player.getName()));
+                plugin.getPlayerDataManager().setYaml(lobbyPlayers);
+                if(plugin.getPlayerDataManager().playerDataYaml.getBoolean("Settings.Join_Messages"))
+                    lobbyPlayers.sendMessage(Util.getMessage(Util.getLocale(lobbyPlayers),"JoinMessage").replaceAll("%PLAYER%",player.getName()));
             }
-            player.sendMessage(Util.getMessage(Util.getLocale(player),"JoinMessage").replaceAll("%PLAYER%",player.getName()));
+            plugin.getPlayerDataManager().setYaml(player);
+            if(plugin.getPlayerDataManager().playerDataYaml.getBoolean("Settings.Join_Messages"))
+                player.sendMessage(Util.getMessage(Util.getLocale(player),"JoinMessage").replaceAll("%PLAYER%",player.getName()));
             if(plugin.getConfig().getBoolean("Titles.WelcomeTitle.enabled"))
                 player.sendTitle(plugin.getConfig().getString("Titles.WelcomeTitle.title").replaceAll("&","§").replaceAll("%PLAYER%",player.getName()),plugin.getConfig().getString("Titles.WelcomeTitle.subtitle").replaceAll("&","§").replaceAll("%PLAYER%",player.getName()),20,100,40);
             boolean updates = plugin.getConfig().getBoolean("Settings.CheckForUpdates");
@@ -55,7 +60,9 @@ public class JoinAndQuitEventListener implements Listener {
             event.setQuitMessage(null);
             for(Player lobbyPlayers : player.getWorld().getPlayers()){
                 if(!lobbyPlayers.equals(player)) {
-                    lobbyPlayers.sendMessage(Util.getMessage(Util.getLocale(lobbyPlayers), "QuitMessage").replaceAll("%PLAYER%",player.getName()));
+                    plugin.getPlayerDataManager().setYaml(lobbyPlayers);
+                    if(plugin.getPlayerDataManager().playerDataYaml.getBoolean("Settings.Leave_Messages"))
+                        lobbyPlayers.sendMessage(Util.getMessage(Util.getLocale(lobbyPlayers), "QuitMessage").replaceAll("%PLAYER%",player.getName()));
                 }
             }
         }

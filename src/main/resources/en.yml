@@ -96,9 +96,15 @@ Lobby:
 Gadgets:
   ResetHead: '&aYour head has been reset &2successfully&a.'
   FailedResetHead: '&cYou dont have a custom head on.'
+  ResetArmor: '&aYour armor has been reset &2successfully&a.'
+  FailedResetArmor: '&cYou dont have any armor on you.'
   SelectHead: '&aYou selected the head: %HEAD%'
   SelectSpecialItems: '&aYou selected the gadget: %GADGET%'
+  SelectParticleEffect: '&aYou selected the particle effect: %PARTICLE%'
+  SelectArmor: '&aYou selected the armor: %ARMOR%'
   BuyNewGadget: '&7You have &asuccessfully &7bought the gadget &6%GADGET%&7. §5Coins left: §6%COINS%'
+  BuyNewParticle: '&7You have &asuccessfully &7bought the particle effect &6%PARTICLE%&7. §5Coins left: §6%COINS%'
+  BuyNewArmor: '&7You have &asuccessfully &7bought the armor &6%ARMOR%&7. §5Coins left: §6%COINS%'
   NotEnoughCoins: '&cYou dont have enough coins.'
 
 Coins:

@@ -22,10 +22,14 @@ public class PlayerChangeWorldEventListener implements Listener {
         Player player = event.getPlayer();
         if(plugin.getLobbyWorlds().contains(player.getWorld())){
             for(Player lobbyPlayers : player.getWorld().getPlayers()){
-                lobbyPlayers.sendMessage(Util.getMessage(Util.getLocale(lobbyPlayers),"ChangeLobbyJoinMessage").replaceAll("%PLAYER%",player.getName()));
+                plugin.getPlayerDataManager().setYaml(lobbyPlayers);
+                if(plugin.getPlayerDataManager().playerDataYaml.getBoolean("Settings.Join_Messages"))
+                    lobbyPlayers.sendMessage(Util.getMessage(Util.getLocale(lobbyPlayers),"ChangeLobbyJoinMessage").replaceAll("%PLAYER%",player.getName()));
             }
             for(Player lobbyPlayers : event.getFrom().getPlayers()){
-                lobbyPlayers.sendMessage(Util.getMessage(Util.getLocale(lobbyPlayers),"ChangeLobbyLeaveMessage").replaceAll("%PLAYER%",player.getName()));
+                plugin.getPlayerDataManager().setYaml(lobbyPlayers);
+                if(plugin.getPlayerDataManager().playerDataYaml.getBoolean("Settings.Leave_Messages"))
+                 lobbyPlayers.sendMessage(Util.getMessage(Util.getLocale(lobbyPlayers),"ChangeLobbyLeaveMessage").replaceAll("%PLAYER%",player.getName()));
             }
             plugin.getSetPlayerLobbyManager().setPlayerInLobby(player);
             plugin.getSetPlayerLobbyManager().updateLobbyInventory();

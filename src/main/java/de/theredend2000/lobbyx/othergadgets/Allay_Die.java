@@ -1,4 +1,4 @@
-package de.theredend2000.lobbyx.animatedHeads;
+package de.theredend2000.lobbyx.othergadgets;
 
 import de.theredend2000.lobbyx.Main;
 import de.theredend2000.lobbyx.util.ItemBuilder;
@@ -6,8 +6,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import java.util.ArrayList;
 
 public class Allay_Die {
 

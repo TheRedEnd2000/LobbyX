@@ -33,9 +33,8 @@ public class PlayerInteractAtEntityEventListener implements Listener {
         Player player = event.getPlayer();
         if(event.getRightClicked() instanceof Player){
             Player rightClicked = (Player) event.getRightClicked();
-            if(plugin.getLobbyWorlds().contains(player.getWorld()) && plugin.getLobbyWorlds().contains(rightClicked.getWorld())){
+            if(plugin.getLobbyWorlds().contains(player.getWorld()) && plugin.getLobbyWorlds().contains(rightClicked.getWorld()) && player.getItemInHand().getItemMeta() == null){
                 interactWithPLayerInv(player,rightClicked);
-
             }
         }
     }

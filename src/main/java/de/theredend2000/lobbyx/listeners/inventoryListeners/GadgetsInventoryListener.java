@@ -2,11 +2,15 @@ package de.theredend2000.lobbyx.listeners.inventoryListeners;
 
 import de.theredend2000.lobbyx.Main;
 import de.theredend2000.lobbyx.listeners.itemListeners.GadgetsListener;
+import de.theredend2000.lobbyx.managers.ParticleManager;
 import de.theredend2000.lobbyx.messages.Util;
+import de.theredend2000.lobbyx.othergadgets.RainbowArmor;
 import de.theredend2000.lobbyx.util.ConfigLocationUtil;
 import de.theredend2000.lobbyx.util.ItemBuilder;
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -43,7 +47,11 @@ public class GadgetsInventoryListener implements Listener {
                         case"gadgets.main.specialItems":
                             plugin.getGadgetsMenuManager().createItemGadgetsInventory(player);
                             break;
-                        case"MainInventory.Social":
+                        case"gadgets.main.particle":
+                            plugin.getGadgetsMenuManager().createParticleInventory(player);
+                            break;
+                        case"gadgets.main.armor":
+                            plugin.getGadgetsMenuManager().createArmorInventory(player);
                             break;
                     }
                 }
@@ -123,14 +131,125 @@ public class GadgetsInventoryListener implements Listener {
                                 plugin.getGadgetsMenuManager().createGadgetsBugConfirm(player,items);
                                 return;
                             }
-                            player.closeInventory();
-                            String gadgetName = plugin.gadgetsYaml.getString("Gadgets.SpecialItems."+items+".name");
+                            player.closeInventory();;
+                            String itemName = plugin.gadgetsYaml.getString("Gadgets.SpecialItems."+items+".name");
                             Material material = plugin.getGadgetsMaterial("Gadgets.SpecialItems."+items+".item");
-                            player.sendMessage(Util.getMessage(Util.getLocale(player),"SelectSpecialItems").replaceAll("%GADGET%", gadgetName.replaceAll("&","§")));
-                            player.getInventory().setItem(5, new ItemBuilder(material).setDisplayname(gadgetName.replaceAll("&","§")).build());
+                            player.sendMessage(Util.getMessage(Util.getLocale(player),"SelectSpecialItems").replaceAll("%GADGET%", itemName.replaceAll("&","§")));
+                            player.getInventory().setItem(5, new ItemBuilder(material).setDisplayname(itemName.replaceAll("&","§")).build());
                             plugin.yaml.set("Selected_Items."+player.getUniqueId()+".Inv",items);
                             plugin.saveData();
+                        }
+                    }
+                }
+            }
+        }else if (event.getView().getTitle().equals(Objects.requireNonNull(plugin.getConfig().getString("Inventory.GadgetsInventory.ParticleInventory")).replaceAll("&","§"))){
+            event.setCancelled(true);
+            if (event.getCurrentItem() != null){
+                if (event.getCurrentItem().getItemMeta().hasLocalizedName()){
+                    switch(event.getCurrentItem().getItemMeta().getLocalizedName()){
+                        case "gadgets.particle.close":
+                            player.closeInventory();
+                            break;
+                        case "gadgets.particle.reset":
+                            if(player.getInventory().getHelmet() != null){
+                                player.getInventory().setHelmet(null);
+                                plugin.yaml.set("Selected_Items."+player.getUniqueId()+".Head","null");
+                                plugin.saveData();
+                                player.closeInventory();
+                                player.sendMessage(Util.getMessage(Util.getLocale(player),"ResetHead"));
+                            }else{
+                                player.closeInventory();
+                                player.sendMessage(Util.getMessage(Util.getLocale(player),"FailedResetHead"));
+                            }
+                            break;
+                        case "gadgets.particle.back":
+                            plugin.getGadgetsMenuManager().createGadgetsInventory(player);
+                            break;
+                    }
+                    for(String items : plugin.gadgetsYaml.getConfigurationSection("Gadgets.Particle").getKeys(false)){
+                        if(event.getCurrentItem().getItemMeta().getLocalizedName().equals(items)){
+                            plugin.getPlayerDataManager().setYaml(player);
+                            boolean isBought = plugin.getPlayerDataManager().playerDataYaml.getBoolean("Gadgets.Particle."+items);
+                            if(!isBought){
+                                plugin.getGadgetsMenuManager().createGadgetsBugConfirm(player,items);
+                                return;
+                            }
+                            player.closeInventory();
+                            String particleName = plugin.gadgetsYaml.getString("Gadgets.Particle."+items+".name");
+                            player.sendMessage(Util.getMessage(Util.getLocale(player),"SelectParticleEffect").replaceAll("%PARTICLE%", particleName.replaceAll("&","§")));
+                            plugin.yaml.set("Selected_Items."+player.getUniqueId()+".Particle",items);
+                            plugin.saveData();
+                        }
+                    }
+                }
+            }
+        }else if (event.getView().getTitle().equals(Objects.requireNonNull(plugin.getConfig().getString("Inventory.GadgetsInventory.ArmorInventory")).replaceAll("&","§"))){
+            event.setCancelled(true);
+            if (event.getCurrentItem() != null){
+                if (event.getCurrentItem().getItemMeta().hasLocalizedName()){
+                    switch(event.getCurrentItem().getItemMeta().getLocalizedName()){
+                        case "gadgets.armor.close":
+                            player.closeInventory();
+                            break;
+                        case "gadgets.armor.reset":
+                            if(player.getInventory().getChestplate() != null){
+                                player.getInventory().setArmorContents(null);
+                                plugin.yaml.set("Selected_Items."+player.getUniqueId()+".Head","null");
+                                plugin.yaml.set("Selected_Items."+player.getUniqueId()+".Chest","null");
+                                plugin.yaml.set("Selected_Items."+player.getUniqueId()+".Leggins","null");
+                                plugin.yaml.set("Selected_Items."+player.getUniqueId()+".Boots","null");
+                                plugin.saveData();
+                                player.closeInventory();
+                                player.sendMessage(Util.getMessage(Util.getLocale(player),"ResetArmor"));
+                            }else{
+                                player.closeInventory();
+                                player.sendMessage(Util.getMessage(Util.getLocale(player),"FailedResetArmor"));
+                            }
+                            break;
+                        case "gadgets.armor.back":
+                            plugin.getGadgetsMenuManager().createGadgetsInventory(player);
+                            break;
+                    }
+                    for(String items : plugin.gadgetsYaml.getConfigurationSection("Gadgets.Armor").getKeys(false)){
+                        if(event.getCurrentItem().getItemMeta().getLocalizedName().equals(items)){
+                            plugin.getPlayerDataManager().setYaml(player);
+                            boolean isBought = plugin.getPlayerDataManager().playerDataYaml.getBoolean("Gadgets.Armor."+items);
+                            if(!isBought){
+                                plugin.getGadgetsMenuManager().createGadgetsBugConfirm(player,items);
+                                return;
+                            }
+                            player.closeInventory();
+                            if(items.equals("RainbowArmor")){
+                                player.sendMessage("§cThis armor is currently disabled.");
+                                return;
+                            }
+                            String armorName = plugin.gadgetsYaml.getString("Gadgets.Armor."+items+".name");
+                            player.sendMessage(Util.getMessage(Util.getLocale(player),"SelectArmor").replaceAll("%ARMOR%", armorName.replaceAll("&","§")));
+                            plugin.yaml.set("Selected_Items."+player.getUniqueId()+".Head",items);
+                            plugin.yaml.set("Selected_Items."+player.getUniqueId()+".Chest",items);
+                            plugin.yaml.set("Selected_Items."+player.getUniqueId()+".Leggins",items);
+                            plugin.yaml.set("Selected_Items."+player.getUniqueId()+".Boots",items);
+                            plugin.saveData();
+                            Material helmetMaterial = plugin.getGadgetsMaterial("Gadgets.Armor."+items+".Helmet.material");
+                            String helmetName = plugin.gadgetsYaml.getString("Gadgets.Armor."+items+".Helmet.name");
+                            String helmetTexture = plugin.gadgetsYaml.getString("Gadgets.Armor."+items+".Helmet.texture");
+                            Color helmetColor = plugin.gadgetsYaml.getColor("Gadgets.Armor."+items+".Helmet.color");
+                            player.getInventory().setHelmet(new ItemBuilder(helmetMaterial).setColor(helmetColor).setSkullOwner(helmetTexture != null ? Main.getTexture(helmetTexture) : null).setDisplayname(helmetName.replaceAll("&","§")).build());
 
+                            Material chestplateMaterial = plugin.getGadgetsMaterial("Gadgets.Armor."+items+".Chestplate.material");
+                            String chestplateName = plugin.gadgetsYaml.getString("Gadgets.Armor."+items+".Chestplate.name");
+                            Color chestplateColor = plugin.gadgetsYaml.getColor("Gadgets.Armor."+items+".Helmet.color");
+                            player.getInventory().setChestplate(new ItemBuilder(chestplateMaterial).setColor(chestplateColor).setDisplayname(chestplateName.replaceAll("&","§")).build());
+
+                            Material legginsMaterial = plugin.getGadgetsMaterial("Gadgets.Armor."+items+".Leggins.material");
+                            String legginsName = plugin.gadgetsYaml.getString("Gadgets.Armor."+items+".Leggins.name");
+                            Color legginsColor = plugin.gadgetsYaml.getColor("Gadgets.Armor."+items+".Helmet.color");
+                            player.getInventory().setLeggings(new ItemBuilder(legginsMaterial).setColor(legginsColor).setDisplayname(legginsName.replaceAll("&","§")).build());
+
+                            Material bootsMaterial = plugin.getGadgetsMaterial("Gadgets.Armor."+items+".Boots.material");
+                            String bootsName = plugin.gadgetsYaml.getString("Gadgets.Armor."+items+".Boots.name");
+                            Color bootsColor = plugin.gadgetsYaml.getColor("Gadgets.Armor."+items+".Helmet.color");
+                            player.getInventory().setBoots(new ItemBuilder(bootsMaterial).setColor(bootsColor).setDisplayname(bootsName.replaceAll("&","§")).build());
                         }
                     }
                 }
@@ -177,6 +296,32 @@ public class GadgetsInventoryListener implements Listener {
                                         plugin.getPlayerDataManager().playerDataYaml.set("Gadgets.SpecialItems." + heads, true);
                                         plugin.getPlayerDataManager().save(player);
                                         player.sendMessage(Util.getMessage(Util.getLocale(player), "BuyNewGadget").replaceAll("%GADGET%", heads).replaceAll("%COINS%", String.valueOf(plugin.getCoinManager().getCoins(player))));
+                                    }else
+                                        player.sendMessage(Util.getMessage(Util.getLocale(player),"NotEnoughCoins"));
+                                }
+                            }
+                            for(String particle : plugin.gadgetsYaml.getConfigurationSection("Gadgets.Particle").getKeys(false)){
+                                String name = event.getInventory().getItem(13).getItemMeta().getLocalizedName();
+                                if(particle.equals(name)){
+                                    int coinCost = plugin.gadgetsYaml.getInt("Gadgets.Particle."+particle+".coins");
+                                    if(plugin.getCoinManager().haveEnoughCoins(player, coinCost)) {
+                                        plugin.getCoinManager().removeCoins(player, coinCost);
+                                        plugin.getPlayerDataManager().playerDataYaml.set("Gadgets.Particle." + particle, true);
+                                        plugin.getPlayerDataManager().save(player);
+                                        player.sendMessage(Util.getMessage(Util.getLocale(player), "BuyNewParticle").replaceAll("%PARTICLE%", particle).replaceAll("%COINS%", String.valueOf(plugin.getCoinManager().getCoins(player))));
+                                    }else
+                                        player.sendMessage(Util.getMessage(Util.getLocale(player),"NotEnoughCoins"));
+                                }
+                            }
+                            for(String armor : plugin.gadgetsYaml.getConfigurationSection("Gadgets.Armor").getKeys(false)){
+                                String name = event.getInventory().getItem(13).getItemMeta().getLocalizedName();
+                                if(armor.equals(name)){
+                                    int coinCost = plugin.gadgetsYaml.getInt("Gadgets.Armor."+armor+".coins");
+                                    if(plugin.getCoinManager().haveEnoughCoins(player, coinCost)) {
+                                        plugin.getCoinManager().removeCoins(player, coinCost);
+                                        plugin.getPlayerDataManager().playerDataYaml.set("Gadgets.Armor." + armor, true);
+                                        plugin.getPlayerDataManager().save(player);
+                                        player.sendMessage(Util.getMessage(Util.getLocale(player), "BuyNewArmor").replaceAll("%ARMOR%", armor).replaceAll("%COINS%", String.valueOf(plugin.getCoinManager().getCoins(player))));
                                     }else
                                         player.sendMessage(Util.getMessage(Util.getLocale(player),"NotEnoughCoins"));
                                 }

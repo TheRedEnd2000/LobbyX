@@ -9,6 +9,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -50,6 +51,31 @@ public class LobbyXCommand implements CommandExecutor, TabCompleter {
                     player.sendMessage("§7Plugin author: §aXMC-Plugins");
                     player.sendMessage("§7Plugin api version: §a"+plugin.getDescription().getAPIVersion());
                     player.sendMessage("§3-------------------------------");
+                }else if(args[0].equalsIgnoreCase("reload")){
+                    new BukkitRunnable() {
+                        int count = 0;
+                        @Override
+                        public void run() {
+                            if(count == 10){
+                                plugin.reloadConfig();
+                                player.sendMessage("§aConfig reloaded...");
+                            }
+                            if(count == 20){
+                                plugin.reloadData();
+                                player.sendMessage("§aDatabase reloaded...");
+                            }
+                            if(count == 30){
+                                plugin.reloadGadgets();
+                                player.sendMessage("§aGadgets reloaded...");
+                            }
+                            if(count == 40){
+                                plugin.reloadNavigator();
+                                player.sendMessage("§aNavigator reloaded...");
+                                cancel();
+                            }
+                            count ++;
+                        }
+                    }.runTaskTimer(plugin,0,2L);
                 }
             }
         }else
@@ -60,7 +86,7 @@ public class LobbyXCommand implements CommandExecutor, TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
         if(args.length == 1){
-            String[] completes = {"help","manage","information"};
+            String[] completes = {"help","manage","information","reload"};
             ArrayList<String> tabComplete = new ArrayList<>();
             Collections.addAll(tabComplete, completes);
             return tabComplete;

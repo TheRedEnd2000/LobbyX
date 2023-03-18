@@ -3,12 +3,14 @@ package de.theredend2000.lobbyx.util;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import de.theredend2000.lobbyx.Main;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import java.lang.reflect.Field;
@@ -75,6 +77,15 @@ public class ItemBuilder {
             Field field = skullMeta.getClass().getDeclaredField("profile");
             field.setAccessible(true);
             field.set(skullMeta, profile);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return this;
+    }
+    public ItemBuilder setColor(Color color) {
+        try {
+            LeatherArmorMeta armorMeta = (LeatherArmorMeta) this.itemMeta;
+            armorMeta.setColor(color);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

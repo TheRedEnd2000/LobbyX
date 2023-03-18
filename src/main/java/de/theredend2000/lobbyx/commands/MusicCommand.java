@@ -9,9 +9,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryHolder;
 
 import java.io.File;
 
@@ -27,10 +24,6 @@ public class MusicCommand implements CommandExecutor {
                     return true;
                 }
                 if(Bukkit.getPluginManager().isPluginEnabled("NoteBlockAPI")){
-                    if(NoteBlockAPI.isReceivingSong(player)){
-                        player.sendMessage("§cDu hörst gerade schon einen song.");
-                        return true;
-                    }
                     Song playingsong = NBSDecoder.parse(new File("plugins/Lobbyx/"+song+".nbs"));
                     if(playingsong != null){
                         EntitySongPlayer esp2 = new EntitySongPlayer(playingsong);

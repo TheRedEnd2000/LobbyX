@@ -49,7 +49,7 @@ public class ProfileListener implements Listener {
                     case"MainInventory.Info":
                         break;
                     case"MainInventory.Social":
-                        plugin.getProfileMenuManager().createSozailMenu(player);
+                        plugin.getProfileMenuManager().createSocialMenu(player);
                         break;
                     case "MainInventory.Clan":
                         if(plugin.yaml.contains("Clans.")) {
@@ -92,7 +92,7 @@ public class ProfileListener implements Listener {
                             Util.setLocale(player, file2);
                             player.sendMessage(Util.getMessage(Util.getLocale(player), "LangSelectEnglish"));
                             break;
-                        case"Settings.Language.Spanisch":
+                        case"Settings.Language.Spain":
                             player.closeInventory();
                             player.sendMessage("In Arbeit");
                             /*File file = new File(plugin.getDataFolder()+"/locales","sp.yml");
@@ -284,6 +284,16 @@ public class ProfileListener implements Listener {
                             break;
                         case "playerSettings.clan_requests":
                             plugin.getPlayerDataManager().playerDataYaml.set("Settings.ClanRequests", !plugin.getPlayerDataManager().playerDataYaml.getBoolean("Settings.ClanRequests"));
+                            plugin.getPlayerDataManager().save(player);
+                            plugin.getProfileMenuManager().createPlayerSettingsInventory(player);
+                            break;
+                        case "playerSettings.join_messages":
+                            plugin.getPlayerDataManager().playerDataYaml.set("Settings.Join_Messages", !plugin.getPlayerDataManager().playerDataYaml.getBoolean("Settings.Join_Messages"));
+                            plugin.getPlayerDataManager().save(player);
+                            plugin.getProfileMenuManager().createPlayerSettingsInventory(player);
+                            break;
+                        case "playerSettings.leave_messages":
+                            plugin.getPlayerDataManager().playerDataYaml.set("Settings.Leave_Messages", !plugin.getPlayerDataManager().playerDataYaml.getBoolean("Settings.Leave_Messages"));
                             plugin.getPlayerDataManager().save(player);
                             plugin.getProfileMenuManager().createPlayerSettingsInventory(player);
                             break;

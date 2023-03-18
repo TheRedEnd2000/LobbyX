@@ -113,6 +113,7 @@ public class SetPlayerLobbyManager {
         }
         if(!plugin.yaml.contains("Selected_Items."+player.getUniqueId())){
             plugin.yaml.set("Selected_Items."+player.getUniqueId()+".Inv","null");
+            plugin.yaml.set("Selected_Items."+player.getUniqueId()+".Particle","null");
             plugin.yaml.set("Selected_Items."+player.getUniqueId()+".Head","null");
             plugin.yaml.set("Selected_Items."+player.getUniqueId()+".Chest","null");
             plugin.yaml.set("Selected_Items."+player.getUniqueId()+".Leggins","null");
@@ -124,6 +125,8 @@ public class SetPlayerLobbyManager {
             plugin.getPlayerDataManager().playerDataYaml.set("Settings.Msg_Messages","EVERYONE");
             plugin.getPlayerDataManager().playerDataYaml.set("Settings.FriendRequests",true);
             plugin.getPlayerDataManager().playerDataYaml.set("Settings.ClanRequests",true);
+            plugin.getPlayerDataManager().playerDataYaml.set("Settings.Join_Messages",true);
+            plugin.getPlayerDataManager().playerDataYaml.set("Settings.Leave_Messages",true);
             plugin.getPlayerDataManager().playerDataYaml.set("Settings.CoinsAPI",true);
             plugin.getPlayerDataManager().save(player);
         }
