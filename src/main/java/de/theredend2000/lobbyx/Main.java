@@ -1,6 +1,7 @@
 package de.theredend2000.lobbyx;
 
 import com.google.common.base.Charsets;
+import de.theredend2000.lobbyx.listeners.gadgetsListener.SheepCannon;
 import de.theredend2000.lobbyx.othergadgets.Allay_Die;
 import de.theredend2000.lobbyx.commands.*;
 import de.theredend2000.lobbyx.jumpandrun.JnrCommand;
@@ -215,6 +216,7 @@ public final class Main extends JavaPlugin {
         new PlayerInteractAtEntityEventListener(this);
         new PlayerChatEventListener(this);
         new Updater(this);
+        new SheepCannon(this);
     }
     private void initManagers(){
         new Util(this);
@@ -323,7 +325,7 @@ public final class Main extends JavaPlugin {
             }
             return material;
         } catch (Exception ex) {
-            Bukkit.getConsoleSender().sendMessage("§4Material Error:");
+            Bukkit.getConsoleSender().sendMessage("§4Material Error: "+ex);
             return Material.STONE;
         }
     }
@@ -335,7 +337,7 @@ public final class Main extends JavaPlugin {
             }
             return material;
         } catch (Exception ex) {
-            Bukkit.getConsoleSender().sendMessage("§4Material Error:");
+            Bukkit.getConsoleSender().sendMessage("§4Material Error: "+ex);
             return Material.STONE;
         }
     }
@@ -347,7 +349,7 @@ public final class Main extends JavaPlugin {
             }
             return material;
         } catch (Exception ex) {
-            Bukkit.getConsoleSender().sendMessage("§4Material Error:");
+            Bukkit.getConsoleSender().sendMessage("§4Material Error: "+ex);
             return Material.STONE;
         }
     }
@@ -359,7 +361,7 @@ public final class Main extends JavaPlugin {
             }
             return particle;
         } catch (Exception ex) {
-            Bukkit.getConsoleSender().sendMessage("§4Particle Error:");
+            Bukkit.getConsoleSender().sendMessage("§4Particle Error: "+ex);
             return Particle.LANDING_LAVA;
         }
     }

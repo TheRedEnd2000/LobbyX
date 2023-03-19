@@ -1,16 +1,11 @@
 package de.theredend2000.lobbyx.listeners.inventoryListeners;
 
 import de.theredend2000.lobbyx.Main;
-import de.theredend2000.lobbyx.listeners.itemListeners.GadgetsListener;
-import de.theredend2000.lobbyx.managers.ParticleManager;
 import de.theredend2000.lobbyx.messages.Util;
-import de.theredend2000.lobbyx.othergadgets.RainbowArmor;
-import de.theredend2000.lobbyx.util.ConfigLocationUtil;
 import de.theredend2000.lobbyx.util.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
-import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -238,17 +233,17 @@ public class GadgetsInventoryListener implements Listener {
 
                             Material chestplateMaterial = plugin.getGadgetsMaterial("Gadgets.Armor."+items+".Chestplate.material");
                             String chestplateName = plugin.gadgetsYaml.getString("Gadgets.Armor."+items+".Chestplate.name");
-                            Color chestplateColor = plugin.gadgetsYaml.getColor("Gadgets.Armor."+items+".Helmet.color");
+                            Color chestplateColor = plugin.gadgetsYaml.getColor("Gadgets.Armor."+items+".Chestplate.color");
                             player.getInventory().setChestplate(new ItemBuilder(chestplateMaterial).setColor(chestplateColor).setDisplayname(chestplateName.replaceAll("&","§")).build());
 
                             Material legginsMaterial = plugin.getGadgetsMaterial("Gadgets.Armor."+items+".Leggins.material");
                             String legginsName = plugin.gadgetsYaml.getString("Gadgets.Armor."+items+".Leggins.name");
-                            Color legginsColor = plugin.gadgetsYaml.getColor("Gadgets.Armor."+items+".Helmet.color");
+                            Color legginsColor = plugin.gadgetsYaml.getColor("Gadgets.Armor."+items+".Leggins.color");
                             player.getInventory().setLeggings(new ItemBuilder(legginsMaterial).setColor(legginsColor).setDisplayname(legginsName.replaceAll("&","§")).build());
 
                             Material bootsMaterial = plugin.getGadgetsMaterial("Gadgets.Armor."+items+".Boots.material");
                             String bootsName = plugin.gadgetsYaml.getString("Gadgets.Armor."+items+".Boots.name");
-                            Color bootsColor = plugin.gadgetsYaml.getColor("Gadgets.Armor."+items+".Helmet.color");
+                            Color bootsColor = plugin.gadgetsYaml.getColor("Gadgets.Armor."+items+".Boots.color");
                             player.getInventory().setBoots(new ItemBuilder(bootsMaterial).setColor(bootsColor).setDisplayname(bootsName.replaceAll("&","§")).build());
                         }
                     }

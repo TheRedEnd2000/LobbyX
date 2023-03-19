@@ -38,7 +38,7 @@ public class ParticleManager {
                                             player.getLocation().getWorld().spawnParticle(particle, player.getLocation(), count,0.15,0.15,0.15,0);
                                             break;
                                         case "BODY":
-                                            player.getLocation().getWorld().spawnParticle(particle, player.getLocation(), count,0.2,1,0.2,0);
+                                            player.getLocation().getWorld().spawnParticle(particle, player.getLocation().add(0,0.5,0), count,0.2,0.5,0.2,0);
                                             break;
                                         default:
                                             player.getLocation().getWorld().spawnParticle(particle, player.getLocation(), count,0.15,0.15,0.15,0);

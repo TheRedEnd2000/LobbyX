@@ -95,10 +95,10 @@ Gadgets:
       item: STICK
       name: '&3Paint Ball'
       coins: 3500
-    s:
-      item: STICK
-      name: '&3Paint Ball'
-      coins: 3500
+    Sheep_Cannon:
+      item: WHITE_WOOL
+      name: '&9Sheep Cannon'
+      coins: 5000
 
 
   AnimatedHeads:
