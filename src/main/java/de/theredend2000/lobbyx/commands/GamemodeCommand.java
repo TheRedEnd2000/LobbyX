@@ -26,7 +26,7 @@ public class GamemodeCommand implements CommandExecutor, TabCompleter {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(sender instanceof Player){
             Player player = (Player) sender;
-            String permission = plugin.getConfig().getString("Permissions.GamemodeCommand");
+            String permission = plugin.getConfig().getString("Permissions.GamemodeCommandPermission");
             assert permission != null;
             if(player.hasPermission(permission)){
                 if(args.length == 1){
@@ -76,7 +76,7 @@ public class GamemodeCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
-        String permission = plugin.getConfig().getString("Permissions.GamemodeCommand");
+        String permission = plugin.getConfig().getString("Permissions.GamemodeCommandPermission");
         assert permission != null;
         if(args.length == 1 && sender.hasPermission(permission)){
             ArrayList<String > tabComplete = new ArrayList<>();

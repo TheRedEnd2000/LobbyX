@@ -18,8 +18,8 @@ public class NavigatorMenuManager {
     }
 
     public void createTeleporterInventory(Player player){
-        Inventory inventory = Bukkit.createInventory(player,54, Objects.requireNonNull(plugin.getConfig().getString("Inventory.TeleporterInventoryTitle")).replaceAll("&","§"));
-        int invSize = plugin.navigatorYaml.getInt("Navigator.Settings.size");
+        Inventory inventory = Bukkit.createInventory(player,plugin.navigatorYaml.getInt("Navigator.Settings.size"), Objects.requireNonNull(plugin.getConfig().getString("Inventory.TeleporterInventoryTitle")).replaceAll("&","§"));
+        int invSize = plugin.navigatorYaml.getInt("Navigator.Settings.size")-1;
         if(plugin.navigatorYaml.contains("Navigator.Slots")) {
             for (String slot : plugin.navigatorYaml.getConfigurationSection("Navigator.Slots").getKeys(false)) {
                 int itemSlot = Integer.parseInt(slot);
@@ -41,7 +41,7 @@ public class NavigatorMenuManager {
     public void createSelectSlotInventory(Player player){
         Inventory inventory = Bukkit.createInventory(player,plugin.navigatorYaml.getInt("Navigator.Settings.size"),"§7Select a Slot");
         inventory.clear();
-        int invSize = plugin.navigatorYaml.getInt("Navigator.Settings.size");
+        int invSize = plugin.navigatorYaml.getInt("Navigator.Settings.size")-1;
         if(plugin.navigatorYaml.contains("Navigator.Slots")) {
             for (String slot : plugin.navigatorYaml.getConfigurationSection("Navigator.Slots").getKeys(false)) {
                 int itemSlot = Integer.parseInt(slot);

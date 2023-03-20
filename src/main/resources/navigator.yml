@@ -1,11 +1,9 @@
-
-
-#If you're using a custom head, you need to add the texture. See at slot 10
+# If you're using a custom head, you need to add the texture. See at slot 10
 
 
 Navigator:
   Settings:
-    size: 54 #You can only use this sizes: 9, 18, 27, 36, 45, 54!
+    size: 54 # You can only use this sizes: 9, 18, 27, 36, 45, 54!
   Slots:
     '0':
       item: WHITE_STAINED_GLASS_PANE
@@ -48,40 +46,33 @@ Navigator:
       name: '&c'
       action: none
     '10':
-      item: PLAYER_HEAD
-      texture: 'ZjAwZTdiMzNlZTJhNjAwMjc1OGFjZmUwOGM3ZGY2YmQzN2E0OTdkYzlmODAwMGMzY2E5ODI0YTJjZmFiY2FkZCJ9fX0='
-      name: '&6Game 1'
-      action: teleport
+      item: GRAY_STAINED_GLASS_PANE
+      name: '&1'
+      action: none
     '11':
-      item: PLAYER_HEAD
-      texture: 'YTg4MzJjMTQ2NmM4NDFjYzc5ZDVmMTAyOTVkNDY0Mjc5OTY3OTc1YTI0NTFjN2E1MzNjNzk5Njg5NzQwOGJlYSJ9fX0='
-      name: '&6Game 2'
+      item: RED_BED
+      name: '&cBedwars'
       action: teleport
     '12':
-      item: PLAYER_HEAD
-      texture: 'YTVkNzZkOTBiMzc4MDgzZDE0Nzc1NjgwNTA1ZGRiMWU2YzJjNmRjZjRkZGU3ZjliMWY1ODgwOWJlYzZjNjVjOCJ9fX0='
-      name: '&6Game 3'
-      action: teleport
+      item: GRAY_STAINED_GLASS_PANE
+      name: '&1'
+      action: none
     '13':
-      item: PLAYER_HEAD
-      texture: 'ZDZjYzZiODM3NjNhNjdmY2FkYTFlYTE4NGMyZDE3NTJhZDI0MDc0NmM2YmUyNThhNzM5ODNkOGI2NTdmNGJiNSJ9fX0='
-      name: '&6Game 4'
-      action: teleport
+      item: GRAY_STAINED_GLASS_PANE
+      name: '&1'
+      action: none
     '14':
-      item: PLAYER_HEAD
-      texture: 'YmFhOTUyOTFmOTNhNzBkYjZmMWFhMWViODQ4MjRiOWRmM2I5ZmMwYTI1NDZmN2ZmODFhMTJjNTY3NjBmZWFhIn19fQ=='
-      name: '&6Game 5'
-      action: teleport
+      item: GRAY_STAINED_GLASS_PANE
+      name: '&1'
+      action: none
     '15':
-      item: PLAYER_HEAD
-      texture: 'MjI2MjQzNDYzMmFjMzNlZGQyYzRiZDQwNGU5NmRiZWQ2OWEyOGNmMzQ4OWM0NWVjYTNkY2Y4YzRhYmZkYmQ4NCJ9fX0='
-      name: '&6Game 6'
+      item: IRON_SWORD
+      name: '&4Muder&cMystery'
       action: teleport
     '16':
-      item: PLAYER_HEAD
-      texture: 'YzdlNmM0MGY2OGI3NzVmMmVmY2Q3YmQ5OTE2YjMyNzg2OWRjZjI3ZTI0Yzg1NWQwYTE4ZTA3YWMwNGZlMSJ9fX0='
-      name: '&6Game 7'
-      action: teleport
+      item: GRAY_STAINED_GLASS_PANE
+      name: '&1'
+      action: none
     '17':
       item: WHITE_STAINED_GLASS_PANE
       name: '&c'
@@ -99,20 +90,17 @@ Navigator:
       name: '&c'
       action: none
     '21':
-      item: PLAYER_HEAD
-      texture: 'YzdlNmM0MGY2OGI3NzVmMmVmY2Q3YmQ5OTE2YjMyNzg2OWRjZjI3ZTI0Yzg1NWQwYTE4ZTA3YWMwNGZlMSJ9fX0='
-      name: '&6Game 8'
-      action: teleport
+      item: GRAY_STAINED_GLASS_PANE
+      name: '&1'
+      action: none
     '22':
-      item: PLAYER_HEAD
-      texture: 'YzdlNmM0MGY2OGI3NzVmMmVmY2Q3YmQ5OTE2YjMyNzg2OWRjZjI3ZTI0Yzg1NWQwYTE4ZTA3YWMwNGZlMSJ9fX0='
-      name: '&6Game 9'
+      item: BEACON
+      name: '&5Lobby'
       action: teleport
     '23':
-      item: PLAYER_HEAD
-      texture: 'YzdlNmM0MGY2OGI3NzVmMmVmY2Q3YmQ5OTE2YjMyNzg2OWRjZjI3ZTI0Yzg1NWQwYTE4ZTA3YWMwNGZlMSJ9fX0='
-      name: '&6Game 10'
-      action: teleport
+      item: GRAY_STAINED_GLASS_PANE
+      name: '&1'
+      action: none
     '24':
       item: GRAY_STAINED_GLASS_PANE
       name: '&c'
@@ -134,9 +122,9 @@ Navigator:
       name: '&c'
       action: none
     '29':
-      item: GRAY_STAINED_GLASS_PANE
-      name: '&c'
-      action: none
+      item: ENDER_EYE
+      name: '&2Skywars'
+      action: teleport
     '30':
       item: GRAY_STAINED_GLASS_PANE
       name: '&c'
@@ -150,9 +138,9 @@ Navigator:
       name: '&c'
       action: none
     '33':
-      item: GRAY_STAINED_GLASS_PANE
-      name: '&c'
-      action: none
+      item: DIAMOND_CHESTPLATE
+      name: '&91vs1'
+      action: teleport
     '34':
       item: GRAY_STAINED_GLASS_PANE
       name: '&c'
@@ -166,31 +154,31 @@ Navigator:
       name: '&c'
       action: none
     '37':
-      item: GRAY_STAINED_GLASS_PANE
+      item: WHITE_STAINED_GLASS_PANE
       name: '&c'
       action: none
     '38':
-      item: GRAY_STAINED_GLASS_PANE
+      item: WHITE_STAINED_GLASS_PANE
       name: '&c'
       action: none
     '39':
-      item: GRAY_STAINED_GLASS_PANE
+      item: WHITE_STAINED_GLASS_PANE
       name: '&c'
       action: none
     '40':
-      item: GRASS
-      name: '&6RANDOM'
-      action: teleport
+      item: WHITE_STAINED_GLASS_PANE
+      name: '&5Lobby'
+      action: none
     '41':
-      item: GRAY_STAINED_GLASS_PANE
+      item: WHITE_STAINED_GLASS_PANE
       name: '&c'
       action: none
     '42':
-      item: GRAY_STAINED_GLASS_PANE
+      item: WHITE_STAINED_GLASS_PANE
       name: '&c'
       action: none
     '43':
-      item: GRAY_STAINED_GLASS_PANE
+      item: WHITE_STAINED_GLASS_PANE
       name: '&c'
       action: none
     '44':
@@ -198,19 +186,19 @@ Navigator:
       name: '&c'
       action: none
     '45':
-      item: WHITE_STAINED_GLASS_PANE
+      item: LIGHT_GRAY_STAINED_GLASS_PANE
       name: '&c'
       action: none
     '46':
-      item: WHITE_STAINED_GLASS_PANE
+      item: LIGHT_GRAY_STAINED_GLASS_PANE
       name: '&c'
       action: none
     '47':
-      item: WHITE_STAINED_GLASS_PANE
+      item: LIGHT_GRAY_STAINED_GLASS_PANE
       name: '&c'
       action: none
     '48':
-      item: WHITE_STAINED_GLASS_PANE
+      item: LIGHT_GRAY_STAINED_GLASS_PANE
       name: '&c'
       action: none
     '49':
@@ -218,18 +206,18 @@ Navigator:
       name: '&4Close'
       action: close
     '50':
-      item: WHITE_STAINED_GLASS_PANE
+      item: LIGHT_GRAY_STAINED_GLASS_PANE
       name: '&c'
       action: none
     '51':
-      item: WHITE_STAINED_GLASS_PANE
+      item: LIGHT_GRAY_STAINED_GLASS_PANE
       name: '&c'
       action: none
     '52':
-      item: WHITE_STAINED_GLASS_PANE
+      item: LIGHT_GRAY_STAINED_GLASS_PANE
       name: '&c'
       action: none
     '53':
-      item: WHITE_STAINED_GLASS_PANE
+      item: LIGHT_GRAY_STAINED_GLASS_PANE
       name: '&c'
       action: none

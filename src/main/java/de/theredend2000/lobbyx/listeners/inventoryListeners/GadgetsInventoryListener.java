@@ -11,6 +11,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
+import java.util.HashMap;
 import java.util.Objects;
 
 public class GadgetsInventoryListener implements Listener {
@@ -103,15 +104,15 @@ public class GadgetsInventoryListener implements Listener {
                             player.closeInventory();
                             break;
                         case "gadgets.items.reset":
-                            if(player.getInventory().getHelmet() != null){
-                                player.getInventory().setHelmet(null);
-                                plugin.yaml.set("Selected_Items."+player.getUniqueId()+".Head","null");
+                            if(plugin.yaml.getString("Selected_Items."+player.getUniqueId()+".Inv") != null){
+                                player.getInventory().setItem(5,null);
+                                plugin.yaml.set("Selected_Items."+player.getUniqueId()+".Inv","null");
                                 plugin.saveData();
                                 player.closeInventory();
-                                player.sendMessage(Util.getMessage(Util.getLocale(player),"ResetHead"));
+                                player.sendMessage(Util.getMessage(Util.getLocale(player),"ResetGadget"));
                             }else{
                                 player.closeInventory();
-                                player.sendMessage(Util.getMessage(Util.getLocale(player),"FailedResetHead"));
+                                player.sendMessage(Util.getMessage(Util.getLocale(player),"FailedResetGadget"));
                             }
                             break;
                         case "gadgets.items.back":
@@ -146,15 +147,14 @@ public class GadgetsInventoryListener implements Listener {
                             player.closeInventory();
                             break;
                         case "gadgets.particle.reset":
-                            if(player.getInventory().getHelmet() != null){
-                                player.getInventory().setHelmet(null);
-                                plugin.yaml.set("Selected_Items."+player.getUniqueId()+".Head","null");
+                            if(plugin.yaml.getString("Selected_Items."+player.getUniqueId()+".Particle") != null){
+                                plugin.yaml.set("Selected_Items."+player.getUniqueId()+".Particle","null");
                                 plugin.saveData();
                                 player.closeInventory();
-                                player.sendMessage(Util.getMessage(Util.getLocale(player),"ResetHead"));
+                                player.sendMessage(Util.getMessage(Util.getLocale(player),"ResetParticle"));
                             }else{
                                 player.closeInventory();
-                                player.sendMessage(Util.getMessage(Util.getLocale(player),"FailedResetHead"));
+                                player.sendMessage(Util.getMessage(Util.getLocale(player),"FailedResetParticle"));
                             }
                             break;
                         case "gadgets.particle.back":

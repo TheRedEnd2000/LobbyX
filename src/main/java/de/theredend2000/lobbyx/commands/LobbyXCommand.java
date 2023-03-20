@@ -35,7 +35,7 @@ public class LobbyXCommand implements CommandExecutor, TabCompleter {
                     tutorial.start(player);
                     return true;
                 }else if(args[0].equalsIgnoreCase("help")){
-
+                    helpMessages(player);
                 }else if(args[0].equalsIgnoreCase("manage")) {
                     String permission = plugin.getConfig().getString("Permissions.LobbyXCommandPermission");
                     assert permission != null;
@@ -92,5 +92,31 @@ public class LobbyXCommand implements CommandExecutor, TabCompleter {
             return tabComplete;
         }
         return null;
+    }
+
+    public void helpMessages(Player player){
+        player.sendMessage("");
+        player.sendMessage("§b-=-=-=-=-=-=-§6§lHELP§b-=-=-=-=-=-=-");
+        player.sendMessage("");
+        player.sendMessage("§5------§2§lCommands§5------");
+        player.sendMessage("§e§l/lobbyx §f§l- §bConfigure the hole plugin or get information of it. §4[ADMIN]");
+        player.sendMessage("§e§l/build §f§l- §bSets you in creative and gives you the permission to edit the lobbys. §4[ADMIN]");
+        player.sendMessage("§e§l/coins §f§l- §bShows your coins or manage the coins of others. §2[EVERYONE] §6§l+ §4[ADMIN]");
+        player.sendMessage("§e§l/daily §f§l- §bClaim your daily coins to get as rich as possible. §2[EVERYONE]");
+        player.sendMessage("§e§l/clan §f§l- §bCreate a clan and invite friends. Manage everything or play with the settings. §2[EVERYONE]");
+        player.sendMessage("§e§l/friend §f§l- §bAdd friends to your friendship an manage it. §2[EVERYONE]");
+        player.sendMessage("§e§l/lobby §f§l- §bTeleports you to the lobby. §2[EVERYONE]");
+        player.sendMessage("§e§l/msg §f§l- §bText other players. §2[EVERYONE]");
+        player.sendMessage("§e§l/language §f§l- §bChange your language to English, Deutsch or Español. §2[EVERYONE]");
+        player.sendMessage("");
+        player.sendMessage("§5------§2§lPermissions§5------");
+        player.sendMessage("§e§l"+plugin.getConfig().getString("Permissions.LobbyXCommandPermission")+" §f§l- §bPermission for the /lobbyx command.");
+        player.sendMessage("§e§l"+plugin.getConfig().getString("Permissions.BuildCommandPermission")+" §f§l- §bPermission for the /build command.");
+        player.sendMessage("§e§l"+plugin.getConfig().getString("Permissions.CreateNewLobbyWorld")+" §f§l- §bPermission for the world creator in the lobby selector.");
+        player.sendMessage("§e§l"+plugin.getConfig().getString("Permissions.CoinsCommandPermission")+" §f§l- §bPermission for the /coins command to change coins.");
+        player.sendMessage("§e§l"+plugin.getConfig().getString("Permissions.MaintenanceModsPermission")+" §f§l- §bPermission for the world edit menu in the lobby selector.");
+        player.sendMessage("§e§l"+plugin.getConfig().getString("Permissions.GamemodeCommandPermission")+" §f§l- §bPermission for the /gamemode command.");
+        player.sendMessage("");
+        player.sendMessage("§b-=-=-=-=-=-=-§6§lHELP§b-=-=-=-=-=-=-");
     }
 }

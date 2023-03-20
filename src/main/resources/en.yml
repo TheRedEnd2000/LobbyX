@@ -91,7 +91,7 @@ Clan:
 Lobby:
   TeleportToLobby: '&8Sending you to the lobby...'
   LobbyCommandUsage: '&7Usages: &6/lobby &8| &6/l &8| &6/hub'
-  LobbyInNotSet: '&cThe lobby inst set yet. &4Please contact and admin!'
+  LobbyInNotSet: '&cThe lobby isnt set yet. &4Please contact and admin!'
 
 Gadgets:
   ResetHead: '&aYour head has been reset &2successfully&a.'
@@ -106,6 +106,10 @@ Gadgets:
   BuyNewParticle: '&7You have &asuccessfully &7bought the particle effect &6%PARTICLE%&7. §5Coins left: §6%COINS%'
   BuyNewArmor: '&7You have &asuccessfully &7bought the armor &6%ARMOR%&7. §5Coins left: §6%COINS%'
   NotEnoughCoins: '&cYou dont have enough coins.'
+  ResetGadget: '&aYour special item has been reset &2successfully&a.'
+  FailedResetGadget: '&cYou dont habe any special item on.'
+  ResetParticle: '&aYour particle has been reset &2successfully&a.'
+  FailedResetParticle: '&cYou dont habe any particle on.'
 
 Coins:
   GetCoins: '&7You have &6%COINS% coins &7in you &5purse&7.'
@@ -125,6 +129,8 @@ Teleporter:
   LocationSaved: '§7The &6location &7was saved&a successfully&7.'
   NotAMaterial: '&4%MATERIAL% &cis not an available material. Please try again.'
   EnterInChatCanceled: '&cYou canceled the action.'
+  MaterialNotAir: '&cYou cant set the material to air. It was instand set to light gray stained glass pane.'
+  CancelWorldDeletion: '&aYou canceled the world deletion &2successfully&a.'
 
 WorldCreator:
   EnterWorldNameInChat: '&aEnter your world name in Chat. §7Type "&ccancel&7" to cancel.'
@@ -135,6 +141,9 @@ WorldCreator:
   WorldAlreadyExists: '&cA world with the name &6%WORLD_NAME%&c does already exists.'
   CreatingWorld: '&aStarting creating world &6%WORLD_NAME%&a.'
   FinishCreatingWorld: '&aYou create a new LobbyWorld with the name &6%WORLD_NAME%&a.'
+  WorldInMaintenance: '&cThis world is currently in maintenance mode.'
+  WorldSetInMaintenance: '&cThis world was set to maintenance mode.'
+  NoFreeWorldsFound: '&cThere are no free worlds. No player got kicked.'
 
 DailyReward:
   AlreadyClaimed: '&cYou have already claimed your daily reward.'

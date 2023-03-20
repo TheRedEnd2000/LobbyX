@@ -1,6 +1,7 @@
 package de.theredend2000.lobbyx.listeners.inventoryListeners;
 
 import de.theredend2000.lobbyx.Main;
+import de.theredend2000.lobbyx.commands.LobbyXCommand;
 import de.theredend2000.lobbyx.messages.Util;
 import de.theredend2000.lobbyx.util.ItemBuilder;
 import org.bukkit.*;
@@ -42,6 +43,8 @@ public class ProfileListener implements Listener {
                         plugin.getProfileMenuManager().createPlayerSettingsInventory(player);
                         break;
                     case "MainInventory.Help":
+                        new LobbyXCommand(plugin).helpMessages(player);
+                        player.closeInventory();
                         break;
                     case "MainInventory.Friends":
                         plugin.getProfileMenuManager().createFriendInventory(player,true);
@@ -250,7 +253,7 @@ public class ProfileListener implements Listener {
                     }
                 }
             }
-        }else if (event.getView().getTitle().equals(Objects.requireNonNull(plugin.getConfig().getString("Inventory.InteractwithplayerInventory")).replaceAll("&", "§"))){
+        }else if (event.getView().getTitle().equals(Objects.requireNonNull(plugin.getConfig().getString("Inventory.InteractWithPlayerInventory")).replaceAll("&", "§"))){
             event.setCancelled(true);
             if (event.getCurrentItem() !=null){
                 if (event.getCurrentItem().getItemMeta().hasLocalizedName()){

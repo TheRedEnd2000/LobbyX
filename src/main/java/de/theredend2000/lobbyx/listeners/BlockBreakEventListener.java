@@ -1,7 +1,9 @@
 package de.theredend2000.lobbyx.listeners;
 
 import de.theredend2000.lobbyx.Main;
+import net.minecraft.world.level.block.Blocks;
 import org.bukkit.Bukkit;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

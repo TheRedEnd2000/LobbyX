@@ -13,6 +13,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Objects;
 import java.util.Random;
@@ -43,16 +44,46 @@ public class SetPlayerLobbyManager {
             updateLobbyInventory();
 
             if(!plugin.getLobbyWorlds().isEmpty()) {
-                ConfigLocationUtil locationUtil = new ConfigLocationUtil(plugin, "Locations.Lobby." + player.getWorld().getName());
-                if (locationUtil.loadLocation() != null) {
-                    player.teleport(locationUtil.loadLocation());
-                } else {
-                    for (Player admins : Bukkit.getOnlinePlayers()) {
-                        if (admins.isOp()) {
-                            admins.sendMessage("§cThe Lobby for the world " + player.getWorld().getName() + " is not set. Please do this!");
+                new BukkitRunnable() {
+                    int worldID = 0;
+                    @Override
+                    public void run() {
+                        if(plugin.getLobbyWorlds().contains(player.getWorld()) && !plugin.getConfig().getBoolean("Lobby_Worlds."+player.getWorld().getName()+".maintenance")){
+                            ConfigLocationUtil locationUtil = new ConfigLocationUtil(plugin, "Locations.Lobby." + player.getWorld().getName());
+                            if (locationUtil.loadLocation() != null) {
+                                player.teleport(locationUtil.loadLocation());
+                            } else {
+                                for (Player admins : Bukkit.getOnlinePlayers()) {
+                                    if (admins.isOp()) {
+                                        admins.sendMessage("§cThe Lobby for the world " + player.getWorld().getName() + " is not set. Please do this!");
+                                    }
+                                }
+                            }
+                            cancel();
+                            return;
+                        }else{
+                            if(plugin.getLobbyWorlds().size() <= worldID){
+                                cancel();
+                                if(player.isOp())
+                                    player.sendMessage(Util.getMessage(Util.getLocale(player),"NoFreeWorldsFound"));
+                                else
+                                    player.kickPlayer(plugin.getConfig().getString("Prefix").replaceAll("&","§")+"§cThere are no free lobbys!");
+                                return;
+                            }
+                            World newWorld = plugin.getLobbyWorlds().get(worldID);
+                            if(!plugin.getConfig().getBoolean("Lobby_Worlds."+newWorld.getName()+".maintenance")){
+                                cancel();
+                                ConfigLocationUtil locationUtil = new ConfigLocationUtil(plugin,"Locations.Lobby."+newWorld.getName());
+                                if(locationUtil.loadLocation() != null){
+                                    player.teleport(locationUtil.loadLocation());
+                                    player.sendMessage(Util.getMessage(Util.getLocale(player),"WorldSetInMaintenance"));
+                                }else
+                                    player.sendMessage(Util.getMessage(Util.getLocale(player),"LobbyInNotSet"));
+                            }else
+                                worldID++;
                         }
                     }
-                }
+                }.runTaskTimer(plugin,0,1);
             }
 
         }

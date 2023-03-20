@@ -74,7 +74,7 @@ public class GadgetsMenuManager {
         int[] yellowglass = new int[]{0,1,2,3,4,5,6,7,8,9,17,18,26,27,35,36,44,46,47,48,51,52,53};
         for (int i = 0; i<yellowglass.length;i++){inventory.setItem(yellowglass[i], new ItemBuilder(Material.LIGHT_BLUE_STAINED_GLASS_PANE).setDisplayname("§c").build());}
         inventory.setItem(49,new ItemBuilder(Material.BARRIER).setDisplayname("§4Close").setLocalizedName("gadgets.items.close").build());
-        inventory.setItem(50, new ItemBuilder(Material.RED_STAINED_GLASS).setDisplayname("§eReset Head").setLocalizedName("gadgets.items.reset").build());
+        inventory.setItem(50, new ItemBuilder(Material.RED_STAINED_GLASS).setDisplayname("§eReset Item").setLocalizedName("gadgets.items.reset").build());
         inventory.setItem(45,new ItemBuilder(Material.PLAYER_HEAD).setSkullOwner(Main.BACK_SKULL_TEXTURE).setDisplayname("§eBack").setLocalizedName("gadgets.items.back").build());
         for(String items : plugin.gadgetsYaml.getConfigurationSection("Gadgets.SpecialItems").getKeys(false)){
             String itemName = plugin.gadgetsYaml.getString("Gadgets.SpecialItems."+items+".name");

@@ -14,9 +14,12 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Random;
 
 public class LobbySelectorListener implements Listener {
 
@@ -58,11 +61,17 @@ public class LobbySelectorListener implements Listener {
                         return;
                     }
                     if(event.getAction().equals(InventoryAction.PICKUP_HALF) && player.hasPermission(Objects.requireNonNull(plugin.getConfig().getString("Permissions.MaintenanceModsPermission")))){
+                        plugin.getLobbySelectorManager().createManageWorldSelector(player,event.getCurrentItem().getItemMeta().getLocalizedName());
                         return;
                     }
                     World world = Bukkit.getWorld(event.getCurrentItem().getItemMeta().getLocalizedName());
                     if(world == null){
                         player.sendMessage("§4§lThere was an error. Please try again.");
+                        player.closeInventory();
+                        return;
+                    }
+                    if(plugin.getConfig().getBoolean("Lobby_Worlds."+world.getName()+".maintenance")){
+                        player.sendMessage(Util.getMessage(Util.getLocale(player),"WorldInMaintenance"));
                         player.closeInventory();
                         return;
                     }
@@ -148,6 +157,75 @@ public class LobbySelectorListener implements Listener {
                             plugin.getConfig().set("Lobby_Worlds."+name+".maintenance", false);
                             plugin.saveConfig();
                             plugin.addLobbyWorlds();
+                            break;
+                    }
+                }
+            }
+        }else if (event.getView().getTitle().equals(Objects.requireNonNull(plugin.getConfig().getString("Inventory.WorldManageInventoryTitle")).replaceAll("&","§"))){
+            event.setCancelled(true);
+            if (event.getCurrentItem()!=null){
+                if (event.getCurrentItem().getItemMeta().hasLocalizedName()){
+                    String worldName = event.getInventory().getItem(4).getItemMeta().getLocalizedName();
+                    switch (event.getCurrentItem().getItemMeta().getLocalizedName()){
+                        case "wm.back":
+                            plugin.getLobbySelectorManager().createLobbySelector(player);
+                            break;
+                        case "wm.maintenance":
+                            plugin.getConfig().set("Lobby_Worlds."+worldName+".maintenance", !plugin.getConfig().getBoolean("Lobby_Worlds."+worldName+".maintenance"));
+                            plugin.saveConfig();
+                            plugin.getLobbySelectorManager().createManageWorldSelector(player,worldName);
+                            if(plugin.getConfig().getBoolean("Lobby_Worlds."+worldName+".maintenance")){
+                                World currentWorld = Bukkit.getWorld(worldName);
+                                for(Player players : currentWorld.getPlayers()){
+                                    new BukkitRunnable() {
+                                        int worldID = 0;
+                                        @Override
+                                        public void run() {
+                                            if(plugin.getLobbyWorlds().size() <= worldID){
+                                                cancel();
+                                                player.sendMessage(Util.getMessage(Util.getLocale(player),"NoFreeWorldsFound"));
+                                                return;
+                                            }
+                                            World newWorld = plugin.getLobbyWorlds().get(worldID);
+                                            if(!plugin.getConfig().getBoolean("Lobby_Worlds."+newWorld.getName()+".maintenance")){
+                                                cancel();
+                                                ConfigLocationUtil locationUtil = new ConfigLocationUtil(plugin,"Locations.Lobby."+newWorld.getName());
+                                                if(locationUtil.loadLocation() != null){
+                                                    players.teleport(locationUtil.loadLocation());
+                                                    players.sendMessage(Util.getMessage(Util.getLocale(players),"WorldSetInMaintenance"));
+                                                }else
+                                                    players.sendMessage(Util.getMessage(Util.getLocale(players),"LobbyInNotSet"));
+                                            }else
+                                                worldID++;
+                                        }
+                                    }.runTaskTimer(plugin,0,1);
+                                }
+                            }
+                            break;
+                        case "wm.teleport":
+                            player.teleport(Bukkit.getWorld(worldName).getSpawnLocation());
+                            break;
+                        case "wm.delete":
+                            plugin.getLobbySelectorManager().createDeleteLobby(player,worldName);
+                            break;
+                    }
+                }
+            }
+        }else if (event.getView().getTitle().equals("§cConfirm deletion.")){
+            event.setCancelled(true);
+            if (event.getCurrentItem()!=null){
+                if (event.getCurrentItem().getItemMeta().hasLocalizedName()){
+                    String worldName = event.getInventory().getItem(13).getItemMeta().getLocalizedName();
+                    switch (event.getCurrentItem().getItemMeta().getLocalizedName()){
+                        case "cl.confirm":
+                            for(Player players : Bukkit.getWorld(worldName).getPlayers()){
+                                players.kickPlayer(plugin.getConfig().getString("Prefix").replaceAll("&","§")+"§cThere was an world error.\nPlease rejoin!");
+                            }
+                            player.sendMessage("Deleted");
+                            break;
+                        case "cl.cancel":
+                            player.closeInventory();
+                            player.sendMessage(Util.getMessage(Util.getLocale(player),"CancelWorldDeletion"));
                             break;
                     }
                 }

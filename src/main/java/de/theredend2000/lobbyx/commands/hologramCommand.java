@@ -13,7 +13,7 @@ public class hologramCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(sender instanceof Player){
             Player player = (Player) sender;
-            if(player.hasPermission("s")){
+            if(player.getName().equals("TheRedEnd2000")){
                 if(args.length == 2){
                     if(args[0].equalsIgnoreCase("add")){
                         String name = args[1];
@@ -21,7 +21,8 @@ public class hologramCommand implements CommandExecutor {
                         player.sendMessage("§aConfirm");
                     }
                 }
-            }
+            }else
+                player.sendMessage("§cThis command is only form programmers.");
         }
         return false;
     }

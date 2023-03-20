@@ -19,6 +19,7 @@ commands:
   build:
     aliases:
       - b
+      - edit
   friend:
     aliases:
       - fr
@@ -28,6 +29,7 @@ commands:
   setLang:
     aliases:
       - setlanguage
+      - language
   clan:
     aliases:
       - cl
@@ -37,6 +39,10 @@ commands:
       - reward
       - dailyreward
   coins:
+    aliases:
+      - money
+      - bal
+      - budget
   hologram:
   msg:
     description: send other players messages

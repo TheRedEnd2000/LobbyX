@@ -3,6 +3,7 @@ package de.theredend2000.lobbyx.commands;
 import de.theredend2000.lobbyx.Main;
 import de.theredend2000.lobbyx.messages.Util;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -26,9 +27,13 @@ public class BuildCommand implements CommandExecutor {
                 if(plugin.getBuildPlayers().contains(player)){
                     plugin.getBuildPlayers().remove(player);
                     player.sendMessage(Util.getMessage(Util.getLocale(player),"BuildLeave"));
+                    plugin.getSetPlayerLobbyManager().setItems(player);
+                    player.setGameMode(GameMode.SURVIVAL);
                 }else{
                     plugin.getBuildPlayers().add(player);
                     player.sendMessage(Util.getMessage(Util.getLocale(player),"BuildJoined"));
+                    player.getInventory().clear();
+                    player.setGameMode(GameMode.CREATIVE);
                 }
             }else
                 player.sendMessage(Util.getMessage(Util.getLocale(player),"NoPermissionMessage").replaceAll("%PERMISSION%",permission));

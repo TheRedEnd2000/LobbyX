@@ -40,7 +40,7 @@ public class PlayerInteractAtEntityEventListener implements Listener {
     }
 
     private void interactWithPLayerInv(Player player,Player rightClicked){
-        Inventory Playerinfo = Bukkit.createInventory(player, 54,Objects.requireNonNull(plugin.getConfig().getString("Inventory.InteractwithplayerInventory")).replaceAll("&", "§"));
+        Inventory Playerinfo = Bukkit.createInventory(player, 54,Objects.requireNonNull(plugin.getConfig().getString("Inventory.InteractWithPlayerInventory")).replaceAll("&", "§"));
         int[] white = new int[]{10,12,14,16,19,21,22,23,24,25,28,30,31,32,33,34,37,39,41,43};
         int[] orange = new int[]{0,1,2,3,5,6,7,8,9,17,18,26,27,35,36,44,45,46,47,48,50,51,52};
         Playerinfo.setItem(4,new ItemBuilder(Material.RED_STAINED_GLASS_PANE).setDisplayname("§c").build());

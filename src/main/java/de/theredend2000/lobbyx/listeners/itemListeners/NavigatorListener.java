@@ -188,7 +188,15 @@ public class NavigatorListener implements Listener {
                 materialPlayer.remove(player);
                 return;
             }
-            plugin.navigatorYaml.set("Navigator.Slots." + slot + ".item", event.getMessage().toUpperCase() );
+            if(material.equals(Material.AIR) || material.equals(Material.CAVE_AIR) || material.equals(Material.VOID_AIR)){
+                player.sendMessage(Util.getMessage(Util.getLocale(player),"MaterialNotAir"));
+                plugin.navigatorYaml.set("Navigator.Slots." + slot + ".item", "LIGHT_GRAY_STAINED_GLASS_PANE");
+                plugin.saveNavigator();
+                plugin.getNavigatorMenuManager().createSlotEditInventory(player, slot);
+                materialPlayer.remove(player);
+                return;
+            }
+            plugin.navigatorYaml.set("Navigator.Slots." + slot + ".item", event.getMessage().toUpperCase());
             plugin.saveNavigator();
             plugin.getNavigatorMenuManager().createSlotEditInventory(player, slot);
             materialPlayer.remove(player);

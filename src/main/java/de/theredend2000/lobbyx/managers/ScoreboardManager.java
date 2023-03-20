@@ -15,7 +15,6 @@ import java.util.List;
 public class ScoreboardManager {
 
     private Main plugin;
-
     public ScoreboardManager(Main plugin){
         this.plugin = plugin;
         updateScoreboardForAll();
@@ -23,16 +22,16 @@ public class ScoreboardManager {
 
     private void updateScoreboardForAll(){
         int delay = plugin.getConfig().getInt("Scoreboard.UpdateDelay");
-        new BukkitRunnable() {
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
             @Override
             public void run() {
                 for(Player player : Bukkit.getOnlinePlayers()){
-                    if(plugin.getLobbyWorlds().contains(player.getWorld())){
+                    if(plugin.getLobbyWorlds().contains(player.getWorld())) {
                         updateScoreboard(player);
                     }
                 }
             }
-        }.runTaskTimer(plugin,0,delay);
+        },0,delay);
     }
 
     private void updateScoreboard(Player player){

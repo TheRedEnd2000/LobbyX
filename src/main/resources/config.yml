@@ -33,7 +33,7 @@ Permissions:
   CreateNewLobbyWorld: lobbyx.world
   CoinsCommandPermission: lobbyx.coins
   MaintenanceModsPermission: lobbyx.maintenance
-  GamemodeCommand: lobbyx.gamemode
+  GamemodeCommandPermission: lobbyx.gamemode
 
 #Inventorys
 #Change the inventory titles
@@ -49,9 +49,10 @@ Inventory:
   FriendRemoveInventoryTitle: '&bLobby&4X&f - &cRemove this Friend'
   LobbySelectorInventoryTitle: '&bLobby&4X&f - &dLobbys'
   WorldCreatorInventoryTitle: '&bLobby&4X&f - &2World Creator'
+  WorldManageInventoryTitle: '&bLobby&4X&f - &3Edit World'
   TeleporterInventoryTitle: '&bLobby&4X&f - &5Navigator'
   SettingsInventoryTitle: '&bLobby&4X&f - &4Settings'
-  InteractwithplayerInventory: '&bLobby&4X&f - &3PlayerInfo'
+  InteractWithPlayerInventory: '&bLobby&4X&f - &3PlayerInfo'
   Rank:
     RankInventory: '&bLobby&4X&f - &9Ranks'
     RankSettingsInventory:

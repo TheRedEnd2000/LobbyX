@@ -17,6 +17,10 @@ public class MusicCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(sender instanceof Player){
             Player player = (Player) sender;
+            if(!player.getName().equals("TheRedEnd2000")){
+                player.sendMessage("§cThis command is only form programmers.");
+                return true;
+            }
             if(args.length == 1){
                 String song = args[0];
                 if(!(song.equals("Faded") || song.equals("AllStar") || song.equals("Levels") || song.equals("Imagine") || song.equals("Love") || song.equals("Happy") || song.equals("Animals"))){

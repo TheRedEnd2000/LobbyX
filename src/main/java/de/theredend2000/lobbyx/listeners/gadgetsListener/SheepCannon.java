@@ -66,7 +66,7 @@ public class SheepCannon implements Listener {
             @Override
             public void run() {
                 for(Sheep sheep : sheeps){
-                    if(sheep.isOnGround()){
+                    if(sheep.isOnGround() || sheep.isInWater() || sheep.isSwimming()){
                         sheep.remove();
                         sheep.getLocation().getWorld().spawnParticle(Particle.EXPLOSION_NORMAL,sheep.getLocation(),5,1,1,1,0);
                         Firework fw = sheep.getLocation().getWorld().spawn(sheep.getLocation(), Firework.class);
