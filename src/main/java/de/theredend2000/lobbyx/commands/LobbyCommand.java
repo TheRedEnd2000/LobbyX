@@ -29,6 +29,7 @@ public class LobbyCommand implements CommandExecutor {
                     player.sendMessage(Util.getMessage(Util.getLocale(player),"NoLobbys"));
                     return true;
                 }
+                plugin.getSetPlayerLobbyManager().setItems(player);
                 World world = null;
                 if(plugin.getLobbyWorlds().contains(player.getWorld())){
                     world = player.getWorld();

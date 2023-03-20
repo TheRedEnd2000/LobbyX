@@ -32,6 +32,10 @@ public class ClanCommands implements CommandExecutor, TabCompleter {
         if(sender instanceof Player){
             Player player = (Player) sender;
             if(plugin.getLobbyWorlds().contains(player.getWorld())){
+                if(!player.getName().equals("TheRedEnd2000")){
+                    player.sendMessage("§4This feature is currently disabled!");
+                    return true;
+                }
                 if(args.length == 2){
                     if(args[0].equalsIgnoreCase("create")){
                         if(!plugin.getClanManager().hasClan(player)){

@@ -45,8 +45,8 @@ public class MsgCommand implements CommandExecutor {
             StringBuilder message = new StringBuilder();
             for(int i = 1; i < args.length; i++)
                 message.append(" ").append(args[i]);
-            player.sendMessage(Util.getMessage(Util.getLocale(player),"MsgCommandMsg").replaceAll("%RANK_COLOR_SENDER%",playerNameColor).replaceAll("%RANK_COLOR_RECEIVER%",getPlayerNameColor).replaceAll("%RECEIVER%",getPlayer.getName()).replaceAll("%SENDER%",player.getName()).replaceAll("%MESSAGE%", String.valueOf(message)).replaceAll("&","§"));
-            getPlayer.sendMessage(Util.getMessage(Util.getLocale(getPlayer),"MsgCommandMsg").replaceAll("%RANK_COLOR_SENDER%",playerNameColor).replaceAll("%RANK_COLOR_RECEIVER%",getPlayerNameColor).replaceAll("%RECEIVER%",getPlayer.getName()).replaceAll("%SENDER%",player.getName()).replaceAll("%MESSAGE%", String.valueOf(message)).replaceAll("&","§"));
+            player.sendMessage(Util.getMessage(Util.getLocale(player),"MsgCommandMsgSender").replaceAll("%RANK_COLOR_SENDER%",playerNameColor).replaceAll("%RANK_COLOR_RECEIVER%",getPlayerNameColor).replaceAll("%RECEIVER%",getPlayer.getName()).replaceAll("%SENDER%",player.getName()).replaceAll("%MESSAGE%", String.valueOf(message)).replaceAll("&","§"));
+            getPlayer.sendMessage(Util.getMessage(Util.getLocale(getPlayer),"MsgCommandMsgRevier").replaceAll("%RANK_COLOR_SENDER%",playerNameColor).replaceAll("%RANK_COLOR_RECEIVER%",getPlayerNameColor).replaceAll("%RECEIVER%",getPlayer.getName()).replaceAll("%SENDER%",player.getName()).replaceAll("%MESSAGE%", String.valueOf(message)).replaceAll("&","§"));
         }
         return false;
     }

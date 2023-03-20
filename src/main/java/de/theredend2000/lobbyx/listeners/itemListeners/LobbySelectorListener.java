@@ -206,6 +206,10 @@ public class LobbySelectorListener implements Listener {
                             player.teleport(Bukkit.getWorld(worldName).getSpawnLocation());
                             break;
                         case "wm.delete":
+                            if(!player.getName().equals("-")){
+                                player.sendMessage("§4This feature is coming soon.");
+                                return;
+                            }
                             plugin.getLobbySelectorManager().createDeleteLobby(player,worldName);
                             break;
                     }

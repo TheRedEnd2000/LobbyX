@@ -4,10 +4,7 @@ import de.theredend2000.lobbyx.Main;
 import de.theredend2000.lobbyx.messages.Util;
 import de.theredend2000.lobbyx.util.ConfigLocationUtil;
 import de.theredend2000.lobbyx.util.ItemBuilder;
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -134,6 +131,39 @@ public class SetPlayerLobbyManager {
                 String headName = plugin.gadgetsYaml.getString("Gadgets.Heads."+heads+".name");
                 String headTexture = plugin.gadgetsYaml.getString("Gadgets.Heads."+heads+".texture");
                 player.getInventory().setHelmet(new ItemBuilder(Material.PLAYER_HEAD).setDisplayname(headName.replaceAll("&","§")).setSkullOwner(Main.getTexture(headTexture)).build());
+            }
+        }
+        for(String heads : plugin.gadgetsYaml.getConfigurationSection("Gadgets.AnimatedHeads").getKeys(false)){
+            String checkPath = plugin.yaml.getString("Selected_Items."+player.getUniqueId()+".Head");
+            if(heads.equals(checkPath)){
+                String headName = plugin.gadgetsYaml.getString("Gadgets.AnimatedHeads."+heads+".name");
+                String headTexture = plugin.gadgetsYaml.getString("Gadgets.AnimatedHeads."+heads+".texture");
+                player.getInventory().setHelmet(new ItemBuilder(Material.PLAYER_HEAD).setDisplayname(headName.replaceAll("&","§")).setSkullOwner(Main.getTexture(headTexture)).build());
+            }
+        }
+        for(String items : plugin.gadgetsYaml.getConfigurationSection("Gadgets.Armor").getKeys(false)){
+            String checkPath = plugin.yaml.getString("Selected_Items."+player.getUniqueId()+".Chest");
+            if(items.equals(checkPath)){
+                Material helmetMaterial = plugin.getGadgetsMaterial("Gadgets.Armor."+items+".Helmet.material");
+                String helmetName = plugin.gadgetsYaml.getString("Gadgets.Armor."+items+".Helmet.name");
+                String helmetTexture = plugin.gadgetsYaml.getString("Gadgets.Armor."+items+".Helmet.texture");
+                Color helmetColor = plugin.gadgetsYaml.getColor("Gadgets.Armor."+items+".Helmet.color");
+                player.getInventory().setHelmet(new ItemBuilder(helmetMaterial).setColor(helmetColor).setSkullOwner(helmetTexture != null ? Main.getTexture(helmetTexture) : null).setDisplayname(helmetName.replaceAll("&","§")).build());
+
+                Material chestplateMaterial = plugin.getGadgetsMaterial("Gadgets.Armor."+items+".Chestplate.material");
+                String chestplateName = plugin.gadgetsYaml.getString("Gadgets.Armor."+items+".Chestplate.name");
+                Color chestplateColor = plugin.gadgetsYaml.getColor("Gadgets.Armor."+items+".Chestplate.color");
+                player.getInventory().setChestplate(new ItemBuilder(chestplateMaterial).setColor(chestplateColor).setDisplayname(chestplateName.replaceAll("&","§")).build());
+
+                Material legginsMaterial = plugin.getGadgetsMaterial("Gadgets.Armor."+items+".Leggins.material");
+                String legginsName = plugin.gadgetsYaml.getString("Gadgets.Armor."+items+".Leggins.name");
+                Color legginsColor = plugin.gadgetsYaml.getColor("Gadgets.Armor."+items+".Leggins.color");
+                player.getInventory().setLeggings(new ItemBuilder(legginsMaterial).setColor(legginsColor).setDisplayname(legginsName.replaceAll("&","§")).build());
+
+                Material bootsMaterial = plugin.getGadgetsMaterial("Gadgets.Armor."+items+".Boots.material");
+                String bootsName = plugin.gadgetsYaml.getString("Gadgets.Armor."+items+".Boots.name");
+                Color bootsColor = plugin.gadgetsYaml.getColor("Gadgets.Armor."+items+".Boots.color");
+                player.getInventory().setBoots(new ItemBuilder(bootsMaterial).setColor(bootsColor).setDisplayname(bootsName.replaceAll("&","§")).build());
             }
         }
     }

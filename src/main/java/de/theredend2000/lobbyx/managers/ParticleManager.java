@@ -23,7 +23,7 @@ public class ParticleManager {
             @Override
             public void run() {
                 for(Player player : Bukkit.getOnlinePlayers()){
-                    if(plugin.getLobbyWorlds().contains(player.getWorld())){
+                    if(plugin.getLobbyWorlds().contains(player.getWorld()) && !plugin.getBuildPlayers().contains(player)){
                         for(String particles : plugin.gadgetsYaml.getConfigurationSection("Gadgets.Particle").getKeys(false)) {
                             if (plugin.yaml.getString("Selected_Items." + player.getUniqueId() + ".Particle") != null) {
                                 if (Objects.requireNonNull(plugin.yaml.getString("Selected_Items." + player.getUniqueId() + ".Particle")).equals(particles)) {

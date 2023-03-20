@@ -86,7 +86,7 @@ Broadcaster:
   delay: 300 #delay in seconds
   messages:
     - '&fYou can change this messages in the &3config.yml&f file.'
-    - '&fDo &6/lx &fto edit the navigator and more.'
+    - '&fDo &6/lobbyx manage &fto edit the navigator and more.'
     - '&fSet you language under &3Profile &f-> &cSettings &f-> &6Language&f!'
     - '&fDo &5/daily &fto claim you daily coins.'
     - '&fAdd &3Friends&f with &6/friend add <Player>'

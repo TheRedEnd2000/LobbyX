@@ -4,6 +4,7 @@ import de.theredend2000.lobbyx.Main;
 import de.theredend2000.lobbyx.jumpandrun.JumpAndRun;
 import de.theredend2000.lobbyx.messages.Util;
 import de.theredend2000.lobbyx.othergadgets.RainbowArmor;
+import de.theredend2000.lobbyx.util.DatetimeUtils;
 import de.theredend2000.lobbyx.util.Updater;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -32,6 +33,7 @@ public class JoinAndQuitEventListener implements Listener {
         Player player = event.getPlayer();
         plugin.getPlayerDataManager().checkPlayerData(player);
         if(plugin.getLobbyWorlds().contains(player.getWorld())){
+            checkFirstJoinedData(player);
             plugin.getSetPlayerLobbyManager().setPlayerInLobby(player);
             event.setJoinMessage(null);
             for(Player lobbyPlayers : player.getWorld().getPlayers()){
@@ -50,6 +52,14 @@ public class JoinAndQuitEventListener implements Listener {
                 Updater updater = new Updater(plugin);
                 if(updater.isOutdated(player)) return;
             }
+        }
+    }
+
+    private void checkFirstJoinedData(Player player){
+        if(!plugin.yaml.contains("PlayerInformation."+player.getUniqueId()+".FirstJoined")){
+            plugin.yaml.set("PlayerInformation."+player.getUniqueId()+".FirstJoined.Date", plugin.getDatetimeUtils().getNowDate());
+            plugin.yaml.set("PlayerInformation."+player.getUniqueId()+".FirstJoined.Time", plugin.getDatetimeUtils().getNowTime());
+            plugin.saveData();
         }
     }
 

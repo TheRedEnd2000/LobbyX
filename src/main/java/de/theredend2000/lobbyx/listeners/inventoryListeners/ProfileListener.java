@@ -1,9 +1,13 @@
 package de.theredend2000.lobbyx.listeners.inventoryListeners;
 
 import de.theredend2000.lobbyx.Main;
+import de.theredend2000.lobbyx.commands.FriendCommand;
 import de.theredend2000.lobbyx.commands.LobbyXCommand;
 import de.theredend2000.lobbyx.messages.Util;
 import de.theredend2000.lobbyx.util.ItemBuilder;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -55,6 +59,10 @@ public class ProfileListener implements Listener {
                         plugin.getProfileMenuManager().createSocialMenu(player);
                         break;
                     case "MainInventory.Clan":
+                        if(!player.getName().equals("TheRedEnd2000")){
+                            player.sendMessage("§4This feature is currently disabled!");
+                            return;
+                        }
                         if(plugin.yaml.contains("Clans.")) {
                             for (String clanOwner : plugin.yaml.getConfigurationSection("Clans.").getKeys(false)) {
                                 for (String clanNames : plugin.yaml.getConfigurationSection("Clans." + clanOwner + ".").getKeys(false)) {
@@ -258,7 +266,39 @@ public class ProfileListener implements Listener {
             if (event.getCurrentItem() !=null){
                 if (event.getCurrentItem().getItemMeta().hasLocalizedName()){
                     switch (event.getCurrentItem().getItemMeta().getLocalizedName()){
-                        case "":
+                        case "playerInformation.addFriend":
+                            FriendCommand friendCommand = new FriendCommand(plugin);
+                            Player friendtoadd = Bukkit.getPlayer(event.getInventory().getItem(13).getItemMeta().getLocalizedName());
+                            if(friendtoadd == null){
+                                player.sendMessage(Util.getMessage(Util.getLocale(player),"PlayerNotFound"));
+                                return;
+                            }
+                            if(friendCommand.getFriendRequest().containsKey(player)){
+                                player.sendMessage(Util.getMessage(Util.getLocale(player), "AlreadySend").replaceAll("%FRIEND_REQUEST_RECEIVER%", friendtoadd.getName()).replaceAll("%FRIEND_REQUEST_SENDER%",player.getName()));
+                                return;
+                            }
+                            plugin.getFriendManager().addFriend(player,friendtoadd);
+                            break;
+                        case "playerInformation.inviteClan":
+                            if(!player.getName().equals("TheRedEnd2000")){
+                                player.sendMessage("§cThis feature is coming soon.");
+                            }
+                            break;
+                        case "playerInformation.social":
+                            if(!player.getName().equals("TheRedEnd2000")){
+                                player.sendMessage("§cThis feature is coming soon.");
+                            }
+                            break;
+                        case "playerInformation.message":
+                            String players = event.getInventory().getItem(13).getItemMeta().getLocalizedName();
+                            TextComponent c = new TextComponent(plugin.getConfig().getString("Prefix").replaceAll("&","§")+"§7Click to get the command usage: ");
+                            TextComponent clickme = new TextComponent("§6§l[HERE]");
+
+                            clickme.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/msg " +players+" <Message>"));
+                            clickme.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, TextComponent.fromLegacyText("§aShow command usage.")));
+                            c.addExtra(clickme);
+                            player.spigot().sendMessage(c);
+                            player.closeInventory();
                             break;
                     }
                 }

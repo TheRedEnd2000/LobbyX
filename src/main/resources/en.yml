@@ -155,7 +155,8 @@ MsgCommand:
   MsgCommandUsage: '&7Usages: &6/msg <Player> <Message>&7!'
   MsgCommandNotYourself: '&cYou cant send yourself a msg.'
   MsgCommandNoPlayerFound: '&cI cant find the player &6%PLAYER%&c.'
-  MsgCommandMsg: '%RANK_COLOR_SENDER%%SENDER% &6to&r %RANK_COLOR_RECEIVER%%RECEIVER%&f:%MESSAGE%'
+  MsgCommandMsgSender: '%RANK_COLOR_SENDER%me &6to&r %RANK_COLOR_RECEIVER%%RECEIVER%&f:%MESSAGE%'
+  MsgCommandMsgRevier: '%RANK_COLOR_SENDER%%SENDER% &6to&r %RANK_COLOR_RECEIVER%you &f:%MESSAGE%'
   AcceptNoMsg: '&cThis user does not accept msg messages.'
 
 GamemodeCommand:
