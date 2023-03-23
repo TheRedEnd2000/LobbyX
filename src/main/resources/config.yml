@@ -16,6 +16,7 @@ Settings:
   DefaultGamemode: SURVIVAL
   DailyRewardCoinsAmount: 2000
   CheckForUpdates: true
+  LobbySpeed: true
 
 #LobbyWorlds
 
@@ -34,6 +35,7 @@ Permissions:
   CoinsCommandPermission: lobbyx.coins
   MaintenanceModsPermission: lobbyx.maintenance
   GamemodeCommandPermission: lobbyx.gamemode
+  FlySettingPermission: lobbyx.fly
 
 #Inventorys
 #Change the inventory titles
@@ -43,7 +45,8 @@ Inventory:
   ProfileInventoryTitle: '&bLobby&4X&f - &6Profile'
   SocialInventoryTitle: '&bLobby&4X&f - &9Social'
   FriendInventoryTitle: '&bLobby&4X&f - &3Friends'
-  LocationInventoryTitle: '&bLobby&4X&f - &9Locations'
+  MainSettingsInventoryTitle: '&bLobby&4X&f - &4Main Settings'
+  MainJnrInventoryTitle: '&bLobby&4X&f - &bMain Jump and Run'
   LanguageInventoryTitle: '&bLobby&4X&f - &3Language'
   FriendSettingsInventoryTitle: '&bLobby&4X&f - &bFriend Settings'
   FriendRemoveInventoryTitle: '&bLobby&4X&f - &cRemove this Friend'
@@ -87,7 +90,7 @@ Broadcaster:
   messages:
     - '&fYou can change this messages in the &3config.yml&f file.'
     - '&fDo &6/lobbyx manage &fto edit the navigator and more.'
-    - '&fSet you language under &3Profile &f-> &cSettings &f-> &6Language&f!'
+    - '&fSet you language under &3Profile &f-> &6Language&f!'
     - '&fDo &5/daily &fto claim you daily coins.'
     - '&fAdd &3Friends&f with &6/friend add <Player>'
 
@@ -157,6 +160,9 @@ Scoreboard:
 #Customize the JumpAndRun
 
 JumpAndRun:
+  enabled: true
+  jnrCoins: true
+  pressurePlateStart: true
   Sounds:
     StartSound: ENTITY_PLAYER_LEVELUP
     StopSound: ITEM_SHIELD_BREAK

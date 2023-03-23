@@ -26,11 +26,12 @@ public class GadgetsMenuManager {
         int[] orangeglass = new int[]{0,1,2,3,4,5,6,7,8,9,17,18,26,27,35,36,44,45,46,47,48,50,51,52,53};
         for (int i = 0; i<orangeglass.length;i++){inventory.setItem(orangeglass[i], new ItemBuilder(Material.LIME_STAINED_GLASS_PANE).setDisplayname("§c").build());}
         inventory.setItem(49,new ItemBuilder(Material.BARRIER).setDisplayname("§4Close").setLocalizedName("gadgets.main.close").build());
-        inventory.setItem(13, new ItemBuilder(Material.PLAYER_HEAD).setSkullOwner(Main.getTexture("N2RlNDFlODE1YTQ5MmM5MmQ4YTQ1YmU1NGRhOWVhNjdlNmMyOTliZWNlMTM4NmMxZGZhOWMxNjk5ZDA5ZTA4NCJ9fX0=")).setDisplayname("§5Heads").setLocalizedName("gadgets.main.heads").build());
-        inventory.setItem(10, new ItemBuilder(Material.FISHING_ROD).setDisplayname("§9Special Items").setLocalizedName("gadgets.main.specialItems").build());
-        inventory.setItem(16, new ItemBuilder(Material.PLAYER_HEAD).setSkullOwner(Main.getTexture("OGFkMmI0ZTQ4OTU5NDk4YzNiZmIyZDE0OTg3NGVkYmY5YTBjZmJhZGNlYjU0YWQyNTlhYTQwNzA2ZGRhMWI2YyJ9fX0=")).setDisplayname("§6Animated Heads").setLocalizedName("gadgets.main.aheads").build());
-        inventory.setItem(37, new ItemBuilder(Material.FIREWORK_ROCKET).setDisplayname("§6Particle Effects").setLocalizedName("gadgets.main.particle").build());
-        inventory.setItem(40, new ItemBuilder(Material.IRON_CHESTPLATE).setDisplayname("§3Armor").setLocalizedName("gadgets.main.armor").build());
+        inventory.setItem(13, new ItemBuilder(Material.PLAYER_HEAD).setLore("§7Heads for everyone. ","§7Look for the most suitable head for you.","","§eClick to browse.").setSkullOwner(Main.getTexture("N2RlNDFlODE1YTQ5MmM5MmQ4YTQ1YmU1NGRhOWVhNjdlNmMyOTliZWNlMTM4NmMxZGZhOWMxNjk5ZDA5ZTA4NCJ9fX0=")).setDisplayname("§5Heads").setLocalizedName("gadgets.main.heads").build());
+        inventory.setItem(10, new ItemBuilder(Material.FISHING_ROD).setLore("§7Fun with everything. ","§7Look for you favorite ones.","","§eClick to browse.").setDisplayname("§9Special Items").setLocalizedName("gadgets.main.specialItems").build());
+        inventory.setItem(16, new ItemBuilder(Material.PLAYER_HEAD).setLore("§7Heads but animated. ","§7What could be cooler than animated heads.","","§eClick to browse.").setSkullOwner(Main.getTexture("OGFkMmI0ZTQ4OTU5NDk4YzNiZmIyZDE0OTg3NGVkYmY5YTBjZmJhZGNlYjU0YWQyNTlhYTQwNzA2ZGRhMWI2YyJ9fX0=")).setDisplayname("§6Animated Heads").setLocalizedName("gadgets.main.aheads").build());
+        inventory.setItem(37, new ItemBuilder(Material.FIREWORK_ROCKET).setLore("§7Particles of all kinds. ","§7Select your favorite one or try out everyone.","","§eClick to browse.").setDisplayname("§6Particle Effects").setLocalizedName("gadgets.main.particle").build());
+        inventory.setItem(40, new ItemBuilder(Material.IRON_CHESTPLATE).setLore("§7Cool armor for everyone. ","§7From colorful to stylish, ","§7everything is included.","","§eClick to browse.").setDisplayname("§3Armor").setLocalizedName("gadgets.main.armor").build());
+        inventory.setItem(43, new ItemBuilder(Material.BARRIER).setLore("§cThis feature is coming soon.").setDisplayname("§4Coming Soon").setLocalizedName("gadgets.main.soon").build());
         player.openInventory(inventory);
     }
 

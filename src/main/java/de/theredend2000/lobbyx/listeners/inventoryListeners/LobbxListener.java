@@ -11,6 +11,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Objects;
 
@@ -21,6 +24,7 @@ public class LobbxListener implements Listener {
     public LobbxListener(Main plugin){
         this.plugin = plugin;
         Bukkit.getPluginManager().registerEvents(this, plugin);
+        lobbySpeed();
     }
 
     @EventHandler
@@ -31,8 +35,8 @@ public class LobbxListener implements Listener {
             if (event.getCurrentItem()!=null){
                 if (event.getCurrentItem().getItemMeta().hasLocalizedName()){
                     switch(event.getCurrentItem().getItemMeta().getLocalizedName()){
-                        case "lobbyx.locations":
-                            plugin.getLobbyXMenuManager().createLocationsInventpry(player);
+                        case "lobbyx.settings":
+                            plugin.getLobbyXMenuManager().createSettingsInventory(player);
                             break;
                         case "lobbyx.editNavigator":
                             plugin.getNavigatorMenuManager().createSelectSlotInventory(player);
@@ -47,29 +51,86 @@ public class LobbxListener implements Listener {
                             c.addExtra(clickme);
                             player.spigot().sendMessage(c);
                             break;
+                        case "lobbyx.jnr":
+                            plugin.getLobbyXMenuManager().createJnrInventory(player);
+                            break;
                     }
                 }
             }
-        }else if (event.getView().getTitle().equals(Objects.requireNonNull(plugin.getConfig().getString("Inventory.LocationInventoryTitle")).replaceAll("&","§"))){
+        }else if (event.getView().getTitle().equals(Objects.requireNonNull(plugin.getConfig().getString("Inventory.MainSettingsInventoryTitle")).replaceAll("&","§"))){
             event.setCancelled(true);
             if (event.getCurrentItem()!=null){
                 if (event.getCurrentItem().getItemMeta().hasLocalizedName()){
                     switch(event.getCurrentItem().getItemMeta().getLocalizedName()){
-                        case "lobbyx.locations.back":
+                        case "lobbyx.settings.back":
                             plugin.getLobbyXMenuManager().createMainInventory(player);
                             break;
-                        case"lobbyx.locations.lobby":
+                        case"lobbyx.settings.lobby":
                             new ConfigLocationUtil(plugin,player.getLocation(),"Locations.Lobby."+player.getWorld().getName()).saveLocation();
                             player.sendMessage(Util.getMessage(Util.getLocale(player),"SetLobby").replaceAll("%WORLD_NAME%",player.getWorld().getName()));
                             player.closeInventory();
                             break;
-                        case"lobbyx.locations.close":
+                        case"lobbyx.settings.close":
                             player.closeInventory();
+                            break;
+                        case "lobbyx.settings.lobbyspeed":
+                            plugin.getConfig().set("Settings.LobbySpeed", !plugin.getConfig().getBoolean("Settings.LobbySpeed"));
+                            plugin.saveConfig();
+                            plugin.getLobbyXMenuManager().createSettingsInventory(player);
+                            break;
+                    }
+                }
+            }
+        }else if (event.getView().getTitle().equals(Objects.requireNonNull(plugin.getConfig().getString("Inventory.MainJnrInventoryTitle")).replaceAll("&","§"))){
+            event.setCancelled(true);
+            if (event.getCurrentItem()!=null){
+                if (event.getCurrentItem().getItemMeta().hasLocalizedName()){
+                    switch(event.getCurrentItem().getItemMeta().getLocalizedName()){
+                        case "lobbyx.jnr.back":
+                            plugin.getLobbyXMenuManager().createMainInventory(player);
+                            break;
+                        case"lobbyx.jnr.close":
+                            player.closeInventory();
+                            break;
+                        case"lobbyx.jnr.coins":
+                            plugin.getConfig().set("JumpAndRun.jnrCoins", !plugin.getConfig().getBoolean("JumpAndRun.jnrCoins"));
+                            plugin.saveConfig();
+                            plugin.getLobbyXMenuManager().createJnrInventory(player);
+                            break;
+                        case"lobbyx.jnr.pressure":
+                            plugin.getConfig().set("JumpAndRun.pressurePlateStart", !plugin.getConfig().getBoolean("JumpAndRun.pressurePlateStart"));
+                            plugin.saveConfig();
+                            plugin.getLobbyXMenuManager().createJnrInventory(player);
+                            break;
+                        case"lobbyx.jnr.enabled":
+                            plugin.getConfig().set("JumpAndRun.enabled", !plugin.getConfig().getBoolean("JumpAndRun.enabled"));
+                            plugin.saveConfig();
+                            plugin.getLobbyXMenuManager().createJnrInventory(player);
+                            break;
+                        case"lobbyx.jnr.actionbar":
+                            plugin.getConfig().set("JumpAndRun.Actionbar.enabled", !plugin.getConfig().getBoolean("JumpAndRun.Actionbar.enabled"));
+                            plugin.saveConfig();
+                            plugin.getLobbyXMenuManager().createJnrInventory(player);
                             break;
                     }
                 }
             }
         }
+    }
+
+    private void lobbySpeed(){
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                for(Player players : Bukkit.getOnlinePlayers()){
+                    if(plugin.getLobbyWorlds().contains(players.getWorld())){
+                        if(plugin.getConfig().getBoolean("Settings.LobbySpeed")){
+                            players.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,21,0,false));
+                        }
+                    }
+                }
+            }
+        }.runTaskTimer(plugin,0,20);
     }
 
 }

@@ -12,6 +12,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
@@ -46,11 +47,7 @@ public class FriendCommand implements CommandExecutor, TabCompleter {
                             player.sendMessage(Util.getMessage(Util.getLocale(player),"NotAddYourself"));
                             return true;
                         }
-                        if(friendRequest.containsKey(player)){
-                            player.sendMessage(Util.getMessage(Util.getLocale(player), "AlreadySend").replaceAll("%FRIEND_REQUEST_RECEIVER%", friendtoadd.getName()).replaceAll("%FRIEND_REQUEST_SENDER%",player.getName()));
-                            return true;
-                        }
-                        plugin.getFriendManager().addFriend(player,friendtoadd);
+                        addFriend(player,friendtoadd);
                     }else if(args[0].equalsIgnoreCase("accept")){
                         Player friendAccept = Bukkit.getPlayer(args[1]);
                         if(friendAccept == null){
@@ -84,21 +81,20 @@ public class FriendCommand implements CommandExecutor, TabCompleter {
                     }else if(args[0].equalsIgnoreCase("remove")){
                         String friendtoremove = args[1];
                         if(plugin.yaml.getString("Friends."+player.getUniqueId()) != null) {
-                            for (String friends : plugin.yaml.getConfigurationSection("Friends." + player.getUniqueId()).getKeys(false)) {
-                                if (friends.equalsIgnoreCase(friendtoremove) && plugin.yaml.contains("Friends." + player.getUniqueId()+"."+friends)) {
-                                    String friendtoremoveUUID = plugin.yaml.getString("Friends."+player.getUniqueId()+"."+friendtoremove+".UUID");
-                                    player.sendMessage(Util.getMessage(Util.getLocale(player),"FriendRemoveSender").replaceAll("%PLAYER_REMOVED%",friendtoremove).replaceAll("%PLAYER_REMOVED_FRIEND%",player.getName()));
-                                    Player removed = Bukkit.getPlayer(friendtoremove);
-                                    if(removed != null)
-                                        removed.sendMessage(Util.getMessage(Util.getLocale(removed),"FriendRemoveReceiver").replaceAll("%PLAYER_REMOVED%",friendtoremove).replaceAll("%PLAYER_REMOVED_FRIEND%",player.getName()));
-                                    plugin.yaml.set("Friends."+player.getUniqueId()+"."+friendtoremove, null);
-                                    plugin.yaml.set("Friends."+friendtoremoveUUID+"."+player.getName(), null);
-                                    plugin.saveData();
-                                    return true;
-                                }else
-                                    player.sendMessage(Util.getMessage(Util.getLocale(player), "FriendRemoveNotFriend").replaceAll("%PLAYER_REMOVED%",friendtoremove).replaceAll("%PLAYER_REMOVED_FRIEND%",player.getName()));
-                            }
-                        }
+                            if (plugin.getFriendManager().isFriend(player,friendtoremove)) {
+                                String friendtoremoveUUID = plugin.yaml.getString("Friends."+player.getUniqueId()+"."+friendtoremove+".UUID");
+                                player.sendMessage(Util.getMessage(Util.getLocale(player),"FriendRemoveSender").replaceAll("%PLAYER_REMOVED%",friendtoremove).replaceAll("%PLAYER_REMOVED_FRIEND%",player.getName()));
+                                Player removed = Bukkit.getPlayer(friendtoremove);
+                                if(removed != null)
+                                    removed.sendMessage(Util.getMessage(Util.getLocale(removed),"FriendRemoveReceiver").replaceAll("%PLAYER_REMOVED%",friendtoremove).replaceAll("%PLAYER_REMOVED_FRIEND%",player.getName()));
+                                plugin.yaml.set("Friends."+player.getUniqueId()+"."+friendtoremove, null);
+                                plugin.yaml.set("Friends."+friendtoremoveUUID+"."+player.getName(), null);
+                                plugin.saveData();
+                                return true;
+                            }else
+                                player.sendMessage(Util.getMessage(Util.getLocale(player), "FriendRemoveNotFriend").replaceAll("%PLAYER_REMOVED%",friendtoremove).replaceAll("%PLAYER_REMOVED_FRIEND%",player.getName()));
+                        }else
+                            player.sendMessage(Util.getMessage(Util.getLocale(player), "FriendRemoveNotFriend").replaceAll("%PLAYER_REMOVED%",friendtoremove).replaceAll("%PLAYER_REMOVED_FRIEND%",player.getName()));
                     }else
                         player.sendMessage(Util.getMessage(Util.getLocale(player), "FriendCommandUsage"));
                 }else if(args.length == 1){
@@ -119,19 +115,17 @@ public class FriendCommand implements CommandExecutor, TabCompleter {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    if(plugin.getLobbyWorlds().contains(player.getWorld())){
-                        if(friendRequest.containsKey(player)){
-                            if(friendRequestTime.get(player) == 0){
-                                 friendRequest.remove(player);
-                                 friendRequestTime.remove(player);
-                                 player.sendMessage(Util.getMessage(Util.getLocale(player), "FriendRequestExpired"));
-                                 return;
-                            }
-                            int time = friendRequestTime.get(player);
-                            time -=1;
+                    if(friendRequest.containsKey(player)){
+                        if(friendRequestTime.get(player) == 0){
+                            friendRequest.remove(player);
                             friendRequestTime.remove(player);
-                            friendRequestTime.put(player,time);
+                            player.sendMessage(Util.getMessage(Util.getLocale(player), "FriendRequestExpired"));
+                            return;
                         }
+                        int time = friendRequestTime.get(player);
+                        time -=1;
+                        friendRequestTime.remove(player);
+                        friendRequestTime.put(player,time);
                     }
                 }
             }.runTaskTimer(plugin,0,20);
@@ -153,11 +147,39 @@ public class FriendCommand implements CommandExecutor, TabCompleter {
         return null;
     }
 
-    public HashMap<Player, Integer> getFriendRequestTime() {
-        return friendRequestTime;
-    }
+    public void addFriend(Player player, Player friendtoadd){
+        if(friendRequest.containsKey(player)){
+            player.sendMessage(Util.getMessage(Util.getLocale(player), "AlreadySend").replaceAll("%FRIEND_REQUEST_RECEIVER%", friendtoadd.getName()).replaceAll("%FRIEND_REQUEST_SENDER%",player.getName()));
+            return;
+        }
+        if(plugin.getFriendManager().acceptFriendRequests(friendtoadd)) {
+            if (plugin.yaml.getString("Friends." + player.getUniqueId()) != null) {
+                for (String friends : plugin.yaml.getConfigurationSection("Friends." + player.getUniqueId()).getKeys(false)) {
+                    if (friends.equalsIgnoreCase(friendtoadd.getName())) {
+                        player.sendMessage(Util.getMessage(Util.getLocale(player), "FriendAlreadyAdded").replaceAll("%PLAYER_REQUEST_RECEIVER%", friendtoadd.getName()));
+                        return;
+                    }
+                }
+            }
 
-    public HashMap<Player, Player> getFriendRequest() {
-        return friendRequest;
+            player.sendMessage(Util.getMessage(Util.getLocale(player), "FriendRequestSender").replaceAll("%FRIEND_REQUEST_RECEIVER%", friendtoadd.getName()).replaceAll("%FRIEND_REQUEST_SENDER%", player.getName()));
+            friendtoadd.sendMessage("§4§l-=-=-=-=-=-=-=-=-=-=-=-=-");
+            friendtoadd.sendMessage(Util.getMessage(Util.getLocale(friendtoadd), "FriendRequestReceiver").replaceAll("%FRIEND_REQUEST_RECEIVER%", friendtoadd.getName()).replaceAll("%FRIEND_REQUEST_SENDER%", player.getName()));
+            TextComponent c = new TextComponent("");
+            TextComponent clickme = new TextComponent("§7|----------- §a§l[Accept] §5§l----- ");
+            TextComponent clickme2 = new TextComponent("§c§l[Deny] §7-----------|");
+
+            clickme.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/friend accept " + player.getName()));
+            clickme.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, TextComponent.fromLegacyText("§aAccept friend request.")));
+            c.addExtra(clickme);
+            clickme2.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/friend deny " + player.getName()));
+            clickme2.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, TextComponent.fromLegacyText("§cDeny friend request.")));
+            c.addExtra(clickme2);
+            friendtoadd.spigot().sendMessage(c);
+            friendtoadd.sendMessage("§4§l-=-=-=-=-=-=-=-=-=-=-=-=-");
+            friendRequest.put(player, friendtoadd);
+            friendRequestTime.put(player, 300);
+        }else
+            player.sendMessage(Util.getMessage(Util.getLocale(player),"AcceptNoFriendRequests"));
     }
 }

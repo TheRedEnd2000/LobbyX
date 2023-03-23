@@ -1,6 +1,7 @@
 Admin:
   OnlyPlayerUse: '&cOnly Player can use this command.'
   NoPermissionMessage: '&cYou do not have the &6%PERMISSION% permission &cto use this command!'
+  NoPermissionMessageClick: '&cYou do not have the &6%PERMISSION% permission &cto use this feature!'
 
 PlayerHider:
   PlayerHider_Hide: '&7Player visibility has been &6successfully §cdisabled&7.'
@@ -47,14 +48,17 @@ Other:
   DisabledChat: '&cYou cannot use the chat if you have turned it off. You can change that in the settings.'
 
 Locations:
-  SetHub: '&7The &9Hub &7was set&a successfully&7.'
   SetLobby: '&7The &bLobby &7for the world &6%WORLD_NAME% &7was set&a successfully&7.'
+  LobbyxUsage: '&7Usages: &6/lobbyx manage &8| &6/lobbyx help &8| &6/lobbyx information &8| &6/lobbyx reload&7!'
 
 JumpAndRun:
   AlreadyStarted: '&cYou have already started a jump and run.'
+  JnrDisabled: '&cJump and run is disabled.'
   StartJnr: '&7You started the &6Jump and Run&7.'
-  StopJnr: '&7You&c fell&7. You point are &6%JUMP_AND_RUN_POINTS%'
-  NewHighScore: '&2&lNEW HIGHSCORE! &7Your new personal best is &6%JUMP_AND_RUN_POINTS%'
+  StopJnr: '&7You&c fell&7. You point are &6%JUMP_AND_RUN_POINTS%&7.'
+  CoinsGotMessageNormal: '&7You got &6%COINS% coins &7for your score.'
+  CoinsGotMessageDouble: '&7You got &5&lDOUBLE COINS &7because you got a new highscore. (&6%COINS% coins&7)'
+  NewHighScore: '&2&lNEW HIGHSCORE! &7Your new personal best is &6%JUMP_AND_RUN_POINTS%&7.'
 
 Languages:
   LanguagesUsage: '&7Usages: &6/setLang &7[&3ENGLISH &8| &3GERMAN &8| &3SPAIN&7]'

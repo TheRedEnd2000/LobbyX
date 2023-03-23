@@ -188,6 +188,8 @@ public class SetPlayerLobbyManager {
             plugin.getPlayerDataManager().playerDataYaml.set("Settings.ClanRequests",true);
             plugin.getPlayerDataManager().playerDataYaml.set("Settings.Join_Messages",true);
             plugin.getPlayerDataManager().playerDataYaml.set("Settings.Leave_Messages",true);
+            plugin.getPlayerDataManager().playerDataYaml.set("Settings.Fly",false);
+            plugin.getPlayerDataManager().playerDataYaml.set("Settings.Year",false);
             plugin.getPlayerDataManager().playerDataYaml.set("Settings.CoinsAPI",true);
             plugin.getPlayerDataManager().save(player);
         }

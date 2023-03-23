@@ -91,6 +91,7 @@ public final class Main extends JavaPlugin {
             initListeners();
             initAHeads();
             addLobbyWorlds();
+            addItemForOnlinePlayer();
     }
 
     @Override
@@ -246,6 +247,13 @@ public final class Main extends JavaPlugin {
             + "y90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYmQ2OWUwNmU1ZGFkZmQ4NGU1ZjNkMWMyMTA2M2YyNTUzY"
             + "jJmYTk0NWVlMWQ0ZDcxNTJmZGM1NDI1YmMxMmE5In19fQ==";
 
+    private void addItemForOnlinePlayer(){
+        for(Player players : Bukkit.getOnlinePlayers()){
+            if(getLobbyWorlds().contains(players.getWorld())){
+                getSetPlayerLobbyManager().setPlayerInLobby(players);
+            }
+        }
+    }
 
     public void saveData() {
         try {

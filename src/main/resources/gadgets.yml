@@ -114,21 +114,21 @@ Gadgets:
       particle: HEART
       name: '&cHeart'
       coins: 6000
-      count: 2
+      count: 1
       location: EYE
     Good_Deal:
       material: EMERALD
       particle: VILLAGER_HAPPY
       name: '&2Good Deal'
       coins: 5000
-      count: 7
+      count: 5
       location: BODY
     Lava:
       material: LAVA_BUCKET
       particle: LAVA
       name: '&4LAVA'
       coins: 7000
-      count: 2
+      count: 1
       location: EYE
     Firework:
       material: FIREWORK_ROCKET
@@ -142,7 +142,7 @@ Gadgets:
       particle: FLAME
       name: '&cFlame'
       coins: 4500
-      count: 7
+      count: 10
       location: BODY
     Note:
       material: NOTE_BLOCK
@@ -221,3 +221,24 @@ Gadgets:
         name: '&cRed Skeleton Boots'
         material: LEATHER_BOOTS
         color: RED
+    Tree_Armor:
+      name: '&2Tree Armor'
+      coins: 7000
+      item: LEATHER_HELMET
+      color: LIME
+      Helmet:
+        name: '&2Tree Armor Helmet'
+        material: LEATHER_HELMET
+        color: LIME
+      Chestplate:
+        name: '&2Tree Armor Chestplate'
+        material: LEATHER_CHESTPLATE
+        color: GREEN
+      Leggins:
+        name: '&2Tree Armor Leggins'
+        material: LEATHER_LEGGINGS
+        color: BROWN
+      Boots:
+        name: '&2Tree Armor Boots'
+        material: LEATHER_BOOTS
+        color: BROWN

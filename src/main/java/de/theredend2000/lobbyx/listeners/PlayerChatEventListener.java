@@ -41,7 +41,7 @@ public class PlayerChatEventListener implements Listener {
                         String prefix = plugin.getApi().getPrefix(rank);
                         String nameColor = plugin.getApi().getNameColor(rank);
                         String chatColor = plugin.getApi().getChatColor(rank);
-                        lobbyPlayer.sendMessage(plugin.getConfig().getString("ChatFormat.ChatFormatRank").replaceAll("%RANK%", ColorUtils.format('&', prefix, true, true)).replaceAll("%CHAT_COLOR%", chatColor).replaceAll("%PLAYER%", player.getName()).replaceAll("%MESSAGE%", event.getMessage()).replaceAll("%NAME_COLOR%", nameColor).replaceAll("&", "§"));
+                        lobbyPlayer.sendMessage(plugin.getConfig().getString("ChatFormat.ChatFormatRank").replaceAll("%RANK%", ColorUtils.format('¶', prefix, false, false)).replaceAll("%CHAT_COLOR%", chatColor).replaceAll("%PLAYER%", player.getName()).replaceAll("%MESSAGE%", event.getMessage()).replaceAll("%NAME_COLOR%", nameColor).replaceAll("&", "§"));
                     } else
                         lobbyPlayer.sendMessage(plugin.getConfig().getString("ChatFormat.ChatFormatWithout").replaceAll("%PLAYER%", player.getName()).replaceAll("%MESSAGE%", event.getMessage()).replaceAll("&", "§"));
                 }

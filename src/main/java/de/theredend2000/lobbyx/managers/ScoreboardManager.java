@@ -55,11 +55,13 @@ public class ScoreboardManager {
     }
 
     private String getClan(Player player){
-        if(plugin.getClanManager().hasClan(player)){
-            return plugin.getClanManager().getClanName(player);
-        }
-        if(plugin.getClanManager().isInClan(player)){
-            return plugin.getClanManager().getClanNameAsMember(player);
+        if(plugin.yaml.contains("Clans")) {
+            if (plugin.getClanManager().hasClan(player)) {
+                return plugin.getClanManager().getClanName(player);
+            }
+            if (plugin.getClanManager().isInClan(player)) {
+                return plugin.getClanManager().getClanNameAsMember(player);
+            }
         }
         return "§cNo Clan";
     }

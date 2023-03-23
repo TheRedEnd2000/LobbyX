@@ -10,6 +10,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -229,7 +232,17 @@ public class GadgetsInventoryListener implements Listener {
                             String helmetName = plugin.gadgetsYaml.getString("Gadgets.Armor."+items+".Helmet.name");
                             String helmetTexture = plugin.gadgetsYaml.getString("Gadgets.Armor."+items+".Helmet.texture");
                             Color helmetColor = plugin.gadgetsYaml.getColor("Gadgets.Armor."+items+".Helmet.color");
-                            player.getInventory().setHelmet(new ItemBuilder(helmetMaterial).setColor(helmetColor).setSkullOwner(helmetTexture != null ? Main.getTexture(helmetTexture) : null).setDisplayname(helmetName.replaceAll("&","§")).build());
+                            ItemStack helmet = new ItemStack(helmetMaterial);
+                            if(helmetMaterial.equals(Material.LEATHER_HELMET)) {
+                                LeatherArmorMeta meta = (LeatherArmorMeta) helmet.getItemMeta();
+                                meta.setColor(helmetColor);
+                                meta.setDisplayName(helmetName);
+                                helmet.setItemMeta(meta);
+                                player.getInventory().setHelmet(helmet);
+                            }else{
+                                player.getInventory().setHelmet(new ItemBuilder(helmetMaterial).setSkullOwner(helmetTexture != null ? Main.getTexture(helmetTexture) : null).setDisplayname(helmetName.replaceAll("&","§")).build());
+                            }
+
 
                             Material chestplateMaterial = plugin.getGadgetsMaterial("Gadgets.Armor."+items+".Chestplate.material");
                             String chestplateName = plugin.gadgetsYaml.getString("Gadgets.Armor."+items+".Chestplate.name");

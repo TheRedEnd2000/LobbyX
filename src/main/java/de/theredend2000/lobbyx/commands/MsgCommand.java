@@ -36,9 +36,11 @@ public class MsgCommand implements CommandExecutor {
                 return true;
             }
             plugin.getPlayerDataManager().setYaml(getPlayer);
-            if(Objects.requireNonNull(plugin.getPlayerDataManager().playerDataYaml.getString("Settings.Msg_Messages")).equalsIgnoreCase("NONE") || !plugin.getFriendManager().isFriend(player,getPlayer)){
-                player.sendMessage(Util.getMessage(Util.getLocale(player),"AcceptNoMsg"));
-                return true;
+            if(!plugin.getPlayerDataManager().playerDataYaml.getString("Settings.Msg_Messages").equals("EVERYONE")) {
+                if (Objects.requireNonNull(plugin.getPlayerDataManager().playerDataYaml.getString("Settings.Msg_Messages")).equals("NONE") || !plugin.getFriendManager().isFriend(player, getPlayer)) {
+                    player.sendMessage(Util.getMessage(Util.getLocale(player), "AcceptNoMsg"));
+                    return true;
+                }
             }
             String getPlayerNameColor = plugin.getApi().getNameColor(plugin.getApi().getPrimaryRank(getPlayer));
             String playerNameColor = plugin.getApi().getNameColor(plugin.getApi().getPrimaryRank(player));

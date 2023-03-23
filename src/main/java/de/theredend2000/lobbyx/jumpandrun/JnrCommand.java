@@ -22,15 +22,18 @@ public class JnrCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(sender instanceof Player){
             Player player = (Player) sender;
-            if (JumpAndRun.getJumpAndRuns().containsKey(player.getUniqueId())) {
-                player.sendMessage(Util.getMessage(Util.getLocale(player), "AlreadyStarted"));
-                return true;
-            }
-            if (plugin.getLobbyWorlds().contains(player.getWorld())) {
-                JumpAndRun jumpAndRun = new JumpAndRun(player, plugin);
-                jumpAndRun.start(player);
-                JumpAndRun.getJumpAndRuns().put(player.getUniqueId(), jumpAndRun);
-            }
+            if(plugin.getConfig().getBoolean("JumpAndRun.enabled")) {
+                if (JumpAndRun.getJumpAndRuns().containsKey(player.getUniqueId())) {
+                    player.sendMessage(Util.getMessage(Util.getLocale(player), "AlreadyStarted"));
+                    return true;
+                }
+                if (plugin.getLobbyWorlds().contains(player.getWorld())) {
+                    JumpAndRun jumpAndRun = new JumpAndRun(player, plugin);
+                    jumpAndRun.start(player);
+                    JumpAndRun.getJumpAndRuns().put(player.getUniqueId(), jumpAndRun);
+                }
+            }else
+                player.sendMessage(Util.getMessage(Util.getLocale(player),"JnrDisabled"));
         }else
             sender.sendMessage(Util.getMessage("en","OnlyPlayerUse"));
         return false;

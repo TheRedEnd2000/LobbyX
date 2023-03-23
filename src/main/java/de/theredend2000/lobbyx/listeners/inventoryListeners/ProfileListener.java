@@ -3,6 +3,7 @@ package de.theredend2000.lobbyx.listeners.inventoryListeners;
 import de.theredend2000.lobbyx.Main;
 import de.theredend2000.lobbyx.commands.FriendCommand;
 import de.theredend2000.lobbyx.commands.LobbyXCommand;
+import de.theredend2000.lobbyx.jumpandrun.JumpAndRun;
 import de.theredend2000.lobbyx.messages.Util;
 import de.theredend2000.lobbyx.util.ItemBuilder;
 import net.md_5.bungee.api.chat.ClickEvent;
@@ -17,6 +18,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerChatEvent;
+import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -33,6 +35,7 @@ public class ProfileListener implements Listener {
         this.plugin = plugin;
         Bukkit.getPluginManager().registerEvents(this, plugin);
         friendSearchPlayers = new ArrayList<>();
+        checkPlayerSettings();
     }
 
     @EventHandler
@@ -172,10 +175,14 @@ public class ProfileListener implements Listener {
                             plugin.getProfileMenuManager().createFriendSettingsInventory(player,friend);
                             break;
                         case "Settings.Friends.Clan":
-                            player.sendMessage("need setup");
+                            if(!player.getName().equals("TheRedEnd2000")){
+                                player.sendMessage("§cThis feature is coming soon.");
+                            }
                             break;
                         case "Settings.Friends.Socials":
-                            player.sendMessage("§cNeed Setup");
+                            if(!player.getName().equals("TheRedEnd2000")){
+                                player.sendMessage("§cThis feature is coming soon.");
+                            }
                             break;
                         case "Settings.Friends.Remove":
                             plugin.getProfileMenuManager().createDeleteFriendInventory(player, friend, 5, false);
@@ -267,17 +274,16 @@ public class ProfileListener implements Listener {
                 if (event.getCurrentItem().getItemMeta().hasLocalizedName()){
                     switch (event.getCurrentItem().getItemMeta().getLocalizedName()){
                         case "playerInformation.addFriend":
-                            FriendCommand friendCommand = new FriendCommand(plugin);
+                            if(!player.getName().equals("TheRedEnd2000")){
+                                player.sendMessage("§cThis feature is currently disabled due to a bug.");
+                                return;
+                            }
                             Player friendtoadd = Bukkit.getPlayer(event.getInventory().getItem(13).getItemMeta().getLocalizedName());
                             if(friendtoadd == null){
                                 player.sendMessage(Util.getMessage(Util.getLocale(player),"PlayerNotFound"));
                                 return;
                             }
-                            if(friendCommand.getFriendRequest().containsKey(player)){
-                                player.sendMessage(Util.getMessage(Util.getLocale(player), "AlreadySend").replaceAll("%FRIEND_REQUEST_RECEIVER%", friendtoadd.getName()).replaceAll("%FRIEND_REQUEST_SENDER%",player.getName()));
-                                return;
-                            }
-                            plugin.getFriendManager().addFriend(player,friendtoadd);
+                            new FriendCommand(plugin).addFriend(player,friendtoadd);
                             break;
                         case "playerInformation.inviteClan":
                             if(!player.getName().equals("TheRedEnd2000")){
@@ -340,8 +346,22 @@ public class ProfileListener implements Listener {
                             plugin.getPlayerDataManager().save(player);
                             plugin.getProfileMenuManager().createPlayerSettingsInventory(player);
                             break;
+                        case "playerSettings.fly":
+                            String permission = Objects.requireNonNull(plugin.getConfig().getString("Permissions.FlySettingPermission"));
+                            if(player.hasPermission(permission)){
+                                plugin.getPlayerDataManager().playerDataYaml.set("Settings.Fly", !plugin.getPlayerDataManager().playerDataYaml.getBoolean("Settings.Fly"));
+                                plugin.getPlayerDataManager().save(player);
+                                plugin.getProfileMenuManager().createPlayerSettingsInventory(player);
+                            }else
+                                player.sendMessage(Util.getMessage(Util.getLocale(player),"NoPermissionMessageClick").replaceAll("%PERMISSION%",permission));
+                            break;
                         case "playerSettings.coins_api":
                             plugin.getPlayerDataManager().playerDataYaml.set("Settings.CoinsAPI", !plugin.getPlayerDataManager().playerDataYaml.getBoolean("Settings.CoinsAPI"));
+                            plugin.getPlayerDataManager().save(player);
+                            plugin.getProfileMenuManager().createPlayerSettingsInventory(player);
+                            break;
+                        case "playerSettings.year":
+                            plugin.getPlayerDataManager().playerDataYaml.set("Settings.Year", !plugin.getPlayerDataManager().playerDataYaml.getBoolean("Settings.Year"));
                             plugin.getPlayerDataManager().save(player);
                             plugin.getProfileMenuManager().createPlayerSettingsInventory(player);
                             break;
@@ -391,6 +411,35 @@ public class ProfileListener implements Listener {
         }
     }
 
-
+    private void checkPlayerSettings(){
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                for(Player player : Bukkit.getOnlinePlayers()){
+                    if(plugin.getLobbyWorlds().contains(player.getWorld())){
+                        plugin.getPlayerDataManager().setYaml(player);
+                        if(player.getGameMode().equals(GameMode.ADVENTURE) || player.getGameMode().equals(GameMode.SURVIVAL)){
+                            String permission = Objects.requireNonNull(plugin.getConfig().getString("Permissions.FlySettingPermission"));
+                            if(player.hasPermission(permission)){
+                                if (JumpAndRun.getJumpAndRuns().containsKey(player.getUniqueId())) {
+                                    player.setFlying(false);
+                                    player.setAllowFlight(false);
+                                    return;
+                                }
+                                player.setAllowFlight(plugin.getPlayerDataManager().playerDataYaml.getBoolean("Settings.Fly"));
+                            }
+                            if(plugin.getPlayerDataManager().playerDataYaml.getBoolean("Settings.Year") && !plugin.getBuildPlayers().contains(player)){
+                                player.setLevel(Integer.parseInt(plugin.getDatetimeUtils().getNowYear()));
+                                player.setExp(0);
+                            }else{
+                                player.setLevel(0);
+                                player.setExp(0);
+                            }
+                        }
+                    }
+                }
+            }
+        }.runTaskTimer(plugin,0,10);
+    }
 
 }

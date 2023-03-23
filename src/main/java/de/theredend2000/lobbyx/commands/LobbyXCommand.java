@@ -76,8 +76,10 @@ public class LobbyXCommand implements CommandExecutor, TabCompleter {
                             count ++;
                         }
                     }.runTaskTimer(plugin,0,2L);
-                }
-            }
+                }else
+                    player.sendMessage(Util.getMessage(Util.getLocale(player),"LobbyxUsage"));
+            }else
+                player.sendMessage(Util.getMessage(Util.getLocale(player),"LobbyxUsage"));
         }else
             sender.sendMessage(Util.getMessage("en","OnlyPlayerUse"));
         return false;

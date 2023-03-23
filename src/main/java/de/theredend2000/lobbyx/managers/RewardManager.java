@@ -3,12 +3,15 @@ package de.theredend2000.lobbyx.managers;
 import de.theredend2000.lobbyx.Main;
 import de.theredend2000.lobbyx.messages.Util;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Villager;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Locale;
 
 public class RewardManager {
 

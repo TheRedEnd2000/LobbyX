@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 
@@ -38,10 +39,6 @@ public class ColorUtils {
     public static String format(char altColorChar, String input, boolean special, boolean addLeadingReset) {
         String output = input;
         boolean hexSupported = false;
-
-        if (addLeadingReset && !input.toLowerCase().endsWith(altColorChar + "r")) {
-            input += altColorChar + "r";
-        }
 
         try {
             Class.forName("net.md_5.bungee.api.ChatColor");

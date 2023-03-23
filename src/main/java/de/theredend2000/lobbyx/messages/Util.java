@@ -97,6 +97,17 @@ public class Util {
             e.printStackTrace();
         }
 
+        File spFile = new File(langFolder,"sp.yml");
+        try {
+            if(!spFile.exists()){
+                InputStream in = plugin.getResource("sp.yml");
+                assert in != null;
+                Files.copy(in,spFile.toPath());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         for (File file : Objects.requireNonNull(langFolder.listFiles())){
             Map<String, String> localesMessages = new HashMap<>();
             FileConfiguration lang = YamlConfiguration.loadConfiguration(file);

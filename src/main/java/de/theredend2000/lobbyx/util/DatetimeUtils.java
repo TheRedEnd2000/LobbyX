@@ -14,6 +14,7 @@ public class DatetimeUtils {
     public final int[] SECONDS_IN_UNIT = new int[]{31536000, 2592000, 604800, 86400, 3600, 60};
     public DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy").withZone(getZoneId());
     public DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss").withZone(getZoneId());
+    public DateTimeFormatter YEAR_FORMATTER = DateTimeFormatter.ofPattern("yyyy").withZone(getZoneId());
 
 
     public byte getCurrentDayOfMonth() {
@@ -45,6 +46,16 @@ public class DatetimeUtils {
             return "§cNOT FOUND";
         }
     }
+
+    public String getNowYear() {
+        try {
+            return ZonedDateTime.now().format(YEAR_FORMATTER);
+        } catch (Exception var1) {
+            var1.printStackTrace();
+            return "§cNOT FOUND";
+        }
+    }
+
 
     public long getSeconds(String date) {
         try {

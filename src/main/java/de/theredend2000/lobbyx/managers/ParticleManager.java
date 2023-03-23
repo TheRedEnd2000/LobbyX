@@ -12,6 +12,7 @@ import java.util.Objects;
 public class ParticleManager {
 
     private Main plugin;
+    private int i = 0;
 
     public ParticleManager(Main plugin){
         this.plugin = plugin;
@@ -32,7 +33,12 @@ public class ParticleManager {
                                     String location = plugin.gadgetsYaml.getString("Gadgets.Particle." + particles + ".location");
                                     switch (location){
                                         case "EYE":
-                                            player.getEyeLocation().getWorld().spawnParticle(particle, player.getEyeLocation().add(0, 0.5, 0), count,0.15,0.15,0.15,0);
+                                            double angel = (i*Math.PI / 100);
+                                            double x = 0.5 * Math.cos(angel);
+                                            double z = 0.5 * Math.sin(angel);
+                                            double y = 0.5;
+                                            player.getEyeLocation().getWorld().spawnParticle(particle, player.getEyeLocation().add(x, y, z), count,0,0,0,0);
+                                            i = i + 20;
                                             break;
                                         case "FEED":
                                             player.getLocation().getWorld().spawnParticle(particle, player.getLocation(), count,0.15,0.15,0.15,0);

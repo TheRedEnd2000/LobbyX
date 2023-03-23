@@ -89,14 +89,8 @@ public class JumpAndRun {
                     this.nextLocation.subtract(0.0, 1.0, 0.0).getBlock().setType(plugin.getMaterial("JumpAndRun.Blocks.NewBlock"));
                     return;
                 }else{
-                    if(counter == 10){
-                        stop(player);
-                        player.sendMessage("§cThere was an error. §4§l(NO-FREE-BLOCK-FOUND) \n§cPlease contact an admin.");
-                        nextLocation.getBlock().setType(Material.AIR);
-                        return;
-                    }
-                    nextBlock(player, true);
-                    counter = counter+1;
+                    stop(player);
+                    player.sendMessage("§cThere has been an error. We ask for your understanding.");
                 }
             }
         }
@@ -109,9 +103,20 @@ public class JumpAndRun {
         player.playSound(player.getLocation(), Sound.valueOf(plugin.getConfig().getString("JumpAndRun.Sounds.StopSound")), 1.0F, 1.0F);
         player.sendMessage(Util.getMessage(Util.getLocale(player), "StopJnr").replaceAll("%JUMP_AND_RUN_POINTS%", jumpAndRunPoints.get(player.getUniqueId()).toString()));
         if(jumpAndRunPoints.get(player.getUniqueId()) > plugin.yaml.getInt("JumpAndRun.Points."+player.getName())){
+            int coins2 = jumpAndRunPoints.get(player.getUniqueId()) * 2;
             plugin.yaml.set("JumpAndRun.Points."+player.getName(), jumpAndRunPoints.get(player.getUniqueId()));
             plugin.saveData();
             player.sendMessage(Util.getMessage(Util.getLocale(player),"NewHighScore").replaceAll("%JUMP_AND_RUN_POINTS%", jumpAndRunPoints.get(player.getUniqueId()).toString()));
+            if(plugin.getConfig().getBoolean("JumpAndRun.jnrCoins")) {
+                player.sendMessage(Util.getMessage(Util.getLocale(player), "CoinsGotMessageDouble").replaceAll("%COINS%", String.valueOf(coins2)));
+                plugin.getCoinManager().addCoins(player,coins2);
+            }
+        }else{
+            int coins = jumpAndRunPoints.get(player.getUniqueId());
+            if(plugin.getConfig().getBoolean("JumpAndRun.jnrCoins")) {
+                player.sendMessage(Util.getMessage(Util.getLocale(player), "CoinsGotMessageNormal").replaceAll("%COINS%", String.valueOf(coins)));
+                plugin.getCoinManager().addCoins(player,coins);
+            }
         }
         jumpAndRunPoints.remove(player.getUniqueId());
     }
