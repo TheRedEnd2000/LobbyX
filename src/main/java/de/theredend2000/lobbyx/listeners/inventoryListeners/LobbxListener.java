@@ -79,6 +79,26 @@ public class LobbxListener implements Listener {
                             plugin.saveConfig();
                             plugin.getLobbyXMenuManager().createSettingsInventory(player);
                             break;
+                        case "lobbyx.settings.mobDamage":
+                            plugin.getConfig().set("Settings.MobDamageInLobbys", !plugin.getConfig().getBoolean("Settings.MobDamageInLobbys"));
+                            plugin.saveConfig();
+                            plugin.getLobbyXMenuManager().createSettingsInventory(player);
+                            break;
+                        case "lobbyx.settings.welcomeTitles":
+                            plugin.getConfig().set("Titles.WelcomeTitle.enabled", !plugin.getConfig().getBoolean("Titles.WelcomeTitle.enabled"));
+                            plugin.saveConfig();
+                            plugin.getLobbyXMenuManager().createSettingsInventory(player);
+                            break;
+                        case "lobbyx.settings.lobbySelector":
+                            plugin.getConfig().set("LobbySelector.enabled", !plugin.getConfig().getBoolean("LobbySelector.enabled"));
+                            plugin.saveConfig();
+                            plugin.getLobbyXMenuManager().createSettingsInventory(player);
+                            break;
+                        case "lobbyx.settings.broadcaster":
+                            plugin.getConfig().set("Broadcaster.enabled", !plugin.getConfig().getBoolean("Broadcaster.enabled"));
+                            plugin.saveConfig();
+                            plugin.getLobbyXMenuManager().createSettingsInventory(player);
+                            break;
                     }
                 }
             }
@@ -126,7 +146,7 @@ public class LobbxListener implements Listener {
                 for(Player players : Bukkit.getOnlinePlayers()){
                     if(plugin.getLobbyWorlds().contains(players.getWorld())){
                         if(plugin.getConfig().getBoolean("Settings.LobbySpeed")){
-                            players.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,21,0,false));
+                            players.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,21,0,false,false));
                         }
                     }
                 }

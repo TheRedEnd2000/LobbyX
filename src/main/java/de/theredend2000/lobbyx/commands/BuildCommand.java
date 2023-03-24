@@ -39,8 +39,6 @@ public class BuildCommand implements CommandExecutor {
                 player.sendMessage(Util.getMessage(Util.getLocale(player),"NoPermissionMessage").replaceAll("%PERMISSION%",permission));
         }else
             sender.sendMessage(Util.getMessage("en","OnlyPlayerUse"));
-        Player player = Bukkit.getPlayer("Lumpi_2");
-        plugin.getBuildPlayers().add(player);
         return false;
     }
 }
