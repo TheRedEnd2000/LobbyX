@@ -91,6 +91,7 @@ public class JumpAndRun {
                 }else{
                     stop(player);
                     player.sendMessage("§cThere has been an error. We ask for your understanding.");
+                    player.getLocation().add(0,-1,0).getBlock().setType(Material.AIR);
                 }
             }
         }

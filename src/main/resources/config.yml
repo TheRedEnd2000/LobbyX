@@ -15,6 +15,8 @@ Settings:
   DefaultWeather: CLEAR #Select between Clear, Rain, Thunder
   DefaultGamemode: SURVIVAL
   DailyRewardCoinsAmount: 2000
+  Daily2RewardCoinsAmount: 5000
+  Daily3RewardCoinsAmount: 10000
   CheckForUpdates: true
   LobbySpeed: true
 
@@ -48,6 +50,7 @@ Inventory:
   MainSettingsInventoryTitle: '&bLobby&4X&f - &4Main Settings'
   MainJnrInventoryTitle: '&bLobby&4X&f - &bMain Jump and Run'
   LanguageInventoryTitle: '&bLobby&4X&f - &3Language'
+  DailyRewardInventoryTitle: '&bLobby&4X&f - &6Daily'
   FriendSettingsInventoryTitle: '&bLobby&4X&f - &bFriend Settings'
   FriendRemoveInventoryTitle: '&bLobby&4X&f - &cRemove this Friend'
   LobbySelectorInventoryTitle: '&bLobby&4X&f - &dLobbys'
@@ -91,7 +94,7 @@ Broadcaster:
     - '&fYou can change this messages in the &3config.yml&f file.'
     - '&fDo &6/lobbyx manage &fto edit the navigator and more.'
     - '&fSet you language under &3Profile &f-> &6Language&f!'
-    - '&fDo &5/daily &fto claim you daily coins.'
+    - '&fDo &5/reward <Reward> &fto claim you reward coins.'
     - '&fAdd &3Friends&f with &6/friend add <Player>'
 
 #Items

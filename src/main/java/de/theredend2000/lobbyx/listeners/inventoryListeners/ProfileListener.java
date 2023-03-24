@@ -4,6 +4,7 @@ import de.theredend2000.lobbyx.Main;
 import de.theredend2000.lobbyx.commands.FriendCommand;
 import de.theredend2000.lobbyx.commands.LobbyXCommand;
 import de.theredend2000.lobbyx.jumpandrun.JumpAndRun;
+import de.theredend2000.lobbyx.listeners.PlayerInteractAtEntityEventListener;
 import de.theredend2000.lobbyx.messages.Util;
 import de.theredend2000.lobbyx.util.ItemBuilder;
 import net.md_5.bungee.api.chat.ClickEvent;
@@ -264,6 +265,65 @@ public class ProfileListener implements Listener {
                             plugin.getProfileMenuManager().createProfileInventory(player);
                             break;
                         case ":":
+                            break;
+                    }
+                }
+            }
+        }else if (event.getView().getTitle().equals(Objects.requireNonNull(plugin.getConfig().getString("Inventory.DailyRewardInventoryTitle").replaceAll("&","§")))){
+            event.setCancelled(true);
+            if (event.getCurrentItem()!=null){
+                if (event.getCurrentItem().getItemMeta().hasLocalizedName()){
+                    switch (event.getCurrentItem().getItemMeta().getLocalizedName()){
+                        case "daily.dailyReward":
+                            player.closeInventory();
+                            if(!plugin.getRewardManager().getAllowReward(player, "daily")) {
+                                player.sendMessage(Util.getMessage(Util.getLocale(player),"AlreadyClaimed"));
+                                long current = System.currentTimeMillis();
+                                long release = plugin.getRewardManager().getTimeDaily(player);
+                                long millis = release - current;
+                                player.sendMessage(plugin.getRewardManager().getRemainingTime(millis,player));
+                                return;
+                            }
+                            player.sendMessage(Util.getMessage(Util.getLocale(player),"ClaimReward"));
+                            plugin.getRewardManager().setRewardDaily(player);
+                            int coins = plugin.getConfig().getInt("Settings.DailyRewardCoinsAmount");
+                            plugin.getCoinManager().addCoins(player,coins);
+                            player.sendMessage(Util.getMessage(Util.getLocale(player),"CoinsLayout").replaceAll("%COINS_AMOUNT%", String.valueOf(coins)).replaceAll("%COINS_BALANCE%", String.valueOf(plugin.getCoinManager().getCoins(player))));
+                            break;
+                        case "daily.weeklyReward":
+                            player.closeInventory();
+                            if(!plugin.getRewardManager().getAllowReward(player, "weekly")) {
+                                player.sendMessage(Util.getMessage(Util.getLocale(player),"AlreadyClaimed"));
+                                long current = System.currentTimeMillis();
+                                long release = plugin.getRewardManager().getTimeWeekly(player);
+                                long millis = release - current;
+                                player.sendMessage(plugin.getRewardManager().getRemainingTime(millis,player));
+                                return;
+                            }
+                            player.sendMessage(Util.getMessage(Util.getLocale(player),"ClaimReward"));
+                            plugin.getRewardManager().setRewardWeekly(player);
+                            int coins2 = plugin.getConfig().getInt("Settings.WeeklyRewardCoinsAmount");
+                            plugin.getCoinManager().addCoins(player,coins2);
+                            player.sendMessage(Util.getMessage(Util.getLocale(player),"CoinsLayout").replaceAll("%COINS_AMOUNT%", String.valueOf(coins2)).replaceAll("%COINS_BALANCE%", String.valueOf(plugin.getCoinManager().getCoins(player))));
+                            break;
+                        case "daily.monthlyReward":
+                            player.closeInventory();
+                            if(!plugin.getRewardManager().getAllowReward(player, "monthly")) {
+                                player.sendMessage(Util.getMessage(Util.getLocale(player),"AlreadyClaimed"));
+                                long current = System.currentTimeMillis();
+                                long release = plugin.getRewardManager().getTimeMonthly(player);
+                                long millis = release - current;
+                                player.sendMessage(plugin.getRewardManager().getRemainingTime(millis,player));
+                                return;
+                            }
+                            player.sendMessage(Util.getMessage(Util.getLocale(player),"ClaimReward"));
+                            plugin.getRewardManager().setRewardMonthly(player);
+                            int coins3 = plugin.getConfig().getInt("Settings.MonthlyRewardCoinsAmount");
+                            plugin.getCoinManager().addCoins(player,coins3);
+                            player.sendMessage(Util.getMessage(Util.getLocale(player),"CoinsLayout").replaceAll("%COINS_AMOUNT%", String.valueOf(coins3)).replaceAll("%COINS_BALANCE%", String.valueOf(plugin.getCoinManager().getCoins(player))));
+                            break;
+                        case "daily.close":
+                            player.closeInventory();
                             break;
                     }
                 }

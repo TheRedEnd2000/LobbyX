@@ -27,6 +27,12 @@ public class EntityDamageEventListener implements Listener {
                 }
             }
         }
+        if(event.getEntity() instanceof Villager){
+            Villager villager = (Villager) event.getEntity();
+            if(villager.getCustomName().equals("§6Daily")){
+                event.setCancelled(true);
+            }
+        }
 
     }
 

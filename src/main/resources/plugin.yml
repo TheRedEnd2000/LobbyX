@@ -35,10 +35,10 @@ commands:
       - cl
   music:
     description: only for programmers
-  daily:
+  reward:
     aliases:
-      - reward
-      - dailyreward
+      - claim
+      - claimreward
   coins:
     aliases:
       - money

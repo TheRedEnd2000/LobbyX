@@ -4,8 +4,8 @@ Admin:
   NoPermissionMessageClick: '&cYou do not have the &6%PERMISSION% permission &cto use this feature!'
 
 PlayerHider:
-  PlayerHider_Hide: '&7Player visibility has been &6successfully §cdisabled&7.'
-  PlayerHider_Show: '&7Player visibility has been &6successfully §aenabled&7.'
+  PlayerHider_Hide: '&7Player visibility has been &6successfully &cdisabled&7.'
+  PlayerHider_Show: '&7Player visibility has been &6successfully &aenabled&7.'
   PlayerHider_Wait: '&cPlease wait before doing this again!'
 
 BuildCommand:
@@ -106,9 +106,9 @@ Gadgets:
   SelectSpecialItems: '&aYou selected the gadget: %GADGET%'
   SelectParticleEffect: '&aYou selected the particle effect: %PARTICLE%'
   SelectArmor: '&aYou selected the armor: %ARMOR%'
-  BuyNewGadget: '&7You have &asuccessfully &7bought the gadget &6%GADGET%&7. §5Coins left: §6%COINS%'
-  BuyNewParticle: '&7You have &asuccessfully &7bought the particle effect &6%PARTICLE%&7. §5Coins left: §6%COINS%'
-  BuyNewArmor: '&7You have &asuccessfully &7bought the armor &6%ARMOR%&7. §5Coins left: §6%COINS%'
+  BuyNewGadget: '&7You have &asuccessfully &7bought the gadget &6%GADGET%&7. &5Coins left: &6%COINS%'
+  BuyNewParticle: '&7You have &asuccessfully &7bought the particle effect &6%PARTICLE%&7. &5Coins left: &6%COINS%'
+  BuyNewArmor: '&7You have &asuccessfully &7bought the armor &6%ARMOR%&7. &5Coins left: &6%COINS%'
   NotEnoughCoins: '&cYou dont have enough coins.'
   ResetGadget: '&aYour special item has been reset &2successfully&a.'
   FailedResetGadget: '&cYou dont habe any special item on.'
@@ -122,7 +122,7 @@ Coins:
   SetCoinsPlayer: '&7You set &3%PLAYER%`s &5purse&7 to &6%COINS% coins&7.'
   RemoveCoinsPlayer: '&7You remove &6%COINS% coins &7from &3%PLAYER%`s &5purse&7.'
   ResetCoinsPlayer: '&7You reset the &5purse from &3%PLAYER%&7.'
-  NotAllowCoinsSee: '§cThis user has switched off the coins view by others'
+  NotAllowCoinsSee: '&cThis user has switched off the coins view by others'
   CoinCommandUsage: '&7Usages: &6/coins add <Player> <Coins> &8| &6/coins remove <Player> <Coins> &8| &6/coins set <Player> <Coins> &8| &6/coins reset <Player> confirm&7!'
 
 Teleporter:
@@ -130,14 +130,14 @@ Teleporter:
   LocationNotSet: '&cThis Location isnt set. Please contact an admin.'
   EnterNewNameInChat: '&aWrite &6name &ain chat. Type "&ccancel&a" to cancel'
   EnterNewMaterialInChat: '&aWrite &6material &ain chat. Type "&ccancel&a" to cancel'
-  LocationSaved: '§7The &6location &7was saved&a successfully&7.'
+  LocationSaved: '&7The &6location &7was saved&a successfully&7.'
   NotAMaterial: '&4%MATERIAL% &cis not an available material. Please try again.'
   EnterInChatCanceled: '&cYou canceled the action.'
   MaterialNotAir: '&cYou cant set the material to air. It was instand set to light gray stained glass pane.'
   CancelWorldDeletion: '&aYou canceled the world deletion &2successfully&a.'
 
 WorldCreator:
-  EnterWorldNameInChat: '&aEnter your world name in Chat. §7Type "&ccancel&7" to cancel.'
+  EnterWorldNameInChat: '&aEnter your world name in Chat. &7Type "&ccancel&7" to cancel.'
   CanceledAction: '&cAction canceled.'
   CantContain: '&cYou world name cant contains dots or spaces.'
   NewWorldName: '&aWorld name was updated &2successfully&a.'
@@ -149,11 +149,12 @@ WorldCreator:
   WorldSetInMaintenance: '&cThis world was set to maintenance mode.'
   NoFreeWorldsFound: '&cThere are no free worlds. No player got kicked.'
 
-DailyReward:
-  AlreadyClaimed: '&cYou have already claimed your daily reward.'
-  RewardTimeLayOut: '&7Come back in: &6%HOURS%h %MINUTES%m %SECONDS%s&7!'
-  ClaimReward: '&aYou claimed your &6Daily Reward&a!'
+Reward:
+  AlreadyClaimed: '&cYou have already claimed your reward.'
+  RewardTimeLayOut: '&7Come back in: &6%DAYS%d %HOURS%h %MINUTES%m %SECONDS%s&7!'
+  ClaimReward: '&aYou claimed your &6Reward&a!'
   CoinsLayout: '&7Your &6%COINS_AMOUNT% coins&7 was added to you &5purse&7. You have now &6%COINS_BALANCE% coins.'
+  RewardUsage: '&7Usages: &6/reward daily &8| &6/reward weekly &8| &6/reward monthly&7!'
 
 MsgCommand:
   MsgCommandUsage: '&7Usages: &6/msg <Player> <Message>&7!'

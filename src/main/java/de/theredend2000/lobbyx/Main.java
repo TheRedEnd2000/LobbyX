@@ -175,7 +175,7 @@ public final class Main extends JavaPlugin {
         getCommand("setLang").setExecutor(new SetLangCommand(this));
         getCommand("clan").setExecutor(new ClanCommands(this));
         getCommand("music").setExecutor(new MusicCommand());
-        getCommand("daily").setExecutor(new DailyRewardCommand(this));
+        getCommand("reward").setExecutor(new DailyRewardCommand(this));
         getCommand("coins").setExecutor(new CoinsCommand(this));
         getCommand("hologram").setExecutor(new hologramCommand());
         getCommand("msg").setExecutor(new MsgCommand(this));

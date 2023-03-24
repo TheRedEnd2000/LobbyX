@@ -76,6 +76,8 @@ public class LobbyXCommand implements CommandExecutor, TabCompleter {
                             count ++;
                         }
                     }.runTaskTimer(plugin,0,2L);
+                }else if(args[0].equalsIgnoreCase("spawnDailyRewardVillager")){
+                    plugin.getRewardManager().spawnDailyRewardVillager(player.getLocation());
                 }else
                     player.sendMessage(Util.getMessage(Util.getLocale(player),"LobbyxUsage"));
             }else
@@ -88,7 +90,7 @@ public class LobbyXCommand implements CommandExecutor, TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
         if(args.length == 1){
-            String[] completes = {"help","manage","information","reload"};
+            String[] completes = {"help","manage","information","reload","spawnDailyRewardVillager"};
             ArrayList<String> tabComplete = new ArrayList<>();
             Collections.addAll(tabComplete, completes);
             return tabComplete;
