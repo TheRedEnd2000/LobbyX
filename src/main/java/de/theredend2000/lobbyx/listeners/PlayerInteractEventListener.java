@@ -73,6 +73,11 @@ public class PlayerInteractEventListener implements Listener {
                         if (event.getClickedBlock().getType() == Material.OAK_BOAT | event.getClickedBlock().getType() == Material.OAK_CHEST_BOAT | event.getClickedBlock().getType() == Material.SPRUCE_BOAT | event.getClickedBlock().getType() == Material.CARTOGRAPHY_TABLE | event.getClickedBlock().getType() == Material.GRINDSTONE | event.getClickedBlock().getType() == Material.SMOKER | event.getClickedBlock().getType() == Material.BARREL | event.getClickedBlock().getType() == Material.SMITHING_TABLE | event.getClickedBlock().getType() == Material.LOOM) {
                             event.setCancelled(true);
                         }
+                        if(plugin.getServer().getVersion().contains("1.19")){
+                            if (event.getClickedBlock().getType() == Material.OAK_BOAT | event.getClickedBlock().getType() == Material.OAK_CHEST_BOAT | event.getClickedBlock().getType() == Material.SPRUCE_BOAT | event.getClickedBlock().getType() == Material.CARTOGRAPHY_TABLE | event.getClickedBlock().getType() == Material.GRINDSTONE | event.getClickedBlock().getType() == Material.SMOKER | event.getClickedBlock().getType() == Material.BARREL | event.getClickedBlock().getType() == Material.SMITHING_TABLE | event.getClickedBlock().getType() == Material.LOOM) {
+                                event.setCancelled(true);
+                            }
+                        }
                     }
                 }
             }
