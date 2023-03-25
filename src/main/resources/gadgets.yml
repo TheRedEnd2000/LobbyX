@@ -99,6 +99,10 @@ Gadgets:
       item: WHITE_WOOL
       name: '&9Sheep Cannon'
       coins: 5000
+    Lightning_Staff:
+      item: BLAZE_ROD
+      name: '&6Lightning Staff'
+      coins: 6500
 
 
   AnimatedHeads:
@@ -187,58 +191,139 @@ Gadgets:
       name: '&6Rainbow Armor'
       coins: 20000
       item: LEATHER_CHESTPLATE
-      color: RED
+      color:
+        red: 255
+        green: 0
+        blue: 0
       Helmet:
         name: '&6Rainbow Helmet'
         material: LEATHER_HELMET
+        color:
+          red: 0
+          green: 0
+          blue: 0
       Chestplate:
         name: '&6Rainbow Chestplate'
         material: LEATHER_CHESTPLATE
+        color:
+          red: 0
+          green: 0
+          blue: 0
       Leggins:
         name: '&6Rainbow Leggins'
         material: LEATHER_LEGGINGS
+        color:
+          red: 0
+          green: 0
+          blue: 0
       Boots:
         name: '&6Rainbow Boots'
         material: LEATHER_BOOTS
+        color:
+          red: 0
+          green: 0
+          blue: 0
     Red_Skeleton:
       name: '&cRed Skeleton'
       coins: 10000
       item: PLAYER_HEAD
       texture: MTRkNDQ5MDdhNjc5ZjE3MzAzOTJmY2ZhOGZkYWRkZjJhYzc5OGVhZWI4YzRlMTA5MmQ0YmIwMDM3N2I2MTliOCJ9fX0=
+      color:
+        red: 0
+        green: 0
+        blue: 0
       Helmet:
         name: '&cRed Skeleton Helmet'
         material: PLAYER_HEAD
         texture: MTRkNDQ5MDdhNjc5ZjE3MzAzOTJmY2ZhOGZkYWRkZjJhYzc5OGVhZWI4YzRlMTA5MmQ0YmIwMDM3N2I2MTliOCJ9fX0=
+        color:
+          red: 0
+          green: 0
+          blue: 0
       Chestplate:
         name: '&cRed Skeleton Chestplate'
         material: LEATHER_CHESTPLATE
-        color: RED
+        color:
+          red: 200
+          green: 0
+          blue: 0
       Leggins:
         name: '&cRed Skeleton Leggins'
         material: LEATHER_LEGGINGS
-        color: RED
+        color:
+          red: 150
+          green: 0
+          blue: 0
       Boots:
         name: '&cRed Skeleton Boots'
         material: LEATHER_BOOTS
-        color: RED
+        color:
+          red: 100
+          green: 0
+          blue: 0
     Tree_Armor:
       name: '&2Tree Armor'
       coins: 7000
       item: LEATHER_HELMET
-      color: LIME
+      color:
+        red: 0
+        green: 255
+        blue: 0
       Helmet:
         name: '&2Tree Armor Helmet'
         material: LEATHER_HELMET
-        color: LIME
+        color:
+          red: 0
+          green: 255
+          blue: 0
       Chestplate:
         name: '&2Tree Armor Chestplate'
         material: LEATHER_CHESTPLATE
-        color: GREEN
+        color:
+          red: 0
+          green: 200
+          blue: 0
       Leggins:
         name: '&2Tree Armor Leggins'
         material: LEATHER_LEGGINGS
-        color: BROWN
+        color:
+          red: 139
+          green: 90
+          blue: 43
       Boots:
         name: '&2Tree Armor Boots'
         material: LEATHER_BOOTS
-        color: BROWN
+        color:
+          red: 139
+          green: 69
+          blue: 19
+    GOD_Armor:
+      name: '&6&lGOD Armor'
+      coins: 15000
+      item: PLAYER_HEAD
+      texture: NjJiY2EwODU3NTAwNDM1MDNmNWRmOWY3ZGVmODI0YTJlM2FjZmMyNzg0MmJjZDA5ZDJiNjY5NTg4MWU4MzJmNSJ9fX0=
+      Helmet:
+        name: '&6&lGOD Armor Helmet'
+        material: PLAYER_HEAD
+        texture: NjJiY2EwODU3NTAwNDM1MDNmNWRmOWY3ZGVmODI0YTJlM2FjZmMyNzg0MmJjZDA5ZDJiNjY5NTg4MWU4MzJmNSJ9fX0=
+      Chestplate:
+        name: '&6&lGOD Armor Chestplate'
+        material: LEATHER_CHESTPLATE
+        color:
+          red: 255
+          green: 185
+          blue: 15
+      Leggins:
+        name: '&6&lGOD Armor Leggins'
+        material: LEATHER_LEGGINGS
+        color:
+          red: 218
+          green: 165
+          blue: 32
+      Boots:
+        name: '&6&lGOD Armor Boots'
+        material: LEATHER_BOOTS
+        color:
+          red: 255
+          green: 193
+          blue: 37

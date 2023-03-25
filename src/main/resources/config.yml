@@ -19,6 +19,8 @@ Settings:
   Daily3RewardCoinsAmount: 10000
   CheckForUpdates: true
   LobbySpeed: true
+  PlayerYLevelTeleport: -80
+  GadgetsCooldownTime: 15
 
 #LobbyWorlds
 
@@ -185,3 +187,11 @@ LobbySelector:
 ChatFormat:
   ChatFormatRank: '&6[%RANK%&6]&r %NAME_COLOR%%PLAYER% &5>>&r %CHAT_COLOR%%MESSAGE%'
   ChatFormatWithout: '&3%PLAYER% &5>> &f%MESSAGE%'
+
+IntractableItems:
+  RedStoneItems: true
+  Doors: true
+  Buttons: true
+  WorkingStations: true
+  Furnaces: true
+  Boats: true

@@ -37,9 +37,10 @@ public class SheepCannon implements Listener {
     public void onPlayerInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItemInMainHand();
-        if (item.getType() == Material.WHITE_WOOL) {
-            ItemMeta meta = item.getItemMeta();
-            if (meta != null && plugin.yaml.getString("Selected_Items."+player.getUniqueId()+".Inv").equals("Sheep_Cannon")) {
+        ItemMeta meta = item.getItemMeta();
+        if (meta != null && plugin.yaml.getString("Selected_Items."+player.getUniqueId()+".Inv").equals("Sheep_Cannon")) {
+            String name = item.getItemMeta().getDisplayName();
+            if(name.equals(plugin.gadgetsYaml.getString("Gadgets.SpecialItems.Sheep_Cannon.name").replaceAll("&","§"))){
                 if (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
                     Sheep sheep = player.getEyeLocation().getWorld().spawn(player.getEyeLocation(),Sheep.class);
                     sheep.setRotation(player.getLocation().getYaw(),player.getLocation().getPitch());

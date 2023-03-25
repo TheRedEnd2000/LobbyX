@@ -1,6 +1,7 @@
 package de.theredend2000.lobbyx;
 
 import com.google.common.base.Charsets;
+import de.theredend2000.lobbyx.listeners.gadgetsListener.LightningStaff;
 import de.theredend2000.lobbyx.listeners.gadgetsListener.SheepCannon;
 import de.theredend2000.lobbyx.othergadgets.Allay_Die;
 import de.theredend2000.lobbyx.commands.*;
@@ -64,6 +65,8 @@ public final class Main extends JavaPlugin {
     public File gadgetData;
     public File navigatorData;
     private PowerRanksAPI api;
+    private HashMap<Player, Long> gadgetsCooldown;
+    private int gadgetsCooldownTime;
 
 
     @Override
@@ -92,6 +95,7 @@ public final class Main extends JavaPlugin {
             initAHeads();
             addLobbyWorlds();
             addItemForOnlinePlayer();
+            gadgetsCooldownTime = getConfig().getInt("Settings.GadgetsCooldownTime");
     }
 
     @Override
@@ -136,6 +140,7 @@ public final class Main extends JavaPlugin {
     private void initLists(){
         lobbyWorlds = new ArrayList<>();
         buildPlayers = new ArrayList<>();
+        gadgetsCooldown = new HashMap<>();
     }
 
     public void addLobbyWorlds(){
@@ -219,6 +224,9 @@ public final class Main extends JavaPlugin {
         new PlayerChatEventListener(this);
         new Updater(this);
         new SheepCannon(this);
+        new PlayerMoveEventListener(this);
+        new PlayerDeathEventListener(this);
+        new LightningStaff(this);
     }
     private void initManagers(){
         new Util(this);
@@ -408,5 +416,11 @@ public final class Main extends JavaPlugin {
     }
     public PowerRanksAPI getApi() {
         return api;
+    }
+    public HashMap<Player, Long> getGadgetsCooldown() {
+        return gadgetsCooldown;
+    }
+    public int getGadgetsCooldownTime() {
+        return gadgetsCooldownTime;
     }
 }

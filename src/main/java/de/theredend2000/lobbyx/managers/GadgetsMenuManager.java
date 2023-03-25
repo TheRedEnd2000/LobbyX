@@ -115,13 +115,19 @@ public class GadgetsMenuManager {
         inventory.setItem(45,new ItemBuilder(Material.PLAYER_HEAD).setSkullOwner(Main.BACK_SKULL_TEXTURE).setDisplayname("§eBack").setLocalizedName("gadgets.armor.back").build());
         for(String armors : plugin.gadgetsYaml.getConfigurationSection("Gadgets.Armor").getKeys(false)){
             String armorName = plugin.gadgetsYaml.getString("Gadgets.Armor."+armors+".name");
-            String material = "Gadgets.Armor."+armors+".item";
+            Material material = plugin.getGadgetsMaterial("Gadgets.Armor."+armors+".item");
             int coinCost = plugin.gadgetsYaml.getInt("Gadgets.Armor."+armors+".coins");
-            Color color = plugin.gadgetsYaml.getColor("Gadgets.Armor."+armors+".color");
+            int redColor = plugin.gadgetsYaml.getInt("Gadgets.Armor."+armors+".color.red");
+            int greenColor = plugin.gadgetsYaml.getInt("Gadgets.Armor."+armors+".color.green");
+            int blueColor = plugin.gadgetsYaml.getInt("Gadgets.Armor."+armors+".color.blue");
+            Color color = Color.fromRGB(redColor, greenColor, blueColor);
             String texture = plugin.gadgetsYaml.getString("Gadgets.Armor."+armors+".texture");
             plugin.getPlayerDataManager().setYaml(player);
             boolean isBought = plugin.getPlayerDataManager().playerDataYaml.getBoolean("Gadgets.Armor."+armors);
-            inventory.addItem(new ItemBuilder(plugin.getGadgetsMaterial(material)).setColor(color).setSkullOwner(Main.getTexture(texture)).setLore(isBought ? "§a§l✓ Unlocked" : "§7Costs: §6"+coinCost).setDisplayname(armorName.replaceAll("&","§")).setLocalizedName(armors).withGlow(plugin.yaml.getString("Selected_Items." + player.getUniqueId() + ".Chest").equals(armors)).build());
+            if(material.equals(Material.PLAYER_HEAD))
+                inventory.addItem(new ItemBuilder(material).setSkullOwner(Main.getTexture(texture)).setLore(isBought ? "§a§l✓ Unlocked" : "§7Costs: §6"+coinCost).setDisplayname(armorName.replaceAll("&","§")).setLocalizedName(armors).withGlow(plugin.yaml.getString("Selected_Items." + player.getUniqueId() + ".Chest").equals(armors)).setDisplayname(armorName.replaceAll("&","§")).build());
+            else
+                inventory.addItem(new ItemBuilder(material).setColor(material.equals(Material.LEATHER_HELMET) ? color : null).setLore(isBought ? "§a§l✓ Unlocked" : "§7Costs: §6"+coinCost).setDisplayname(armorName.replaceAll("&","§")).setLocalizedName(armors).withGlow(plugin.yaml.getString("Selected_Items." + player.getUniqueId() + ".Chest").equals(armors)).setDisplayname(armorName.replaceAll("&","§")).build());
         }
         player.openInventory(inventory);
     }
@@ -167,10 +173,13 @@ public class GadgetsMenuManager {
                 int coinCost = plugin.gadgetsYaml.getInt("Gadgets.Armor."+item+".coins");
                 Color color = plugin.gadgetsYaml.getColor("Gadgets.Armor."+item+".color");
                 String texture = plugin.gadgetsYaml.getString("Gadgets.Armor."+item+".texture");
-                inventory.setItem(13,new ItemBuilder(itemMaterial).setLore("§7Costs: §6"+coinCost).setColor(color).setSkullOwner(Main.getTexture(texture)).setDisplayname(itemName.replaceAll("&","§")).setLocalizedName(item).build());
+                if(itemMaterial.equals(Material.PLAYER_HEAD))
+                    inventory.setItem(13,new ItemBuilder(itemMaterial).setLore("§7Costs: §6"+coinCost).setSkullOwner(Main.getTexture(texture)).setDisplayname(itemName.replaceAll("&","§")).setLocalizedName(item).build());
+                else
+                    inventory.setItem(13,new ItemBuilder(itemMaterial).setLore("§7Costs: §6"+coinCost).setColor(color).setDisplayname(itemName.replaceAll("&","§")).setLocalizedName(item).build());
             }
         }
-        inventory.setItem(15,new ItemBuilder(Material.RED_CONCRETE).setSkullOwner(Main.BACK_SKULL_TEXTURE).setDisplayname("§4Cancel").setLocalizedName("gadgets.buy.cancel").build());
+        inventory.setItem(15,new ItemBuilder(Material.RED_CONCRETE).setDisplayname("§4Cancel").setLocalizedName("gadgets.buy.cancel").build());
         player.openInventory(inventory);
     }
 

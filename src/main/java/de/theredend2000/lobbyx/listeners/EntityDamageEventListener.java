@@ -33,6 +33,11 @@ public class EntityDamageEventListener implements Listener {
                 event.setCancelled(true);
             }
         }
+        if(event.getEntity() instanceof Minecart){
+            if(plugin.getLobbyWorlds().contains(event.getEntity().getWorld())){
+                event.setCancelled(true);
+            }
+        }
 
     }
 

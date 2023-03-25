@@ -147,23 +147,38 @@ public class SetPlayerLobbyManager {
                 Material helmetMaterial = plugin.getGadgetsMaterial("Gadgets.Armor."+items+".Helmet.material");
                 String helmetName = plugin.gadgetsYaml.getString("Gadgets.Armor."+items+".Helmet.name");
                 String helmetTexture = plugin.gadgetsYaml.getString("Gadgets.Armor."+items+".Helmet.texture");
-                Color helmetColor = plugin.gadgetsYaml.getColor("Gadgets.Armor."+items+".Helmet.color");
-                player.getInventory().setHelmet(new ItemBuilder(helmetMaterial).setColor(helmetColor).setSkullOwner(helmetTexture != null ? Main.getTexture(helmetTexture) : null).setDisplayname(helmetName.replaceAll("&","§")).build());
+                int redHelmet = plugin.gadgetsYaml.getInt("Gadgets.Armor."+items+".Helmet.color.red");
+                int greenHelmet = plugin.gadgetsYaml.getInt("Gadgets.Armor."+items+".Helmet.color.green");
+                int blueHelmet = plugin.gadgetsYaml.getInt("Gadgets.Armor."+items+".Helmet.color.blue");
+                Color colorHelmet = Color.fromRGB(redHelmet, greenHelmet, blueHelmet);
+                if(helmetMaterial.equals(Material.PLAYER_HEAD))
+                    player.getInventory().setHelmet(new ItemBuilder(helmetMaterial).setSkullOwner(Main.getTexture(helmetTexture)).setDisplayname(helmetName.replaceAll("&","§")).build());
+                else
+                    player.getInventory().setHelmet(new ItemBuilder(helmetMaterial).setColor(helmetMaterial.equals(Material.LEATHER_HELMET) ? colorHelmet : null).setDisplayname(helmetName.replaceAll("&","§")).build());
 
                 Material chestplateMaterial = plugin.getGadgetsMaterial("Gadgets.Armor."+items+".Chestplate.material");
                 String chestplateName = plugin.gadgetsYaml.getString("Gadgets.Armor."+items+".Chestplate.name");
-                Color chestplateColor = plugin.gadgetsYaml.getColor("Gadgets.Armor."+items+".Chestplate.color");
-                player.getInventory().setChestplate(new ItemBuilder(chestplateMaterial).setColor(chestplateColor).setDisplayname(chestplateName.replaceAll("&","§")).build());
+                int redChestplate = plugin.gadgetsYaml.getInt("Gadgets.Armor."+items+".Chestplate.color.red");
+                int greenChestplate = plugin.gadgetsYaml.getInt("Gadgets.Armor."+items+".Chestplate.color.green");
+                int blueChestplate = plugin.gadgetsYaml.getInt("Gadgets.Armor."+items+".Chestplate.color.blue");
+                Color colorChestplate = Color.fromRGB(redChestplate, greenChestplate, blueChestplate);
+                player.getInventory().setChestplate(new ItemBuilder(chestplateMaterial).setColor(chestplateMaterial.equals(Material.LEATHER_CHESTPLATE) ? colorChestplate : null).setDisplayname(chestplateName.replaceAll("&","§")).build());
 
                 Material legginsMaterial = plugin.getGadgetsMaterial("Gadgets.Armor."+items+".Leggins.material");
                 String legginsName = plugin.gadgetsYaml.getString("Gadgets.Armor."+items+".Leggins.name");
-                Color legginsColor = plugin.gadgetsYaml.getColor("Gadgets.Armor."+items+".Leggins.color");
-                player.getInventory().setLeggings(new ItemBuilder(legginsMaterial).setColor(legginsColor).setDisplayname(legginsName.replaceAll("&","§")).build());
+                int redLeggins = plugin.gadgetsYaml.getInt("Gadgets.Armor."+items+".Leggins.color.red");
+                int greenLeggins = plugin.gadgetsYaml.getInt("Gadgets.Armor."+items+".Leggins.color.green");
+                int blueLeggins = plugin.gadgetsYaml.getInt("Gadgets.Armor."+items+".Leggins.color.blue");
+                Color colorLeggins = Color.fromRGB(redLeggins, greenLeggins, blueLeggins);
+                player.getInventory().setLeggings(new ItemBuilder(legginsMaterial).setColor(legginsMaterial.equals(Material.LEATHER_LEGGINGS) ? colorLeggins : null).setDisplayname(legginsName.replaceAll("&","§")).build());
 
                 Material bootsMaterial = plugin.getGadgetsMaterial("Gadgets.Armor."+items+".Boots.material");
                 String bootsName = plugin.gadgetsYaml.getString("Gadgets.Armor."+items+".Boots.name");
-                Color bootsColor = plugin.gadgetsYaml.getColor("Gadgets.Armor."+items+".Boots.color");
-                player.getInventory().setBoots(new ItemBuilder(bootsMaterial).setColor(bootsColor).setDisplayname(bootsName.replaceAll("&","§")).build());
+                int redBoots = plugin.gadgetsYaml.getInt("Gadgets.Armor."+items+".Boots.color.red");
+                int greenBoots = plugin.gadgetsYaml.getInt("Gadgets.Armor."+items+".Boots.color.green");
+                int blueBoots = plugin.gadgetsYaml.getInt("Gadgets.Armor."+items+".Boots.color.blue");
+                Color colorBoots = Color.fromRGB(redBoots, greenBoots, blueBoots);
+                player.getInventory().setBoots(new ItemBuilder(bootsMaterial).setColor(bootsMaterial.equals(Material.LEATHER_BOOTS) ? colorBoots : null).setDisplayname(bootsName.replaceAll("&","§")).build());
             }
         }
     }
@@ -190,6 +205,7 @@ public class SetPlayerLobbyManager {
             plugin.getPlayerDataManager().playerDataYaml.set("Settings.Leave_Messages",true);
             plugin.getPlayerDataManager().playerDataYaml.set("Settings.Fly",false);
             plugin.getPlayerDataManager().playerDataYaml.set("Settings.Year",false);
+            plugin.getPlayerDataManager().playerDataYaml.set("Settings.GadgetCooldown",true);
             plugin.getPlayerDataManager().playerDataYaml.set("Settings.CoinsAPI",true);
             plugin.getPlayerDataManager().save(player);
         }

@@ -87,6 +87,8 @@ public class PlayerInteractAtEntityEventListener implements Listener {
         inventory.setItem(22, new ItemBuilder(claimedWeekly ? Material.BUCKET : Material.MILK_BUCKET).setDisplayname("§6Weekly Reward").setLore(claimedWeekly ? "§7You have already claimed your weekly reward." : "§7Your weekly reward is ready to claim.", claimedWeekly ? "§7Come back in: "+plugin.getRewardManager().getRemainingTime(millisWeekly) : "§eClick to claim").setLocalizedName("daily.weeklyReward").build());
         inventory.setItem(24, new ItemBuilder(claimedMonthly ? Material.BUCKET : Material.LAVA_BUCKET).setDisplayname("§6Monthly Reward").setLore(claimedMonthly ? "§7You have already claimed your monthly reward." : "§7Your monthly reward is ready to claim.", claimedMonthly ? "§7Come back in: "+plugin.getRewardManager().getRemainingTime(millisMonthly) : "§eClick to claim").setLocalizedName("daily.monthlyReward").build());
         inventory.setItem(40, new ItemBuilder(Material.BARRIER).setDisplayname("§cClose").setLocalizedName("daily.close").build());
+        if(player.isOp())
+            inventory.setItem(44, new ItemBuilder(Material.LAVA_BUCKET).setDisplayname("§4Kill Villager").setLocalizedName("daily.kill").build());
         player.openInventory(inventory);
     }
 }

@@ -148,7 +148,22 @@ public class RewardManager {
         daily.setCustomName("§6Daily");
         daily.setCustomNameVisible(true);
         daily.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,Integer.MAX_VALUE,500));
+        daily.setSilent(true);
+        daily.setBreed(false);
         new ConfigLocationUtil(plugin,location,"DailyRewardVillager."+location.getWorld().getName()).saveLocation();
+    }
+
+    public void removeDailyRewardVillager(Location location){
+        if(plugin.yaml.contains("DailyRewardVillager."+location.getWorld().getName())){
+            for(Entity entity : location.getWorld().getEntities()){
+                if(entity instanceof Villager){
+                    Villager villager = (Villager) entity;
+                    if(villager.getCustomName().equals("§6Daily")){
+                        villager.remove();
+                    }
+                }
+            }
+        }
     }
 
     private void teleportAllVillagers(){

@@ -325,6 +325,11 @@ public class ProfileListener implements Listener {
                         case "daily.close":
                             player.closeInventory();
                             break;
+                        case "daily.kill":
+                            plugin.getRewardManager().removeDailyRewardVillager(player.getLocation());
+                            player.playSound(player.getLocation(),Sound.ENTITY_GENERIC_EXPLODE,1,1);
+                            player.closeInventory();
+                            break;
                     }
                 }
             }

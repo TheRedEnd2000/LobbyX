@@ -7,9 +7,11 @@ import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.vehicle.VehicleMoveEvent;
 import org.bukkit.potion.PotionEffect;
@@ -98,6 +100,27 @@ public class LobbxListener implements Listener {
                             plugin.getConfig().set("Broadcaster.enabled", !plugin.getConfig().getBoolean("Broadcaster.enabled"));
                             plugin.saveConfig();
                             plugin.getLobbyXMenuManager().createSettingsInventory(player);
+                            break;
+                        case "lobbyx.settings.ylevel":
+                            if(event.getAction().equals(InventoryAction.PICKUP_ALL)){
+                                int currentLevel = plugin.getConfig().getInt("Settings.PlayerYLevelTeleport");
+                                if(currentLevel == 100){
+                                    player.playSound(player.getLocation(), Sound.ENTITY_ENDERMAN_HURT,5,1);
+                                    return;
+                                }
+                                plugin.getConfig().set("Settings.PlayerYLevelTeleport",currentLevel+1);
+                                plugin.saveConfig();
+                                plugin.getLobbyXMenuManager().createSettingsInventory(player);
+                            }else if(event.getAction().equals(InventoryAction.PICKUP_HALF)){
+                                int currentLevel = plugin.getConfig().getInt("Settings.PlayerYLevelTeleport");
+                                if(currentLevel == -200){
+                                    player.playSound(player.getLocation(), Sound.ENTITY_ENDERMAN_HURT,5,1);
+                                    return;
+                                }
+                                plugin.getConfig().set("Settings.PlayerYLevelTeleport",currentLevel-1);
+                                plugin.saveConfig();
+                                plugin.getLobbyXMenuManager().createSettingsInventory(player);
+                            }
                             break;
                     }
                 }
