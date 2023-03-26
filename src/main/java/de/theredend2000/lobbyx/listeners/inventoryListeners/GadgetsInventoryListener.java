@@ -44,7 +44,12 @@ public class GadgetsInventoryListener implements Listener {
                             plugin.getGadgetsMenuManager().createAHeadsGadgetsInventory(player);
                             break;
                         case"gadgets.main.specialItems":
-                            plugin.getGadgetsMenuManager().createItemGadgetsInventory(player);
+                            if(player.isOp())
+                                plugin.getGadgetsMenuManager().createItemGadgetsInventory(player);
+                            else {
+                                player.sendMessage("§cSpecial items are currently only available for operators. We ask for your understanding.");
+                                player.closeInventory();
+                            }
                             break;
                         case"gadgets.main.particle":
                             plugin.getGadgetsMenuManager().createParticleInventory(player);
@@ -107,7 +112,7 @@ public class GadgetsInventoryListener implements Listener {
                             player.closeInventory();
                             break;
                         case "gadgets.items.reset":
-                            if(plugin.yaml.getString("Selected_Items."+player.getUniqueId()+".Inv") != null){
+                            if(!plugin.yaml.getString("Selected_Items."+player.getUniqueId()+".Inv").equals("null")){
                                 player.getInventory().setItem(5,null);
                                 plugin.yaml.set("Selected_Items."+player.getUniqueId()+".Inv","null");
                                 plugin.saveData();
@@ -122,20 +127,21 @@ public class GadgetsInventoryListener implements Listener {
                             plugin.getGadgetsMenuManager().createGadgetsInventory(player);
                             break;
                     }
-                    for(String items : plugin.gadgetsYaml.getConfigurationSection("Gadgets.SpecialItems").getKeys(false)){
-                        if(event.getCurrentItem().getItemMeta().getLocalizedName().equals(items)){
+                    for (String items : plugin.gadgetsYaml.getConfigurationSection("Gadgets.SpecialItems").getKeys(false)) {
+                        if (event.getCurrentItem().getItemMeta().getLocalizedName().equals(items)) {
                             plugin.getPlayerDataManager().setYaml(player);
-                            boolean isBought = plugin.getPlayerDataManager().playerDataYaml.getBoolean("Gadgets.SpecialItems."+items);
-                            if(!isBought){
-                                plugin.getGadgetsMenuManager().createGadgetsBugConfirm(player,items);
+                            boolean isBought = plugin.getPlayerDataManager().playerDataYaml.getBoolean("Gadgets.SpecialItems." + items);
+                            if (!isBought) {
+                                plugin.getGadgetsMenuManager().createGadgetsBugConfirm(player, items);
                                 return;
                             }
-                            player.closeInventory();;
-                            String itemName = plugin.gadgetsYaml.getString("Gadgets.SpecialItems."+items+".name");
-                            Material material = plugin.getGadgetsMaterial("Gadgets.SpecialItems."+items+".item");
-                            player.sendMessage(Util.getMessage(Util.getLocale(player),"SelectSpecialItems").replaceAll("%GADGET%", itemName.replaceAll("&","§")));
-                            player.getInventory().setItem(5, new ItemBuilder(material).setDisplayname(itemName.replaceAll("&","§")).build());
-                            plugin.yaml.set("Selected_Items."+player.getUniqueId()+".Inv",items);
+                            player.closeInventory();
+                            ;
+                            String itemName = plugin.gadgetsYaml.getString("Gadgets.SpecialItems." + items + ".name");
+                            Material material = plugin.getGadgetsMaterial("Gadgets.SpecialItems." + items + ".item");
+                            player.sendMessage(Util.getMessage(Util.getLocale(player), "SelectSpecialItems").replaceAll("%GADGET%", itemName.replaceAll("&", "§")));
+                            player.getInventory().setItem(5, new ItemBuilder(material).setDisplayname(itemName.replaceAll("&", "§")).build());
+                            plugin.yaml.set("Selected_Items." + player.getUniqueId() + ".Inv", items);
                             plugin.saveData();
                         }
                     }
@@ -150,7 +156,7 @@ public class GadgetsInventoryListener implements Listener {
                             player.closeInventory();
                             break;
                         case "gadgets.particle.reset":
-                            if(plugin.yaml.getString("Selected_Items."+player.getUniqueId()+".Particle") != null){
+                            if(!plugin.yaml.getString("Selected_Items."+player.getUniqueId()+".Particle").equals("null")){
                                 plugin.yaml.set("Selected_Items."+player.getUniqueId()+".Particle","null");
                                 plugin.saveData();
                                 player.closeInventory();

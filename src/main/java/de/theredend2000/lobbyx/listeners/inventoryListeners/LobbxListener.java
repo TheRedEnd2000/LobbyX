@@ -122,6 +122,9 @@ public class LobbxListener implements Listener {
                                 plugin.getLobbyXMenuManager().createSettingsInventory(player);
                             }
                             break;
+                        case "lobbyx.settings.items":
+                            plugin.getLobbyXMenuManager().createIntractableItemsInventory(player);
+                            break;
                     }
                 }
             }
@@ -155,6 +158,90 @@ public class LobbxListener implements Listener {
                             plugin.getConfig().set("JumpAndRun.Actionbar.enabled", !plugin.getConfig().getBoolean("JumpAndRun.Actionbar.enabled"));
                             plugin.saveConfig();
                             plugin.getLobbyXMenuManager().createJnrInventory(player);
+                            break;
+                    }
+                }
+            }
+        }else if (event.getView().getTitle().equals(Objects.requireNonNull(plugin.getConfig().getString("Inventory.MainIntractableItemsInventoryTitle")).replaceAll("&","§"))){
+            event.setCancelled(true);
+            if (event.getCurrentItem()!=null){
+                if (event.getCurrentItem().getItemMeta().hasLocalizedName()){
+                    switch(event.getCurrentItem().getItemMeta().getLocalizedName()){
+                        case "lobbyx.items.back":
+                            plugin.getLobbyXMenuManager().createSettingsInventory(player);
+                            break;
+                        case"lobbyx.items.close":
+                            player.closeInventory();
+                            break;
+                        case "lobbyx.items.redstone":
+                            plugin.getConfig().set("IntractableItems.RedStoneItems", !plugin.getConfig().getBoolean("IntractableItems.RedStoneItems"));
+                            plugin.saveConfig();
+                            plugin.getLobbyXMenuManager().createIntractableItemsInventory(player);
+                            break;
+                        case "lobbyx.items.station":
+                            plugin.getConfig().set("IntractableItems.WorkingStations", !plugin.getConfig().getBoolean("IntractableItems.WorkingStations"));
+                            plugin.saveConfig();
+                            plugin.getLobbyXMenuManager().createIntractableItemsInventory(player);
+                            break;
+                        case "lobbyx.items.furnace":
+                            plugin.getConfig().set("IntractableItems.Furnaces", !plugin.getConfig().getBoolean("IntractableItems.Furnaces"));
+                            plugin.saveConfig();
+                            plugin.getLobbyXMenuManager().createIntractableItemsInventory(player);
+                            break;
+                        case "lobbyx.items.doors":
+                            plugin.getConfig().set("IntractableItems.Doors", !plugin.getConfig().getBoolean("IntractableItems.Doors"));
+                            plugin.saveConfig();
+                            plugin.getLobbyXMenuManager().createIntractableItemsInventory(player);
+                            break;
+                        case "lobbyx.items.buttons":
+                            plugin.getConfig().set("IntractableItems.Buttons", !plugin.getConfig().getBoolean("IntractableItems.Buttons"));
+                            plugin.saveConfig();
+                            plugin.getLobbyXMenuManager().createIntractableItemsInventory(player);
+                            break;
+                        case "lobbyx.items.boats":
+                            plugin.getConfig().set("IntractableItems.Boats", !plugin.getConfig().getBoolean("IntractableItems.Boats"));
+                            plugin.saveConfig();
+                            plugin.getLobbyXMenuManager().createIntractableItemsInventory(player);
+                            break;
+                        case "lobbyx.items.chests":
+                            plugin.getConfig().set("IntractableItems.Chests", !plugin.getConfig().getBoolean("IntractableItems.Chests"));
+                            plugin.saveConfig();
+                            plugin.getLobbyXMenuManager().createIntractableItemsInventory(player);
+                            break;
+                        case "lobbyx.items.fence":
+                            plugin.getConfig().set("IntractableItems.Fence_Gates", !plugin.getConfig().getBoolean("IntractableItems.Fence_Gates"));
+                            plugin.saveConfig();
+                            plugin.getLobbyXMenuManager().createIntractableItemsInventory(player);
+                            break;
+                        case "lobbyx.items.trapdoors":
+                            plugin.getConfig().set("IntractableItems.Trapdoors", !plugin.getConfig().getBoolean("IntractableItems.Trapdoors"));
+                            plugin.saveConfig();
+                            plugin.getLobbyXMenuManager().createIntractableItemsInventory(player);
+                            break;
+                        case "lobbyx.items.candles":
+                            plugin.getConfig().set("IntractableItems.Candles", !plugin.getConfig().getBoolean("IntractableItems.Candles"));
+                            plugin.saveConfig();
+                            plugin.getLobbyXMenuManager().createIntractableItemsInventory(player);
+                            break;
+                        case "lobbyx.items.other":
+                            plugin.getConfig().set("IntractableItems.Other", !plugin.getConfig().getBoolean("IntractableItems.Other"));
+                            plugin.saveConfig();
+                            plugin.getLobbyXMenuManager().createIntractableItemsInventory(player);
+                            break;
+                        case "lobbyx.items.minecarts":
+                            plugin.getConfig().set("IntractableItems.Minecarts", !plugin.getConfig().getBoolean("IntractableItems.Minecarts"));
+                            plugin.saveConfig();
+                            plugin.getLobbyXMenuManager().createIntractableItemsInventory(player);
+                            break;
+                        case "lobbyx.items.anvils":
+                            plugin.getConfig().set("IntractableItems.Anvils", !plugin.getConfig().getBoolean("IntractableItems.Anvils"));
+                            plugin.saveConfig();
+                            plugin.getLobbyXMenuManager().createIntractableItemsInventory(player);
+                            break;
+                        case "lobbyx.items.shulkers":
+                            plugin.getConfig().set("IntractableItems.Shulkers", !plugin.getConfig().getBoolean("IntractableItems.Shulkers"));
+                            plugin.saveConfig();
+                            plugin.getLobbyXMenuManager().createIntractableItemsInventory(player);
                             break;
                     }
                 }

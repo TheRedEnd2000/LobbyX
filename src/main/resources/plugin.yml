@@ -33,8 +33,6 @@ commands:
   clan:
     aliases:
       - cl
-  music:
-    description: only for programmers
   reward:
     aliases:
       - claim

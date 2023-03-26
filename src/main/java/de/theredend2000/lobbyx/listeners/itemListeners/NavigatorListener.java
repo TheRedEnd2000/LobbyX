@@ -65,9 +65,9 @@ public class NavigatorListener implements Listener {
                             break;
                         case "teleport":
                             String name = plugin.navigatorYaml.getString("Navigator.Slots." + slot + ".name");
-                            if(plugin.navigatorYaml.contains("Navigator.Slots." + slot + ".teleportLocation")){
-                                if(loadLocation("Navigator.Slots." + slot + ".teleportLocation") != null)
-                                    player.teleport(loadLocation("Navigator.Slots." + slot + ".teleportLocation"));
+                            if(plugin.navigatorYaml.contains("Navigator.Slots." + slot + ".teleportLocation."+player.getWorld().getName())){
+                                if(loadLocation("Navigator.Slots." + slot + ".teleportLocation."+player.getWorld().getName()) != null)
+                                    player.teleport(loadLocation("Navigator.Slots." + slot + ".teleportLocation."+player.getWorld().getName()));
                                 player.sendMessage(Util.getMessage(Util.getLocale(player),"TeleportPlayerToLocation").replaceAll("%GAME%", name.replaceAll("&","§")));
                             }else
                                 player.sendMessage(Util.getMessage(Util.getLocale(player),"LocationNotSet"));
@@ -122,7 +122,7 @@ public class NavigatorListener implements Listener {
                             player.sendMessage(Util.getMessage(Util.getLocale(player),"EnterNewMaterialInChat"));
                             break;
                         case "location":
-                            saveLocation("Navigator.Slots." + slot + ".teleportLocation",player.getLocation());
+                            saveLocation("Navigator.Slots." + slot + ".teleportLocation."+player.getWorld().getName(),player.getLocation());
                             player.sendMessage(Util.getMessage(Util.getLocale(player),"LocationSaved"));
                             break;
                     }

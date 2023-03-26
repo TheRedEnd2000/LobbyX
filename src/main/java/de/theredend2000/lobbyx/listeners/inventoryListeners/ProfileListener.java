@@ -109,7 +109,7 @@ public class ProfileListener implements Listener {
                             break;
                         case"Settings.Language.Spain":
                             player.closeInventory();
-                            player.sendMessage("In Arbeit");
+                            player.sendMessage("§cThis language has not yet been translated. Do you speak spanish? Then help us to translate this. Join the discord for more info. Discord: https://discord.gg/7x2fzYKucZ");
                             /*File file = new File(plugin.getDataFolder()+"/locales","sp.yml");
                             Util.setLocale(player, file);
                             player.sendMessage(Util.getMessage(Util.getLocale(player), "LangSelectEnglish"));*/

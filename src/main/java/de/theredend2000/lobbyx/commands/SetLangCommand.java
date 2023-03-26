@@ -37,7 +37,7 @@ public class SetLangCommand implements CommandExecutor, TabCompleter {
                     Util.setLocale(player, file);
                     player.sendMessage(Util.getMessage(Util.getLocale(player), "LangSelectEnglish"));
                 }else if(fileName.equalsIgnoreCase("spain") || fileName.equalsIgnoreCase("sp")){
-                    player.sendMessage("In Arbeit");
+                    player.sendMessage("§cThis language has not yet been translated. Do you speak spanish? Then help us to translate this. Join the discord for more info. Discord: https://discord.gg/7x2fzYKucZ");
                     return true;
                     /*File file = new File(plugin.getDataFolder()+"/locales","sp.yml");
                     Util.setLocale(player, file);

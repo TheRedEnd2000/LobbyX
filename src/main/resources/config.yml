@@ -50,6 +50,7 @@ Inventory:
   SocialInventoryTitle: '&bLobby&4X&f - &9Social'
   FriendInventoryTitle: '&bLobby&4X&f - &3Friends'
   MainSettingsInventoryTitle: '&bLobby&4X&f - &4Main Settings'
+  MainIntractableItemsInventoryTitle: '&bLobby&4X&f - &eIntractable Items'
   MainJnrInventoryTitle: '&bLobby&4X&f - &bMain Jump and Run'
   LanguageInventoryTitle: '&bLobby&4X&f - &3Language'
   DailyRewardInventoryTitle: '&bLobby&4X&f - &6Daily'
@@ -195,3 +196,11 @@ IntractableItems:
   WorkingStations: true
   Furnaces: true
   Boats: true
+  Chests: true
+  Trapdoors: true
+  Fence_Gates: true
+  Candles: true
+  Other: true
+  Anvils: true
+  Minecarts: true
+  Shulkers: true

@@ -1,0 +1,178 @@
+Admin:
+  OnlyPlayerUse: '&cOnly Player can use this command.'
+  NoPermissionMessage: '&cYou do not have the &6%PERMISSION% permission &cto use this command!'
+  NoPermissionMessageClick: '&cYou do not have the &6%PERMISSION% permission &cto use this feature!'
+
+PlayerHider:
+  PlayerHider_Hide: '&7Player visibility has been &6successfully &cdisabled&7.'
+  PlayerHider_Show: '&7Player visibility has been &6successfully &aenabled&7.'
+  PlayerHider_Wait: '&cPlease wait before doing this again!'
+
+BuildCommand:
+  BuildJoined: '&7You are now in the &abuild mode&7.'
+  BuildLeave: '&7You are not longer in the &cbuild mode&7.'
+
+JoinQuit:
+  JoinMessage: '&b%PLAYER% &6joined the Server.'
+  QuitMessage: '&b%PLAYER% &6left the Server.'
+  ChangeLobbyJoinMessage: '&6%PLAYER% &7joined the &bLobby&7.'
+  ChangeLobbyLeaveMessage: '&6%PLAYER% &7left the &bLobby&7.'
+
+Friend:
+  FriendRequestSender: '&7You send &6%FRIEND_REQUEST_RECEIVER% &7a friend request. He has &e5 minutes &7to &aaccept&7.'
+  FriendRequestReceiver: '&7Friend request from &6%FRIEND_REQUEST_SENDER%&7.'
+  AlreadySend: '&cYou can only send one friend request at the time. Please wait.'
+  NotFriendRequest: '&cYou have no friend requests!'
+  FriendRequestExpired: '&cYour friend requests expired!'
+  FriendAlreadyAdded: '&c%PLAYER_REQUEST_RECEIVER% is already your friend!'
+  NotAddYourself: '&cYou cant send yourself a friend request!'
+  FriendRequestAcceptSender: '&6%PLAYER_REQUEST_ACCEPT% &7has&a accepted &7your &bfriend request&7.'
+  FriendRequestAcceptReceiver: '&7You have &6%PLAYER_REQUEST_SENDER%&b friend request&a accepted&7.'
+  FriendRequestDenySender: '&6%PLAYER_REQUEST_ACCEPT% &7has&c denied &7your &bfriend request&7.'
+  FriendRequestDenyReceiver: '&7You have &6%PLAYER_REQUEST_SENDER%&b friend request&c denied&7.'
+  FriendRemoveSender: '&7You have &6%PLAYER_REMOVED% &cremoved &7from your friend list.'
+  FriendRemoveReceiver: '&6%PLAYER_REMOVED_FRIEND% &7has &cremoved &7you form their friend list.'
+  FriendRemoveNotFriend: '&6%PLAYER_REMOVED% &7is &cnot &7your friend.'
+  SearchFriend: '&7Enter &aplayer name &7in chat. Type "&ccancel&7" to cancel.'
+  SearchFriendCancel: '&cYou canceled this action.'
+  SearchFriendNotFound: '&cI cant find a friend with the name &6%PLAYER%&c.'
+  AcceptNoFriendRequests: '&cThis user does not accept friend requests.'
+  FriendCommandUsage: '&7Usages: &6/friend add <Player> &8| &6/friend accept <Player> &8| &6/friend deny <Player> &8| &6/friend remove <Player> &8| &6/friend list&7!'
+
+Other:
+  PlayerNotFound: '&cI cant find this Player!'
+  LobbySelectorDisabled: '&cThe Lobby Selector is currently disabled.'
+  LobbySelectorAlreadyInThisWorld: '&cYou already on this world.'
+  NoLobbys: '&cThere are no lobbys.'
+  NoLobbySpawn: '&cThis world has no lobby spawn.'
+  DisabledChat: '&cYou cannot use the chat if you have turned it off. You can change that in the settings.'
+
+Locations:
+  SetLobby: '&7The &bLobby &7for the world &6%WORLD_NAME% &7was set&a successfully&7.'
+  LobbyxUsage: '&7Usages: &6/lobbyx manage &8| &6/lobbyx help &8| &6/lobbyx information &8| &6/lobbyx reload&7!'
+
+JumpAndRun:
+  AlreadyStarted: '&cYou have already started a jump and run.'
+  JnrDisabled: '&cJump and run is disabled.'
+  StartJnr: '&7You started the &6Jump and Run&7.'
+  StopJnr: '&7You&c fell&7. You point are &6%JUMP_AND_RUN_POINTS%&7.'
+  CoinsGotMessageNormal: '&7You got &6%COINS% coins &7for your score.'
+  CoinsGotMessageDouble: '&7You got &5&lDOUBLE COINS &7because you got a new highscore. (&6%COINS% coins&7)'
+  NewHighScore: '&2&lNEW HIGHSCORE! &7Your new personal best is &6%JUMP_AND_RUN_POINTS%&7.'
+
+Languages:
+  LanguagesUsage: '&7Usages: &6/setLang &7[&3ENGLISH &8| &3GERMAN &8| &3SPAIN&7]'
+  LangSelectEnglish: '&7Language set to: &6English&7.'
+  LanguagesNotFound: '&cThis Language doesnt exists.'
+
+Clan:
+  HasAlreadyCreatedClan: '&cYou have already created a clan!'
+  HasNoClan: '&cYou have no clan!'
+  CreatedClan: '&aThe clan &6%CLAN_NAME% &awas created!'
+  AlreadySendInvitation: '&cYou have already send &6%PLAYER_NAME% &ca clan invitation.'
+  NoClanInvitation: '&cYou have no clan invasions.'
+  ClanInvationExpired: '&cYour clan invitation has expired.'
+  NotInviteYourself: '&cYou cant invite yourself.'
+  InviterMessage: '&7You invited &6%PLAYER_RECEIVER%&7 to &2your clan&7.'
+  ReceiverMessage: '&6%PLAYER_INVITER% &7invited you to their clan &5%CLAN_NAME%&7.'
+  AlreadyInClan: '&6%PLAYER_NAME% &7is already in a &aClan&7.'
+  AlreadyInClanPersonal: '&cYou are already in a clan.'
+  AlreadyInYourClan: '&6%PLAYER_NAME% &7is &2already &7in your &aClan&7.'
+  LeaveClan: '&aYou left the clan &2%CLAN_NAME%&a.'
+  PlayerLeftClan: '&6%PLAYER_NAME% &cleft the clan.'
+  CantLeaveOwnClan: '&cYou cant leave your own clan.'
+  NotInYourClan: '&6%PLAYER_NAME% &7is &cnot &7in your &aClan&7.'
+  NotInAClan: '&cYou are not in a Clan.'
+  JoinClan: '&7You &ajoined the clan &5%CLAN_NAME%&7.'
+  JoinClanMessageInviter: '&6%PLAYER_NAME% &ajoined &7the clan.'
+  DenyClanMessageInviter: '&6%PLAYER_NAME%&c denied &7the clan invasion.'
+  DenyClan: '&7You&c denied&7 the clan &6invasion&7.'
+  KickPlayerSenderMessage: '&7You &ckicked &6%PLAYER_NAME% &7from the clan &a%CLAN_NAME%&7.'
+  KickPlayerReceiver: '&7You got &ckicked &7out of the clan &a%CLAN_NAME%&7.'
+  AcceptNoClanRequests: '&cThis user does not accept clan requests.'
+  ClanCommandUsage: '&7Usages: &6/clan create <ClanName> &8| &6/clan invite <Player> &8| &6/clan join <Player> &8| &6/clan deny <Player> &8| &6/clan kick <Player> &8| &6/clan manage &8| &6/clan leave&7!'
+
+Lobby:
+  TeleportToLobby: '&8Sending you to the lobby...'
+  LobbyCommandUsage: '&7Usages: &6/lobby &8| &6/l &8| &6/hub'
+  LobbyInNotSet: '&cThe lobby isnt set yet. &4Please contact and admin!'
+
+Gadgets:
+  ResetHead: '&aYour head has been reset &2successfully&a.'
+  FailedResetHead: '&cYou dont have a custom head on.'
+  ResetArmor: '&aYour armor has been reset &2successfully&a.'
+  FailedResetArmor: '&cYou dont have any armor on you.'
+  SelectHead: '&aYou selected the head: %HEAD%'
+  SelectSpecialItems: '&aYou selected the gadget: %GADGET%'
+  SelectParticleEffect: '&aYou selected the particle effect: %PARTICLE%'
+  SelectArmor: '&aYou selected the armor: %ARMOR%'
+  BuyNewGadget: '&7You have &asuccessfully &7bought the gadget &6%GADGET%&7. &5Coins left: &6%COINS%'
+  BuyNewParticle: '&7You have &asuccessfully &7bought the particle effect &6%PARTICLE%&7. &5Coins left: &6%COINS%'
+  BuyNewArmor: '&7You have &asuccessfully &7bought the armor &6%ARMOR%&7. &5Coins left: &6%COINS%'
+  NotEnoughCoins: '&cYou dont have enough coins.'
+  ResetGadget: '&aYour special item has been reset &2successfully&a.'
+  FailedResetGadget: '&cYou dont habe any special item on.'
+  ResetParticle: '&aYour particle has been reset &2successfully&a.'
+  FailedResetParticle: '&cYou dont habe any particle on.'
+
+Coins:
+  GetCoins: '&7You have &6%COINS% coins &7in you &5purse&7.'
+  GetCoinsPlayer: '&3%PLAYER% &7has &6%COINS% coins &7in his &5purse&7.'
+  AddCoinsPlayer: '&7You added &6%COINS% coins &7to &3%PLAYER%`s &5purse&7.'
+  SetCoinsPlayer: '&7You set &3%PLAYER%`s &5purse&7 to &6%COINS% coins&7.'
+  RemoveCoinsPlayer: '&7You remove &6%COINS% coins &7from &3%PLAYER%`s &5purse&7.'
+  ResetCoinsPlayer: '&7You reset the &5purse from &3%PLAYER%&7.'
+  NotAllowCoinsSee: '&cThis user has switched off the coins view by others'
+  CoinCommandUsage: '&7Usages: &6/coins add <Player> <Coins> &8| &6/coins remove <Player> <Coins> &8| &6/coins set <Player> <Coins> &8| &6/coins reset <Player> confirm&7!'
+
+Teleporter:
+  TeleportPlayerToLocation: '&aYou have been teleported to &6%GAME%'
+  LocationNotSet: '&cThis Location isnt set. Please contact an admin.'
+  EnterNewNameInChat: '&aWrite &6name &ain chat. Type "&ccancel&a" to cancel'
+  EnterNewMaterialInChat: '&aWrite &6material &ain chat. Type "&ccancel&a" to cancel'
+  LocationSaved: '&7The &6location &7was saved&a successfully&7.'
+  NotAMaterial: '&4%MATERIAL% &cis not an available material. Please try again.'
+  EnterInChatCanceled: '&cYou canceled the action.'
+  MaterialNotAir: '&cYou cant set the material to air. It was instand set to light gray stained glass pane.'
+  CancelWorldDeletion: '&aYou canceled the world deletion &2successfully&a.'
+
+WorldCreator:
+  EnterWorldNameInChat: '&aEnter your world name in Chat. &7Type "&ccancel&7" to cancel.'
+  CanceledAction: '&cAction canceled.'
+  CantContain: '&cYou world name cant contains dots or spaces.'
+  NewWorldName: '&aWorld name was updated &2successfully&a.'
+  NoWorldName: '&cPlease enter a world name.'
+  WorldAlreadyExists: '&cA world with the name &6%WORLD_NAME%&c does already exists.'
+  CreatingWorld: '&aStarting creating world &6%WORLD_NAME%&a.'
+  FinishCreatingWorld: '&aYou create a new LobbyWorld with the name &6%WORLD_NAME%&a.'
+  WorldInMaintenance: '&cThis world is currently in maintenance mode.'
+  WorldSetInMaintenance: '&cThis world was set to maintenance mode.'
+  NoFreeWorldsFound: '&cThere are no free worlds. No player got kicked.'
+
+Reward:
+  AlreadyClaimed: '&cYou have already claimed your reward.'
+  RewardTimeLayOut: '&7Come back in: &6%DAYS%d %HOURS%h %MINUTES%m %SECONDS%s&7!'
+  ClaimReward: '&aYou claimed your &6Reward&a!'
+  CoinsLayout: '&7Your &6%COINS_AMOUNT% coins&7 was added to you &5purse&7. You have now &6%COINS_BALANCE% coins.'
+  RewardUsage: '&7Usages: &6/reward daily &8| &6/reward weekly &8| &6/reward monthly&7!'
+
+MsgCommand:
+  MsgCommandUsage: '&7Usages: &6/msg <Player> <Message>&7!'
+  MsgCommandNotYourself: '&cYou cant send yourself a msg.'
+  MsgCommandNoPlayerFound: '&cI cant find the player &6%PLAYER%&c.'
+  MsgCommandMsgSender: '%RANK_COLOR_SENDER%me &6to&r %RANK_COLOR_RECEIVER%%RECEIVER%&f:%MESSAGE%'
+  MsgCommandMsgRevier: '%RANK_COLOR_SENDER%%SENDER% &6to&r %RANK_COLOR_RECEIVER%you &f:%MESSAGE%'
+  AcceptNoMsg: '&cThis user does not accept msg messages.'
+
+GamemodeCommand:
+  NewGamemodePersonal: '&aSet your personal Gamemode to &6%GAMEMODE%&a.'
+  NewGamemodeOther: '&aSet &3%PLAYER%´s &aGamemode to &6%GAMEMODE%&a'
+  GamemodeUsage: '&7Usage: &6/gamemode <Gamemode> [Player]&7!'
+  GamemodePlayerNotFound: '&cI cant find the player &6%PLAYER%&c.'
+
+TutorialText:
+  TT-Section1: '&7&lWell, now that you have hopefully chosen the right language for you, we can continue.'
+  TT-Section2: '&7&lIf you dont see a scoreboard or anything just yet, its probably because your not in a lobby world. You can add this after the tutorial.'
+  TT-Section3: '&7&lThe command that will interest you the most is the &6/lobbyx manage&7&l. With this command you can make any settings on the plugin. You should also set up the plugin nicely. you can do that in the &6config.yml file'
+  TT-Section4: '&7&lWhat you are probably also interested in is the range that is available. You can set them with the power ranks web editor. if you dont have power ranks, you need to do this now.'
+  TT-Section5: '&7&lSo that would be it for now. if you set or have set everything correctly now, you can now use the plugin without any problems. &6For more information type /lobbyx help'

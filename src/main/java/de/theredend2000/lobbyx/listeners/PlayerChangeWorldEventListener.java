@@ -36,8 +36,8 @@ public class PlayerChangeWorldEventListener implements Listener {
         }else{
             player.getInventory().clear();
             player.setPlayerListHeaderFooter(null,null);
-            player.sendMessage("left lobby");
             player.setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
+            plugin.getBuildPlayers().remove(player);
         }
     }
 

@@ -19,26 +19,23 @@ public class EntityDamageEventListener implements Listener {
 
     @EventHandler
     public void onDamageEntity(EntityDamageEvent event){
-        if(event.getEntity() instanceof Player){
-            Player player = (Player) event.getEntity();
-            if(plugin.getLobbyWorlds().contains(player.getWorld())){
-                if(!plugin.getBuildPlayers().contains(player)){
+        if(plugin.getLobbyWorlds().contains(event.getEntity().getWorld())){
+            if (event.getEntity() instanceof Villager) {
+                Villager villager = (Villager) event.getEntity();
+                if (villager.getCustomName().equals("§6Daily")) {
                     event.setCancelled(true);
                 }
             }
-        }
-        if(event.getEntity() instanceof Villager){
-            Villager villager = (Villager) event.getEntity();
-            if(villager.getCustomName().equals("§6Daily")){
+            if(event.getEntity() instanceof Player) {
+                Player player = (Player) event.getEntity();
+                if (!plugin.getBuildPlayers().contains(player)) {
+                    event.setCancelled(true);
+                }
+            }
+            if (event.getEntity() instanceof Minecart || event.getEntity() instanceof Boat || event.getEntity() instanceof ChestBoat) {
                 event.setCancelled(true);
             }
         }
-        if(event.getEntity() instanceof Minecart){
-            if(plugin.getLobbyWorlds().contains(event.getEntity().getWorld())){
-                event.setCancelled(true);
-            }
-        }
-
     }
 
     @EventHandler
@@ -49,6 +46,13 @@ public class EntityDamageEventListener implements Listener {
                 Player player = (Player) event.getDamager();
                 if(plugin.getLobbyWorlds().contains(player.getWorld()) && plugin.getLobbyWorlds().contains(entity.getWorld())){
                     if(!plugin.getBuildPlayers().contains(player)){
+                        event.setCancelled(true);
+                    }
+                }
+            }
+            if (event.getEntity() instanceof Minecart || event.getEntity() instanceof Boat || event.getEntity() instanceof ChestBoat) {
+                if (plugin.getLobbyWorlds().contains(event.getEntity().getWorld())) {
+                    if(!plugin.getBuildPlayers().contains((Player) event.getDamager())) {
                         event.setCancelled(true);
                     }
                 }

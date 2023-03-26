@@ -29,6 +29,7 @@ import org.bukkit.Particle;
 import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerBedEnterEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -179,7 +180,6 @@ public final class Main extends JavaPlugin {
         getCommand("jnr").setExecutor(new JnrCommand(this));
         getCommand("setLang").setExecutor(new SetLangCommand(this));
         getCommand("clan").setExecutor(new ClanCommands(this));
-        getCommand("music").setExecutor(new MusicCommand());
         getCommand("reward").setExecutor(new DailyRewardCommand(this));
         getCommand("coins").setExecutor(new CoinsCommand(this));
         getCommand("hologram").setExecutor(new hologramCommand());
@@ -227,6 +227,7 @@ public final class Main extends JavaPlugin {
         new PlayerMoveEventListener(this);
         new PlayerDeathEventListener(this);
         new LightningStaff(this);
+        new PlayerEnterBedListener(this);
     }
     private void initManagers(){
         new Util(this);

@@ -121,7 +121,7 @@ Coins:
   AddCoinsPlayer: '&7You added &6%COINS% coins &7to &3%PLAYER%`s &5purse&7.'
   SetCoinsPlayer: '&7You set &3%PLAYER%`s &5purse&7 to &6%COINS% coins&7.'
   RemoveCoinsPlayer: '&7You remove &6%COINS% coins &7from &3%PLAYER%`s &5purse&7.'
-  ResetCoinsPlayer: '&7You reset the &5purse from &3%PLAYER%&7.'
+  ResetCoinsPlayer: '&7You reset the &5purse &7from &3%PLAYER%&7.'
   NotAllowCoinsSee: '&cThis user has switched off the coins view by others'
   CoinCommandUsage: '&7Usages: &6/coins add <Player> <Coins> &8| &6/coins remove <Player> <Coins> &8| &6/coins set <Player> <Coins> &8| &6/coins reset <Player> confirm&7!'
 
