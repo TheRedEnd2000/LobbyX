@@ -42,6 +42,7 @@ public class PlayerInteractEventListener implements Listener {
                     event.setCancelled(true);
                 }
             }
+
             if (event.getAction() == Action.LEFT_CLICK_BLOCK | event.getAction() == Action.RIGHT_CLICK_BLOCK) {
                 if(!plugin.getBuildPlayers().contains(player)) {
                     if (plugin.getConfig().getBoolean("IntractableItems.RedStoneItems")) {
@@ -65,7 +66,7 @@ public class PlayerInteractEventListener implements Listener {
                         }
                     }
                     if (plugin.getConfig().getBoolean("IntractableItems.WorkingStations")) {
-                        if (event.getClickedBlock().getType() == Material.LODESTONE | event.getClickedBlock().getType() == Material.BELL | event.getClickedBlock().getType() == Material.STONECUTTER | event.getClickedBlock().getType() == Material.CARTOGRAPHY_TABLE | event.getClickedBlock().getType() == Material.GRINDSTONE | event.getClickedBlock().getType() == Material.SMOKER | event.getClickedBlock().getType() == Material.BARREL | event.getClickedBlock().getType() == Material.SMITHING_TABLE | event.getClickedBlock().getType() == Material.LOOM) {
+                        if (event.getClickedBlock().getType() == Material.LODESTONE | event.getClickedBlock().getType() == Material.BELL | event.getClickedBlock().getType() == Material.STONECUTTER | event.getClickedBlock().getType() == Material.CARTOGRAPHY_TABLE | event.getClickedBlock().getType() == Material.GRINDSTONE  | event.getClickedBlock().getType() == Material.BARREL | event.getClickedBlock().getType() == Material.SMITHING_TABLE | event.getClickedBlock().getType() == Material.LOOM) {
                             event.setCancelled(true);
                         }
                     }
@@ -73,14 +74,56 @@ public class PlayerInteractEventListener implements Listener {
                         if (event.getClickedBlock().getType() == Material.OAK_BOAT | event.getClickedBlock().getType() == Material.OAK_CHEST_BOAT | event.getClickedBlock().getType() == Material.SPRUCE_BOAT | event.getClickedBlock().getType() == Material.CARTOGRAPHY_TABLE | event.getClickedBlock().getType() == Material.GRINDSTONE | event.getClickedBlock().getType() == Material.SMOKER | event.getClickedBlock().getType() == Material.BARREL | event.getClickedBlock().getType() == Material.SMITHING_TABLE | event.getClickedBlock().getType() == Material.LOOM) {
                             event.setCancelled(true);
                         }
+
                         if(plugin.getServer().getVersion().contains("1.19")){
-                            if (event.getClickedBlock().getType() == Material.OAK_BOAT | event.getClickedBlock().getType() == Material.OAK_CHEST_BOAT | event.getClickedBlock().getType() == Material.SPRUCE_BOAT | event.getClickedBlock().getType() == Material.CARTOGRAPHY_TABLE | event.getClickedBlock().getType() == Material.GRINDSTONE | event.getClickedBlock().getType() == Material.SMOKER | event.getClickedBlock().getType() == Material.BARREL | event.getClickedBlock().getType() == Material.SMITHING_TABLE | event.getClickedBlock().getType() == Material.LOOM) {
+                            if (event.getClickedBlock().getType() == Material.OAK_CHEST_BOAT | event.getClickedBlock().getType() == Material.SPRUCE_CHEST_BOAT | event.getClickedBlock().getType() == Material.BIRCH_CHEST_BOAT | event.getClickedBlock().getType() == Material.JUNGLE_CHEST_BOAT | event.getClickedBlock().getType() == Material.ACACIA_CHEST_BOAT | event.getClickedBlock().getType() == Material.DARK_OAK_CHEST_BOAT | event.getClickedBlock().getType() == Material.MANGROVE_CHEST_BOAT) {
                                 event.setCancelled(true);
                             }
                         }
+                    }
+                    if (plugin.getConfig().getBoolean("IntractableItems.Chests")){
+                        if (event.getClickedBlock().getType() == Material.CHEST | event.getClickedBlock().getType() == Material.TRAPPED_CHEST | event.getClickedBlock().getType() == Material.ENDER_CHEST){
+                            event.setCancelled(true);
+                        }
+                    }
+                    if (plugin.getConfig().getBoolean("IntractableItems.Fences")){
+                        if (event.getClickedBlock().getType() == Material.OAK_FENCE_GATE | event.getClickedBlock().getType() == Material.SPRUCE_FENCE_GATE | event.getClickedBlock().getType() == Material.BIRCH_FENCE_GATE | event.getClickedBlock().getType() == Material.JUNGLE_FENCE_GATE | event.getClickedBlock().getType() == Material.ACACIA_FENCE_GATE | event.getClickedBlock().getType() == Material.DARK_OAK_FENCE_GATE){
+                            event.setCancelled(true);
+                            if (plugin.getServer().getVersion().contains("1.19")){
+                                if (event.getClickedBlock().getType() == Material.MANGROVE_FENCE_GATE){
+                                    event.setCancelled(true);
+                                }
+                            }
+                        }
+                    }
+                    if (plugin.getConfig().getBoolean("IntractableItems.Trapdoors")){
+                        if (event.getClickedBlock().getType() == Material.OAK_TRAPDOOR | event.getClickedBlock().getType() == Material.SPRUCE_TRAPDOOR | event.getClickedBlock().getType() == Material.BIRCH_TRAPDOOR | event.getClickedBlock().getType() == Material.JUNGLE_TRAPDOOR | event.getClickedBlock().getType() == Material.ACACIA_TRAPDOOR | event.getClickedBlock().getType() == Material.DARK_OAK_TRAPDOOR ){
+                            event.setCancelled(true);
+                            }if (plugin.getServer().getVersion().contains("1.16")){
+                                if (event.getClickedBlock().getType() == Material.CRIMSON_TRAPDOOR | event.getClickedBlock().getType() == Material.WARPED_TRAPDOOR){
+                                    event.setCancelled(true);
+                                }
+                            }if (plugin.getServer().getVersion().contains("1.19")){
+                                if (event.getClickedBlock().getType() == Material.MANGROVE_TRAPDOOR){
+                                    event.setCancelled(true);
+                                }
+                            }
+                        }
+
+                    }
+                    if (plugin.getConfig().getBoolean("IntractableItems.Candles")){
+                        if (plugin.getServer().getVersion().contains("1.17")){
+                            event.setCancelled(true);
+                        }
+                    }
+                    if (plugin.getConfig().getBoolean("IntractableItems")){
+
+                    }
+                    if (plugin.getConfig().getBoolean("IntractableItems")){
+
                     }
                 }
             }
         }
     }
-}
+
